@@ -45,7 +45,6 @@ class Arr implements Collection, ArrayAccess {
         'array_uintersect',
         'array_unique',
         'array_values',
-        'array_walk',
         'compact',
         'count',
         'current',
@@ -316,6 +315,13 @@ class Arr implements Collection, ArrayAccess {
     }
 
     public function walk_recursive(...$args) {
+        if (array_walk_recursive($this->elements, ...$args)) {
+            return $this;
+        }
+        throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
+    }
+
+    public function walk(...$args) {
         if (array_walk_recursive($this->elements, ...$args)) {
             return $this;
         }

@@ -35,9 +35,7 @@ class Arr implements Collection, ArrayAccess {
         'array_replace',
         'array_reverse',
         'array_search',
-        'array_shift',
         'array_slice',
-        'array_splice',
         'array_sum',
         'array_udiff_assoc',
         'array_udiff_uassoc',
@@ -46,9 +44,7 @@ class Arr implements Collection, ArrayAccess {
         'array_uintersect_uassoc',
         'array_uintersect',
         'array_unique',
-        'array_unshift',
         'array_values',
-        'array_walk_recursive',
         'array_walk',
         'compact',
         'count',
@@ -70,7 +66,7 @@ class Arr implements Collection, ArrayAccess {
     ];
 
     protected $elements = [];
-    protected $length;
+    protected $_length;
 
     function __construct(...$elements) {
         foreach ($elements as $idx => $element) {
@@ -79,13 +75,13 @@ class Arr implements Collection, ArrayAccess {
             }
             array_push($this->elements, $element);
         }
-        $this->length = count($this->elements);
+        $this->_length = count($this->elements);
     }
 
     public function __get($name) {
         switch ($name) {
             case 'length':
-                return $this->length;
+                return $this->_length;
             default:
                 return null;
         }
@@ -135,7 +131,7 @@ class Arr implements Collection, ArrayAccess {
 
     public function clear() {
         $this->elements = [];
-        $this->length = 0;
+        $this->_length = 0;
         return $this;
     }
 
@@ -156,20 +152,20 @@ class Arr implements Collection, ArrayAccess {
     }
 
     public function is_empty() {
-        return $this->length === 0;
+        return $this->_length === 0;
     }
 
     public function remove($object) {
         $idx = $this->index($object);
         if ($idx >= 0) {
             array_splice($this->elements, $idx, 1);
-            $this->length--;
+            $this->_length--;
         }
         return $this;
     }
 
     public function size() {
-        return $this->length;
+        return $this->_length;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +174,7 @@ class Arr implements Collection, ArrayAccess {
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
             if ($offset < 0) {
-                $offset += $this->length;
+                $offset += $this->_length;
             }
             return $offset;
         }
@@ -188,10 +184,10 @@ class Arr implements Collection, ArrayAccess {
     public function offsetExists($offset) {
         if (is_int($offset)) {
             if ($offset >= 0) {
-                return $offset < $this->length;
+                return $offset < $this->_length;
             }
             // else: negative
-            return abs($offset) <= $this->length;
+            return abs($offset) <= $this->_length;
         }
         return false;
     }
@@ -214,7 +210,7 @@ class Arr implements Collection, ArrayAccess {
     public function offsetUnset($offset) {
         if ($this->offsetExists($offset)) {
             unset($this->elements[$offset]);
-            $this->length--;
+            $this->_length--;
             // reassign keys
             $this->elements = array_values($this->elements);
         }
@@ -264,7 +260,7 @@ class Arr implements Collection, ArrayAccess {
 
     public function key_exists($key) {
         if (is_int($key)) {
-            return $key < $this->length;
+            return $key < $this->_length;
         }
         return false;
     }
@@ -274,18 +270,20 @@ class Arr implements Collection, ArrayAccess {
     }
 
     public function pop() {
-        if ($this->length > 0) {
+        if ($this->_length > 0) {
             $removed_element = array_pop($this->elements);
-            $this->length--;
+            $this->_length--;
             return $removed_element;
         }
         return null;
     }
 
+    // @return $this instead of $new_length
     public function push(...$args) {
         $new_length = array_push($this->elements, ...$args);
-        $this->length += count($args);
-        return $new_length;
+        $this->_length += count($args);
+        // return $new_length;
+        return $this;
     }
 
     public function search($needle, ...$args) {
@@ -293,15 +291,38 @@ class Arr implements Collection, ArrayAccess {
     }
 
     public function shift() {
-        if ($this->length > 0) {
+        if ($this->_length > 0) {
             $removed_element = array_shift($this->elements);
-            $this->length--;
-            return $removed_element;
+            $this->_length--;
+            return new static($removed_element);
         }
         return null;
     }
 
-    // custom delegations to native methods
+    public function splice($offset, $length=null, $replacement = []) {
+        if ($length === null) {
+            $length = $this->_length - $offset;
+        }
+        $removed_elements = array_shift($this->elements, $offset, $length, $replacement);
+        $this->_length += -count($removed_elements) + count($replacement);
+        return new static($removed_elements);
+    }
+
+    // @return $this instead of $new_length
+    public function unshift(...$args) {
+        $length = array_unshift($this->elements, ...$args);
+        $this->_length += $length;
+        return $this;
+    }
+
+    public function walk_recursive(...$args) {
+        if (array_walk_recursive($this->elements, ...$args)) {
+            return $this;
+        }
+        throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
+    }
+
+    // EXTENDING THE API: custom delegations to native methods
 
     public function index($needle, ...$args) {
         $idx = array_search($needle, $this->elements, ...$args);

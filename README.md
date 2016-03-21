@@ -1,2 +1,2 @@
 # php_adt
-An OOP PHP library for abstract data types.
+An OOP PHP library providing PHP implementations of abstract data types.

@@ -1,5 +1,5 @@
 <?php
-
+// phpinfo();
 require_once 'Arr.php';
 $arr = new Arr(1,2,3,4);
 
@@ -43,23 +43,21 @@ $arr = new Arr(1,2,3,4);
     $unsorted = new Arr(2,5,4,6,3,1);
     $unsorted->sort();
     echo '<br>'.$unsorted;
+    $unsorted->reversed();
+    echo '<br>'.$unsorted;
+    $unsorted->reverse();
+    echo '<br>'.$unsorted;
 
     // check stable
     $unsorted = new Arr(
-    
+        new Arr(1, 'b'),
+        new Arr(2, 'c'),
+        new Arr(1, 'a')
     );
     $unsorted->sort(function($a, $b) {
         return compare($a[0], $b[0]);
     });
     echo '<br>'.$unsorted;
-
-    // var_dump(compare(2,5));
-
-    // $unsorted2 = array(2,5,4,6,3,1);
-    // mergesort_native($unsorted2);
-    // var_dump($unsorted2);
-
-    // echo $arr->rand();
 
 ?>
 </body>

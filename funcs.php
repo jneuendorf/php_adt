@@ -7,7 +7,7 @@ function equals($x, $y) {
     if (method_exists($y, "equals")) {
         return $y->equals($x);
     }
-    return $k == $key;
+    return $x == $y;
 }
 
 function compare($x, $y) {
@@ -20,10 +20,13 @@ function compare($x, $y) {
     if (equals($x, $y)) {
         return 0;
     }
-    throw new Exception("Given parameters are not comparable!", 1);
+    if ($x < $y) {
+        return -1;
+    }
+    return 1;
 }
 
-function hash($x) {
+function _hash($x) {
     if (method_exists($x, "hash")) {
         return $x->hash();
     }
@@ -36,9 +39,6 @@ function hash($x) {
     if (is_bool($x)) {
         return (int) $x;
     }
-    // if ($x === null) {
-    //     return 0;
-    // }
     throw new Exception("Given parameter does not support hashing!", 1);
 }
 
@@ -67,7 +67,10 @@ function mergesort(&$array, $cmp_function = 'mergesort_compare') {
     // Merge the two sorted arrays into a single sorted array
     $array = array();
     $ptr1 = $ptr2 = 0;
-    while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
+    $len1 = count($array1);
+    $len2 = count($array2);
+    while ($ptr1 < $len1 && $ptr2 < $len2) {
+    // while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
         if (call_user_func($cmp_function, $array1[$ptr1], $array2[$ptr2]) < 1) {
             $array[] = $array1[$ptr1++];
         }
@@ -76,13 +79,16 @@ function mergesort(&$array, $cmp_function = 'mergesort_compare') {
         }
     }
     // Merge the remainder
-    while ($ptr1 < count($array1)) $array[] = $array1[$ptr1++];
-    while ($ptr2 < count($array2)) $array[] = $array2[$ptr2++];
-    // return;
+    while ($ptr1 < $len1) {
+        $array[] = $array1[$ptr1++];
+    }
+    while ($ptr2 < $len2) {
+        $array[] = $array2[$ptr2++];
+    }
 }
 
 // for native array
-function mergesort(&$array, $cmp_function = 'strcmp') {
+function mergesort_native(&$array, $cmp_function = 'strcmp') {
     // Arrays of size < 2 require no action.
     if (count($array) < 2)
         return;
@@ -92,8 +98,8 @@ function mergesort(&$array, $cmp_function = 'strcmp') {
     $array1 = array_slice($array, 0, $halfway);
     $array2 = array_slice($array, $halfway);
     // Recurse to sort the two halves
-    mergesort($array1, $cmp_function);
-    mergesort($array2, $cmp_function);
+    mergesort_native($array1, $cmp_function);
+    mergesort_native($array2, $cmp_function);
     // If all of $array1 is <= all of $array2, just append them.
     if (call_user_func($cmp_function, end($array1), $array2[0]) < 1) {
         $array = array_merge($array1, $array2);

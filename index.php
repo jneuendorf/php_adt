@@ -36,6 +36,29 @@ $arr = new Arr(1,2,3,4);
     echo '<br>'.$arr;
     echo '<br>'.$arr->reverse();
 
+    echo '<br>'.Arr::range(0,10,2);
+    echo '<br>'.$arr->size();
+
+
+    $unsorted = new Arr(2,5,4,6,3,1);
+    $unsorted->sort();
+    echo '<br>'.$unsorted;
+
+    // check stable
+    $unsorted = new Arr(
+    
+    );
+    $unsorted->sort(function($a, $b) {
+        return compare($a[0], $b[0]);
+    });
+    echo '<br>'.$unsorted;
+
+    // var_dump(compare(2,5));
+
+    // $unsorted2 = array(2,5,4,6,3,1);
+    // mergesort_native($unsorted2);
+    // var_dump($unsorted2);
+
     // echo $arr->rand();
 
 ?>

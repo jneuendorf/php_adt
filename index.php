@@ -59,6 +59,11 @@ $arr = new Arr(1,2,3,4);
     });
     echo '<br>'.$unsorted;
 
+    echo '<hr><br>iterating "'.$arr.'" using foreach:<br>';
+    foreach ($arr as $idx => $elem) {
+        echo "$idx->$elem<br>";
+    }
+
 ?>
 </body>
 </html>

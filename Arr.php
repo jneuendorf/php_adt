@@ -3,7 +3,7 @@
 require_once 'Collection.php';
 require_once 'funcs.php';
 
-class Arr implements Collection, ArrayAccess {
+class Arr implements Collection, ArrayAccess, Iterator {
 
     // list of native array function that we can automatically create delegations (using the __callStatic() method)
     protected static $class_methods = [
@@ -50,6 +50,7 @@ class Arr implements Collection, ArrayAccess {
 
     protected $elements = [];
     protected $_length;
+    protected $_position;
 
     public function __construct(...$elements) {
         foreach ($elements as $idx => $element) {
@@ -198,6 +199,44 @@ class Arr implements Collection, ArrayAccess {
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING ITERATOR
+
+    public function current() {
+        if ($this->_position >= 0 && $this->_position < $this->_length) {
+            return $this->elements[$this->_position];
+        }
+        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
+        return null;
+    }
+
+    public function key() {
+        if ($this->_position >= 0 && $this->_position < $this->_length) {
+            return $this->_position;
+        }
+        return null;
+    }
+
+    public function next() {
+        $this->_position++;
+        if ($this->_position >= 0 && $this->_position < $this->_length) {
+            return $this->elements[$this->_position];
+        }
+        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
+        return null;
+    }
+
+    public function rewind() {
+        $this->_position = 0;
+        return $this;
+    }
+
+    public function valid() {
+        return $this->_position >= 0 && $this->_position < $this->_length;
+    }
+
+
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     // DELEGATIONS TO NATIVE METHODS
@@ -219,21 +258,18 @@ class Arr implements Collection, ArrayAccess {
         return $this;
     }
 
-    public function current() {
-        return current($this->elements);
-    }
+    // current() is defined above (iterator interface section)
 
     // API-CHANGE: each function not implemented
 
     public function end() {
-        return end($this->elements);
+        $this->_position = $this->_length - 1;
+        return $this;
     }
 
     // API-CHANGE: extract function not implemented
 
-    public function key() {
-        return key($this->elements);
-    }
+    // key() is defined above (iterator interface section)
 
     public function key_exists($key) {
         if (is_int($key)) {
@@ -246,9 +282,7 @@ class Arr implements Collection, ArrayAccess {
         return new Arr(...array_map($callback, $this->elements));
     }
 
-    public function next() {
-        return next($this->elements);
-    }
+    // next() is defined above (iterator interface section)
 
     public function pop($index=null) {
         if ($index === null) {
@@ -259,11 +293,15 @@ class Arr implements Collection, ArrayAccess {
     }
 
     public function pos() {
-        return pos($this->elements);
+        return $this->current();
     }
 
     public function prev() {
-        return prev($this->elements);
+        $this->_position--;
+        if ($this->_position >= 0 && $this->_position < $this->_length) {
+            return $this->elements[$this->_position];
+        }
+        throw new Exception("Arr::next: Invalid position", 1);
     }
 
     // API-CHANGE: chainable, @return $this instead of $new_length
@@ -275,8 +313,7 @@ class Arr implements Collection, ArrayAccess {
 
     // API-CHANGE: chainable
     public function reset() {
-        reset($this->elements);
-        return $this;
+        return $this->rewind();
     }
 
     // name in php array was reverse which is not in place.

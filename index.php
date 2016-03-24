@@ -13,10 +13,7 @@ $arr = new Arr(1,2,3,4);
 <body>
 <?php
 
-    // var_dump($arr->length);
-
-    echo $arr."\n";
-    // echo $arr->asdf()."\n";
+    echo $arr." (length = $arr->length)<br>\n";
     echo $arr->chunk(2)."\n";
     // echo $arr->filter(function($x) {return $x > 2;})."\n";
     // echo $arr->keys()."\n";

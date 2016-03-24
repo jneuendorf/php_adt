@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Collection.php';
+require_once 'CollectionInterface.php';
 require_once 'funcs.php';
 
 class Arr implements Collection, ArrayAccess, Iterator {
@@ -34,7 +34,6 @@ class Arr implements Collection, ArrayAccess, Iterator {
         'array_reduce',
         'array_replace_recursive',
         'array_replace',
-        // 'array_reverse',
         'array_search',
         'array_slice',
         'array_sum',
@@ -259,7 +258,6 @@ class Arr implements Collection, ArrayAccess, Iterator {
     }
 
     // current() is defined above (iterator interface section)
-
     // API-CHANGE: each function not implemented
 
     public function end() {
@@ -268,7 +266,6 @@ class Arr implements Collection, ArrayAccess, Iterator {
     }
 
     // API-CHANGE: extract function not implemented
-
     // key() is defined above (iterator interface section)
 
     public function key_exists($key) {
@@ -356,8 +353,8 @@ class Arr implements Collection, ArrayAccess, Iterator {
         throw new Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
     }
 
-    public function sort($cmp_function='mergesort_compare') {
-        mergesort($this->elements, $cmp_function);
+    public function sort($cmp_function='__mergesort_compare') {
+        __mergesort($this->elements, $cmp_function);
         return $this;
     }
 
@@ -435,9 +432,7 @@ class Arr implements Collection, ArrayAccess, Iterator {
     }
 
     // pop([index]) is implemented above (php array section)
-
     // remove(object) is implemented above (colsection interface section)
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////

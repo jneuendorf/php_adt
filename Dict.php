@@ -2,7 +2,7 @@
 
 require_once 'funcs.php';
 require_once 'Arr.php';
-require_once 'Map.php';
+require_once 'MapInterface.php';
 
 class Dict implements Map {
 
@@ -17,7 +17,7 @@ class Dict implements Map {
         }
     }
 
-    //////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
     protected function _get_key_idx($key) {
@@ -29,20 +29,98 @@ class Dict implements Map {
         return -1;
     }
 
-    //////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
-    public function clear();
-    public function equals($map);
-    public function get($key);
-    public function has_key($key);
-    public function has_value($value);
-    public function hash();
-    public function is_empty();
-    public function put($key, $value);
-    public function remove($key);
-    public function size();
-    public function values();
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING MAP (COLLECTION)
+
+    public function add($object) {
+
+    }
+
+    public function clear() {
+
+    }
+
+    public function equals($map) {
+
+    }
+    public function has($object) {
+
+    }
+
+    public function hash() {
+
+    }
+
+    public function is_empty() {
+
+    }
+
+    public function remove($key) {
+
+    }
+
+    public function size() {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING MAP (remaining function)
+
+    public function copy() {
+
+    }
+
+    public function fromkeys() {
+
+    }
+
+    public function get($key) {
+
+    }
+
+    public function has_key($key) {
+
+    }
+
+    public function has_value($value) {
+
+    }
+
+    public function items() {
+
+    }
+
+    public function keys() {
+
+    }
+
+    public function pop() {
+
+    }
+
+    public function popitem() {
+
+    }
+
+    public function put($key, $value) {
+
+    }
+
+    public function setdefault() {
+
+    }
+
+    public function update() {
+
+    }
+
+    public function values() {
+
+    }
+
 }
 
 class_alias('Dict', 'Hash');

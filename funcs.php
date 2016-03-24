@@ -1,6 +1,6 @@
 <?php
 
-function equals($x, $y) {
+function __equals($x, $y) {
     if (method_exists($x, "equals")) {
         return $x->equals($y);
     }
@@ -10,7 +10,7 @@ function equals($x, $y) {
     return $x == $y;
 }
 
-function compare($x, $y) {
+function __compare($x, $y) {
     if (method_exists($x, "compare")) {
         return $x->compare($y);
     }
@@ -26,7 +26,7 @@ function compare($x, $y) {
     return 1;
 }
 
-function _hash($x) {
+function __hash($x) {
     if (method_exists($x, "hash")) {
         return $x->hash();
     }
@@ -42,18 +42,18 @@ function _hash($x) {
     throw new Exception("Given parameter does not support hashing!", 1);
 }
 
-function mergesort_compare($a, $b) {
+function __mergesort_compare($a, $b) {
     return compare($a, $b);
 }
 
-// for Arr instance
-function mergesort(&$array, $cmp_function = 'mergesort_compare') {
+function __mergesort(&$array, $cmp_function='__mergesort_compare') {
+    $length = count($array);
     // Arrays of size < 2 require no action.
-    if (count($array) < 2)
+    if ($length < 2)
         return;
 
     // Split the array in half
-    $halfway = count($array) / 2;
+    $halfway = $length / 2;
     $array1 = array_slice($array, 0, $halfway);
     $array2 = array_slice($array, $halfway);
     // Recurse to sort the two halves
@@ -70,7 +70,6 @@ function mergesort(&$array, $cmp_function = 'mergesort_compare') {
     $len1 = count($array1);
     $len2 = count($array2);
     while ($ptr1 < $len1 && $ptr2 < $len2) {
-    // while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
         if (call_user_func($cmp_function, $array1[$ptr1], $array2[$ptr2]) < 1) {
             $array[] = $array1[$ptr1++];
         }
@@ -86,41 +85,5 @@ function mergesort(&$array, $cmp_function = 'mergesort_compare') {
         $array[] = $array2[$ptr2++];
     }
 }
-
-// for native array
-function mergesort_native(&$array, $cmp_function = 'strcmp') {
-    // Arrays of size < 2 require no action.
-    if (count($array) < 2)
-        return;
-
-    // Split the array in half
-    $halfway = count($array) / 2;
-    $array1 = array_slice($array, 0, $halfway);
-    $array2 = array_slice($array, $halfway);
-    // Recurse to sort the two halves
-    mergesort_native($array1, $cmp_function);
-    mergesort_native($array2, $cmp_function);
-    // If all of $array1 is <= all of $array2, just append them.
-    if (call_user_func($cmp_function, end($array1), $array2[0]) < 1) {
-        $array = array_merge($array1, $array2);
-        return;
-    }
-    // Merge the two sorted arrays into a single sorted array
-    $array = array();
-    $ptr1 = $ptr2 = 0;
-    while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
-        if (call_user_func($cmp_function, $array1[$ptr1], $array2[$ptr2]) < 1) {
-            $array[] = $array1[$ptr1++];
-        }
-        else {
-            $array[] = $array2[$ptr2++];
-        }
-    }
-    // Merge the remainder
-    while ($ptr1 < count($array1)) $array[] = $array1[$ptr1++];
-    while ($ptr2 < count($array2)) $array[] = $array2[$ptr2++];
-    // return;
-}
-
 
 ?>

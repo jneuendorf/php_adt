@@ -4,10 +4,10 @@ require_once 'CollectionInterface.php';
 
 interface Map extends Collection {
     // from collection
-    // public function add($object);
+    public function add($key, $value);
     // public function clear();
     // public function equals($collection);
-    // public function has($object);
+    public function has($key);
     // public function hash();
     // public function is_empty();
     // public function remove($object);

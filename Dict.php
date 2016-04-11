@@ -6,14 +6,16 @@ require_once 'MapInterface.php';
 
 class Dict implements Map {
 
-    protected $keys;
-    protected $vals;
+    protected $_dict;
+    protected $_size;
 
-    function __construct($arr=[]) {
-        $this->keys = new Arr();
-        $this->vals = new Arr();
+    function __construct($default_val=null, $arr=[]) {
+        $this->_dict = [];
+        $this->_size = 0;
+        $this->default_val = $default_val;
+
         foreach ($arr as $key => $value) {
-            # code...
+            $this->put($key, $value);
         }
     }
 
@@ -35,18 +37,21 @@ class Dict implements Map {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (COLLECTION)
 
-    public function add($object) {
+    public function add($key, $value) {
 
     }
 
     public function clear() {
-
+        $this->_dict = [];
+        $this->_size = 0;
+        return $this;
     }
 
     public function equals($map) {
 
     }
-    public function has($object) {
+
+    public function has($key) {
 
     }
 
@@ -55,7 +60,7 @@ class Dict implements Map {
     }
 
     public function is_empty() {
-
+        return $this->_size === 0;
     }
 
     public function remove($key) {
@@ -63,7 +68,7 @@ class Dict implements Map {
     }
 
     public function size() {
-
+        return $this->_size;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -78,11 +83,35 @@ class Dict implements Map {
     }
 
     public function get($key) {
+        try {
+            $k = __hash($key);
+        } catch (Exception $e) {
+            $k = uniqid('', true);
+        }
 
+        if (array_key_exists($k, $_dict)) {
+            $list = $this->_dict[$k];
+            if (count($list) === 1) {
+                return $list[0][1];
+            }
+            foreach ($list as $idx => $tuple) {
+                if (__equals($key, $tuple[0])) {
+                    return $tuple[1];
+                }
+            }
+            return $this->default_val;
+        }
+        return $this->default_val;
     }
 
     public function has_key($key) {
-
+        if (method_exists($key, "hash")) {
+            $k = $key->hash();
+        }
+        else {
+            $k = uniqid('', true);
+        }
+        return array_key_exists($k, $_dict);
     }
 
     public function has_value($value) {
@@ -123,7 +152,7 @@ class Dict implements Map {
 
 }
 
-class_alias('Dict', 'Hash');
+class_alias('Dict', 'HashMap');
 class_alias('Dict', 'Dictionary');
 
 ?>

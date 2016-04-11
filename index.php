@@ -52,7 +52,7 @@ $arr = new Arr(1,2,3,4);
         new Arr(1, 'a')
     );
     $unsorted->sort(function($a, $b) {
-        return compare($a[0], $b[0]);
+        return __compare($a[0], $b[0]);
     });
     echo '<br>'.$unsorted;
 

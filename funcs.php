@@ -17,7 +17,7 @@ function __compare($x, $y) {
     if (method_exists($y, "compare")) {
         return $y->compare($x);
     }
-    if (equals($x, $y)) {
+    if (__equals($x, $y)) {
         return 0;
     }
     if ($x < $y) {
@@ -43,7 +43,7 @@ function __hash($x) {
 }
 
 function __mergesort_compare($a, $b) {
-    return compare($a, $b);
+    return __compare($a, $b);
 }
 
 function __mergesort(&$array, $cmp_function='__mergesort_compare') {
@@ -57,8 +57,8 @@ function __mergesort(&$array, $cmp_function='__mergesort_compare') {
     $array1 = array_slice($array, 0, $halfway);
     $array2 = array_slice($array, $halfway);
     // Recurse to sort the two halves
-    mergesort($array1, $cmp_function);
-    mergesort($array2, $cmp_function);
+    __mergesort($array1, $cmp_function);
+    __mergesort($array2, $cmp_function);
     // If all of $array1 is <= all of $array2, just append them.
     if (call_user_func($cmp_function, end($array1), $array2[0]) < 1) {
         $array = array_merge($array1, $array2);

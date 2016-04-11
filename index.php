@@ -1,6 +1,9 @@
 <?php
 // phpinfo();
 require_once 'Arr.php';
+require_once 'Dict.php';
+
+
 $arr = new Arr(1,2,3,4);
 
 ?>
@@ -60,6 +63,30 @@ $arr = new Arr(1,2,3,4);
     foreach ($arr as $idx => $elem) {
         echo "$idx->$elem<br>";
     }
+
+
+
+    echo '<hr><hr>DICT:<br>';
+    $dict = new Dict();
+    // echo 'get new Arr(): ';
+    // var_dump($dict->get(new Arr()));
+    // echo '<br>';
+    // $dict->put(true, 'asdf');
+    $dict->put(false, 'bsdf');
+    // echo 'get true: ';
+    // var_dump($dict->get(true));
+    // echo '<br>';
+    // echo 'get false: ';
+    // var_dump($dict->get(false));
+    // echo '<br>';
+    $dict->put(new Arr(), 'array as key!!');
+    echo 'get new Arr(): ';
+    var_dump($dict->get(new Arr()));
+    echo '<br>';
+    $dict->put(new Arr(), 'new ARRAY2 as key!!');
+    echo 'get new Arr(): ';
+    var_dump($dict->get(new Arr()));
+    echo '<br>';
 
 ?>
 </body>

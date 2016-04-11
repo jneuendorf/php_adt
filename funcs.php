@@ -27,6 +27,11 @@ function __compare($x, $y) {
 }
 
 function __hash($x) {
+    // use cached value
+    if (is_object($x) && property_exists($x, '__hash__')) {
+        return $x->__hash__;
+    }
+    // calc new hash
     if (method_exists($x, "hash")) {
         return $x->hash();
     }

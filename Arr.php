@@ -1,9 +1,9 @@
 <?php
 
-require_once 'CollectionInterface.php';
+require_once 'Collection.php';
 require_once 'funcs.php';
 
-class Arr implements Collection, ArrayAccess, Iterator {
+class Arr extends Collection implements ArrayAccess, Iterator {
 
     // list of native array function that we can automatically create delegations (using the __callStatic() method)
     protected static $class_methods = [
@@ -119,7 +119,10 @@ class Arr implements Collection, ArrayAccess, Iterator {
     }
 
     public function equals($collection) {
-        // TODO
+        if ($collection instanceof Collection) {
+            return __hash($collection) === __hash($this);
+        }
+        return false;
     }
 
     public function has($object) {
@@ -128,7 +131,7 @@ class Arr implements Collection, ArrayAccess, Iterator {
 
     public function hash() {
         $result = 0;
-        foreach ($this->$elements as $idx => $element) {
+        foreach ($this->elements as $idx => $element) {
             $result += ($idx + 1) * hash($element);
         }
         return $result;

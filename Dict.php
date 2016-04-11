@@ -2,9 +2,9 @@
 
 require_once 'funcs.php';
 require_once 'Arr.php';
-require_once 'MapInterface.php';
+require_once 'Map.php';
 
-class Dict implements Map {
+class Dict extends Map {
 
     protected $_dict;
     protected $_size;
@@ -31,6 +31,15 @@ class Dict implements Map {
         return -1;
     }
 
+    protected function _get_hash($key) {
+        try {
+            $k = __hash($key);
+        } catch (Exception $e) {
+            $k = uniqid('', true);
+        }
+        return $k;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
@@ -38,7 +47,7 @@ class Dict implements Map {
     // IMPLEMENTING MAP (COLLECTION)
 
     public function add($key, $value) {
-
+        return $this->put($key, $value);
     }
 
     public function clear() {
@@ -52,7 +61,7 @@ class Dict implements Map {
     }
 
     public function has($key) {
-
+        return $this->has_key($key);
     }
 
     public function hash() {
@@ -83,17 +92,10 @@ class Dict implements Map {
     }
 
     public function get($key) {
-        try {
-            $k = __hash($key);
-        } catch (Exception $e) {
-            $k = uniqid('', true);
-        }
+        $k = $this->_get_hash($key);
 
-        if (array_key_exists($k, $_dict)) {
+        if (array_key_exists($k, $this->_dict)) {
             $list = $this->_dict[$k];
-            if (count($list) === 1) {
-                return $list[0][1];
-            }
             foreach ($list as $idx => $tuple) {
                 if (__equals($key, $tuple[0])) {
                     return $tuple[1];
@@ -105,12 +107,7 @@ class Dict implements Map {
     }
 
     public function has_key($key) {
-        if (method_exists($key, "hash")) {
-            $k = $key->hash();
-        }
-        else {
-            $k = uniqid('', true);
-        }
+        $k = $this->_get_hash($key);
         return array_key_exists($k, $_dict);
     }
 
@@ -135,7 +132,31 @@ class Dict implements Map {
     }
 
     public function put($key, $value) {
+        $k = $this->_get_hash($key);
+        // cache hash
+        if (is_object($key) && !property_exists($key, '__hash__')) {
+            $key->__hash__ = $k;
+        }
 
+        // add key with new hash
+        if (!array_key_exists($k, $this->_dict)) {
+            $this->_dict[$k] = [[$key, $value]];
+            return $this;
+        }
+        // else: add key with existing hash
+        $list = $this->_dict[$k];
+        foreach ($list as $idx => $tuple) {
+            if (__equals($key, $tuple[0])) {
+                // also update key for reference equality
+                $this->_dict[$k][$idx][0] = $key;
+                $this->_dict[$k][$idx][1] = $value;
+                // $tuple[0] = $key;
+                // $tuple[1] = $value;
+                return $this;
+            }
+        }
+        array_push($this->_dict[$k], [$key, $value]);
+        return $this;
     }
 
     public function setdefault() {

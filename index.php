@@ -76,17 +76,46 @@ $arr = new Arr(1,2,3,4);
     // echo 'get true: ';
     // var_dump($dict->get(true));
     // echo '<br>';
-    // echo 'get false: ';
-    // var_dump($dict->get(false));
-    // echo '<br>';
+    echo 'get false: ';
+    var_dump($dict->get(false));
+    echo '<br>';
     $dict->put(new Arr(), 'array as key!!');
     echo 'get new Arr(): ';
     var_dump($dict->get(new Arr()));
     echo '<br>';
-    $dict->put(new Arr(), 'new ARRAY2 as key!!');
+    // $dict->put(new Arr(), 'equal key hash for this value!!');
+    // echo 'get new Arr(): ';
+    // var_dump($dict->get(new Arr()));
+    // echo '<br>';
+
+    // !!!!!
+    $dict[new Arr()] = 'new!!!';
     echo 'get new Arr(): ';
-    var_dump($dict->get(new Arr()));
+    var_dump($dict[new Arr()]);
     echo '<br>';
+
+    // var_dump($dict->values());
+    echo '$dict->values(): ';
+    echo $dict->values().'<br>';
+    echo '$dict->keys(): ';
+    echo $dict->keys().'<br>';
+
+    $obj = new StdClass();
+    $dict[$obj] = 42;
+    echo 'get obj: ';
+    var_dump($dict[$obj]);
+    echo '<br>';
+    $dict[$obj] = 43;
+    echo 'get obj after update: ';
+    var_dump($dict[$obj]);
+    echo '<br>';
+    echo 'get new obj: ';
+    var_dump($dict[new StdClass()]);
+    echo '<br>';
+
+    var_dump(Dict::fromkeys([1,2]));
+    var_dump(__hash(0.123456789));
+
 
 ?>
 </body>

@@ -23,7 +23,7 @@ abstract class Map extends Collection {
     // from python
     // clear
     public function copy() {}
-    public function fromkeys() {}
+    public static function fromkeys() {}
     // get
     public function items() {}
     public function keys() {}

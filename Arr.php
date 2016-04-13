@@ -3,7 +3,7 @@
 require_once 'Collection.php';
 require_once 'funcs.php';
 
-class Arr extends Collection implements ArrayAccess, Iterator {
+class Arr extends Collection implements ArrayAccess, Countable, Iterator {
 
     // list of native array function that we can automatically create delegations (using the __callStatic() method)
     protected static $class_methods = [
@@ -27,7 +27,7 @@ class Arr extends Collection implements ArrayAccess, Iterator {
         'array_intersect',
         'array_keys',
         'array_merge_recursive',
-        'array_merge',
+        // 'array_merge',
         'array_pad',
         'array_product',
         'array_rand',
@@ -119,7 +119,7 @@ class Arr extends Collection implements ArrayAccess, Iterator {
     }
 
     public function equals($collection) {
-        if ($collection instanceof Collection) {
+        if ($collection instanceof Arr) {
             return __hash($collection) === __hash($this);
         }
         return false;
@@ -201,6 +201,19 @@ class Arr extends Collection implements ArrayAccess, Iterator {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING COUNTABLE
+
+    public function count() {
+        return $this->_length;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING PSEUDO INTERFACE CLONABLE
+
+    public function __clone() {
+        return $this->clone();
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
@@ -260,12 +273,38 @@ class Arr extends Collection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    // API-CHANGE: new function
+    public function concat(...$arrays) {
+        $res = new Arr();
+        foreach ($arrays as $idx => $arr) {
+            $res->merge(...$arrays);
+        }
+        return $res;
+    }
+
     // current() is defined above (iterator interface section)
     // API-CHANGE: each function not implemented
 
     public function end() {
         $this->_position = $this->_length - 1;
         return $this;
+    }
+
+    // API-CHANGE: new function
+    public function flatten($deep=false) {
+        $flattened = new Arr();
+
+        foreach ($this as $idx => $value) {
+            if ($value instanceof Arr) {
+                if (!$deep) {
+                    $flattened->merge($value);
+                }
+                else {
+                    $flattened->merge($value->flatten());
+                }
+            }
+        }
+        return $flattened;
     }
 
     // API-CHANGE: extract function not implemented
@@ -281,6 +320,16 @@ class Arr extends Collection implements ArrayAccess, Iterator {
     public function map($callback) {
         return new Arr(...array_map($callback, $this->elements));
     }
+
+    // API-CHANGE: now in place (for not in place see concat)
+    public function merge(...$arrays) {
+        foreach ($arrays as $idx => $arr) {
+            $this->push(...$arr);
+        }
+        return $this;
+    }
+
+
 
     // next() is defined above (iterator interface section)
 
@@ -394,7 +443,9 @@ class Arr extends Collection implements ArrayAccess, Iterator {
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////
     // EXTENDING THE API: adapt to python mutable sequence API
+
     public function append(...$args) {
         return $this->push(...$args);
     }
@@ -402,7 +453,11 @@ class Arr extends Collection implements ArrayAccess, Iterator {
     // clear() is implemented above (collection interface section)
 
     public function copy() {
-        return new static(...$this->elements);
+        $res = new Arr();
+        foreach ($this->elements as $idx => $value) {
+            $res->merge(__clone($value));
+        }
+        return $res;
     }
 
     public function extend($iterable) {

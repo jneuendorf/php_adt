@@ -27,25 +27,49 @@ function __compare($x, $y) {
 }
 
 function __hash($x) {
-    // use cached value
-    if (is_object($x) && property_exists($x, '__hash__')) {
-        return $x->__hash__;
-    }
+    // // use cached value
+    // if (is_object($x) && property_exists($x, '__hash__')) {
+    //     return $x->__hash__;
+    // }
     // calc new hash
     if (method_exists($x, "hash")) {
         return $x->hash();
     }
+    if (is_int($x)) {
+        return $x;
+    }
     if (is_numeric($x)) {
-        return (float) $x;
+        while ($x < PHP_INT_MAX && floor($x) != $x) {
+            $x = $x * 100;
+        }
+        return (int) $x;
     }
     if (is_string($x)) {
         // TODO: calc string hash
+    }
+    if (is_array($x)) {
+        // TODO: calc native array hash
     }
     if (is_bool($x)) {
         return (int) $x;
     }
     throw new Exception("Given parameter does not support hashing!", 1);
 }
+
+function __clone($x) {
+    if (method_exists($x, "copy")) {
+        return $x->copy();
+    }
+    if (is_object($x)) {
+        return clone $x;
+    }
+    if (is_array($x)) {
+        return array_merge($x);
+    }
+    return $x;
+}
+
+
 
 function __mergesort_compare($a, $b) {
     return __compare($a, $b);

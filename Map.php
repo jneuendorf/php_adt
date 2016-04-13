@@ -14,7 +14,7 @@ abstract class Map extends Collection {
     // public function size() {}
     // from java
     // public function equals($map) {}
-    public function get($key) {}
+    public function get($key, $default_val=null) {}
     public function has_key($key) {}
     public function has_value($value) {}
     public function put($key, $value) {}
@@ -22,12 +22,11 @@ abstract class Map extends Collection {
     public function values() {}
     // from python
     // clear
-    public function copy() {}
     public static function fromkeys() {}
     // get
     public function items() {}
     public function keys() {}
-    public function pop() {}
+    public function pop($key, $default=null) {}
     public function popitem() {}
     public function setdefault() {}
     public function update() {}

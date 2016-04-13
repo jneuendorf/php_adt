@@ -3,6 +3,7 @@
 abstract class Collection {
     public function add($object) {}
     public function clear() {}
+    public function copy($deep=false) {}
     public function equals($collection) {}
     public function has($object) {}
     public function hash() {}

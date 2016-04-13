@@ -1,5 +1,6 @@
 <?php
 
+require_once 'init.php';
 require_once 'Collection.php';
 require_once 'funcs.php';
 
@@ -112,6 +113,17 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
         return $this->push($object);
     }
 
+    public function copy($deep=false) {
+        if (!$deep) {
+            return new Arr(...$this->elements);
+        }
+        $res = new Arr();
+        foreach ($this->elements as $idx => $value) {
+            $res->merge(__clone($value));
+        }
+        return $res;
+    }
+
     public function clear() {
         $this->elements = [];
         $this->_length = 0;
@@ -212,39 +224,26 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     // IMPLEMENTING PSEUDO INTERFACE CLONABLE
 
     public function __clone() {
-        return $this->clone();
+        return $this->copy();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
 
     public function current() {
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->elements[$this->_position];
-        }
-        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
-        return null;
+        return $this->elements[$this->_position];
     }
 
     public function key() {
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->_position;
-        }
-        return null;
+        return $this->_position;
     }
 
     public function next() {
         $this->_position++;
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->elements[$this->_position];
-        }
-        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
-        return null;
     }
 
     public function rewind() {
         $this->_position = 0;
-        return $this;
     }
 
     public function valid() {
@@ -451,14 +450,6 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     }
 
     // clear() is implemented above (collection interface section)
-
-    public function copy() {
-        $res = new Arr();
-        foreach ($this->elements as $idx => $value) {
-            $res->merge(__clone($value));
-        }
-        return $res;
-    }
 
     public function extend($iterable) {
         foreach ($iterable as $key => $value) {

@@ -1,5 +1,6 @@
 <?php
 
+require_once 'init.php';
 require_once 'funcs.php';
 require_once 'Arr.php';
 require_once 'Map.php';
@@ -7,21 +8,56 @@ require_once 'Map.php';
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it
 class Dict extends Map implements ArrayAccess, Countable, Iterator {
 
+    public $default_val;
+
     // maps hashes to lists of values
     protected $_dict;
-    // // maps hashes to list of keys (needed for the keys() method)
-    // protected $_keys;
     protected $_size;
+    protected $_hash_idx;
+    protected $_bucket_item_idx;
+    protected $_hash_order;
 
-    function __construct($default_val=null, $arr=[]) {
-        $this->_dict = [];
-        // $this->_keys = [];
-        $this->_size = 0;
+    public function __construct($default_val=null, $iterable=[]) {
+        $this->clear();
         $this->default_val = $default_val;
 
-        foreach ($arr as $key => $value) {
+        foreach ($iterable as $key => $value) {
             $this->put($key, $value);
         }
+    }
+
+    public function __toString() {
+        $res = [];
+        foreach ($this as $key => $value) {
+            if (is_string($key)) {
+                $k = "'$key'";
+            }
+            elseif (is_bool($key)) {
+                $k = $key ? 'true' : 'false';
+            }
+            else {
+                try {
+                    $k = "$key";
+                } catch (Exception $e) {
+                    $k = var_export($key, true);
+                }
+            }
+            if (is_string($value)) {
+                $v = "'$value'";
+            }
+            elseif (is_bool($value)) {
+                $v = $value ? 'true' : 'false';
+            }
+            else {
+                try {
+                    $v = "$value";
+                } catch (Exception $e) {
+                    $v = var_export($value, true);
+                }
+            }
+            array_push($res, '  '.$k.': '.$v);
+        }
+        return "{\n".implode(", \n", $res)."\n}";
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -43,43 +79,6 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING MAP (COLLECTION)
-
-    public function add($key, $value) {
-        return $this->put($key, $value);
-    }
-
-    public function clear() {
-        $this->_dict = [];
-        $this->_size = 0;
-        return $this;
-    }
-
-    public function equals($map) {
-
-    }
-
-    public function has($key) {
-        return $this->has_key($key);
-    }
-
-    public function hash() {
-        // TODO: sum of hashes of keys-value pairs
-    }
-
-    public function is_empty() {
-        return $this->_size === 0;
-    }
-
-    public function remove($key) {
-
-    }
-
-    public function size() {
-        return $this->_size;
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COUNTABLE
@@ -109,39 +108,99 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
-    // TODO
 
     public function current() {
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->elements[$this->_position];
-        }
-        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
-        return null;
+        return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx][1];
     }
 
     public function key() {
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->_position;
-        }
-        return null;
+        return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx][0];
     }
 
     public function next() {
-        $this->_position++;
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
-            return $this->elements[$this->_position];
+        // can proceed in current bucket
+        if ($this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$this->_hash_idx]]) - 1) {
+            $this->_bucket_item_idx++;
         }
-        // i would like to throw an exception to differentiate a possible NULL value from out of range but this would cause uncaught exception when iterating...
-        return null;
+        // need to proceed to beginning of next bucket
+        else {
+            $this->_hash_idx++;
+            $this->_bucket_item_idx = 0;
+        }
     }
 
     public function rewind() {
-        $this->_position = 0;
-        return $this;
+        $this->_hash_idx = 0;
+        $this->_bucket_item_idx = 0;
     }
 
     public function valid() {
-        return $this->_position >= 0 && $this->_position < $this->_length;
+        $h_idx = $this->_hash_idx;
+        return $h_idx >= 0 && $h_idx < count($this->_hash_order) && $this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$h_idx]]);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING MAP (COLLECTION)
+
+    public function add($key, $value) {
+        return $this->put($key, $value);
+    }
+
+    public function clear() {
+        $this->_dict = [];
+        $this->_size = 0;
+        $this->_hash_idx = 0;
+        $this->_bucket_item_idx = 0;
+        $this->_hash_order = [];
+        return $this;
+    }
+
+    public function copy() {
+
+    }
+
+    public function equals($map) {
+
+    }
+
+    public function has($key) {
+        return $this->has_key($key);
+    }
+
+    public function hash() {
+        // TODO: sum (or some other commutative function) of hashes of keys-value pairs
+    }
+
+    public function is_empty() {
+        return $this->_size === 0;
+    }
+
+    public function remove($key) {
+        if ($this->has_key($key)) {
+            $hash = $this->_get_hash($key);
+            $bucket = $this->_dict[$hash];
+            foreach ($bucket as $idx => $tuple) {
+                if (__equals($key, $tuple[0])) {
+                    // remove entire hash-bucket entry because will be empty
+                    if (count($bucket) === 1) {
+                        unset($this->_dict[$hash]);
+                        // remove hash from hash order
+                        $this->_hash_order = array_values(array_diff($this->_hash_order, array($hash)));
+                    }
+                    // remove tuple from the bucket
+                    else {
+                        unset($this->_dict[$hash][$idx]);
+                    }
+                    $this->_size--;
+                    return $this;
+                }
+            }
+        }
+        return $this;
+    }
+
+    public function size() {
+        return $this->_size;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -159,10 +218,6 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (remaining function)
 
-    public function copy() {
-
-    }
-
     public static function fromkeys($iterable=[], $value=null) {
         $res = new static();
         foreach ($iterable as $idx => $key) {
@@ -171,7 +226,10 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
         return $res;
     }
 
-    public function get($key) {
+    public function get($key, $default_val=null) {
+        if ($default_val === null) {
+            $default_val = $this->default_val;
+        }
         $k = $this->_get_hash($key);
 
         if (array_key_exists($k, $this->_dict)) {
@@ -181,14 +239,14 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
                     return $tuple[1];
                 }
             }
-            return $this->default_val;
+            return $default_val;
         }
-        return $this->default_val;
+        return $default_val;
     }
 
     public function has_key($key) {
         $k = $this->_get_hash($key);
-        return array_key_exists($k, $_dict);
+        return array_key_exists($k, $this->_dict);
     }
 
     public function has_value($value) {
@@ -222,47 +280,50 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
         return $res;
     }
 
-    public function pop() {
-
+    public function pop($key, $default=null) {
+        if ($this->has($key)) {
+            $res = $this->get($key);
+            $this->remove($key);
+            return $res;
+        }
+        // else
+        return $default;
     }
 
     public function popitem() {
-
+        foreach ($this->dict as $hash => $bucket) {
+            $tuple = $bucket[0];
+            $res = new Arr(...$tuple);
+            $this->remove($tuple[0]);
+            return $res;
+        }
     }
 
     public function put($key, $value) {
-        $k = $this->_get_hash($key);
-        // // cache hash
+        $hash = $this->_get_hash($key);
+        // cache pseudo hash on key
         if (is_object($key) && !property_exists($key, '__uniqid__')) {
-            $key->__uniqid__ = $k;
-        }
-
-        if (is_float($k)) {
-            echo '$k ';
-            var_dump($k);
-            var_dump($key);
-            var_dump($value);
-            echo '<br>';
-
+            $key->__uniqid__ = $hash;
         }
 
         // add key with new hash (new bucket)
-        if (!array_key_exists($k, $this->_dict)) {
-            $this->_dict[$k] = [[$key, $value]];
+        if (!array_key_exists($hash, $this->_dict)) {
+            $this->_dict[$hash] = [[$key, $value]];
             $this->_size++;
+            array_push($this->_hash_order, $hash);
             return $this;
         }
         // else: add key with existing hash
-        $list = $this->_dict[$k];
+        $list = $this->_dict[$hash];
         foreach ($list as $idx => $tuple) {
             if (__equals($key, $tuple[0])) {
-                // also update key for reference equality
-                $this->_dict[$k][$idx][0] = $key;
-                $this->_dict[$k][$idx][1] = $value;
+                // also update key for potential reference equality
+                $this->_dict[$hash][$idx][0] = $key;
+                $this->_dict[$hash][$idx][1] = $value;
                 return $this;
             }
         }
-        array_push($this->_dict[$k], [$key, $value]);
+        array_push($this->_dict[$hash], [$key, $value]);
         $this->_size++;
         return $this;
     }
@@ -271,13 +332,11 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
 
     }
 
-    // update(...)
-    //     D.update([E, ]**F) -> None.  Update D from dict/iterable E and F.
-    //     If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
-    //     If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
-    //     In either case, this is followed by: for k in F:  D[k] = F[k]
-    public function update() {
-
+    public function update($iterable) {
+        foreach ($iterable as $key => $value) {
+            $this->put($key, $value);
+        }
+        return $this;
     }
 
     public function values() {

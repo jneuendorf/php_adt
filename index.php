@@ -76,13 +76,13 @@ $arr = new Arr(1,2,3,4);
     // echo 'get true: ';
     // var_dump($dict->get(true));
     // echo '<br>';
-    echo 'get false: ';
-    var_dump($dict->get(false));
-    echo '<br>';
-    $dict->put(new Arr(), 'array as key!!');
-    echo 'get new Arr(): ';
-    var_dump($dict->get(new Arr()));
-    echo '<br>';
+    // echo 'get false: ';
+    // var_dump($dict->get(false));
+    // echo '<br>';
+    // $dict->put(new Arr(), 'array as key!!');
+    // echo 'get new Arr(): ';
+    // var_dump($dict->get(new Arr()));
+    // echo '<br>';
     // $dict->put(new Arr(), 'equal key hash for this value!!');
     // echo 'get new Arr(): ';
     // var_dump($dict->get(new Arr()));
@@ -94,7 +94,6 @@ $arr = new Arr(1,2,3,4);
     var_dump($dict[new Arr()]);
     echo '<br>';
 
-    // var_dump($dict->values());
     echo '$dict->values(): ';
     echo $dict->values().'<br>';
     echo '$dict->keys(): ';
@@ -109,13 +108,29 @@ $arr = new Arr(1,2,3,4);
     echo 'get obj after update: ';
     var_dump($dict[$obj]);
     echo '<br>';
-    echo 'get new obj: ';
-    var_dump($dict[new StdClass()]);
-    echo '<br>';
+    // echo 'get new obj: ';
+    // var_dump($dict[new StdClass()]);
+    // echo '<br>';
 
-    var_dump(Dict::fromkeys([1,2]));
-    var_dump(__hash(0.123456789));
+    echo 'dict size = '.$dict->size().'<br>';
+    // echo 'get obj after removal: ';
+    // $dict->remove($obj);
+    // var_dump($dict[$obj]);
+    // echo '<br>';
+    // echo 'dict size = '.$dict->size().'<br>';
 
+    echo $dict.'<br>';
+
+    echo 'EACH.....<br>';
+    foreach ($dict as $key => $value) {
+        echo 'key: ';
+        var_dump($key);
+        echo '<br>';
+        echo 'value: ';
+        var_dump($value);
+        echo '<br>';
+        echo '-------<br>';
+    }
 
 ?>
 </body>

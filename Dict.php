@@ -17,12 +17,14 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
     protected $_bucket_item_idx;
     protected $_hash_order;
 
-    public function __construct($default_val=null, $iterable=[]) {
+    public function __construct($default_val=null, $iterable=null) {
         $this->clear();
         $this->default_val = $default_val;
 
-        foreach ($iterable as $key => $value) {
-            $this->put($key, $value);
+        if ($iterable !== null) {
+            foreach ($iterable as $key => $value) {
+                $this->put($key, $value);
+            }
         }
     }
 
@@ -156,11 +158,11 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
     }
 
     public function copy() {
-
+        return new static($this->default_val, $this);
     }
 
     public function equals($map) {
-
+        return $this->hash() === __hash($map);
     }
 
     public function has($key) {
@@ -168,7 +170,11 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
     }
 
     public function hash() {
-        // TODO: sum (or some other commutative function) of hashes of keys-value pairs
+        $res = 0;
+        foreach ($this as $key => $value) {
+            $res += __hash($key) + 3*__hash($value);
+        }
+        return $res;
     }
 
     public function is_empty() {

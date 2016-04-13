@@ -27,11 +27,6 @@ function __compare($x, $y) {
 }
 
 function __hash($x) {
-    // // use cached value
-    // if (is_object($x) && property_exists($x, '__hash__')) {
-    //     return $x->__hash__;
-    // }
-    // calc new hash
     if (method_exists($x, "hash")) {
         return $x->hash();
     }
@@ -45,13 +40,33 @@ function __hash($x) {
         return (int) $x;
     }
     if (is_string($x)) {
-        // TODO: calc string hash
+        $hash = 0;
+        for ($i = 0; $i < strlen($x); $i++) {
+            $hash += ord($x[$i]) * ($i + 1);
+        }
+        return $hash;
     }
     if (is_array($x)) {
-        // TODO: calc native array hash
+        $hash = 0;
+        $i = 1;
+        foreach ($x as $key => $value) {
+            $hash += $i * (__hash($key) + 3*__hash($value));
+            $i++;
+        }
+        return $hash;
     }
     if (is_bool($x)) {
         return (int) $x;
+    }
+    if (is_object($x)) {
+        if ([property_exists($x, '__uniqid__')]) {
+            $id = $x->__uniqid__;
+        }
+        else {
+            $id = uniqid('', true);
+            $x->__uniqid__ = $id;
+        }
+        return __hash($id);
     }
     throw new Exception("Given parameter does not support hashing!", 1);
 }

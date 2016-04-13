@@ -120,6 +120,9 @@ $arr = new Arr(1,2,3,4);
     // echo 'dict size = '.$dict->size().'<br>';
 
     echo $dict.'<br>';
+    echo 'hash value = '.__hash([1,0]).'<br>';
+    echo 'hash value = '.__hash([0,1]).'<br>';
+    // echo 'hash value = '.$dict->hash().'<br>';
 
     echo 'EACH.....<br>';
     foreach ($dict as $key => $value) {

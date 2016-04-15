@@ -2,6 +2,7 @@
 
 require_once 'init.php';
 require_once 'funcs.php';
+require_once 'Arr.php';
 require_once 'AbstractTree.php';
 
 class Tree {
@@ -14,6 +15,31 @@ class Tree {
         $this->data_source = $data_source;
         $this->_children = $children === null ? new Arr() : $children;
         $this->_parent = null;
+    }
+
+    public function __toString() {
+        $children = [];
+        foreach ($this->_children as $idx => $child) {
+            $children[] = $child.'';
+        }
+        try {
+            if ($this->data_source === null) {
+                $data_source = 'null';
+            }
+            elseif (is_string($this->data_source)) {
+                $data_source = "'".$this->data_source."'";
+            }
+            elseif (is_bool($this->data_source)) {
+                $data_source = $this->data_source ? 'true' : 'false';
+            }
+            else {
+                $data_source = $this->data_source.'';
+            }
+        } catch (Exception $e) {
+            $data_source = '...';
+        }
+
+        return 'Tree(data_source: '.$data_source.', children: ['.implode(', ', $children).'])';
     }
 
     // TODO

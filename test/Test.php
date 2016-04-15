@@ -13,4 +13,10 @@ function describe($description, $callback) {
 
 }
 
+function test($begin, $callback, $end='') {
+    echo $begin.'<br>';
+    echo $callback();
+    echo $end.'<br>';
+}
+
 ?>

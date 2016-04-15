@@ -222,8 +222,24 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // PYTHON API
-    // difference
-    // difference_udpate
+
+    public function difference($set) {
+        $res = new Set();
+        foreach ($this as $idx => $element) {
+            if (!$set->has($element)) {
+                $res->add($element);
+            }
+        }
+        return $res;
+    }
+
+    public function difference_udpate($set) {
+        foreach ($set as $idx => $element) {
+            $this->remove($element);
+        }
+        return $this;
+    }
+
     public function discard($element) {
         return $this->remove($element);
     }
@@ -267,8 +283,35 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $set->issubset($this);
     }
 
-    // symmetric_difference
-    // symmetric_difference_udpate
+    // == union without intersection
+    public function symmetric_difference($set) {
+        $res = new Set();
+        foreach ($this as $idx => $element) {
+            if (!$set->has($element)) {
+                $res->add($element);
+            }
+        }
+        foreach ($set as $idx => $element) {
+            if (!$this->has($element)) {
+                $res->add($element);
+            }
+        }
+        return $set;
+    }
+
+    public function symmetric_difference_udpate($set) {
+        // union
+        $this->update($set);
+        // remove intersection
+        foreach ($set as $idx => $element) {
+            // element in intersection
+            if ($this->has($element)) {
+                $this->remove($element);
+            }
+        }
+        return $this;
+    }
+
     public function union($set) {
         $res = $this->copy();
         foreach ($set as $idx => $element) {
@@ -276,7 +319,19 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         }
         return $res;
     }
-    // update
+
+    // API-CHANGE: added for naming consistency
+    public function union_update($set) {
+        return $this->update($set);
+    }
+
+    // union in place
+    public function update($set) {
+        foreach ($set as $idx => $element) {
+            $this->add($element);
+        }
+        return $this;
+    }
 
 }
 

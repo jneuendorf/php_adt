@@ -41,5 +41,7 @@ echo 'intersection:<br>';
 $set->add(1337)->add(42);
 $set2->add(false)->add(new Set());
 echo $set, ' ^ ', $set2, ' = ', $set->intersection($set2);
+echo 'union:<br>';
+echo $set, ' u ', $set2, ' = ', $set->union($set2);
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-class Set {
+class Tree {
 
-    function __construct() {
+    public function __construct() {
         # code...
     }
 }

@@ -2,17 +2,19 @@
 
 require_once 'init.php';
 require_once 'funcs.php';
-require_once 'Arr.php';
-require_once 'Map.php';
+// require_once 'Arr.php';
+require_once 'AbstractMap.php';
 
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it
-class Dict extends Map implements ArrayAccess, Countable, Iterator {
+// TODO: inherit from Set
+class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
     public $default_val;
 
     // maps hashes to lists of values
     protected $_dict;
-    protected $_size;
+    // protected $_size;
+    // those 3 vars are needed for the iterator interface
     protected $_hash_idx;
     protected $_bucket_item_idx;
     protected $_hash_order;
@@ -65,29 +67,9 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
-    protected function _get_hash($key) {
-        try {
-            $k = __hash($key);
-        } catch (Exception $e) {
-            if (is_object($key) && property_exists($key, '__uniqid__')) {
-                $k = $key->__uniqid__;
-            }
-            else {
-                $k = uniqid('', true);
-            }
-        }
-        return $k;
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING COUNTABLE
-
-    public function count() {
-        return $this->_size;
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
@@ -177,10 +159,6 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
         return $res;
     }
 
-    public function is_empty() {
-        return $this->_size === 0;
-    }
-
     public function remove($key) {
         if ($this->has_key($key)) {
             $hash = $this->_get_hash($key);
@@ -203,10 +181,6 @@ class Dict extends Map implements ArrayAccess, Countable, Iterator {
             }
         }
         return $this;
-    }
-
-    public function size() {
-        return $this->_size;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

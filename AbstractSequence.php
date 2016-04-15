@@ -1,13 +1,13 @@
 <?php
 
-require_once 'Collection.php';
+require_once 'AbstractCollection.php';
 
-abstract class Map extends Collection {
+abstract class AbstractSequence extends AbstractCollection implements ArrayAccess, Countable, Iterator {
     // from collection
-    public function add($key, $value) {}
+    // public function add($object) {}
     // public function clear() {}
     // public function equals($collection) {}
-    public function has($key) {}
+    // public function has($object) {}
     // public function hash() {}
     // public function is_empty() {}
     // public function remove($object) {}
@@ -20,17 +20,7 @@ abstract class Map extends Collection {
     public function put($key, $value) {}
     public function remove($key) {}
     public function values() {}
-    // from python
-    // clear
-    public static function fromkeys() {}
-    // get
-    public function items() {}
-    public function keys() {}
-    public function pop($key, $default=null) {}
-    public function popitem() {}
-    public function setdefault() {}
-    public function update() {}
-    // public function values() {}
+
 
 
 }

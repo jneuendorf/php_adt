@@ -1,10 +1,10 @@
 <?php
 
 require_once 'init.php';
-require_once 'Collection.php';
+require_once 'AbstractCollection.php';
 require_once 'funcs.php';
 
-class Arr extends Collection implements ArrayAccess, Countable, Iterator {
+class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // list of native array function that we can automatically create delegations (using the __callStatic() method)
     protected static $class_methods = [
@@ -49,7 +49,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     ];
 
     protected $elements = [];
-    protected $_length;
+    // protected $_size;
     protected $_position;
 
     public function __construct(...$elements) {
@@ -59,13 +59,13 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
             }
             array_push($this->elements, $element);
         }
-        $this->_length = count($this->elements);
+        $this->_size = count($this->elements);
     }
 
     public function __get($name) {
         switch ($name) {
             case 'length':
-                return $this->_length;
+                return $this->_size;
             default:
                 return null;
         }
@@ -126,7 +126,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
 
     public function clear() {
         $this->elements = [];
-        $this->_length = 0;
+        $this->_size = 0;
         return $this;
     }
 
@@ -149,10 +149,6 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
         return $result;
     }
 
-    public function is_empty() {
-        return $this->_length === 0;
-    }
-
     public function remove($object) {
         $index = $this->index($object);
         if ($index !== null) {
@@ -162,7 +158,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     }
 
     public function size() {
-        return $this->_length;
+        return $this->_size;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -171,7 +167,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
             if ($offset < 0) {
-                $offset += $this->_length;
+                $offset += $this->_size;
             }
             return $offset;
         }
@@ -181,10 +177,10 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     public function offsetExists($offset) {
         if (is_int($offset)) {
             if ($offset >= 0) {
-                return $offset < $this->_length;
+                return $offset < $this->_size;
             }
             // else: negative
-            return abs($offset) <= $this->_length;
+            return abs($offset) <= $this->_size;
         }
         return false;
     }
@@ -207,18 +203,18 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     public function offsetUnset($offset) {
         if ($this->offsetExists($offset)) {
             unset($this->elements[$offset]);
-            $this->_length--;
+            $this->_size--;
             // reassign keys
             $this->elements = array_values($this->elements);
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING COUNTABLE
-
-    public function count() {
-        return $this->_length;
-    }
+    // ////////////////////////////////////////////////////////////////////////////////////
+    // // IMPLEMENTING COUNTABLE
+    //
+    // public function count() {
+    //     return $this->_size;
+    // }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING PSEUDO INTERFACE CLONABLE
@@ -247,7 +243,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     }
 
     public function valid() {
-        return $this->_position >= 0 && $this->_position < $this->_length;
+        return $this->_position >= 0 && $this->_position < $this->_size;
     }
 
 
@@ -285,7 +281,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     // API-CHANGE: each function not implemented
 
     public function end() {
-        $this->_position = $this->_length - 1;
+        $this->_position = $this->_size - 1;
         return $this;
     }
 
@@ -311,7 +307,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
 
     public function key_exists($key) {
         if (is_int($key)) {
-            return $key < $this->_length;
+            return $key < $this->_size;
         }
         return false;
     }
@@ -334,7 +330,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
 
     public function pop($index=null) {
         if ($index === null) {
-            $index = $this->_length - 1;
+            $index = $this->_size - 1;
         }
         $removed_elements = $this->splice($index, 1);
         return $removed_elements[0];
@@ -346,7 +342,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
 
     public function prev() {
         $this->_position--;
-        if ($this->_position >= 0 && $this->_position < $this->_length) {
+        if ($this->_position >= 0 && $this->_position < $this->_size) {
             return $this->elements[$this->_position];
         }
         throw new Exception("Arr::next: Invalid position", 1);
@@ -355,7 +351,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     // API-CHANGE: chainable, @return $this instead of $new_length
     public function push(...$args) {
         $new_length = array_push($this->elements, ...$args);
-        $this->_length = $new_length;
+        $this->_size = $new_length;
         return $this;
     }
 
@@ -372,7 +368,7 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     // API-CHANGE: in place
     public function reverse() {
         $left = 0;
-        $right = $this->_length - 1;
+        $right = $this->_size - 1;
         $arr = &$this->elements;
         while ($left < $right) {
             $temp = $arr[$left];
@@ -389,9 +385,9 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     }
 
     public function shift() {
-        if ($this->_length > 0) {
+        if ($this->_size > 0) {
             $removed_element = array_shift($this->elements);
-            $this->_length--;
+            $this->_size--;
             return new static($removed_element);
         }
         return null;
@@ -413,17 +409,17 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
     // API-CHANGE: inserted elements are passed as separate parameters - not as an array of elements
     public function splice($offset, $length=0, ...$new_elements) {
         // if ($length === null) {
-        //     $length = $this->_length - $offset;
+        //     $length = $this->_size - $offset;
         // }
         $removed_elements = array_splice($this->elements, $offset, $length, $new_elements);
-        $this->_length += -count($removed_elements) + count($new_elements);
+        $this->_size += -count($removed_elements) + count($new_elements);
         return new static($removed_elements);
     }
 
     // API-CHANGE: @return $this instead of $new_length
     public function unshift(...$args) {
         $length = array_unshift($this->elements, ...$args);
-        $this->_length += $length;
+        $this->_size += $length;
         return $this;
     }
 
@@ -455,15 +451,15 @@ class Arr extends Collection implements ArrayAccess, Countable, Iterator {
         foreach ($iterable as $key => $value) {
             $new_length = array_push($this->elements, $value);
         }
-        $this->_length = $new_length;
+        $this->_size = $new_length;
         return $this;
     }
 
     public function index($needle, $start=0, $stop=null) {
         if ($stop === null) {
-            $stop = $this->_length - 1;
+            $stop = $this->_size - 1;
         }
-        if ($start === 0 && $stop === $this->_length - 1) {
+        if ($start === 0 && $stop === $this->_size - 1) {
             $idx = array_search($needle, $this->elements, true);
         }
         else {

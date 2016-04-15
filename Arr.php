@@ -130,9 +130,21 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
-    public function equals($collection) {
-        if ($collection instanceof Arr) {
-            return __hash($collection) === __hash($this);
+    public function equals($arr) {
+        if ($arr instanceof Arr) {
+            if ($this->size() !== $arr->size()) {
+                return false;
+            }
+            if (__hash($arr) !== __hash($this)) {
+                return false;
+            }
+            // hashes are equal => compare each entry
+            foreach ($this as $idx => $element) {
+                if (!__equals($element, $arr[$idx])) {
+                    return false;
+                }
+            }
+            return true;
         }
         return false;
     }
@@ -324,8 +336,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
-
-
     // next() is defined above (iterator interface section)
 
     public function pop($index=null) {
@@ -377,7 +387,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $left++;
             $right--;
        }
-        return new static(...array_reverse($this->elements));
+        return $this;
     }
 
     public function search(...$args) {
@@ -436,6 +446,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             return $this;
         }
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
+    }
+    // API-CHANGE: new function
+    public function without(...$args) {
+        $res = new Arr();
+        foreach ($this as $idx => $element) {
+            if (!in_array($element, $args)) {
+                $res->push($element);
+            }
+        }
+        return $res;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////

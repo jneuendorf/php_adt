@@ -143,8 +143,26 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return new static($this->default_val, $this);
     }
 
+    // REVIEW
     public function equals($map) {
-        return $this->hash() === __hash($map);
+        if ($map instanceof Dict) {
+            if ($this->size() !== $map->size()) {
+                return false;
+            }
+            if (__hash($map) !== __hash($this)) {
+                return false;
+            }
+            // hashes are equal => compare each entry
+            $obj = new StdClass();
+            foreach ($this as $key => $value) {
+                $map_value = $map->get($key, $obj);
+                if (!$map->has_key($key) || $map_value === $obj || !__equals($value, $map_value)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public function has($key) {
@@ -207,7 +225,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     }
 
     public function get($key, $default_val=null) {
-        if ($default_val === null) {
+        if (func_num_args() === 1) {
             $default_val = $this->default_val;
         }
         $k = $this->_get_hash($key);

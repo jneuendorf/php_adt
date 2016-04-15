@@ -7,7 +7,10 @@ function __equals($x, $y) {
     if (method_exists($y, "equals")) {
         return $y->equals($x);
     }
-    return $x == $y;
+    if (__hash($x) !== __hash($y)) {
+        return false;
+    }
+    return $x === $y;
 }
 
 function __compare($x, $y) {

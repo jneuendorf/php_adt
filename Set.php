@@ -173,7 +173,22 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function equals($set) {
-        return $this->hash() === __hash($set);
+        if ($set instanceof Set) {
+            if ($this->size() !== $set->size()) {
+                return false;
+            }
+            if (__hash($set) !== __hash($this)) {
+                return false;
+            }
+            // hashes are equal => compare each element
+            foreach ($this as $idx => $element) {
+                if (!$set->has($element)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public function has($element) {

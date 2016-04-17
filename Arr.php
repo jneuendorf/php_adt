@@ -48,7 +48,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_values',
     ];
 
-    protected $elements = [];
+    protected $_elements = [];
     // protected $_size;
     protected $_position;
 
@@ -57,9 +57,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             if (is_array($element)) {
                 $element = new Arr(...$element);
             }
-            array_push($this->elements, $element);
+            array_push($this->_elements, $element);
         }
-        $this->_size = count($this->elements);
+        $this->_size = count($this->_elements);
     }
 
     public function __get($name) {
@@ -84,7 +84,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         $org_name = $name;
         $name = 'array_'.$name;
         if (in_array($name, static::$instance_methods)) {
-            $res = call_user_func($name, $this->elements, ...$args);
+            $res = call_user_func($name, $this->_elements, ...$args);
             if (is_array($res)) {
                 return new Arr(...$res);
             }
@@ -110,6 +110,62 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return '['.implode(', ', $elements).']';
     }
 
+    // use ...$args workaround for passing an optional parameter (incl. null)
+    public function first(...$args) {
+        if ($this->_size >= 1) {
+            return $this->_elements[0];
+        }
+        // trigger exception
+        if (count($args) === 0) {
+            return $this->_elements[0];
+        }
+        // use default value
+        return $args[0];
+    }
+
+    public function second(...$args) {
+        if ($this->_size >= 2) {
+            return $this->_elements[1];
+        }
+        if (count($args) === 0) {
+            return $this->_elements[1];
+        }
+        return $args[0];
+    }
+
+    public function third(...$args) {
+        if ($this->_size >= 3) {
+            return $this->_elements[2];
+        }
+        if (count($args) === 0) {
+            return $this->_elements[2];
+        }
+        return $args[0];
+    }
+
+    public function penultimate(...$args) {
+        if ($this->_size >= 2) {
+            return $this->_elements[$this->_size - 2];
+        }
+        if (count($args) === 0) {
+            return $this->_elements[$this->_size - 2];
+        }
+        return $args[0];
+    }
+
+    public function last(...$args) {
+        if ($this->_size >= 1) {
+            return $this->_elements[$this->_size - 1];
+        }
+        if (count($args) === 0) {
+            return $this->_elements[$this->_size - 1];
+        }
+        return $args[0];
+    }
+
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
@@ -119,17 +175,17 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function copy($deep=false) {
         if (!$deep) {
-            return new Arr(...$this->elements);
+            return new Arr(...$this->_elements);
         }
         $res = new Arr();
-        foreach ($this->elements as $idx => $value) {
+        foreach ($this->_elements as $idx => $value) {
             $res->merge(__clone($value));
         }
         return $res;
     }
 
     public function clear() {
-        $this->elements = [];
+        $this->_elements = [];
         $this->_size = 0;
         return $this;
     }
@@ -159,7 +215,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function hash() {
         $result = 0;
-        foreach ($this->elements as $idx => $element) {
+        foreach ($this->_elements as $idx => $element) {
             $result += ($idx + 1) * hash($element);
         }
         return $result;
@@ -179,6 +235,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
+    // TODO: implment tuple class and use that for slicing
 
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
@@ -202,7 +259,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function offsetGet($offset) {
-        return $this->elements[$this->_adjust_offset($offset)];
+        return $this->_elements[$this->_adjust_offset($offset)];
     }
 
     public function offsetSet($offset, $value) {
@@ -211,26 +268,19 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $this->push($value);
         }
         else {
-            $this->elements[$this->_adjust_offset($offset)] = $value;
+            $this->_elements[$this->_adjust_offset($offset)] = $value;
         }
         return $this;
     }
 
     public function offsetUnset($offset) {
         if ($this->offsetExists($offset)) {
-            unset($this->elements[$offset]);
+            unset($this->_elements[$offset]);
             $this->_size--;
             // reassign keys
-            $this->elements = array_values($this->elements);
+            $this->_elements = array_values($this->_elements);
         }
     }
-
-    // ////////////////////////////////////////////////////////////////////////////////////
-    // // IMPLEMENTING COUNTABLE
-    //
-    // public function count() {
-    //     return $this->_size;
-    // }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING PSEUDO INTERFACE CLONABLE
@@ -243,7 +293,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // IMPLEMENTING ITERATOR
 
     public function current() {
-        return $this->elements[$this->_position];
+        return $this->_elements[$this->_position];
     }
 
     public function key() {
@@ -329,7 +379,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function map($callback) {
-        return new Arr(...array_map($callback, $this->elements));
+        return new Arr(...array_map($callback, $this->_elements));
     }
 
     // API-CHANGE: now in place (for not in place see concat)
@@ -364,14 +414,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function prev() {
         $this->_position--;
         if ($this->_position >= 0 && $this->_position < $this->_size) {
-            return $this->elements[$this->_position];
+            return $this->_elements[$this->_position];
         }
         throw new Exception("Arr::next: Invalid position", 1);
     }
 
     // API-CHANGE: chainable, @return $this instead of $new_length
     public function push(...$args) {
-        $new_length = array_push($this->elements, ...$args);
+        $new_length = array_push($this->_elements, ...$args);
         $this->_size = $new_length;
         return $this;
     }
@@ -383,14 +433,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // name in php array was reverse which is not in place.
     public function reversed() {
-        return new static(...array_reverse($this->elements));
+        return new static(...array_reverse($this->_elements));
     }
 
     // API-CHANGE: in place
     public function reverse() {
         $left = 0;
         $right = $this->_size - 1;
-        $arr = &$this->elements;
+        $arr = &$this->_elements;
         while ($left < $right) {
             $temp = $arr[$left];
             $arr[$left] = $arr[$right];
@@ -407,7 +457,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function shift() {
         if ($this->_size > 0) {
-            $removed_element = array_shift($this->elements);
+            $removed_element = array_shift($this->_elements);
             $this->_size--;
             return new static($removed_element);
         }
@@ -415,14 +465,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function shuffle() {
-        if (shuffle($this->elements)) {
+        if (shuffle($this->_elements)) {
             return $this;
         }
         throw new Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
     }
 
     public function sort($cmp_function='__mergesort_compare') {
-        __mergesort($this->elements, $cmp_function);
+        __mergesort($this->_elements, $cmp_function);
         return $this;
     }
 
@@ -432,28 +482,28 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         // if ($length === null) {
         //     $length = $this->_size - $offset;
         // }
-        $removed_elements = array_splice($this->elements, $offset, $length, $new_elements);
+        $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
         $this->_size += -count($removed_elements) + count($new_elements);
         return new static($removed_elements);
     }
 
     // API-CHANGE: @return $this instead of $new_length
     public function unshift(...$args) {
-        $length = array_unshift($this->elements, ...$args);
+        $length = array_unshift($this->_elements, ...$args);
         $this->_size += $length;
         return $this;
     }
 
     // API-CHANGE: @throws Exception
     public function walk_recursive(...$args) {
-        if (array_walk_recursive($this->elements, ...$args)) {
+        if (array_walk_recursive($this->_elements, ...$args)) {
             return $this;
         }
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
 
     public function walk(...$args) {
-        if (array_walk($this->elements, ...$args)) {
+        if (array_walk($this->_elements, ...$args)) {
             return $this;
         }
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
@@ -480,7 +530,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function extend($iterable) {
         foreach ($iterable as $key => $value) {
-            $new_length = array_push($this->elements, $value);
+            $new_length = array_push($this->_elements, $value);
         }
         $this->_size = $new_length;
         return $this;
@@ -491,10 +541,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $stop = $this->_size - 1;
         }
         if ($start === 0 && $stop === $this->_size - 1) {
-            $idx = array_search($needle, $this->elements, true);
+            $idx = array_search($needle, $this->_elements, true);
         }
         else {
-            $idx = array_search($needle, array_slice($this->elements, $start, $stop + 1), true);
+            $idx = array_search($needle, array_slice($this->_elements, $start, $stop + 1), true);
         }
 
         if ($idx !== false) {

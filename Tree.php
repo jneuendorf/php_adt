@@ -101,7 +101,7 @@ class Tree {
     public function depth() {
         $max_depth = 0;
         foreach ($this->_children as $idx => $child) {
-            $depth = $child->depth();
+            $depth = $child->depth() + 1;
             if ($depth > $max_depth) {
                 $max_depth = $depth;
             }
@@ -118,7 +118,7 @@ class Tree {
     }
 
     public function level() {
-        return $this->path_to_root()->size();
+        return $this->path_to_root()->size() - 1;
     }
 
     public function root() {
@@ -186,6 +186,7 @@ class Tree {
         return $descendants;
     }
 
+    // includes both end nodes
     public function path_to_root() {
         $res = new Arr($this);
         $parent = $this->_parent;

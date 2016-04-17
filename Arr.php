@@ -103,7 +103,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function __toString() {
-        return '['.implode(', ', $this->elements).']';
+        $elements = [];
+        foreach ($this as $idx => $element) {
+            $elements[] = __toString($element);
+        }
+        return '['.implode(', ', $elements).']';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -331,7 +335,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: now in place (for not in place see concat)
     public function merge(...$arrays) {
         foreach ($arrays as $idx => $arr) {
-            $this->push(...$arr);
+            if ($arr instanceof self) {
+                foreach ($arr as $i => $element) {
+                    $this->push($element);
+                }
+            }
+            elseif (is_array($arr)) {
+                $this->push(...$arr);
+            }
         }
         return $this;
     }

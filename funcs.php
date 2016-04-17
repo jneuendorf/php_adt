@@ -87,6 +87,25 @@ function __clone($x) {
     return $x;
 }
 
+function __toString($x, $default_val=null) {
+    if ($x === null) {
+        return 'null';
+    }
+    if (is_string($x)) {
+        return "'".$x."'";
+    }
+    if (is_bool($x)) {
+        return $x ? 'true' : 'false';
+    }
+    if (method_exists($x, '__toString')) {
+        return $x.'';
+    }
+    if ($default_val !== null) {
+        return $default_val;
+    }
+    return var_export($x, true);
+}
+
 
 
 function __mergesort_compare($a, $b) {

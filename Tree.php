@@ -7,6 +7,10 @@ require_once 'AbstractTree.php';
 
 class Tree {
 
+    const PRE_ORDER = 1;
+    const POST_ORDER = 2;
+    const LEVEL_ORDER = 3;
+
     public $data_source;
     protected $_children;
     protected $_parent;
@@ -22,31 +26,70 @@ class Tree {
         foreach ($this->_children as $idx => $child) {
             $children[] = $child.'';
         }
-        try {
-            if ($this->data_source === null) {
-                $data_source = 'null';
-            }
-            elseif (is_string($this->data_source)) {
-                $data_source = "'".$this->data_source."'";
-            }
-            elseif (is_bool($this->data_source)) {
-                $data_source = $this->data_source ? 'true' : 'false';
-            }
-            else {
-                $data_source = $this->data_source.'';
-            }
-        } catch (Exception $e) {
-            $data_source = '...';
-        }
-
-        return 'Tree(data_source: '.$data_source.', children: ['.implode(', ', $children).'])';
+        return 'Tree(data_source: '.__toString($this->data_source).', children: ['.implode(', ', $children).'])';
     }
+
+    protected static function _level_order($tree_node, $accumulator) {
+        $arr = new Arr($tree_node);
+        while (!$arr->is_empty()) {
+            $el = $arr[0];
+            $arr->remove($el);
+            $accumulator->push($el);
+            $arr->merge($el->children());
+        }
+    }
+
+    public static function traverse($tree_node, $order, $accumulator) {
+        switch ($order) {
+            case self::PRE_ORDER:
+                $accumulator->push($tree_node);
+                foreach ($tree_node->children() as $idx => $child) {
+                    static::traverse($child, $order, $accumulator);
+                }
+                break;
+            case self::POST_ORDER:
+                foreach ($tree_node->children() as $idx => $child) {
+                    static::traverse($child, $order, $accumulator);
+                }
+                $accumulator->push($tree_node);
+                break;
+            case self::LEVEL_ORDER:
+                static::_level_order($tree_node, $accumulator);
+                break;
+
+            default:
+                throw new Exception("Tree::traverse: Unsupported order given. Use a class constant! This error might be caused by having called the iterable method on a tree node.", 1);
+        }
+    }
+
+    public function iterable($order=self::PRE_ORDER) {
+        $res = new Arr();
+        static::traverse($this, $order, $res);
+        return $res;
+    }
+
+    // convenience methods for iterators
+    public function pre_order() {
+        return $this->iterable(self::PRE_ORDER);
+    }
+
+    public function post_order() {
+        return $this->iterable(self::POST_ORDER);
+    }
+
+    public function level_order() {
+        return $this->iterable(self::LEVEL_ORDER);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // TREE DATA FETCHING
 
     // TODO
     public function has($tree_node) {
         return $this === $tree_node || (false);
     }
 
+    // TODO
     public function find($filter) {
         $res = new Arr();
         foreach ($this as $parent => $children) {
@@ -75,7 +118,7 @@ class Tree {
     }
 
     public function level() {
-        // TODO use pathToRoot
+        return $this->path_to_root()->size();
     }
 
     public function root() {
@@ -217,78 +260,5 @@ class Tree {
     }
 
 }
-
-/*
-##################################################################################################
-# TRAVERSING THE TREE
-_traverse: (callback, orderMode = @orderMode or "postorder", info = {idx: 0, ctx: @}) ->
-    return @[orderMode](callback, null, info)
-
-each: () ->
-    return @_traverse.apply(@, arguments)
-
-postorder: (callback, level = 0, info = {idx: 0, ctx: @}) ->
-    for child in @children when child?
-        child.postorder(callback, level + 1, info)
-        info.idx++
-
-    if callback.call(info.ctx, @, level, info.idx) is false
-        return @
-    return @
-
-preorder: (callback, level = 0, info = {idx: 0, ctx: @}) ->
-    if callback.call(info.ctx, @, level, info.idx) is false
-        return @
-
-    for child in @children when child?
-        child.preorder(callback, level + 1, info)
-        info.idx++
-
-    return @
-
-inorder: (callback, level = 0, index = @children.length // 2, info = {idx: 0, ctx: @}) ->
-    for i in [0...index]
-        @children[i]?.inorder(callback, level + 1, index, info)
-        info.idx++
-
-    if callback.call(info.ctx, @, level, info.idx) is false
-        return @
-
-    for i in [index...@children.length]
-        @children[i]?.inorder(callback, level + 1, index, info)
-        info.idx++
-
-    return @
-
-levelorder: (callback, level = 0, info = {idx: 0, ctx: @, levelIdx: 0}) ->
-    list = [@]
-
-    startLevel = @level
-    prevLevel = 0
-
-    while list.length > 0
-        # remove 1st elem from list
-        el = list.shift()
-
-        # this is only in case any child is null. this is the case with binary trees
-        if el?
-            currentLevel = el.level - startLevel
-
-            # going to new level => reset level index
-            if currentLevel > prevLevel
-                info.levelIdx = 0
-
-            if callback.call(info.ctx, el, currentLevel, info) is false
-                return @
-
-            prevLevel = currentLevel
-
-            info.idx++
-            info.levelIdx++
-
-            list = list.concat el.children
-
-    return @
-*/
 
 ?>

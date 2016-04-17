@@ -33,33 +33,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     public function __toString() {
         $res = [];
         foreach ($this as $key => $value) {
-            if (is_string($key)) {
-                $k = "'$key'";
-            }
-            elseif (is_bool($key)) {
-                $k = $key ? 'true' : 'false';
-            }
-            else {
-                try {
-                    $k = "$key";
-                } catch (Exception $e) {
-                    $k = var_export($key, true);
-                }
-            }
-            if (is_string($value)) {
-                $v = "'$value'";
-            }
-            elseif (is_bool($value)) {
-                $v = $value ? 'true' : 'false';
-            }
-            else {
-                try {
-                    $v = "$value";
-                } catch (Exception $e) {
-                    $v = var_export($value, true);
-                }
-            }
-            array_push($res, '  '.$k.': '.$v);
+            array_push($res, '  '.__toString($key).': '.__toString($value));
         }
         return "{\n".implode(", \n", $res)."\n}";
     }

@@ -32,20 +32,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     public function __toString() {
         $res = [];
         foreach ($this as $idx => $element) {
-            if (is_string($element)) {
-                $e = "'$element'";
-            }
-            elseif (is_bool($element)) {
-                $e = $element ? 'true' : 'false';
-            }
-            else {
-                try {
-                    $e = "$element";
-                } catch (Exception $e) {
-                    $e = var_export($element, true);
-                }
-            }
-            array_push($res, '  '.$e);
+            array_push($res, '  '.__toString($element));
         }
         return "{\n".implode(", \n", $res)."\n}";
     }

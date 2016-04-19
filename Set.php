@@ -1,7 +1,6 @@
 <?php
 
 require_once 'init.php';
-require_once 'funcs.php';
 require_once 'AbstractCollection.php';
 
 class Set extends AbstractCollection implements ArrayAccess, Iterator {

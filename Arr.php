@@ -2,7 +2,6 @@
 
 require_once 'init.php';
 require_once 'AbstractCollection.php';
-require_once 'funcs.php';
 
 class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
@@ -28,7 +27,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_intersect',
         'array_keys',
         'array_merge_recursive',
-        // 'array_merge',
         'array_pad',
         'array_product',
         'array_rand',
@@ -49,7 +47,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ];
 
     protected $_elements = [];
-    // protected $_size;
     protected $_position;
 
     public function __construct(...$elements) {
@@ -164,8 +161,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
@@ -235,7 +230,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
-    // TODO: implment tuple class and use that for slicing
+    // TODO: enable passing an Arr or array for slicing
 
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
@@ -245,6 +240,33 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             return $offset;
         }
         throw new Exception("Undefined offset $offset!", 1);
+    }
+
+    protected function _get_start_end_from_offset($offset) {
+        if (is_array($offset)) {
+            $use_slicing = true;
+            $start = $offset[0];
+            $end = $offset[1];
+        }
+        else if (is_string($offset)) {
+            $use_slicing = true;
+            $parts = explode(':', preg_replace('/\s+/', '', $offset));
+            $start = (int) $parts[0];
+            $end = (int) $parts[1];
+        }
+        else if (is_int($offset)) {
+            $use_slicing = false;
+            $start = $offset;
+            $end = $offset;
+        }
+        else {
+            throw new Exception('Invalid offset. Use null ($a[]=4) to push, int for index access or for slicing use [start, end] or \'start:end\'!');
+        }
+        return [
+            'start' => $this->_adjust_offset($start),
+            'end' => $this->_adjust_offset($end),
+            'slicing' => $use_slicing
+        ];
     }
 
     public function offsetExists($offset) {
@@ -259,7 +281,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function offsetGet($offset) {
-        return $this->_elements[$this->_adjust_offset($offset)];
+        $bounds = $this->_get_start_end_from_offset($offset);
+        if (!$bounds['slicing']) {
+            return $this->_elements[$bounds['start']];
+        }
+        return $this->slice($bounds['start'], $bounds['end'] - $bounds['start']);
     }
 
     public function offsetSet($offset, $value) {

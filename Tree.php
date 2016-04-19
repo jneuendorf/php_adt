@@ -1,7 +1,6 @@
 <?php
 
 require_once 'init.php';
-require_once 'funcs.php';
 require_once 'Arr.php';
 require_once 'AbstractTree.php';
 
@@ -84,16 +83,22 @@ class Tree {
     ////////////////////////////////////////////////////////////////////////////////////
     // TREE DATA FETCHING
 
-    // TODO
     public function has($tree_node) {
-        return $this === $tree_node || (false);
+        if ($this === $tree_node) {
+            return $this;
+        }
+        $found_nodes = $this->find(function($node) use ($tree_node) {
+            return $node === $tree_node;
+        });
+        return !$found_nodes->is_empty();
     }
 
-    // TODO
     public function find($filter) {
         $res = new Arr();
-        foreach ($this as $parent => $children) {
-            $res->push();
+        foreach ($this as $idx => $node) {
+            if ($filter($node) === true) {
+                $res->push($node);
+            }
         }
         return $res;
     }
@@ -171,7 +176,10 @@ class Tree {
     }
 
     public function level_siblings() {
-        // TODO
+        $level = $this->level();
+        return $this->find(function($node) use ($level) {
+            return $node->level() === $level;
+        });
     }
 
     public function descendants() {
@@ -235,7 +243,6 @@ class Tree {
             $this->add($tree_node, $index);
         }
         return $this;
-
     }
 
     public function set_children($tree_nodes) {
@@ -252,7 +259,7 @@ class Tree {
         return $this;
     }
 
-    public function remove($tree_node) {
+    public function remove() {
         if ($this->_parent !== null) {
             $this->_parent->set_children($this->_parent->children()->without($this));
             $this->_parent = null;

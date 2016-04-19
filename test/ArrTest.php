@@ -56,4 +56,33 @@ foreach ($arr as $idx => $elem) {
     echo "$idx->$elem<br>";
 }
 
+echo '<br>';
+test(
+    'slicing w/ array',
+    function() use ($arr) {
+        echo $arr[[1,3]];
+    }
+);
+test(
+    'slicing w/ array (neg. ints)',
+    function() use ($arr) {
+        echo $arr[[-3,-1]];
+    }
+);
+test(
+    'slicing w/ string',
+    function() use ($arr) {
+        echo $arr['1:3'];
+    }
+);
+test(
+    'slicing w/ string (neg. ints)',
+    function() use ($arr) {
+        echo $arr[' -3: -1'];
+    }
+);
+
+echo '<br>';
+echo '<br>';
+
 ?>

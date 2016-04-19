@@ -1,8 +1,6 @@
 <?php
 
 require_once 'init.php';
-require_once 'funcs.php';
-// require_once 'Arr.php';
 require_once 'AbstractMap.php';
 
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it

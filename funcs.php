@@ -97,6 +97,27 @@ function __toString($x, $default_val=null) {
     if (is_bool($x)) {
         return $x ? 'true' : 'false';
     }
+    if (is_array($x)) {
+        $assoc = false;
+        foreach (array_keys($x) as $idx => $key) {
+            if ($idx !== $key) {
+                $assoc = true;
+                break;
+            }
+        }
+        $elements = [];
+        if (!$assoc) {
+            foreach ($x as $idx => $value) {
+                $elements[] = __toString($value);
+            }
+        }
+        else {
+            foreach ($x as $key => $value) {
+                $elements[] = __toString($key).' => '.__toString($value);
+            }
+        }
+        return '['.implode(', ', $elements).']';
+    }
     if (method_exists($x, '__toString')) {
         return $x.'';
     }
@@ -105,6 +126,7 @@ function __toString($x, $default_val=null) {
     }
     return var_export($x, true);
 }
+
 
 
 

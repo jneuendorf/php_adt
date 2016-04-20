@@ -4,7 +4,7 @@ require_once 'AbstractCollection.php';
 
 abstract class AbstractMap extends AbstractCollection {
     // from collection
-    public function add($key, $value) {}
+    // public function add($key, $value) {}
     // public function clear() {}
     // public function equals($collection) {}
     public function has($key) {}
@@ -29,7 +29,7 @@ abstract class AbstractMap extends AbstractCollection {
     public function pop($key, $default=null) {}
     public function popitem() {}
     public function setdefault() {}
-    public function update() {}
+    public function update($iterable) {}
     // public function values() {}
 
 

@@ -98,9 +98,9 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (COLLECTION)
 
-    public function add($key, $value) {
-        return $this->put($key, $value);
-    }
+    // public function add($key, $value) {
+    //     return $this->put($key, $value);
+    // }
 
     public function clear() {
         $this->_dict = [];
@@ -111,7 +111,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $this;
     }
 
-    public function copy() {
+    public function copy($deep = false) {
         return new static($this->default_val, $this);
     }
 

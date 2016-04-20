@@ -100,11 +100,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function __toString() {
-        $elements = [];
-        foreach ($this as $idx => $element) {
-            $elements[] = __toString($element);
-        }
-        return '['.implode(', ', $elements).']';
+        return __toString($this->_elements);
     }
 
     // use ...$args workaround for passing an optional parameter (incl. null)
@@ -211,7 +207,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function hash() {
         $result = 0;
         foreach ($this->_elements as $idx => $element) {
-            $result += ($idx + 1) * hash($element);
+            $result += ($idx + 1) * __hash($element);
         }
         return $result;
     }
@@ -230,7 +226,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
-    // TODO: enable passing an Arr or array for slicing
 
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
@@ -244,15 +239,26 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     protected function _get_start_end_from_offset($offset) {
         if (is_array($offset)) {
-            $use_slicing = true;
-            $start = $offset[0];
-            $end = $offset[1];
+            if (is_int($offset[0]) && is_int($offset[1])) {
+                $use_slicing = true;
+                $start = $offset[0];
+                $end = $offset[1];
+            }
+            else {
+                throw new Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
+            }
         }
         else if (is_string($offset)) {
-            $use_slicing = true;
-            $parts = explode(':', preg_replace('/\s+/', '', $offset));
-            $start = (int) $parts[0];
-            $end = (int) $parts[1];
+            $offset = preg_replace('/\s+/', '', $offset);
+            if (preg_match('/^\-?\d+\:\-?\d+$/', $offset) === 1) {
+                $use_slicing = true;
+                $parts = explode(':', $offset);
+                $start = (int) $parts[0];
+                $end = (int) $parts[1];
+            }
+            else {
+                throw new Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:int2\'.');
+            }
         }
         else if (is_int($offset)) {
             $use_slicing = false;

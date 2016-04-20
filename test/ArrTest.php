@@ -12,13 +12,11 @@ section('array creation',
     subsection('',
         new Test(
             'new, range',
-            new Callback(
-                function() {
-                    return
-                    expect($this->arr1 instanceof Arr, 'new Arr instanceof Arr')->to_be(true) &&
-                    expect($this->arr2 instanceof Arr, 'Arr::range instanceof Arr')->to_be(true);
-                }
-            ),
+            function() {
+                return
+                expect($this->arr1 instanceof Arr, 'new Arr instanceof Arr')->to_be(true) &&
+                expect($this->arr2 instanceof Arr, 'Arr::range instanceof Arr')->to_be(true);
+            },
             function () {
                 $this->arr1 = new Arr(1,2,3,'asdf',5,6,7);
                 $this->arr2 = Arr::range(-10,10);
@@ -31,16 +29,14 @@ section('array access',
     subsection('',
         new Test(
             'using brackets (get)',
-            new Callback(
-                function() {
-                    $test_res = true;
-                    foreach ($this->native as $idx => $value) {
-                        $test_res = $test_res && expect($this->arr[$idx])->to_be($value);
-                    }
-                    return $test_res &&
-                    expect($this->arr[-1])->to_be($this->native[count($this->native) - 1]);
+            function() {
+                $test_res = true;
+                foreach ($this->native as $idx => $value) {
+                    $test_res = $test_res && expect($this->arr[$idx])->to_be($value);
                 }
-            ),
+                return $test_res &&
+                expect($this->arr[-1])->to_be($this->native[count($this->native) - 1]);
+            },
             function () {
                 $this->native = [1,2,3,'asdf',5,true,7];
                 $this->arr = new Arr(...$this->native);
@@ -48,17 +44,15 @@ section('array access',
         ),
         new Test(
             'using brackets (set)',
-            new Callback(
-                function() {
-                    $test_res = true;
-                    $new_vals = [1 => '2nd', -1 => 'last'];
-                    foreach ($new_vals as $idx => $value) {
-                        $this->arr[$idx] = $value;
-                        $test_res = $test_res && expect($this->arr[$idx])->to_be($new_vals[$idx]);
-                    }
-                    return $test_res;
+            function() {
+                $test_res = true;
+                $new_vals = [1 => '2nd', -1 => 'last'];
+                foreach ($new_vals as $idx => $value) {
+                    $this->arr[$idx] = $value;
+                    $test_res = $test_res && expect($this->arr[$idx])->to_be($new_vals[$idx]);
                 }
-            ),
+                return $test_res;
+            },
             function () {
                 $this->native = [1,2,3,'asdf',5,true,7];
                 $this->arr = new Arr(...$this->native);
@@ -66,16 +60,14 @@ section('array access',
         ),
         new Test(
             'access convenience methods',
-            new Callback(
-                function() {
-                    return
-                    expect($this->arr->first(), '$arr->first()')->to_be($this->native[0]) &&
-                    expect($this->arr->second())->to_be($this->native[1]) &&
-                    expect($this->arr->third())->to_be($this->native[2]) &&
-                    expect($this->arr->penultimate())->to_be($this->native[1]) &&
-                    expect($this->arr->last(), '$arr->last()')->to_be($this->native[2]);
-                }
-            ),
+            function() {
+                return
+                expect($this->arr->first(), '$arr->first()')->to_be($this->native[0]) &&
+                expect($this->arr->second())->to_be($this->native[1]) &&
+                expect($this->arr->third())->to_be($this->native[2]) &&
+                expect($this->arr->penultimate())->to_be($this->native[1]) &&
+                expect($this->arr->last(), '$arr->last()')->to_be($this->native[2]);
+            },
             function () {
                 $this->native = [1,'asdf',true];
                 $this->arr = new Arr(...$this->native);
@@ -87,16 +79,73 @@ section('array access',
 section('array instance methods automatically delegating to native methods',
     subsection('',
         new Test(
-            'chunk, column, count_values, diff_assoc, diff_key, diff_uassoc, diff_ukey, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, search, slice, sum, udiff_assoc, udiff_uassoc, udiff, uintersect_assoc, uintersect_uassoc, uintersect, unique, values',
-            new Callback(
+            'chunk, column, count_values, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, slice, sum, udiff_assoc, udiff_uassoc, udiff, uintersect_assoc, uintersect_uassoc, uintersect, unique, values',
+            [
                 function() {
-                    return expect($this->arr->chunk(2)->to_a())->to_be(array_chunk($this->native, 2)) &&
-                    true;
-                }
-            ),
+                    return expect($this->arr->count_values()->to_a(), 'count_values')->to_be(array_count_values($this->native));
+                },
+                function() {
+                    return expect($this->arr->chunk(2)->to_a(), 'chunk')->to_be(array_chunk($this->native, 2));
+                },
+                function() {
+                    return expect($this->arr_2d->column(1)->to_a(), 'column')->to_be(array_column($this->native_2d, 1));
+                },
+                function() {
+                    return expect($this->arr->count_values()->to_a(), 'count_values')->to_be(array_count_values($this->native));
+                },
+                function() {
+                    return expect($this->arr->diff($this->arr_2d)->to_a(), 'diff')->to_be(array_diff($this->native, $this->native_2d));
+                },
+                function() {
+                    $filter = function($e) {return $e;};
+                    return expect($this->arr->filter($filter)->to_a(), 'filter')->to_be(array_filter($this->native, $filter));
+                },
+                function() {
+                    return expect($this->arr->intersect($this->arr_2d)->to_a(), 'intersect')->to_be(array_intersect($this->native, $this->native_2d));
+                },
+                function() {
+                    return expect($this->arr->keys()->to_a(), 'keys')->to_be(array_keys($this->native));
+                },
+                function() {
+                    return expect($this->arr->merge_recursive($this->arr_2d)->to_a(), 'merge_recursive')->to_be(array_merge_recursive($this->native, $this->native_2d));
+                },
+                function() {
+                    $size = 10;
+                    $value = 'x';
+                    return expect($this->arr->pad($size, $value)->to_a(), 'pad')->to_be(array_pad($this->native, $size, $value));
+                },
+                function() {
+                    $arr = Arr::range(1,500);
+                    $first = $arr->rand();
+                    $second = $arr->rand();
+                    return expect($arr->has($first), 'rand')->to_be(true) &&
+                    expect($arr->has($second), 'rand')->to_be(true) &&
+                    expect($first == $second, 'rand (compare 2 rand values. run test again before checking code)')->to_be(false);
+                },
+                function() {
+                    $initial = '>>';
+                    $callback = function($prev, $cur) {
+                        return $prev.'>'.$cur;
+                    };
+                    return expect($this->arr->reduce($callback, $initial), 'reduce')->to_be(array_reduce($this->native, $callback, $initial));
+                },
+                function() {
+                    return expect($this->arr->replace_recursive($this->arr_2d)->to_a(), 'replace_recursive')->to_be(array_replace_recursive($this->native, $this->native_2d));
+                },
+                function() {
+                    return expect($this->arr->replace($this->arr_2d)->to_a(), 'replace')->to_be(array_replace($this->native, $this->native_2d));
+                },
+                function() {
+                    $start = 0;
+                    $length = 2;
+                    return expect($this->arr->slice($start, $length)->to_a(), 'slice')->to_be(array_slice($this->native, $start, $length));
+                },
+            ],
             function () {
                 $this->native = [1,'asdf',true];
                 $this->arr = new Arr(...$this->native);
+                $this->native_2d = [1,[2, 'asdf'],true];
+                $this->arr_2d = new Arr(...$this->native_2d);
             }
         )
     )
@@ -159,15 +208,12 @@ section('slicing',
     subsection('slicing w/ array',
         new Test(
             'positive valid indices',
-            new Callback(
-                function($args) use ($arr) {
-                    return
-                    expect($this->arr->size())->to_be(7) &&
-                    expect($arr[[1,3]])->to_be($arr->slice(1, 2)) &&
-                    expect($arr[[1,4]])->to_be($arr->slice(1, 3));
-                },
-                ['arr' => $arr]
-            ),
+            function($args) use ($arr) {
+                return
+                expect($this->arr->size())->to_be(7) &&
+                expect($arr[[1,3]])->to_be($arr->slice(1, 2)) &&
+                expect($arr[[1,4]])->to_be($arr->slice(1, 3));
+            },
             function () {
                 $this->arr = new Arr(1,2,3,4,5,6,7);
             }

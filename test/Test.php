@@ -2,27 +2,21 @@
 
 require_once 'funcs.php';
 
-class Callback {
-    public function __construct($func, $args=[]) {
-        $this->func = $func;
-        $this->args = $args;
-    }
-
-    public function call($context=null) {
-        // return $this->func->__invoke($this->args);
-        return $this->func->bindTo($context)->__invoke($this->args);
-    }
-}
-
 class Test {
     public static $total_tests = 0;
     public static $invalid_tests = 0;
     public static $total_expectations = 0;
     public static $invalid_expectations = 0;
 
-    public function __construct($name, $callback, $setup=null, $teardown=null) {
+    public function __construct($name, $callbacks=[], $setup=null, $teardown=null) {
         $this->name = $name;
-        $this->callback = $callback;
+        if (is_array($callbacks)) {
+            $this->callbacks = $callbacks;
+        }
+        else {
+            $this->callbacks = [$callbacks];
+        }
+        // var_dump($this->callbacks);
         $this->setup = $setup;
         $this->teardown = $teardown;
 
@@ -47,29 +41,28 @@ class Test {
 
     public function run() {
         echo "running '$this->name'...<br>";
-        try {
-            if (is_callable($this->setup)) {
-                $this->setup->__invoke();
+        $result = true;
+        foreach ($this->callbacks as $idx => $callback) {
+            Test::$total_tests++;
+            try {
+                if (is_callable($this->setup)) {
+                    $this->setup->__invoke();
+                }
+                $res = $callback->bindTo($this)->__invoke();
+            } catch (Exception $e) {
+                echo '&nbsp;&nbsp;&nbsp;&nbsp;<span style=\'color:red\'>&nbsp;&times; '.$e->getMessage().'</span><br>';
+                $res = false;
+            } finally {
+                if (is_callable($this->teardown)) {
+                    $this->teardown->__invoke();
+                }
+                if (!$res) {
+                    Test::$invalid_tests++;
+                }
+                $result = $result && $res;
             }
-            $res = $this->callback->call($this);
-            // if ($this->callback->call()) {
-            //     // echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
-            //     return true;
-            // }
-            // echo '<span style=\'color:red\'>&nbsp;&times;</span>';
-            // return false;
-        } catch (Exception $e) {
-            echo '<span style=\'color:red\'>&nbsp;&times;</span> '.$e->getMessage();
-            $res = false;
-        } finally {
-            if (is_callable($this->teardown)) {
-                $this->teardown->__invoke();
-            }
-            if (!$res) {
-                Test::$invalid_tests++;
-            }
-            return $res;
         }
+        return $res;
     }
 }
 
@@ -80,19 +73,26 @@ class Expectation {
     }
 
     public function to_be($value) {
-        echo '&nbsp;&nbsp;&nbsp;&nbsp; expect '.__toString($this->value).' == '.__toString($value);
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;';
         if (strlen($this->label) > 0) {
-            echo ' ('.$this->label.')';
+            $label = ' <b>'.$this->label.':</b>';
         }
+        else {
+            $label = '';
+        }
+
         Test::$total_expectations++;
         $res = __equals($this->value, $value);
         if ($res === true) {
-            echo '<span style=\'color:green\'>&nbsp;&#10003;</span><br>';
+            echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
+            echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'<br>';
         }
         else {
             Test::$invalid_expectations++;
-            echo '<span style=\'color:red\'>&nbsp;&times;</span><br>';
+            echo '<span style=\'color:red\'>&nbsp;&times;';
+            echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'</span><br>';
         }
+
         return $res;
     }
 }

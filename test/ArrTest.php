@@ -84,6 +84,24 @@ section('array access',
     )
 );
 
+section('array instance methods automatically delegating to native methods',
+    subsection('',
+        new Test(
+            'chunk, column, count_values, diff_assoc, diff_key, diff_uassoc, diff_ukey, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, search, slice, sum, udiff_assoc, udiff_uassoc, udiff, uintersect_assoc, uintersect_uassoc, uintersect, unique, values',
+            new Callback(
+                function() {
+                    return expect($this->arr->chunk(2)->to_a())->to_be(array_chunk($this->native, 2)) &&
+                    true;
+                }
+            ),
+            function () {
+                $this->native = [1,'asdf',true];
+                $this->arr = new Arr(...$this->native);
+            }
+        )
+    )
+);
+
 
 
 echo $arr." (length = $arr->length)<br>\n";

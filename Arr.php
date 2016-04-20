@@ -103,6 +103,23 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return __toString($this->_elements);
     }
 
+    public function elements() {
+        return $this->_elements;
+    }
+
+    public function to_a() {
+        $res = [];
+        foreach ($this as $idx => $element) {
+            if (is_object($element) && method_exists($element, 'to_a')) {
+                $res[] = $element->to_a();
+            }
+            else {
+                $res[] = $element;
+            }
+        }
+        return $res;
+    }
+
     // use ...$args workaround for passing an optional parameter (incl. null)
     public function first(...$args) {
         if ($this->_size >= 1) {

@@ -18,10 +18,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_chunk',
         'array_column',
         'array_count_values',
-        // 'array_diff_assoc',
-        // 'array_diff_key',
-        // 'array_diff_uassoc',
-        // 'array_diff_ukey',
         'array_diff',
         'array_filter',
         'array_intersect',
@@ -35,11 +31,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_replace',
         'array_slice',
         'array_sum',
-        'array_udiff_assoc',
-        'array_udiff_uassoc',
         'array_udiff',
-        'array_uintersect_assoc',
-        'array_uintersect_uassoc',
         'array_uintersect',
         'array_unique',
         'array_values',
@@ -57,6 +49,22 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         }
         $this->_size = count($this->_elements);
     }
+
+    // STATIC
+    public static function __callStatic($name, $args) {
+        $org_name = $name;
+        $name = 'array_'.$name;
+        if (in_array($name, static::$class_methods)) {
+            return new Arr(...call_user_func($name, ...$args));
+        }
+        throw new Exception("Cannot call $org_name on the Arr class!", 1);
+    }
+
+    public static function range(...$args) {
+        return new static(...range(...$args));
+    }
+
+    // INSTANCE
 
     public function __get($name) {
         switch ($name) {
@@ -87,15 +95,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             return $res;
         }
         throw new Exception("Cannot call $org_name on instance of Arr!", 1);
-    }
-
-    public static function __callStatic($name, $args) {
-        $org_name = $name;
-        $name = 'array_'.$name;
-        if (in_array($name, static::$class_methods)) {
-            return new Arr(...call_user_func($name, ...$args));
-        }
-        throw new Exception("Cannot call $org_name on the Arr class!", 1);
     }
 
     public function __toString() {
@@ -217,7 +216,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function has($object) {
-        return $this->index($object) >= 0;
+        return $this->index($object) !== null;
     }
 
     public function hash() {
@@ -367,10 +366,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // STATIC
-
-    public static function range(...$args) {
-        return new static(...range(...$args));
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // INSTANCE

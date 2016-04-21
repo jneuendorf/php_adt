@@ -72,7 +72,7 @@ class Expectation {
         $this->label = $label;
     }
 
-    public function to_be($value) {
+    public function to_be($value, $negated=false) {
         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
         if (strlen($this->label) > 0) {
             $label = ' <b>'.$this->label.':</b>';
@@ -83,18 +83,36 @@ class Expectation {
 
         Test::$total_expectations++;
         $res = __equals($this->value, $value);
-        if ($res === true) {
-            echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
-            echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'<br>';
+        if (!$negated) {
+            if ($res === true) {
+                echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
+                echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'<br>';
+            }
+            else {
+                Test::$invalid_expectations++;
+                echo '<span style=\'color:red\'>&nbsp;&times;';
+                echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'</span><br>';
+            }
         }
         else {
-            Test::$invalid_expectations++;
-            echo '<span style=\'color:red\'>&nbsp;&times;';
-            echo '&nbsp;'.$label.' expect '.__toString($this->value).' == '.__toString($value).'</span><br>';
+            if ($res === false) {
+                echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
+                echo '&nbsp;'.$label.' expect '.__toString($this->value).' != '.__toString($value).'<br>';
+            }
+            else {
+                Test::$invalid_expectations++;
+                echo '<span style=\'color:red\'>&nbsp;&times;';
+                echo '&nbsp;'.$label.' expect '.__toString($this->value).' != '.__toString($value).'</span><br>';
+            }
         }
 
         return $res;
     }
+
+    public function not_to_be($value) {
+        return $this->to_be($value, true);
+    }
+
 }
 
 

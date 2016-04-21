@@ -76,14 +76,11 @@ section('array access',
     )
 );
 
-section('array instance methods automatically delegating to native methods',
-    subsection('',
+section('Arr instance methods',
+    subsection('automatically delegating to native methods (subset of array_* functions)',
         new Test(
-            'chunk, column, count_values, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, slice, sum, udiff_assoc, udiff_uassoc, udiff, uintersect_assoc, uintersect_uassoc, uintersect, unique, values',
+            'chunk, column, count_values, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, slice, sum, udiff, uintersect, unique, values',
             [
-                function() {
-                    return expect($this->arr->count_values()->to_a(), 'count_values')->to_be(array_count_values($this->native));
-                },
                 function() {
                     return expect($this->arr->chunk(2)->to_a(), 'chunk')->to_be(array_chunk($this->native, 2));
                 },
@@ -115,7 +112,12 @@ section('array instance methods automatically delegating to native methods',
                     return expect($this->arr->pad($size, $value)->to_a(), 'pad')->to_be(array_pad($this->native, $size, $value));
                 },
                 function() {
-                    $arr = Arr::range(1,500);
+                    $n = range(1, 10);
+                    $a = new Arr(...$n);
+                    return expect($a->product(), 'product')->to_be(array_product($n));
+                },
+                function() {
+                    $arr = Arr::range(1,50);
                     $first = $arr->rand();
                     $second = $arr->rand();
                     return expect($arr->has($first), 'rand')->to_be(true) &&
@@ -140,6 +142,46 @@ section('array instance methods automatically delegating to native methods',
                     $length = 2;
                     return expect($this->arr->slice($start, $length)->to_a(), 'slice')->to_be(array_slice($this->native, $start, $length));
                 },
+                function() {
+                    $n = range(1, 100);
+                    $a = new Arr(...$n);
+                    return expect($a->sum(), 'sum')->to_be(array_sum($n));
+                },
+                function() {
+                    $cb = function($a, $b) {
+                        return __equals($a, $b);
+                    };
+                    return expect($this->arr->udiff($this->arr_2d, $cb), 'udiff')->to_be(array_udiff($this->native, $this->native_2d, $cb));
+                },
+                function() {
+                    $cb = function($a, $b) {
+                        return __equals($a, $b);
+                    };
+                    return expect($this->arr->uintersect($this->arr_2d, $cb), 'uintersect')->to_be(array_uintersect($this->native, $this->native_2d, $cb));
+                },
+                function() {
+                    $res = true;
+                    if (!expect($this->arr->unique(SORT_REGULAR)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_REGULAR))) {
+                        echo '...SORT_REGULAR failed';
+                        $res = false;
+                    }
+                    if (!expect($this->arr->unique(SORT_NUMERIC)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_NUMERIC))) {
+                        echo '...SORT_NUMERIC failed';
+                        $res = false;
+                    }
+                    if (!expect($this->arr->unique(SORT_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_STRING))) {
+                        echo '...SORT_STRING failed';
+                        $res = false;
+                    }
+                    if (!expect($this->arr->unique(SORT_LOCALE_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_LOCALE_STRING))) {
+                        echo '...SORT_LOCALE_STRING failed';
+                        $res = false;
+                    }
+                    return $res;
+                },
+                function() {
+                    return expect($this->arr->values()->to_a(), 'values')->to_be(array_values($this->native));
+                },
             ],
             function () {
                 $this->native = [1,'asdf',true];
@@ -148,9 +190,51 @@ section('array instance methods automatically delegating to native methods',
                 $this->arr_2d = new Arr(...$this->native_2d);
             }
         )
+    ),
+    subsection('actually implemented methods (subset of array_* functions + more)',
+        new Test('collection methods', [
+            function() {
+                $a = new Arr(1,2,3);
+                $b = new Arr(1,2,3);
+                $new_val = 'new_val';
+                $a->add($new_val);
+                $b->push($new_val);
+                return expect($a, 'add')->to_be($b);
+            },
+            function() {
+                return expect($this->arr, 'copy')->to_be($this->arr->copy());
+            },
+            function() {
+                return expect($this->arr->copy()->clear(), 'clear')->to_be(new Arr());
+            },
+            function() {
+                return expect($this->arr->copy()->equals($this->arr), 'equals')->to_be(true);
+            },
+            function() {
+                return expect($this->arr->has('asdf'), 'has should')->to_be(true) &&
+                expect($this->arr->has('asdf22'), 'has shouldnt')->to_be(false);
+            },
+            function() {
+                return expect($this->arr->hash(), 'hash')->to_be($this->arr->copy()->hash()) &&
+                expect($this->arr->hash(), 'hash')->not_to_be($this->arr_2d->hash());
+            },
+            function() {
+                $a = $this->arr->copy();
+                $a->remove('asdf');
+                return expect($a->length, 'remove')->to_be($this->arr->length - 1);
+            },
+            function() {
+                return expect($this->arr->size(), 'size (absolute)')->to_be(count($this->native)) &&
+                expect($this->arr->size(), 'size (relative)')->to_be($this->arr->length);
+            },
+        ], function () {
+            $this->native = [1,'asdf',true];
+            $this->arr = new Arr(...$this->native);
+            $this->native_2d = [1,[2, 'asdf'],true];
+            $this->arr_2d = new Arr(...$this->native_2d);
+        })
     )
 );
-
 
 
 echo $arr." (length = $arr->length)<br>\n";
@@ -204,7 +288,7 @@ foreach ($arr as $idx => $elem) {
 
 echo '<br>';
 
-section('slicing',
+section('Arr access',
     subsection('slicing w/ array',
         new Test(
             'positive valid indices',

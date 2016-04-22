@@ -62,17 +62,17 @@ class Test {
                 $result = $result && $res;
             }
         }
-        return $res;
+        return $result;
     }
 }
 
 class Expectation {
-    public function __construct($value, $label='') {
+    public function __construct($value=null, $label='') {
         $this->value = $value;
         $this->label = $label;
     }
 
-    public function to_be($value=null, $negated=false) {
+    protected function pre_process($value) {
         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
         if (strlen($this->label) > 0) {
             $label = ' <b>'.$this->label.':</b>';
@@ -82,7 +82,33 @@ class Expectation {
         }
 
         Test::$total_expectations++;
-        $res = __equals($this->value, $value);
+        $exception = null;
+
+        if (is_callable($this->value)) {
+            try {
+                $this->value = $this->value->__invoke();
+            } catch (Exception $e) {
+                $exception = $e;
+            }
+        }
+        if ($exception === null) {
+            $result = __equals($this->value, $value);
+        }
+        else {
+            $result = null;
+        }
+
+        return [
+            'result' => $result,
+            'label' => $label,
+            'exception' => $exception
+        ];
+    }
+
+    public function to_be($value=null, $negated=false) {
+        $pre_processed = $this->pre_process($value);
+        $res = $pre_processed['result'];
+        $label = $pre_processed['label'];
         if (!$negated) {
             if ($res === true) {
                 echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
@@ -109,10 +135,26 @@ class Expectation {
         return $res;
     }
 
-    public function not_to_be($value) {
+    public function not_to_be($value=null) {
         return $this->to_be($value, true);
     }
 
+    public function to_throw($value=null) {
+        $pre_processed = $this->pre_process($value);
+        $res = $pre_processed['result'];
+        $label = $pre_processed['label'];
+        $exception = $pre_processed['exception'];
+        if ($exception !== null) {
+            echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
+            echo '&nbsp;'.$label.' expect exception \''.$exception->getMessage().'\'<br>';
+            return true;
+        }
+        // else
+        Test::$invalid_expectations++;
+        echo '<span style=\'color:red\'>&nbsp;&times;';
+        echo '&nbsp;'.$label.' expected exception but got '.__toString($value).'</span><br>';
+        return false;
+    }
 }
 
 
@@ -140,7 +182,7 @@ function subsection($name, ...$tests) {
     };
 }
 
-function expect($value, $label='') {
+function expect($value=null, $label='') {
     return new Expectation($value, $label);
 }
 

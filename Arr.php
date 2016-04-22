@@ -7,10 +7,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // list of native array function that we can automatically create delegations (using the __callStatic() method)
     protected static $class_methods = [
-        'array_combine',
-        'array_fill_keys',
-        'array_fill',
-        'array_flip',
+        // 'array_fill',
     ];
 
     // list of native array function that we can automatically create delegations (using the __call() method)
@@ -42,9 +39,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function __construct(...$elements) {
         foreach ($elements as $idx => $element) {
-            if (is_array($element)) {
-                $element = new Arr(...$element);
-            }
             array_push($this->_elements, $element);
         }
         $this->_size = count($this->_elements);
@@ -58,6 +52,21 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             return new Arr(...call_user_func($name, ...$args));
         }
         throw new Exception("Cannot call $org_name on the Arr class!", 1);
+    }
+
+    public static function from_array($array, $recursive=true) {
+        $result = new Arr();
+        foreach ($array as $key => $element) {
+            if ($recursive && is_array($element)) {
+                $element = Arr::from_array($element, $recursive);
+            }
+            $result->push($element);
+        }
+        return $result;
+    }
+
+    public static function fill($num, $value=null) {
+        return new static(...array_fill(0, $num, $value));
     }
 
     public static function range(...$args) {
@@ -503,7 +512,8 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         if ($this->_size > 0) {
             $removed_element = array_shift($this->_elements);
             $this->_size--;
-            return new static($removed_element);
+            $this->rewind();
+            return $removed_element;
         }
         return null;
     }

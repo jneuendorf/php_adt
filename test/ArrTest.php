@@ -4,26 +4,32 @@ require_once __DIR__.'/../Arr.php';
 require_once __DIR__.'/Test.php';
 
 
-
-$arr = new Arr(1,2,3,4);
-
+echo '<h1>Arr class</h1>';
 
 section('array creation',
     subsection('',
         new Test(
-            'new, range',
-            function() {
-                return
-                expect($this->arr1 instanceof Arr, 'new Arr instanceof Arr')->to_be(true) &&
-                expect($this->arr2 instanceof Arr, 'Arr::range instanceof Arr')->to_be(true);
-            },
+            'new, range, from_array',
+            [
+                function() {
+                    return expect($this->arr1 instanceof Arr, 'new Arr instanceof Arr')->to_be(true) &&
+                    expect($this->arr2 instanceof Arr, 'Arr::range instanceof Arr')->to_be(true) &&
+                    expect($this->arr2->to_a(), 'Arr::range vs range()')->to_be(range(-10,10,2));
+                },
+                function () {
+                    $array = [0, ['a','b'], 2];
+                    return expect(Arr::from_array($array), 'from_array recursive')->to_be(new Arr(0, new Arr('a','b'), 2)) &&
+                    expect(Arr::from_array($array, false), 'from_array non-recursive')->to_be(new Arr(0, ['a','b'], 2));
+                }
+            ],
             function () {
                 $this->arr1 = new Arr(1,2,3,'asdf',5,6,7);
-                $this->arr2 = Arr::range(-10,10);
+                $this->arr2 = Arr::range(-10,10,2);
             }
         )
     )
 );
+
 
 section('array access',
     subsection('',
@@ -73,8 +79,45 @@ section('array access',
                 $this->arr = new Arr(...$this->native);
             }
         )
+    ),
+    subsection('slicing w/ array',
+        new Test(
+            'positive valid indices',
+            function() {
+                return expect($this->arr[[1,3]])->to_be($this->arr->slice(1, 2)) &&
+                expect($this->arr[[1,4]])->to_be($this->arr->slice(1, 3));
+            },
+            function () {
+                $this->arr = new Arr(1,2,3,4,5,6,7);
+            }
+        ),
+        new Test(
+            'slicing w/ positive ints (array, string)',
+            function() {
+                $arr = new Arr(1,2,3,4,5);
+                return expect($arr[[1,3]]->to_a())->to_be([2,3]) &&
+                expect($arr['1:3']->to_a())->to_be([2,3]);
+            }
+        ),
+        new Test(
+            'slicing w/ negative ints (array, string)',
+            function() {
+                $arr = new Arr(1,2,3,4,5);
+                return expect($arr[[-3,-1]]->to_a())->to_be([3,4]) &&
+                expect($arr[' -3: -1']->to_a())->to_be([3,4]);
+            }
+        ),
+        new Test(
+            'slicing w/ invalid indices (array, string)',
+            function() {
+                $arr = new Arr();
+                return expect(function() use ($arr) {return $arr[' a: -1'];})->to_throw() &&
+                expect(function() use ($arr) {return $arr[['a', -1]];})->to_throw();
+            }
+        )
     )
 );
+
 
 section('Arr instance methods',
     subsection('automatically delegating to native methods (subset of array_* functions)',
@@ -275,13 +318,17 @@ section('Arr instance methods',
                 $val = 'pushed value';
                 $cloned_arr->push($val);
                 array_push($cloned_native, $val);
+                $val = 12;
+                $cloned_arr[] = $val;
+                array_push($cloned_native, $val);
 
-                return expect($cloned_arr->to_a(), 'push')->to_be($cloned_native) &&
+                return expect($cloned_arr->to_a(), 'push (via ->push() and $arr[] =)')->to_be($cloned_native) &&
                 expect($cloned_arr->size(), 'push (check length)')->to_be(count($cloned_native));
             },
             function() {
                 return expect($this->arr->reversed()->to_a(), 'reversed')->to_be(array_reverse($this->native)) &&
-                expect($this->arr->reversed() === $this->arr, 'reversed (check references)')->to_be(false);
+                expect($this->arr->reversed() === $this->arr, 'reversed (check references)')->to_be(false) &&
+                expect($this->arr->reversed()->reversed(), 'reversed (twice)')->to_be($this->arr);
             },
             function() {
                 $cloned_native = __clone($this->native);
@@ -297,6 +344,27 @@ section('Arr instance methods',
                 return expect($this->arr->search('asdf'), 'search')->to_be($this->arr->index('asdf')) &&
                 expect($this->arr->search('bsdf'), 'search')->to_be($this->arr->index('bsdf'));
             },
+            function() {
+                $cloned_native = __clone($this->native);
+                $cloned_arr = $this->arr->copy();
+
+                $new_ref = $cloned_arr->shift();
+                array_shift($cloned_native);
+
+                return expect($cloned_arr->to_a(), 'shift')->to_be($cloned_native);
+            },
+            function() {
+                return expect($this->arr->copy()->shuffle()->to_a(), 'shuffle')->not_to_be($this->arr);
+            },
+            function() {
+                $arr = new Arr(4,3,5,8,6,7,1,2,9,0);
+                $arr2 = new Arr([2, 'c'], [0, 'a'], [2, 'd'], [5, 'z']);
+                $cmp = function($a, $b) {
+                    return $a[0] - $b[0];
+                };
+                return expect($arr->sort(), 'sort')->to_be(new Arr(0,1,2,3,4,5,6,7,8,9)) &&
+                expect($arr2->sort($cmp), 'sort (stable)')->to_be(new Arr([0, 'a'], [2, 'c'], [2, 'd'], [5, 'z']));
+            },
         ], function () {
             $this->native = [1,'asdf',true];
             $this->arr = new Arr(...$this->native);
@@ -307,120 +375,30 @@ section('Arr instance methods',
 );
 
 
-echo $arr." (length = $arr->length)<br>\n";
-echo $arr->chunk(2)."\n";
-// echo $arr->filter(function($x) {return $x > 2;})."\n";
-// echo $arr->keys()."\n";
-echo $arr->map(function($x) {return $x*$x;})."\n";
-echo '<hr>';
-// echo Arr::combine([1, 3],[3, 4]);
-echo $arr[1].' -> ';
-$arr[1] = 5;
-echo $arr[1];
-
-// push 2 elements
-$arr[] = 12;
-$arr->push('asdf');
-
-echo '<br><br> >> '.$arr[-1].'<br><br>';
-
-echo '<br>'.$arr;
-echo '<br>'.$arr->reverse();
-
-echo '<br>'.Arr::range(0,10,2);
-echo '<br>'.$arr->size();
-echo '<br>'.count($arr);
-
-
-$unsorted = new Arr(2,5,4,6,3,1);
-$unsorted->sort();
-echo '<br>'.$unsorted;
-$unsorted->reversed();
-echo '<br>'.$unsorted;
-$unsorted->reverse();
-echo '<br>'.$unsorted;
-
-// check stable
-$unsorted = new Arr(
-    new Arr(1, 'b'),
-    new Arr(2, 'c'),
-    new Arr(1, 'a')
-);
-$unsorted->sort(function($a, $b) {
-    return __compare($a[0], $b[0]);
-});
-echo '<br>'.$unsorted;
-
-echo '<hr><br>iterating "'.$arr.'" using foreach:<br>';
-foreach ($arr as $idx => $elem) {
-    echo "$idx->$elem<br>";
-}
-
-echo '<br>';
-
-section('Arr access',
-    subsection('slicing w/ array',
-        new Test(
-            'positive valid indices',
-            function($args) use ($arr) {
-                return
-                expect($this->arr->size())->to_be(7) &&
-                expect($arr[[1,3]])->to_be($arr->slice(1, 2)) &&
-                expect($arr[[1,4]])->to_be($arr->slice(1, 3));
-            },
-            function () {
-                $this->arr = new Arr(1,2,3,4,5,6,7);
-            }
-        )
-    )
-);
-
-test(
-    'slicing w/ array',
-    function() use ($arr) {
-        echo $arr[[1,3]];
+section('class methods', subsection('for "range" and "from_array" see array creation section', new Test('', [
+    function() {
+        return expect(Arr::fill(5, 'x')->to_a(), 'fill')->to_be(array_fill(0, 5, 'x')) &&
+        expect(Arr::fill(5)->to_a(), 'fill')->to_be(array_fill(0, 5, null));
     }
-);
-test(
-    'slicing w/ array (neg. ints)',
-    function() use ($arr) {
-        echo $arr[[-3,-1]];
-    }
-);
-test(
-    'slicing w/ string',
-    function() use ($arr) {
-        echo $arr['1:3'];
-    }
-);
-test(
-    'slicing w/ string (neg. ints)',
-    function() use ($arr) {
-        echo $arr[' -3: -1'];
-    }
-);
-test(
-    'slicing w/ invalid string indices',
-    function() use ($arr) {
-        try {
-            echo $arr[' a: -1'];
-        } catch (Exception $e) {
-            echo $e->getMessage();
+], function () {
+    $this->native = [1,'asdf',true];
+    $this->arr = new Arr(...$this->native);
+    $this->native_2d = [1,[2, 'asdf'],true];
+    $this->arr_2d = new Arr(...$this->native_2d);
+})));
+
+
+section('iteration', subsection('', new Test('foreach', [
+    function() {
+        $arr = new Arr(1,2,false,0,'0');
+        $res = true;
+        $expected_idx = 0;
+        foreach ($arr as $idx => $value) {
+            $res = $res && expect($idx, 'index')->to_be($expected_idx++) && expect($arr->get($idx), 'value')->to_be($value);
         }
+        return $res;
     }
-);
-test(
-    'slicing w/ invalid array indices',
-    function() use ($arr) {
-        try {
-            echo $arr[['a', -1]];
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-);
+])));
 
-echo '<br>';
-echo '<br>';
 
 ?>

@@ -157,13 +157,6 @@ class Expectation {
     }
 }
 
-
-function test($begin, $callback, $end='') {
-    echo $begin.'<br>';
-    echo $callback();
-    echo $end.'<br>';
-}
-
 function section($name, ...$subsections) {
     echo "<h3>$name</h3>";
     foreach ($subsections as $idx => $subsection) {
@@ -185,13 +178,5 @@ function subsection($name, ...$tests) {
 function expect($value=null, $label='') {
     return new Expectation($value, $label);
 }
-
-// function and(...$terms) {
-//     $res = true;
-//     foreach ($terms as $idx => $term) {
-//         $res = $res && $term;
-//     }
-//     return $res;
-// }
 
 ?>

@@ -232,6 +232,76 @@ section('Arr instance methods',
             $this->arr = new Arr(...$this->native);
             $this->native_2d = [1,[2, 'asdf'],true];
             $this->arr_2d = new Arr(...$this->native_2d);
+        }),
+        new Test('remaining methods', [
+            function() {
+                return expect($this->arr->concat($this->arr_2d)->to_a(), 'concat')->to_be(array_merge($this->native, $this->native_2d));
+            },
+            function() {
+                return expect($this->arr->flatten(), 'flatten')->to_be($this->arr);
+            },
+            function() {
+                $mapping = function($e) {
+                    return __toString($e).'STRING';
+                };
+                $r = new Arr();
+                foreach ($this->arr as $idx => $e) {
+                    $r->push(__toString($e).'STRING');
+                }
+                return expect($this->arr->map($mapping), 'flatten')->to_be($r);
+            },
+            function() {
+                $res = true;
+                foreach ($this->arr as $idx => $elem) {
+                    $res = $res && expect($this->arr->get($idx), 'get')->to_be($elem);
+                }
+                return $res;
+            },
+            function() {
+                return expect($this->arr->copy()->merge($this->arr_2d)->to_a(), 'merge')->to_be(array_merge($this->native, $this->native_2d));
+            },
+            function() {
+                $cloned_native = __clone($this->native);
+                $removed_from_native = array_pop($cloned_native);
+                $cloned_arr = $this->arr->copy();
+                $removed_from_arr = $cloned_arr->pop();
+                return expect($cloned_arr->to_a(), 'pop')->to_be($cloned_native) &&
+                expect($removed_from_arr, 'pop (check return value)')->to_be($removed_from_native);
+            },
+            function() {
+                $cloned_native = __clone($this->native);
+                $cloned_arr = $this->arr->copy();
+
+                $val = 'pushed value';
+                $cloned_arr->push($val);
+                array_push($cloned_native, $val);
+
+                return expect($cloned_arr->to_a(), 'push')->to_be($cloned_native) &&
+                expect($cloned_arr->size(), 'push (check length)')->to_be(count($cloned_native));
+            },
+            function() {
+                return expect($this->arr->reversed()->to_a(), 'reversed')->to_be(array_reverse($this->native)) &&
+                expect($this->arr->reversed() === $this->arr, 'reversed (check references)')->to_be(false);
+            },
+            function() {
+                $cloned_native = __clone($this->native);
+                $cloned_arr = $this->arr->copy();
+
+                $new_ref = $cloned_arr->reverse();
+                $cloned_native = array_reverse($cloned_native);
+
+                return expect($cloned_arr->to_a(), 'reverse')->to_be($cloned_native) &&
+                expect($cloned_arr === $new_ref, 'reverse (check references)')->to_be(true);
+            },
+            function() {
+                return expect($this->arr->search('asdf'), 'search')->to_be($this->arr->index('asdf')) &&
+                expect($this->arr->search('bsdf'), 'search')->to_be($this->arr->index('bsdf'));
+            },
+        ], function () {
+            $this->native = [1,'asdf',true];
+            $this->arr = new Arr(...$this->native);
+            $this->native_2d = [1,[2, 'asdf'],true];
+            $this->arr_2d = new Arr(...$this->native_2d);
         })
     )
 );

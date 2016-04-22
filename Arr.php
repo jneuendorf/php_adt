@@ -371,15 +371,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // INSTANCE
 
     // custom delegations to native methods
-
-    public function change_key_case(...$args) {
-        // do nothing because all our keys are numbers
-        return $this;
-    }
+    // API-CHANGE: change_key_case function not implemented
 
     // API-CHANGE: new function
     public function concat(...$arrays) {
-        $res = new Arr();
+        $res = new Arr(...$this->_elements);
         foreach ($arrays as $idx => $arr) {
             $res->merge(...$arrays);
         }
@@ -397,29 +393,31 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: new function
     public function flatten($deep=false) {
         $flattened = new Arr();
-
         foreach ($this as $idx => $value) {
-            if ($value instanceof Arr) {
-                if (!$deep) {
-                    $flattened->merge($value);
-                }
-                else {
-                    $flattened->merge($value->flatten());
-                }
+            if ($deep && $value instanceof Arr) {
+                $flattened->merge($value->flatten());
+            }
+            else {
+                $flattened->push($value);
             }
         }
         return $flattened;
     }
 
+    public function get($idx) {
+        return $this->offsetGet($idx);
+    }
+
     // API-CHANGE: extract function not implemented
     // key() is defined above (iterator interface section)
 
-    public function key_exists($key) {
-        if (is_int($key)) {
-            return $key < $this->_size;
-        }
-        return false;
-    }
+    // API-CHANGE: key_exists function not implemented
+    // public function key_exists($key) {
+    //     if (is_int($key)) {
+    //         return $key < $this->_size;
+    //     }
+    //     return false;
+    // }
 
     public function map($callback) {
         return new Arr(...array_map($callback, $this->_elements));
@@ -433,8 +431,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
                     $this->push($element);
                 }
             }
-            elseif (is_array($arr)) {
-                $this->push(...$arr);
+            // elseif (is_array($arr)) {
+            //     $this->push(...$arr);
+            // }
+            else {
+                $this->push($arr);
             }
         }
         return $this;
@@ -522,12 +523,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: if $length is not given does NOT remove everything after $offset (including $offset) but does not remove anything
     // API-CHANGE: inserted elements are passed as separate parameters - not as an array of elements
     public function splice($offset, $length=0, ...$new_elements) {
-        // if ($length === null) {
-        //     $length = $this->_size - $offset;
-        // }
         $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
         $this->_size += -count($removed_elements) + count($new_elements);
-        return new static($removed_elements);
+        return new static(...$removed_elements);
     }
 
     // API-CHANGE: @return $this instead of $new_length
@@ -580,13 +578,17 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function index($needle, $start=0, $stop=null) {
-        if ($stop === null) {
-            $stop = $this->_size - 1;
-        }
-        if ($start === 0 && $stop === $this->_size - 1) {
+        // if ($stop === null) {
+        //     $stop = $this->_size - 1;
+        // }
+        // if ($start === 0 && $stop === $this->_size - 1) {
+        if ($start === 0 && $stop === null) {
             $idx = array_search($needle, $this->_elements, true);
         }
         else {
+            if ($stop === null) {
+                $stop = $this->_size - 1;
+            }
             $idx = array_search($needle, array_slice($this->_elements, $start, $stop + 1), true);
         }
 
@@ -601,7 +603,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // pop([index]) is implemented above (php array section)
-    // remove(object) is implemented above (colsection interface section)
+    // remove(object) is implemented above (collection interface section)
 
 
     ////////////////////////////////////////////////////////////////////////////////////

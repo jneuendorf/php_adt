@@ -71,7 +71,10 @@ function __hash($x) {
         }
         return __hash($id);
     }
-    throw new Exception("Given parameter does not support hashing!", 1);
+    if ($x === null) {
+        return 0;
+    }
+    throw new Exception("Given parameter does not support hashing! ".var_export($x, true), 1);
 }
 
 function __clone($x) {

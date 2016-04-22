@@ -72,7 +72,7 @@ class Expectation {
         $this->label = $label;
     }
 
-    public function to_be($value, $negated=false) {
+    public function to_be($value=null, $negated=false) {
         echo '&nbsp;&nbsp;&nbsp;&nbsp;';
         if (strlen($this->label) > 0) {
             $label = ' <b>'.$this->label.':</b>';

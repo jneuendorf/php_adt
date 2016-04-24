@@ -2,11 +2,14 @@
 
 require_once 'funcs.php';
 
+ob_start();
+
 class Test {
     public static $total_tests = 0;
     public static $invalid_tests = 0;
     public static $total_expectations = 0;
     public static $invalid_expectations = 0;
+    protected static $_abort_flag = false;
 
     public function __construct($name, $callbacks=[], $setup=null, $teardown=null) {
         $this->name = $name;
@@ -16,7 +19,6 @@ class Test {
         else {
             $this->callbacks = [$callbacks];
         }
-        // var_dump($this->callbacks);
         $this->setup = $setup;
         $this->teardown = $teardown;
 
@@ -39,6 +41,13 @@ class Test {
         }
     }
 
+    // can be used inside test callsback to print only the 1st callback using this function
+    public function run_only_this() {
+        ob_end_clean();
+        static::$_abort_flag = true;
+        return $this;
+    }
+
     public function run() {
         echo "running '$this->name'...<br>";
         $result = true;
@@ -53,6 +62,9 @@ class Test {
                 echo '&nbsp;&nbsp;&nbsp;&nbsp;<span style=\'color:red\'>&nbsp;&times; '.$e->getMessage().'</span><br>';
                 $res = false;
             } finally {
+                if (static::$_abort_flag === true) {
+                    exit(0);
+                }
                 if (is_callable($this->teardown)) {
                     $this->teardown->__invoke();
                 }

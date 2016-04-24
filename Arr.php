@@ -2,6 +2,7 @@
 
 require_once 'init.php';
 require_once 'AbstractCollection.php';
+require_once 'Dict.php';
 
 class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
@@ -14,7 +15,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     protected static $instance_methods = [
         'array_chunk',
         'array_column',
-        'array_count_values',
+        // 'array_count_values',
         'array_diff',
         'array_filter',
         'array_intersect',
@@ -380,9 +381,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // INSTANCE
 
     // custom delegations to native methods
-    // API-CHANGE: change_key_case function not implemented
+    // API-CHANGE: 'change_key_case' function not implemented
 
-    // API-CHANGE: new function
+    // API-CHANGE: new function 'concat'
     public function concat(...$arrays) {
         $res = new Arr(...$this->_elements);
         foreach ($arrays as $idx => $arr) {
@@ -391,15 +392,54 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    // API-CHANGE: 'count_values': returns Dict
+    public function count_values() {
+        $res = new Dict();
+        foreach ($this->group_by() as $key => $value) {
+            $res->put($key, $value->size());
+        }
+        return $res;
+    }
+
+    // API-CHANGE: 'diff': the actual difference (to 1 other arr) is calculated. for old behavior see 'without' (and use it with a concatenation of arrays)
+    public function diff($arr) {
+        $res = $this->copy();
+        foreach ($arr as $idx => $elem) {
+            if ($res->has($elem)) {
+                $res->remove($elem);
+            }
+        }
+        return $res;
+    }
+
+    public function group_by($group_func=null) {
+        if ($group_func === null) {
+            $group_func = function($elem) {
+                return $elem;
+            };
+        }
+        $dict = new Dict();
+        foreach ($this as $idx => $elem) {
+            $grouped = $group_func($elem);
+            if ($dict->has($grouped)) {
+                $dict->get($grouped)->push($elem);
+            }
+            else {
+                $dict->put($grouped, new Arr($elem));
+            }
+        }
+        return $dict;
+    }
+
     // current() is defined above (iterator interface section)
-    // API-CHANGE: each function not implemented
+    // API-CHANGE: 'each' function not implemented
 
     public function end() {
         $this->_position = $this->_size - 1;
         return $this;
     }
 
-    // API-CHANGE: new function
+    // API-CHANGE: new function 'flatten'
     public function flatten($deep=false) {
         $flattened = new Arr();
         foreach ($this as $idx => $value) {
@@ -413,26 +453,20 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $flattened;
     }
 
+    // API-CHANGE: new function 'get'
     public function get($idx) {
         return $this->offsetGet($idx);
     }
 
-    // API-CHANGE: extract function not implemented
+    // API-CHANGE: 'extract' function not implemented
     // key() is defined above (iterator interface section)
-
-    // API-CHANGE: key_exists function not implemented
-    // public function key_exists($key) {
-    //     if (is_int($key)) {
-    //         return $key < $this->_size;
-    //     }
-    //     return false;
-    // }
+    // API-CHANGE: 'key_exists' function not implemented
 
     public function map($callback) {
         return new Arr(...array_map($callback, $this->_elements));
     }
 
-    // API-CHANGE: now in place (for not in place see concat)
+    // API-CHANGE: 'merge' is in place (not in place => concat)
     public function merge(...$arrays) {
         foreach ($arrays as $idx => $arr) {
             if ($arr instanceof self) {
@@ -472,24 +506,24 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Arr::next: Invalid position", 1);
     }
 
-    // API-CHANGE: chainable, @return $this instead of $new_length
+    // API-CHANGE: 'push': is chainable (returns $this instead of $new_length)
     public function push(...$args) {
         $new_length = array_push($this->_elements, ...$args);
         $this->_size = $new_length;
         return $this;
     }
 
-    // API-CHANGE: chainable
+    // API-CHANGE: 'reset': is chainable
     public function reset() {
         return $this->rewind();
     }
 
-    // name in php array was reverse which is not in place.
+    // API-CHANGE: 'reversed': is not in place (<=> array_reverse)
     public function reversed() {
         return new static(...array_reverse($this->_elements));
     }
 
-    // API-CHANGE: in place
+    // API-CHANGE: 'reverse': is in place
     public function reverse() {
         $left = 0;
         $right = $this->_size - 1;
@@ -518,6 +552,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return null;
     }
 
+    // API-CHANGE: 'shuffle': @throws Exception
     public function shuffle() {
         if (shuffle($this->_elements)) {
             return $this;
@@ -538,14 +573,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new static(...$removed_elements);
     }
 
-    // API-CHANGE: @return $this instead of $new_length
+    // API-CHANGE: 'unshift': chainable, @return $this instead of $new_length
     public function unshift(...$args) {
         $length = array_unshift($this->_elements, ...$args);
         $this->_size += $length;
         return $this;
     }
 
-    // API-CHANGE: @throws Exception
+    // API-CHANGE: 'walk_recursive': @throws Exception
     public function walk_recursive(...$args) {
         if (array_walk_recursive($this->_elements, ...$args)) {
             return $this;
@@ -553,13 +588,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
 
+    // API-CHANGE: 'walk': @throws Exception
     public function walk(...$args) {
         if (array_walk($this->_elements, ...$args)) {
             return $this;
         }
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
-    // API-CHANGE: new function
+    // API-CHANGE: 'without': new
     public function without(...$args) {
         $res = new Arr();
         foreach ($this as $idx => $element) {
@@ -573,12 +609,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     //////////////////////////////////////////////////////////////////////////////////////////
     // EXTENDING THE API: adapt to python mutable sequence API
 
+    // API-CHANGE: 'append': new function (alias for push)
     public function append(...$args) {
         return $this->push(...$args);
     }
 
     // clear() is implemented above (collection interface section)
 
+    // API-CHANGE: 'extend': new function
     public function extend($iterable) {
         foreach ($iterable as $key => $value) {
             $new_length = array_push($this->_elements, $value);
@@ -587,23 +625,15 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
-    public function index($needle, $start=0, $stop=null) {
-        // if ($stop === null) {
-        //     $stop = $this->_size - 1;
-        // }
-        // if ($start === 0 && $stop === $this->_size - 1) {
-        if ($start === 0 && $stop === null) {
-            $idx = array_search($needle, $this->_elements, true);
+    // API-CHANGE: 'index': new function
+    public function index($needle, $start=0, $stop=null, $equality='__equals') {
+        if ($stop === null) {
+            $stop = $this->_size;
         }
-        else {
-            if ($stop === null) {
-                $stop = $this->_size - 1;
+        for ($i = $start; $i < $stop; $i++) {
+            if (call_user_func($equality, $this->_elements[$i], $needle) === true) {
+                return $i;
             }
-            $idx = array_search($needle, array_slice($this->_elements, $start, $stop + 1), true);
-        }
-
-        if ($idx !== false) {
-            return $idx;
         }
         return null;
     }

@@ -200,11 +200,11 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         if (func_num_args() === 1) {
             $default_val = $this->default_val;
         }
-        $k = $this->_get_hash($key);
+        $hash = $this->_get_hash($key);
 
-        if (array_key_exists($k, $this->_dict)) {
-            $list = $this->_dict[$k];
-            foreach ($list as $idx => $tuple) {
+        if (array_key_exists($hash, $this->_dict)) {
+            $bucket = $this->_dict[$hash];
+            foreach ($bucket as $idx => $tuple) {
                 if (__equals($key, $tuple[0])) {
                     return $tuple[1];
                 }
@@ -215,8 +215,9 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     }
 
     public function has_key($key) {
-        $k = $this->_get_hash($key);
-        return array_key_exists($k, $this->_dict);
+        $default_val = new StdClass();
+        $val = $this->get($key, $default_val);
+        return $val !== $default_val;
     }
 
     public function has_value($value) {

@@ -120,7 +120,7 @@ section('array access',
 
 
 section('Arr instance methods',
-    subsection('automatically delegating to native methods (subset of array_* functions)',
+    subsection('related to native methods (subset of array_* functions)',
         new Test(
             'chunk, column, count_values, diff, filter, intersect, keys, merge_recursive, pad, product, rand, reduce, replace_recursive, replace, slice, sum, udiff, uintersect, unique, values',
             [
@@ -131,10 +131,14 @@ section('Arr instance methods',
                     return expect($this->arr_2d->column(1)->to_a(), 'column')->to_be(array_column($this->native_2d, 1));
                 },
                 function() {
-                    return expect($this->arr->count_values()->to_a(), 'count_values')->to_be(array_count_values($this->native));
-                },
-                function() {
-                    return expect($this->arr->diff($this->arr_2d)->to_a(), 'diff')->to_be(array_diff($this->native, $this->native_2d));
+                    // $this->run_only_this();
+                    $a = new Arr(0, new Arr('a', 'b'), 2, false);
+                    $b = new Arr(0, false);
+                    $c = new Arr(new Arr('a', 'b'), true);
+                    $expected_a_b = new Arr(new Arr('a', 'b'), 2);
+                    $expected_a_c = new Arr(0, 2, false);
+                    return expect($a->diff($b), 'diff')->to_be($expected_a_b) &&
+                    expect($a->diff($c), 'diff')->to_be($expected_a_c);
                 },
                 function() {
                     $filter = function($e) {return $e;};
@@ -251,7 +255,25 @@ section('Arr instance methods',
                 return expect($this->arr->copy()->clear(), 'clear')->to_be(new Arr());
             },
             function() {
+                $expected = new Dict();
+                $expected->put(1, 1);
+                $expected->put('asdf', 1);
+                $expected->put(true, 1);
+                return expect($this->arr->count_values(), 'count_values')->to_be($expected);
+            },
+            function() {
                 return expect($this->arr->copy()->equals($this->arr), 'equals')->to_be(true);
+            },
+            function() {
+                $arr = new Arr(['name'=>'a', 2], ['name'=>'a', 3], ['name'=>'b', 4], ['name'=>'a', 5]);
+                $expected = new Dict();
+                $expected->put('a', new Arr(['name'=>'a', 2], ['name'=>'a', 3], ['name'=>'a', 5]));
+                $expected->put('b', new Arr(['name'=>'b', 4]));
+
+                $cb = function($elem) {
+                    return $elem['name'];
+                };
+                return expect($arr->group_by($cb), 'group_by')->to_be($expected);
             },
             function() {
                 return expect($this->arr->has('asdf'), 'has should')->to_be(true) &&

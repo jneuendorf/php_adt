@@ -1,6 +1,9 @@
 <?php
 
 function __equals($x, $y) {
+    if ($x === $y) {
+        return true;
+    }
     if (method_exists($x, "equals")) {
         return $x->equals($y);
     }
@@ -10,7 +13,7 @@ function __equals($x, $y) {
     if (__hash($x) !== __hash($y)) {
         return false;
     }
-    return $x === $y;
+    return false;
 }
 
 function __compare($x, $y) {

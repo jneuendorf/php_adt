@@ -123,7 +123,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function equals($set) {
-        return $this->_dict->equals($set->to_dict());
+        if ($set instanceof self) {
+            return $this->_dict->equals($set->to_dict());
+        }
+        return false;
     }
 
     public function has($element) {

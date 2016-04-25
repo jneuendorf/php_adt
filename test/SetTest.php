@@ -99,9 +99,58 @@ section('set instance methods',
         new Test(
             'remaining methods',
             [
-                function() {
-
-                },
+                // function() {
+                //     return expect(, 'difference')->to_be() &&
+                //     expect(, 'difference')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'difference_update')->to_be() &&
+                //     expect(, 'difference_update')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'discard')->to_be() &&
+                //     expect(, 'discard')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'intersection')->to_be() &&
+                //     expect(, 'intersection')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'intersection_update')->to_be() &&
+                //     expect(, 'intersection_update')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'isdisjoint')->to_be() &&
+                //     expect(, 'isdisjoint')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'issubset')->to_be() &&
+                //     expect(, 'issubset')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'issuperset')->to_be() &&
+                //     expect(, 'issuperset')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'symmetric_difference')->to_be() &&
+                //     expect(, 'symmetric_difference')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'symmetric_difference_udpate')->to_be() &&
+                //     expect(, 'symmetric_difference_udpate')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'union')->to_be() &&
+                //     expect(, 'union')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'union_update')->to_be() &&
+                //     expect(, 'union_update')->to_be();
+                // },
+                // function() {
+                //     return expect(, 'update')->to_be() &&
+                //     expect(, 'update')->to_be();
+                // },
             ],
             function() {
                 $this->set = new Set(1, 2, 3, 1, 'asdf');

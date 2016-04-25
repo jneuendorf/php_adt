@@ -210,7 +210,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function equals($arr) {
-        if ($arr instanceof Arr) {
+        if ($arr instanceof self) {
             if ($this->size() !== $arr->size()) {
                 return false;
             }

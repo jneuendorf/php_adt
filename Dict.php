@@ -125,7 +125,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
     // REVIEW
     public function equals($map) {
-        if ($map instanceof Dict) {
+        if ($map instanceof self) {
             if ($this->size() !== $map->size()) {
                 return false;
             }

@@ -131,27 +131,49 @@ section('Arr instance methods',
                     return expect($this->arr_2d->column(1)->to_a(), 'column')->to_be(array_column($this->native_2d, 1));
                 },
                 function() {
-                    // $this->run_only_this();
                     $a = new Arr(0, new Arr('a', 'b'), 2, false);
                     $b = new Arr(0, false);
                     $c = new Arr(new Arr('a', 'b'), true);
                     $expected_a_b = new Arr(new Arr('a', 'b'), 2);
                     $expected_a_c = new Arr(0, 2, false);
+
+                    // udiff
+                    $array1 = new Arr(['w' => 11, 'h' => 3], ['w' => 7, 'h' => 1], ['w' => 2, 'h' => 9], ['w' => 5, 'h' => 7]);
+                    $array2 = new Arr(['w' => 7, 'h' => 5], ['w' => 9, 'h' => 2]);
+                    $compare_by_area = function($a, $b) {
+                        $areaA = $a['w'] * $a['h'];
+                        $areaB = $b['w'] * $b['h'];
+                        return $areaA === $areaB;
+                    };
+
                     return expect($a->diff($b), 'diff')->to_be($expected_a_b) &&
-                    expect($a->diff($c), 'diff')->to_be($expected_a_c);
+                    expect($a->diff($c), 'diff')->to_be($expected_a_c) &&
+                    expect($array1->diff($array2, $compare_by_area), 'diff (with callback -> udiff)')->to_be(new Arr(['w' => 11, 'h' => 3], ['w' => 7, 'h' => 1]));
                 },
                 function() {
-                    $filter = function($e) {return $e;};
+                    $filter = function($e) {
+                        return $e;
+                    };
                     return expect($this->arr->filter($filter)->to_a(), 'filter')->to_be(array_filter($this->native, $filter));
                 },
                 function() {
-                    return expect($this->arr->intersect($this->arr_2d)->to_a(), 'intersect')->to_be(array_intersect($this->native, $this->native_2d));
+                    $a = new Arr(1,2,3,4,5,6,7,8);
+                    $b = new Arr(5,6,7,8,9,10);
+                    $array1 = new Arr("green", "brown", "blue", "red");
+                    $array2 = new Arr("GREEN", "broWn", "yellow", "red");
+                    $cb = function($a, $b) {
+                        return strtolower($a) === strtolower($b);
+                    };
+                    return expect($a->intersect($b), 'intersect')->to_be(new Arr(5,6,7,8)) &&
+                    expect($array1->intersect($array2, $cb), 'intersect (with callback -> uintersect)')->to_be(new Arr('green', 'brown', 'red'));
                 },
                 function() {
                     return expect($this->arr->keys()->to_a(), 'keys')->to_be(array_keys($this->native));
                 },
                 function() {
-                    return expect($this->arr->merge_recursive($this->arr_2d)->to_a(), 'merge_recursive')->to_be(array_merge_recursive($this->native, $this->native_2d));
+                    $a = new Arr(1,new Arr('a','b'));
+                    $b = new Arr(1,new Arr('c','d'));
+                    return expect($a->merge_recursive($b), 'merge_recursive')->to_be(new Arr(1, new Arr('a','b','c','d'), 1));
                 },
                 function() {
                     $size = 10;
@@ -179,10 +201,11 @@ section('Arr instance methods',
                     return expect($this->arr->reduce($callback, $initial), 'reduce')->to_be(array_reduce($this->native, $callback, $initial));
                 },
                 function() {
-                    return expect($this->arr->replace_recursive($this->arr_2d)->to_a(), 'replace_recursive')->to_be(array_replace_recursive($this->native, $this->native_2d));
-                },
-                function() {
-                    return expect($this->arr->replace($this->arr_2d)->to_a(), 'replace')->to_be(array_replace($this->native, $this->native_2d));
+                    // $this->run_only_this();
+                    $replacement = new Dict(null, ['asdf' => 'replaced']);
+                    $replacement->put(true, false);
+                    $replacement->put(1, 42);
+                    return expect($this->arr->replace($replacement), 'replace')->to_be(new Arr(42,'replaced',false));
                 },
                 function() {
                     $start = 0;
@@ -193,18 +216,6 @@ section('Arr instance methods',
                     $n = range(1, 100);
                     $a = new Arr(...$n);
                     return expect($a->sum(), 'sum')->to_be(array_sum($n));
-                },
-                function() {
-                    $cb = function($a, $b) {
-                        return __equals($a, $b);
-                    };
-                    return expect($this->arr->udiff($this->arr_2d, $cb), 'udiff')->to_be(array_udiff($this->native, $this->native_2d, $cb));
-                },
-                function() {
-                    $cb = function($a, $b) {
-                        return __equals($a, $b);
-                    };
-                    return expect($this->arr->uintersect($this->arr_2d, $cb), 'uintersect')->to_be(array_uintersect($this->native, $this->native_2d, $cb));
                 },
                 function() {
                     $res = true;
@@ -260,6 +271,9 @@ section('Arr instance methods',
                 $expected->put('asdf', 1);
                 $expected->put(true, 1);
                 return expect($this->arr->count_values(), 'count_values')->to_be($expected);
+            },
+            function() {
+                return expect($this->arr->difference($this->arr_2d), 'difference (alias for diff)')->to_be($this->arr->diff($this->arr_2d));
             },
             function() {
                 return expect($this->arr->copy()->equals($this->arr), 'equals')->to_be(true);
@@ -386,6 +400,9 @@ section('Arr instance methods',
                 };
                 return expect($arr->sort(), 'sort')->to_be(new Arr(0,1,2,3,4,5,6,7,8,9)) &&
                 expect($arr2->sort($cmp), 'sort (stable)')->to_be(new Arr([0, 'a'], [2, 'c'], [2, 'd'], [5, 'z']));
+            },
+            function() {
+                return expect($this->arr->without(1, true), 'without')->to_be(new Arr('asdf'));
             },
         ], function () {
             $this->native = [1,'asdf',true];

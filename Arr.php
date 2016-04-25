@@ -15,22 +15,17 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     protected static $instance_methods = [
         'array_chunk',
         'array_column',
-        // 'array_count_values',
-        'array_diff',
         'array_filter',
-        'array_intersect',
         'array_keys',
         'array_merge_recursive',
         'array_pad',
         'array_product',
         'array_rand',
         'array_reduce',
-        'array_replace_recursive',
-        'array_replace',
         'array_slice',
         'array_sum',
-        'array_udiff',
-        'array_uintersect',
+        // 'array_udiff',
+        // 'array_uintersect',
         'array_unique',
         'array_values',
     ];
@@ -225,8 +220,8 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return false;
     }
 
-    public function has($object) {
-        return $this->index($object) !== null;
+    public function has($object, $equality='__equals') {
+        return $this->index($object, 0, $this->_size, $equality) !== null;
     }
 
     public function hash() {
@@ -243,6 +238,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $this->splice($index, 1);
         }
         return $this;
+    }
+
+    public function remove_at($index) {
+        return $this->splice($index, 1);
     }
 
     public function size() {
@@ -380,7 +379,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // INSTANCE
 
-    // custom delegations to native methods
+    // implementations based on the API of native methods
     // API-CHANGE: 'change_key_case' function not implemented
 
     // API-CHANGE: new function 'concat'
@@ -401,15 +400,19 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
-    // API-CHANGE: 'diff': the actual difference (to 1 other arr) is calculated. for old behavior see 'without' (and use it with a concatenation of arrays)
-    public function diff($arr) {
-        $res = $this->copy();
-        foreach ($arr as $idx => $elem) {
-            if ($res->has($elem)) {
-                $res->remove($elem);
+    public function diff($arr, $equality='__equals') {
+        $res = new Arr();
+        foreach ($this as $idx => $elem) {
+            if (!$arr->has($elem, $equality)) {
+                $res->push($elem);
             }
         }
         return $res;
+    }
+
+    // API-CHANGE: 'difference': alias for 'diff'
+    public function difference(...$args) {
+        return $this->diff(...$args);
     }
 
     public function group_by($group_func=null) {
@@ -458,6 +461,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->offsetGet($idx);
     }
 
+    public function intersect($arr, $equality='__equals') {
+        $res = new Arr();
+        foreach ($this as $idx => $elem) {
+            if ($arr->has($elem, $equality)) {
+                $res->push($elem);
+            }
+        }
+        return $res;
+    }
+
     // API-CHANGE: 'extract' function not implemented
     // key() is defined above (iterator interface section)
     // API-CHANGE: 'key_exists' function not implemented
@@ -467,18 +480,28 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: 'merge' is in place (not in place => concat)
-    public function merge(...$arrays) {
-        foreach ($arrays as $idx => $arr) {
+    public function merge(...$arrs) {
+        foreach ($arrs as $idx => $arr) {
             if ($arr instanceof self) {
                 foreach ($arr as $i => $element) {
                     $this->push($element);
                 }
             }
-            // elseif (is_array($arr)) {
-            //     $this->push(...$arr);
-            // }
             else {
                 $this->push($arr);
+            }
+        }
+        return $this;
+    }
+
+    // API-CHANGE: 'merge_recursive' is in place (not in place => concat)
+    public function merge_recursive($arr) {
+        foreach ($arr as $i => $element) {
+            if ($element instanceof self && $this->_elements[$i] instanceof self) {
+                $this->_elements[$i]->merge($element);
+            }
+            else {
+                $this->push($element);
             }
         }
         return $this;
@@ -512,6 +535,20 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         $this->_size = $new_length;
         return $this;
     }
+
+    // API-CHANGE: 'replace': takes Dict as set of replacements
+    public function replace($replacements) {
+        foreach ($replacements as $old_val => $new_val) {
+            $idx = $this->index($old_val);
+            while ($idx !== null) {
+                $this->_elements[$idx] = $new_val;
+                $idx = $this->index($old_val);
+            }
+        }
+        return $this;
+    }
+
+    // API-CHANGE: 'replace_recursive': not implemented
 
     // API-CHANGE: 'reset': is chainable
     public function reset() {
@@ -573,6 +610,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new static(...$removed_elements);
     }
 
+    // API-CHANGE: 'udiff': not implemented (callback can be passed to 'diff')
+    // API-CHANGE: 'uintersect': not implemented (callback can be passed to 'intersect')
+
     // API-CHANGE: 'unshift': chainable, @return $this instead of $new_length
     public function unshift(...$args) {
         $length = array_unshift($this->_elements, ...$args);
@@ -580,7 +620,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
-    // API-CHANGE: 'walk_recursive': @throws Exception
+    // API-CHANGE: 'walk_recursive': throws Exception
     public function walk_recursive(...$args) {
         if (array_walk_recursive($this->_elements, ...$args)) {
             return $this;
@@ -588,22 +628,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
 
-    // API-CHANGE: 'walk': @throws Exception
+    // API-CHANGE: 'walk': throws Exception
     public function walk(...$args) {
         if (array_walk($this->_elements, ...$args)) {
             return $this;
         }
         throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
     }
-    // API-CHANGE: 'without': new
+    // API-CHANGE: 'without': new. like 'diff' but each argument is an element and not an Arr/array
     public function without(...$args) {
-        $res = new Arr();
-        foreach ($this as $idx => $element) {
-            if (!in_array($element, $args)) {
-                $res->push($element);
-            }
-        }
-        return $res;
+        return $this->diff(new Arr(...$args));
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////

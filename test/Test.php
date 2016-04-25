@@ -136,11 +136,13 @@ class Expectation {
             if ($res === false) {
                 echo '<span style=\'color:green\'>&nbsp;&#10003;</span>';
                 echo '&nbsp;'.$label.' expect '.__toString($this->value).' != '.__toString($value).'<br>';
+                $res = true;
             }
             else {
                 Test::$invalid_expectations++;
                 echo '<span style=\'color:red\'>&nbsp;&times;';
                 echo '&nbsp;'.$label.' expect '.__toString($this->value).' != '.__toString($value).'</span><br>';
+                $res = false;
             }
         }
 

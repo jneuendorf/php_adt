@@ -7,13 +7,14 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
     // maps hashes to lists of values
     protected $_dict;
-    // protected $_size;
-    // those 3 vars are needed for the iterator interface
-    protected $_hash_idx;
-    protected $_bucket_item_idx;
-    protected $_hash_order;
+    // // protected $_size;
+    // // those 3 vars are needed for the iterator interface
+    // protected $_hash_idx;
+    // protected $_bucket_item_idx;
+    // protected $_hash_order;
 
     public function __construct(...$elements) {
+        $this->_dict = new Dict();
         $this->clear();
         foreach ($elements as $idx => $element) {
             $this->add($element);
@@ -37,21 +38,6 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // PROTECTED
-
-    protected function _get_hash($object) {
-        try {
-            $hash = __hash($object);
-        }
-        catch (Exception $e) {
-            if (is_object($object) && property_exists($object, '__uniqid__')) {
-                $hash = $object->__uniqid__;
-            }
-            else {
-                $hash = uniqid('', true);
-            }
-        }
-        return $hash;
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
@@ -118,39 +104,12 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     // IMPLEMENTING COLLECTION
 
     public function add($element) {
-        $hash = $this->_get_hash($element);
-        // cache pseudo hash on key
-        if (is_object($element) && !property_exists($element, '__uniqid__')) {
-            $element->__uniqid__ = $hash;
-        }
-
-        // add key with new hash (new bucket)
-        if (!array_key_exists($hash, $this->_dict)) {
-            $this->_dict[$hash] = [$element];
-            $this->_size++;
-            array_push($this->_hash_order, $hash);
-            return $this;
-        }
-        // else: add key with existing hash
-        $bucket = $this->_dict[$hash];
-        foreach ($bucket as $idx => $bucket_element) {
-            if (__equals($element, $bucket_element)) {
-                // update for potential reference equality
-                $this->_dict[$hash][$idx] = $element;
-                return $this;
-            }
-        }
-        array_push($this->_dict[$hash], $element);
-        $this->_size++;
+        $this->_dict->put($element, true);
         return $this;
     }
 
     public function clear() {
-        $this->_dict = [];
-        $this->_size = 0;
-        $this->_hash_idx = 0;
-        $this->_bucket_item_idx = 0;
-        $this->_hash_order = [];
+        $this->_dict->clear();
         return $this;
     }
 
@@ -159,35 +118,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function equals($set) {
-        if ($set instanceof Set) {
-            if ($this->size() !== $set->size()) {
-                return false;
-            }
-            if (__hash($set) !== __hash($this)) {
-                return false;
-            }
-            // hashes are equal => compare each element
-            foreach ($this as $idx => $element) {
-                if (!$set->has($element)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return $this->_dict->equals(new Dict(null, $set));
     }
 
     public function has($element) {
-        $hash = $this->_get_hash($element);
-        if (array_key_exists($hash, $this->_dict)) {
-            $bucket = $this->_dict[$hash];
-            foreach ($bucket as $idx => $bucket_element) {
-                if (__equals($element, $bucket_element)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return $this->_dict->has($element);
     }
 
     public function hash() {
@@ -199,27 +134,16 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function remove($element) {
-        if ($this->has($element)) {
-            $hash = $this->_get_hash($element);
-            $bucket = $this->_dict[$hash];
-            foreach ($bucket as $idx => $bucket_element) {
-                if (__equals($element, $bucket_element)) {
-                    // remove entire hash-bucket entry because will be empty
-                    if (count($bucket) === 1) {
-                        unset($this->_dict[$hash]);
-                        // remove hash from hash order
-                        $this->_hash_order = array_values(array_diff($this->_hash_order, array($hash)));
-                    }
-                    // remove tuple from the bucket
-                    else {
-                        unset($this->_dict[$hash][$idx]);
-                    }
-                    $this->_size--;
-                    return $this;
-                }
-            }
-        }
+        $this->_dict->remove($element);
         return $this;
+    }
+
+    public function size() {
+        return $this->_dict->size();
+    }
+
+    public function to_a() {
+        return $this->_dict->keys();
     }
 
     // PYTHON API

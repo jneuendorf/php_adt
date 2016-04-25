@@ -34,15 +34,81 @@ section('set access', subsection('', new Test(
     'via [], has',
     function() {
         $set = new Set(1, 2, 3, 1, 'asdf');
-        // $this->run_only_this();
-
         return expect($set[1], 'array-like')->not_to_be(null) &&
         expect($set[2], 'array-like')->not_to_be(null) &&
         expect($set[3], 'array-like')->not_to_be(null) &&
         expect($set['asdf'], 'array-like')->not_to_be(null) &&
-        expect($set['not an element'], 'array-like')->to_be(null);
+        expect($set['not an element'], 'array-like')->to_be(null) &&
+        expect($set->has(1), 'has')->to_be(true) &&
+        expect($set->has(2), 'has')->to_be(true) &&
+        expect($set->has(3), 'has')->to_be(true) &&
+        expect($set->has('asdf'), 'has')->to_be(true) &&
+        expect($set->has('not an element'), 'has')->to_be(false);
     }
 )));
+
+
+section('set instance methods',
+    subsection(
+        '',
+        new Test(
+            'collection "interface"',
+            [
+                function() {
+                    $copy = $this->set->copy();
+                    $copy->add('new element');
+                    return expect($copy->size(), 'add')->to_be($this->set->size() + 1) &&
+                    expect($copy->has('new element'), 'add')->to_be(true);
+                },
+                function() {
+                    $copy = $this->set->copy()->clear();
+                    return expect($copy->size(), 'clear')->to_be(0);
+                },
+                function() {
+                    return expect($this->set->copy()->equals($this->set), 'copy')->to_be(true);
+                },
+                function() {
+                    // $this->run_only_this();
+                    $equal_set = new Set('asdf', 1, 2, 1, 3, 3);
+                    return expect($this->set->equals($equal_set), 'equals')->to_be(true) &&
+                    expect($this->set->equals($equal_set->add(1234)), 'equals')->to_be(false);
+                },
+                function() {
+                    return expect($this->set->has(1), 'has')->to_be(true) &&
+                    expect($this->set->has(2), 'has')->to_be(true) &&
+                    expect($this->set->has(3), 'has')->to_be(true) &&
+                    expect($this->set->has('asdf'), 'has')->to_be(true) &&
+                    expect($this->set->has(11), 'has')->to_be(false);
+                },
+                function() {
+                    return expect($this->set->hash(), 'hash')->to_be($this->set->copy()->hash()) &&
+                    expect($this->set->hash(), 'hash')->not_to_be($this->set->copy()->clear()->hash());
+                },
+                function() {
+                    $copy = $this->set->copy();
+                    $copy->remove(1);
+                    $copy->remove(11);
+                    return expect($copy->size(), 'remove')->to_be($this->set->size() - 1) &&
+                    expect($copy->has(1), 'remove')->to_be(false);
+                },
+            ],
+            function() {
+                $this->set = new Set(1, 2, 3, 1, 'asdf');
+            }
+        ),
+        new Test(
+            'remaining methods',
+            [
+                function() {
+
+                },
+            ],
+            function() {
+                $this->set = new Set(1, 2, 3, 1, 'asdf');
+            }
+        )
+    )
+);
 
 $set = new Set(1, 2, 3, 1, 'asdf');
 $set->add('asdf2');
@@ -60,11 +126,6 @@ var_dump($set->equals($set2));
 
 // array access
 echo '<hr>array access..........<br>';
-echo 'get undefined offset: ';
-var_dump($set[15]);
-echo '<br>';
-echo 'get defined offset: ';
-var_dump($set[1]);
 echo '<br>';
 echo 'set any offset. ';
 $set[] = 'new element';

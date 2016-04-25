@@ -1,6 +1,8 @@
 <?php
 
-abstract class AbstractCollection implements Countable {
+require_once 'Hashable.php';
+
+abstract class AbstractCollection implements Countable, Hashable {
     protected $_size = 0;
 
 
@@ -16,7 +18,7 @@ abstract class AbstractCollection implements Countable {
     public function copy($deep=false) {}
     public function equals($collection) {}
     public function has($element) {}
-    public function hash() {}
+    // public function hash() {}
     public function remove($element) {}
 
     public function is_empty() {

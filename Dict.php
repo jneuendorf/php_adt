@@ -36,6 +36,14 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return "{\n".implode(", \n", $res)."\n}";
     }
 
+    public function to_arr() {
+        return $this->items();
+    }
+
+    public function to_dict() {
+        return $this->copy();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 

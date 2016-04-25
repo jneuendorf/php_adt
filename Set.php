@@ -67,37 +67,42 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     // IMPLEMENTING ITERATOR
 
     public function current() {
-        return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx];
+        return $this->_dict->key();
+        // return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx];
     }
 
     public function key() {
-        $idx = 0;
-        for ($i = 0; $i < $this->_hash_idx; $i++) {
-            $idx += count($this->_dict[$this->_hash_order[$i]]);
-        }
-        return $idx + $this->_bucket_item_idx;
+        // $idx = 0;
+        // for ($i = 0; $i < $this->_hash_idx; $i++) {
+        //     $idx += count($this->_dict[$this->_hash_order[$i]]);
+        // }
+        // return $idx + $this->_bucket_item_idx;
+        return $this->_dict->key();
     }
 
     public function next() {
-        // can proceed in current bucket
-        if ($this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$this->_hash_idx]]) - 1) {
-            $this->_bucket_item_idx++;
-        }
-        // need to proceed to beginning of next bucket
-        else {
-            $this->_hash_idx++;
-            $this->_bucket_item_idx = 0;
-        }
+        // // can proceed in current bucket
+        // if ($this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$this->_hash_idx]]) - 1) {
+        //     $this->_bucket_item_idx++;
+        // }
+        // // need to proceed to beginning of next bucket
+        // else {
+        //     $this->_hash_idx++;
+        //     $this->_bucket_item_idx = 0;
+        // }
+        $this->_dict->next();
     }
 
     public function rewind() {
-        $this->_hash_idx = 0;
-        $this->_bucket_item_idx = 0;
+        // $this->_hash_idx = 0;
+        // $this->_bucket_item_idx = 0;
+        $this->_dict->rewind();
     }
 
     public function valid() {
-        $h_idx = $this->_hash_idx;
-        return $h_idx >= 0 && $h_idx < count($this->_hash_order) && $this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$h_idx]]);
+        // $h_idx = $this->_hash_idx;
+        // return $h_idx >= 0 && $h_idx < count($this->_hash_order) && $this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$h_idx]]);
+        return $this->_dict->valid();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +123,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function equals($set) {
-        return $this->_dict->equals(new Dict(null, $set));
+        return $this->_dict->equals($set->to_dict());
     }
 
     public function has($element) {
@@ -142,8 +147,12 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->_dict->size();
     }
 
-    public function to_a() {
+    public function to_arr() {
         return $this->_dict->keys();
+    }
+
+    public function to_dict() {
+        return $this->_dict->copy();
     }
 
     // PYTHON API

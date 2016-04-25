@@ -123,6 +123,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    public function to_arr() {
+        return $this->copy();
+    }
+
+    public function to_dict() {
+        return new Dict(null, $this);
+    }
+
     // use ...$args workaround for passing an optional parameter (incl. null)
     public function first(...$args) {
         if ($this->_size >= 1) {

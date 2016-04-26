@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <script type="text/javascript" src="jquery-2.2.1.min.js"></script>
 </head>
 <body>
 <?php

@@ -22,7 +22,7 @@ abstract class AbstractCollection implements Countable, Hashable {
     public function remove($element) {}
 
     public function is_empty() {
-        return $this->_size === 0;
+        return $this->size() === 0;
     }
 
     public function size() {

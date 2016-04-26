@@ -170,7 +170,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
-    public function difference_udpate($set) {
+    public function difference_update($set) {
         foreach ($set as $idx => $element) {
             $this->remove($element);
         }
@@ -192,9 +192,9 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function intersection_update($set) {
-        foreach ($set as $idx => $element) {
-            if (!$this->has($element)) {
-                $res->remove($element);
+        foreach ($this as $idx => $element) {
+            if (!$set->has($element)) {
+                $this->remove($element);
             }
         }
         return $this;
@@ -233,19 +233,27 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
                 $res->add($element);
             }
         }
-        return $set;
+        return $res;
     }
 
-    public function symmetric_difference_udpate($set) {
-        // union
-        $this->update($set);
-        // remove intersection
-        foreach ($set as $idx => $element) {
-            // element in intersection
-            if ($this->has($element)) {
-                $this->remove($element);
-            }
+    public function symmetric_difference_update($set) {
+        $sym_diff = $this->symmetric_difference($set);
+        $this->clear();
+        foreach ($sym_diff as $idx => $element) {
+            $this->add($element);
         }
+        // // union
+        // $this->update($set);
+        // // remove intersection
+        // foreach ($this as $idx => $element) {
+        //     var_dump('checking');
+        //     var_dump($element);
+        //     // element in intersection
+        //     if ($set->has($element)) {
+        //         var_dump("removed it!\n");
+        //         $this->remove($element);
+        //     }
+        // }
         return $this;
     }
 

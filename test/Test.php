@@ -59,7 +59,8 @@ class Test {
                 }
                 $res = $callback->bindTo($this)->__invoke();
             } catch (Exception $e) {
-                echo '&nbsp;&nbsp;&nbsp;&nbsp;<span style=\'color:red\'>&nbsp;&times; '.$e->getMessage().'</span><br>';
+                $trace = htmlspecialchars(str_replace("\n", ' ', $e->getTraceAsString()));
+                echo '&nbsp;&nbsp;&nbsp;&nbsp;<span style=\'color:red; cursor:pointer\' onClick="$(this).next().fadeToggle(100);">&nbsp;&times; '.$e->getMessage().'</span><span style="display:none"><br>'.$trace.'</span><br>';
                 $res = false;
             } finally {
                 if (static::$_abort_flag === true) {

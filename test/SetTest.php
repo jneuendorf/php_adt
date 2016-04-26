@@ -57,8 +57,10 @@ section('set instance methods',
                 function() {
                     $copy = $this->set->copy();
                     $copy->add('new element');
-                    return expect($copy->size(), 'add')->to_be($this->set->size() + 1) &&
-                    expect($copy->has('new element'), 'add')->to_be(true);
+                    $copy[] = 'new element2';
+                    return expect($copy->size(), 'add')->to_be($this->set->size() + 2) &&
+                    expect($copy->has('new element'), 'add')->to_be(true) &&
+                    expect($copy->has('new element2'), 'add')->to_be(true);
                 },
                 function() {
                     $copy = $this->set->copy()->clear();
@@ -99,100 +101,100 @@ section('set instance methods',
         new Test(
             'remaining methods',
             [
-                // function() {
-                //     return expect(, 'difference')->to_be() &&
-                //     expect(, 'difference')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'difference_update')->to_be() &&
-                //     expect(, 'difference_update')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'discard')->to_be() &&
-                //     expect(, 'discard')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'intersection')->to_be() &&
-                //     expect(, 'intersection')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'intersection_update')->to_be() &&
-                //     expect(, 'intersection_update')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'isdisjoint')->to_be() &&
-                //     expect(, 'isdisjoint')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'issubset')->to_be() &&
-                //     expect(, 'issubset')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'issuperset')->to_be() &&
-                //     expect(, 'issuperset')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'symmetric_difference')->to_be() &&
-                //     expect(, 'symmetric_difference')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'symmetric_difference_udpate')->to_be() &&
-                //     expect(, 'symmetric_difference_udpate')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'union')->to_be() &&
-                //     expect(, 'union')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'union_update')->to_be() &&
-                //     expect(, 'union_update')->to_be();
-                // },
-                // function() {
-                //     return expect(, 'update')->to_be() &&
-                //     expect(, 'update')->to_be();
-                // },
+                function() {
+                    return expect($this->set->difference($this->set2), 'difference')->to_be(new Set(1,3));
+                },
+                function() {
+                    $set = $this->set->copy();
+                    $set->difference_update($this->set2);
+                    return expect($set, 'difference_update')->to_be($this->set->difference($this->set2));
+                },
+                function() {
+                    $set = $this->set->copy();
+                    $set
+                        ->discard(true)
+                        ->discard(1);
+                    return expect($set->size(), 'discard')->to_be($this->set->size() - 1) &&
+                    expect($set, 'discard')->to_be($this->set->copy()->remove(true)->remove(1));
+                },
+                function() {
+                    return expect($this->set->intersection($this->set2), 'intersection')->to_be(new Set('asdf', 2));
+                },
+                function() {
+                    $set = $this->set->copy();
+                    $set->intersection_update($this->set2);
+                    return expect($set, 'intersection_update')->to_be($this->set->intersection($this->set2));
+                },
+                function() {
+                    return expect($this->set->isdisjoint($this->set2), 'isdisjoint')->to_be(false) &&
+                    expect($this->set->isdisjoint(new Set()), 'isdisjoint')->to_be(true);
+                },
+                function() {
+                    $intersection = $this->set->intersection($this->set2);
+                    return expect($intersection->issubset($this->set), 'issubset')->to_be(true) &&
+                    expect($intersection->issubset($this->set2), 'issubset')->to_be(true) &&
+                    expect($intersection->issubset(new Set()), 'issubset')->to_be(false) &&
+                    expect($intersection->issubset(new Set('haha', [1, 2])), 'issubset')->to_be(false);
+                },
+                function() {
+                    $intersection = $this->set->intersection($this->set2);
+                    return expect($this->set->issuperset($intersection), 'issuperset')->to_be(true) &&
+                    expect($this->set2->issuperset($intersection), 'issuperset')->to_be(true) &&
+                    expect($intersection->issuperset($this->set), 'issuperset')->to_be(false) &&
+                    expect($this->set->issuperset(new Set()), 'issuperset')->to_be(true);
+                },
+                function() {
+                    $set = new Set(1, 2, 3, 1, 'asdf');
+                    $set2 = new Set(2, 'asdf', 42, false);
+                    $union = $set->union($set2);
+                    $intersection = $set->intersection($set2);
+                    return expect($set->symmetric_difference($set2), 'symmetric_difference')->to_be($union->difference($intersection));
+                },
+                function() {
+                    $set = new Set(1, 2, 3, 1, 'asdf');
+                    $set2 = new Set(2, 'asdf', 42, false);
+                    $union = $set->union($set2);
+                    $intersection = $set->intersection($set2);
+                    $set->symmetric_difference_update($set2);
+                    return expect($set, 'symmetric_difference_update')->to_be($union->difference($intersection));
+                },
+                function() {
+                    return expect($this->set->union($this->set2), 'union')->to_be(new Set(1,2,3,'asdf',[true,false],false));
+                },
+                function() {
+                    $copy = $this->set->copy();
+                    $copy->union_update($this->set2);
+                    return expect($copy, 'union_update')->to_be($this->set->union($this->set2));
+                },
+                function() {
+                    $copy = $this->set->copy();
+                    $copy->update($this->set2);
+                    return expect($copy, 'update')->to_be($this->set->union($this->set2));
+                },
             ],
             function() {
                 $this->set = new Set(1, 2, 3, 1, 'asdf');
+                $this->set2 = new Set(2, 'asdf', [true, false], false);
             }
         )
     )
 );
 
-$set = new Set(1, 2, 3, 1, 'asdf');
-$set->add('asdf2');
-$set->remove(2);
+section('iteration', subsection('', new Test(
+    'foreach',
+    function() {
+        $set = new Set(1, 2, 3, 1, 'asdf');
+        $res = true;
 
-foreach ($set as $idx => $elem) {
-    var_dump($idx);
-    echo ': ';
-    var_dump($elem);
-    echo '-------<br>';
-}
+        $iterated = new Set();
+        foreach ($set as $key => $value) {
+            $res = $res && expect($key)->to_be($value);
+            $iterated->add($value);
+        }
+        expect($iterated)->to_be($set);
+        return $res;
+    }
+)));
 
-$set2 = $set->copy();
-var_dump($set->equals($set2));
-
-// array access
-echo '<hr>array access..........<br>';
-echo '<br>';
-echo 'set any offset. ';
-$set[] = 'new element';
-var_dump($set['new element']);
-echo '<br>';
-echo 'unset undefined offset: old size = '.count($set).'....';
-unset($set['nope']);
-echo 'new size'.count($set).' (no change)<br>';
-echo 'unset defined offset: old size = '.count($set).'....';
-unset($set['new element']);
-var_dump($set['new element']);
-echo 'new size'.count($set).' (1 less)<br>';
-
-echo 'intersection:<br>';
-$set->add(1337)->add(42);
-$set2->add(false)->add(new Set());
-echo $set, ' ^ ', $set2, ' = ', $set->intersection($set2);
-echo 'union:<br>';
-echo $set, ' u ', $set2, ' = ', $set->union($set2);
 
 ?>

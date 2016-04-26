@@ -15,9 +15,12 @@ class Tree {
     protected $_parent;
 
     public function __construct($data_source=null, $children=null) {
-        $this->data_source = $data_source;
-        $this->_children = $children === null ? new Arr() : $children;
         $this->_parent = null;
+        $this->data_source = $data_source;
+        $this->_children = new Arr();
+        if ($children instanceof Arr) {
+            $this->add_multiple($children);
+        }
     }
 
     public function __toString() {
@@ -238,8 +241,11 @@ class Tree {
     }
 
     public function add_multiple($tree_nodes, $index=null) {
+        if ($index !== null) {
+            $tree_node->reverse();
+        }
         # inverse for correct indices
-        foreach ($tree_nodes->reversed() as $idx => $tree_node) {
+        foreach ($tree_nodes as $idx => $tree_node) {
             $this->add($tree_node, $index);
         }
         return $this;

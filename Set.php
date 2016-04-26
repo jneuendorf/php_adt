@@ -108,8 +108,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
-    public function add($element) {
-        $this->_dict->put($element, true);
+    public function add(...$elements) {
+        foreach ($elements as $key => $element) {
+            $this->_dict->put($element, true);
+        }
         return $this;
     }
 

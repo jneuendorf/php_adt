@@ -188,8 +188,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
-    public function add($object) {
-        return $this->push($object);
+    public function add(...$objects) {
+        foreach ($objects as $idx => $object) {
+            $this->push($object);
+        }
+        return $this;
     }
 
     public function copy($deep=false) {

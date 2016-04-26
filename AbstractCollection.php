@@ -13,7 +13,7 @@ abstract class AbstractCollection implements Countable, Hashable {
         return $this->_size;
     }
 
-    public function add($element) {}
+    public function add(...$elements) {}
     public function clear() {}
     public function copy($deep=false) {}
     public function equals($collection) {}

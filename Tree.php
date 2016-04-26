@@ -4,7 +4,7 @@ require_once 'init.php';
 require_once 'Arr.php';
 require_once 'AbstractTree.php';
 
-class Tree {
+class Tree extends AbstractTree {
 
     const PRE_ORDER = 1;
     const POST_ORDER = 2;
@@ -82,6 +82,15 @@ class Tree {
     public function level_order() {
         return $this->iterable(self::LEVEL_ORDER);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING HASHABLE
+    public function hash() {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING ABSTRACT TREE
 
     ////////////////////////////////////////////////////////////////////////////////////
     // TREE DATA FETCHING
@@ -272,7 +281,6 @@ class Tree {
         }
         return $this;
     }
-
 }
 
 ?>

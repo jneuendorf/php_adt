@@ -4,6 +4,24 @@ require_once __DIR__.'/../Dict.php';
 require_once __DIR__.'/Test.php';
 
 
+echo '<h1>Dict class</h1>';
+
+
+section('iteration', subsection('', new Test(
+    'foreach',
+    function() {
+        $dict = new Dict(null, [1, 2, 3, 1, 'asdf']);
+        $res = true;
+
+        $iterated = new Dict();
+        foreach ($dict as $key => $value) {
+            $res = $res && expect($dict[$key])->to_be($value);
+            $iterated->put($key, $value);
+        }
+        expect($iterated)->to_be($dict);
+        return $res;
+    }
+)));
 
 
 echo '<hr><hr>DICT:<br>';
@@ -64,15 +82,5 @@ echo 'hash value = '.__hash([1,0]).'<br>';
 echo 'hash value = '.__hash([0,1]).'<br>';
 // echo 'hash value = '.$dict->hash().'<br>';
 
-echo 'EACH.....<br>';
-foreach ($dict as $key => $value) {
-    echo 'key: ';
-    var_dump($key);
-    echo '<br>';
-    echo 'value: ';
-    var_dump($value);
-    echo '<br>';
-    echo '-------<br>';
-}
 
 ?>

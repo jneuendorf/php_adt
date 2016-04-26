@@ -2,6 +2,7 @@
 
 require_once 'init.php';
 require_once 'AbstractMap.php';
+require_once 'Arr.php';
 
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it
 // TODO: inherit from Set

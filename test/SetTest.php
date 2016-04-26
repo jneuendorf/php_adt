@@ -180,6 +180,7 @@ section('set instance methods',
     )
 );
 
+
 section('iteration', subsection('', new Test(
     'foreach',
     function() {

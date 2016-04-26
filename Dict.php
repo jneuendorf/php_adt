@@ -3,6 +3,7 @@
 require_once 'init.php';
 require_once 'AbstractMap.php';
 require_once 'Arr.php';
+require_once 'Set.php';
 
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it
 // TODO: inherit from Set
@@ -107,9 +108,9 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (COLLECTION)
 
-    // public function add($key, $value) {
-    //     return $this->put($key, $value);
-    // }
+    public function add($key) {
+        return $this->put($key, $this->default_val);
+    }
 
     public function clear() {
         $this->_dict = [];
@@ -244,17 +245,17 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         $res = new Arr();
         foreach ($this->_dict as $key => $bucket) {
             foreach ($bucket as $idx => $tuple) {
-                $res->push(new Arr(__clone($tuple)));
+                $res->push(new Arr($tuple[0], $tuple[1]));
             }
         }
         return $res;
     }
 
     public function keys() {
-        $res = new Arr();
-        foreach ($this->_dict as $key => $bucket) {
+        $res = new Set();
+        foreach ($this->_dict as $hash => $bucket) {
             foreach ($bucket as $idx => $tuple) {
-                $res->push($tuple[0]);
+                $res->add($tuple[0]);
             }
         }
         return $res;
@@ -271,12 +272,15 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     }
 
     public function popitem() {
-        foreach ($this->dict as $hash => $bucket) {
-            $tuple = $bucket[0];
-            $res = new Arr(...$tuple);
-            $this->remove($tuple[0]);
-            return $res;
+        if (!$this->is_empty()) {
+            foreach ($this->_dict as $hash => $bucket) {
+                $tuple = $bucket[0];
+                $res = new Arr(...$tuple);
+                $this->remove($tuple[0]);
+                return $res;
+            }
         }
+        throw new Exception('Dict::popitem: Cannot pop an item from an empty dictionary.');
     }
 
     public function put($key, $value) {
@@ -308,8 +312,9 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $this;
     }
 
-    public function setdefault() {
-
+    public function setdefault($default_val=null) {
+        $this->default_val = $default_val;
+        return $this;
     }
 
     public function update($iterable) {
@@ -320,11 +325,13 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     }
 
     public function values() {
-        $res = new Arr();
-        foreach (array_values($this->_dict) as $key => $list) {
-            $res->merge($list);
+        $res = new Set();
+        foreach ($this->_dict as $hash => $bucket) {
+            foreach ($bucket as $idx => $tuple) {
+                $res->add($tuple[1]);
+            }
         }
-        return $res->values();
+        return $res;
     }
 
 }

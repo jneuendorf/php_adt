@@ -35,9 +35,11 @@ class Test {
     public static function print_stats() {
         if (static::$invalid_tests === 0) {
             echo '<h2 style=\'color:green\'>ALL TESTS HAVE BEEN PASSED! ('.static::$total_tests.' tests, '.static::$total_expectations.' expectations)</h2>';
+            echo '<script type="text/javascript">document.body.style.backgroundColor = "#d4fbb6";</script>';
         }
         else {
             echo '<h2 style=\'color:red\'>invalid tests! ('.static::$invalid_tests.' of '.static::$total_tests.' tests, '.static::$invalid_expectations.' of '.static::$total_expectations.' expectations)</h2>';
+            echo '<script type="text/javascript">document.body.style.backgroundColor = "#fcc6c6";</script>';
         }
     }
 

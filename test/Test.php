@@ -175,7 +175,7 @@ class Expectation {
 }
 
 class RecursionTracker {
-    const MAX_STACK_DEPTH = 70;
+    const MAX_STACK_DEPTH = 40;
     protected static $counters = [];
 
 

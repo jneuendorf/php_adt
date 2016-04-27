@@ -58,6 +58,10 @@ section('tree instance methods',
                     expect($nodes->has($this->tree->children()->third()), 'find')->to_be(true);
                 },
                 function() {
+                    return expect($this->tree->hash(), 'hash')->to_be($this->tree->copy()->hash()) &&
+                    expect($this->tree->hash(), 'hash')->not_to_be($this->tree->copy()->clear()->hash());
+                },
+                function() {
                     return expect($this->tree->is_leaf(), 'is_leaf')->to_be(false) &&
                     expect($this->tree->children()->first()->is_leaf(), 'is_leaf')->to_be(true) &&
                     expect((new Tree())->is_leaf(), 'is_leaf')->to_be(true);

@@ -88,8 +88,11 @@ class Tree extends AbstractTree {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        // TODO
-        return 0;
+        $res = __hash($this->data_source);
+        foreach ($this->_children as $child) {
+            $res += __hash($child);
+        }
+        return $res;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -320,7 +323,6 @@ class Tree extends AbstractTree {
 
     public function clear() {
         $this->_children->clear();
-        var_dump($this);
         return $this;
     }
 }

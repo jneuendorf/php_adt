@@ -50,6 +50,10 @@ section('tree instance methods',
                     $tree->children()->first()->add('subchild');
                     return expect($tree->descendants()->to_set(), 'descendants')->to_be(new Set($tree->children()->first()->children()->first(), ...$tree->children()));
                 },
+                function () {
+                    return expect($this->tree->equals($this->tree), 'equals')->to_be(true) &&
+                    expect($this->tree->copy()->clear()->equals($this->tree), 'equals')->to_be(false);
+                },
                 function() {
                     $nodes = $this->tree->find(function($node) {
                         return $node->data_source === 3;
@@ -113,17 +117,35 @@ section('tree instance methods',
         new Test(
             'remaining methods',
             [
-                // function() {
-                //     return expect($this->set->difference($this->set2), 'difference')->to_be(new Set(1,3));
-                // },
-                // function() {
-                //     $set = $this->set->copy();
-                //     $set->difference_update($this->set2);
-                //     return expect($set, 'difference_update')->to_be($this->set->difference($this->set2));
-                // },
+                function() {
+                    return expect($this->tree->path_to_root(), 'path_to_root')->to_be(new Arr()) &&
+                    expect($this->tree->children()->first()->path_to_root(), 'path_to_root')->to_be(new Arr($this->tree));
+                },
+                function() {
+                    return expect($this->tree->path_from_root(), 'path_from_root')->to_be(new Arr()) &&
+                    expect($this->tree->children()->first()->path_from_root(), 'path_from_root')->to_be(new Arr($this->tree));
+                },
+                function() {
+                    $tree = $this->tree->copy();
+                    $tree->add_multiple(new Arr('a', 'b'), 1);
+                    $expected = $this->children->copy()->map(function($node){return $node->data_source;});
+                    $expected->insert(1, 'a', 'b');
+                    return expect($tree->children()->map(function($node){return $node->data_source;}), 'add_multiple')->to_be($expected);
+                },
+                function() {
+                    $tree = $this->tree->copy();
+                    $tree->children()->first()->add('subchild');
+                    $subchild = $tree->children()->first()->children()->first();
+                    $subchild->move_to($tree, 1);
+                    $expected = $this->tree->children()->map(function($node){return $node->data_source;});
+                    $expected->insert(1, 'subchild');
+                    return expect($tree->children()->map(function($node){return $node->data_source;}), 'add_multiple')
+                            ->to_be($expected);
+                },
             ],
             function() {
-                // init
+                $this->children = new Arr(new Tree(1), new Tree(2), new Tree(3), new Tree('4'));
+                $this->tree = new Tree('root', $this->children);
             }
         )
     )
@@ -137,11 +159,9 @@ section('iteration', subsection('foreach + tree->iterable()',
             $children = new Arr(new Tree(1), new Tree(2), new Tree(3), new Tree('4'));
             $tree = new Tree('root', $children);
 
-            $iterated = new Arr();
-            foreach ($tree->iterable(Tree::PRE_ORDER) as $idx => $node) {
-                $iterated->push($node->data_source);
-            }
-            return expect($iterated)->to_be(new Arr('root', 1, 2, 3, '4'));
+            return expect($tree->iterable(Tree::PRE_ORDER)->map(function($node) {return $node->data_source;}))
+                    ->to_be(new Arr('root', 1, 2, 3, '4')) &&
+            expect($tree->iterable(Tree::PRE_ORDER))->to_be($tree->pre_order());
         }
     ),
     new Test(
@@ -172,58 +192,6 @@ section('iteration', subsection('foreach + tree->iterable()',
     )
 ));
 
-// $tree = new Tree('root');
-// $children = $tree->children();
-
-// test(
-//     'adding node 1',
-//     function() use ($tree) {
-//         $tree->add('node1');
-//         echo $tree;
-//     }
-// );
-// test(
-//     'adding node 2',
-//     function() use ($tree) {
-//         $tree->add(new Arr('node2', false));
-//         echo $tree;
-//     }
-// );
-// test(
-//     'adding node 2.1',
-//     function() use ($children) {
-//         $children->second()->add('node2.1 yeah');
-//     },
-//     $tree
-// );
-//
-// test(
-//     '<br>ITERATION:',
-//     function() use ($tree) {
-//         foreach ($tree->iterable(Tree::POST_ORDER) as $idx => $node) {
-//             echo $node.'<br>';
-//         }
-//     }
-// );
-//
-// test(
-//     'depth',
-//     function() use ($tree) {
-//         echo $tree->depth();
-//     }
-// );
-// test(
-//     'level',
-//     function() use ($children) {
-//         echo $children[1]->children()->first()->level();
-//     }
-// );
-// test(
-//     'leaves',
-//     function() use ($tree) {
-//         echo $tree->leaves();
-//     }
-// );
 
 
 

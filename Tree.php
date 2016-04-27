@@ -126,21 +126,11 @@ class Tree extends AbstractTree {
         }
         $res = true;
         $children = $tree->children();
-        foreach ($this->_children as $key => $child) {
+        foreach ($this->_children as $idx => $child) {
             $res = $res && $child->equals($children[$idx]);
         }
         return $res;
     }
-
-    // public function has($tree_node) {
-    //     if ($this === $tree_node) {
-    //         return true;
-    //     }
-    //     $found_nodes = $this->find(function($node) use ($tree_node) {
-    //         return $node === $tree_node;
-    //     });
-    //     return !$found_nodes->is_empty();
-    // }
 
     public function find($filter) {
         $res = new Set();
@@ -172,7 +162,7 @@ class Tree extends AbstractTree {
     }
 
     public function level() {
-        return $this->path_to_root()->size() - 1;
+        return $this->path_to_root()->size();
     }
 
     public function root() {
@@ -243,9 +233,9 @@ class Tree extends AbstractTree {
         return $descendants;
     }
 
-    // includes both end nodes
+    // does not include $this
     public function path_to_root() {
-        $res = new Arr($this);
+        $res = new Arr();
         $parent = $this->_parent;
         while ($parent !== null) {
             $res->push($parent);
@@ -266,7 +256,6 @@ class Tree extends AbstractTree {
     }
 
     public function add($tree_node, $index=null) {
-        // RecursionTracker::track(__FUNCTION__, func_get_args());
         if (!($tree_node instanceof static)) {
             $tree_node = new static($tree_node);
         }
@@ -290,7 +279,7 @@ class Tree extends AbstractTree {
     public function add_multiple($tree_nodes, $index=null) {
         # inverse for correct indices
         if ($index !== null) {
-            $tree_node->reverse();
+            $tree_nodes->reverse();
         }
         foreach ($tree_nodes as $idx => $tree_node) {
             $this->add($tree_node, $index);
@@ -307,9 +296,9 @@ class Tree extends AbstractTree {
         return $old_children;
     }
 
-    public function move_to($tree_node, $index=null) {
+    public function move_to($new_parent, $index=null) {
         $this->remove();
-        $tree_node->add($this, $index);
+        $new_parent->add($this, $index);
         return $this;
     }
 

@@ -18,7 +18,6 @@ abstract class AbstractTree extends Clonable implements Countable, Hashable {
     abstract public function descendants();
     abstract public function equals($tree);
     abstract public function find($filter);
-    // abstract public function has($tree_node);
     abstract public function is_leaf();
     abstract public function leaves();
     abstract public function level_siblings();

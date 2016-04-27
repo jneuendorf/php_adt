@@ -1,8 +1,9 @@
 <?php
 
+require_once 'Clonable.php';
 require_once 'Hashable.php';
 
-abstract class AbstractCollection implements Countable, Hashable {
+abstract class AbstractCollection extends Clonable implements Countable, Hashable {
     protected $_size = 0;
 
 
@@ -10,16 +11,16 @@ abstract class AbstractCollection implements Countable, Hashable {
     // IMPLEMENTING COUNTABLE
 
     public function count() {
-        return $this->_size;
+        return $this->size();
     }
 
-    public function add(...$elements) {}
-    public function clear() {}
-    public function copy($deep=false) {}
-    public function equals($collection) {}
-    public function has($element) {}
-    // public function hash() {}
-    public function remove($element) {}
+    abstract public function add(...$elements);
+    abstract public function clear();
+    // abstract public function copy($deep=false);
+    abstract public function equals($collection);
+    abstract public function has($element);
+    // abstract public function hash();
+    abstract public function remove($element);
 
     public function is_empty() {
         return $this->size() === 0;

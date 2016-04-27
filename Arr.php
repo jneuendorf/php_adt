@@ -131,6 +131,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new Dict(null, $this);
     }
 
+    public function to_set() {
+        return new Set(...$this->_elements);
+    }
+
     // use ...$args workaround for passing an optional parameter (incl. null)
     public function first(...$args) {
         if ($this->_size >= 1) {
@@ -285,14 +289,19 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         }
         else if (is_string($offset)) {
             $offset = preg_replace('/\s+/', '', $offset);
-            if (preg_match('/^\-?\d+\:\-?\d+$/', $offset) === 1) {
+            if (preg_match('/^\-?\d+\:(\-?\d+)?$/', $offset) === 1) {
                 $use_slicing = true;
                 $parts = explode(':', $offset);
                 $start = (int) $parts[0];
-                $end = (int) $parts[1];
+                if (strlen($parts[1]) > 0) {
+                    $end = (int) $parts[1];
+                }
+                else {
+                    $end = null;
+                }
             }
             else {
-                throw new Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:int2\'.');
+                throw new Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:(int2)\'.');
             }
         }
         else if (is_int($offset)) {
@@ -303,9 +312,15 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         else {
             throw new Exception('Invalid offset. Use null ($a[]=4) to push, int for index access or for slicing use [start, end] or \'start:end\'!');
         }
+        try {
+            $end = $this->_adjust_offset($end);
+        } catch (Exception $e) {
+            $end = $this->size();
+        }
+
         return [
             'start' => $this->_adjust_offset($start),
-            'end' => $this->_adjust_offset($end),
+            'end' => $end,
             'slicing' => $use_slicing
         ];
     }
@@ -330,6 +345,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function offsetSet($offset, $value) {
+        // TODO enable slicing notation for setting subarrays
         // called like $my_arr[] = 2; => push
         if ($offset === null) {
             $this->push($value);
@@ -616,6 +632,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: if $length is not given does NOT remove everything after $offset (including $offset) but does not remove anything
     // API-CHANGE: inserted elements are passed as separate parameters - not as an array of elements
     public function splice($offset, $length=0, ...$new_elements) {
+        $offset = $this->_adjust_offset($offset);
         $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
         $this->_size += -count($removed_elements) + count($new_elements);
         return new static(...$removed_elements);

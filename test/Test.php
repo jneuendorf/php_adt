@@ -174,6 +174,37 @@ class Expectation {
     }
 }
 
+class RecursionTracker {
+    const MAX_STACK_DEPTH = 70;
+    protected static $counters = [];
+
+
+    public static function track($func_name, $args) {
+        if (!isset(static::$counters[$func_name])) {
+            static::$counters[$func_name] = 0;
+        }
+        static::$counters[$func_name]++;
+        if (static::$counters[$func_name] > static::MAX_STACK_DEPTH) {
+            echo "<h2 style='color:red'>max call stack exceeded by '$func_name'</h2>";
+            echo (new Exception())->getTraceAsString();
+            exit;
+        }
+        $arg_strs = [];
+        foreach ($args as $idx => $arg) {
+            $str = '#'.$idx.' ';
+            try {
+                $str .= var_export($arg, true);
+            } catch (Exception $e) {
+                $str .= '&lt;something circular&gt;';
+            }
+            $arg_strs[] = $str;
+        }
+        echo "<br>\nrecursion: f = ".$func_name.'('.implode(',', $arg_strs).")<br>\n";
+    }
+}
+
+
+
 function section($name, ...$subsections) {
     echo "<h3>$name</h3>";
     foreach ($subsections as $idx => $subsection) {

@@ -10,4 +10,6 @@ set_error_handler("exception_error_handler");
 
 require_once 'funcs.php';
 
+define('undefined', uniqid('undefined',true));
+
 ?>

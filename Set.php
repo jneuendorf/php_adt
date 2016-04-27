@@ -160,6 +160,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->_dict->copy();
     }
 
+    public function to_set() {
+        return $this->copy();
+    }
+
     // PYTHON API
 
     public function difference($set) {

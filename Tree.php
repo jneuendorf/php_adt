@@ -41,6 +41,8 @@ class Tree extends AbstractTree {
         }
     }
 
+    // TODO: from_iterable (recursive)
+
     public static function traverse($tree_node, $order, $accumulator) {
         switch ($order) {
             case self::PRE_ORDER:
@@ -86,7 +88,21 @@ class Tree extends AbstractTree {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
+        // TODO
+        return 0;
+    }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING CLONABLE
+    public function copy($deep=false) {
+        $children = $this->_children->copy(true);
+        $tree = new static($this->data_source);
+        // detach children from their parent
+        foreach ($children as $child) {
+            $child->set_parent($tree);
+        }
+        $tree->set_children($children);
+        return $tree;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -95,21 +111,39 @@ class Tree extends AbstractTree {
     ////////////////////////////////////////////////////////////////////////////////////
     // TREE DATA FETCHING
 
-    public function has($tree_node) {
-        if ($this === $tree_node) {
-            return $this;
+    public function equals($tree) {
+        if ($this->size() !== $tree->size()) {
+            return false;
         }
-        $found_nodes = $this->find(function($node) use ($tree_node) {
-            return $node === $tree_node;
-        });
-        return !$found_nodes->is_empty();
+        if ($this->_children->size() !== $tree->children()->size()) {
+            return false;
+        }
+        if ($this->hash() !== $tree->hash()) {
+            return false;
+        }
+        $res = true;
+        $children = $tree->children();
+        foreach ($this->_children as $key => $child) {
+            $res = $res && $child->equals($children[$idx]);
+        }
+        return $res;
     }
 
+    // public function has($tree_node) {
+    //     if ($this === $tree_node) {
+    //         return true;
+    //     }
+    //     $found_nodes = $this->find(function($node) use ($tree_node) {
+    //         return $node === $tree_node;
+    //     });
+    //     return !$found_nodes->is_empty();
+    // }
+
     public function find($filter) {
-        $res = new Arr();
-        foreach ($this as $idx => $node) {
+        $res = new Set();
+        foreach ($this->iterable() as $idx => $node) {
             if ($filter($node) === true) {
-                $res->push($node);
+                $res->add($node);
             }
         }
         return $res;
@@ -189,7 +223,7 @@ class Tree extends AbstractTree {
 
     public function level_siblings() {
         $level = $this->level();
-        return $this->find(function($node) use ($level) {
+        return $this->root()->find(function($node) use ($level) {
             return $node->level() === $level;
         });
     }
@@ -229,6 +263,7 @@ class Tree extends AbstractTree {
     }
 
     public function add($tree_node, $index=null) {
+        // RecursionTracker::track(__FUNCTION__, func_get_args());
         if (!($tree_node instanceof static)) {
             $tree_node = new static($tree_node);
         }
@@ -250,10 +285,10 @@ class Tree extends AbstractTree {
     }
 
     public function add_multiple($tree_nodes, $index=null) {
+        # inverse for correct indices
         if ($index !== null) {
             $tree_node->reverse();
         }
-        # inverse for correct indices
         foreach ($tree_nodes as $idx => $tree_node) {
             $this->add($tree_node, $index);
         }
@@ -262,6 +297,7 @@ class Tree extends AbstractTree {
 
     public function set_children($tree_nodes) {
         $old_children = $this->_children;
+        $this->_children = new Arr();
         foreach ($tree_nodes as $idx => $tree_node) {
             $this->add($tree_node);
         }
@@ -276,9 +312,15 @@ class Tree extends AbstractTree {
 
     public function remove() {
         if ($this->_parent !== null) {
-            $this->_parent->set_children($this->_parent->children()->without($this));
+            $this->_parent->children()->remove($this);
             $this->_parent = null;
         }
+        return $this;
+    }
+
+    public function clear() {
+        $this->_children->clear();
+        var_dump($this);
         return $this;
     }
 }

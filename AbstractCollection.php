@@ -1,18 +1,9 @@
 <?php
 
-require_once 'Clonable.php';
-require_once 'Hashable.php';
+require_once 'Super.php';
 
-abstract class AbstractCollection extends Clonable implements Countable, Hashable {
+abstract class AbstractCollection extends Super {
     protected $_size = 0;
-
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING COUNTABLE
-
-    public function count() {
-        return $this->size();
-    }
 
     abstract public function add(...$elements);
     abstract public function clear();

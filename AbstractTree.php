@@ -1,15 +1,8 @@
 <?php
 
-require_once 'Clonable.php';
-require_once 'Hashable.php';
+require_once 'Super.php';
 
-abstract class AbstractTree extends Clonable implements Countable, Hashable {
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING COUNTABLE
-    public function count() {
-        return $this->size();
-    }
+abstract class AbstractTree extends Super {
 
     abstract public function add($tree_node, $index=null);
     abstract public function children();
@@ -26,7 +19,6 @@ abstract class AbstractTree extends Clonable implements Countable, Hashable {
     abstract public function remove();
     abstract public function root();
     abstract public function siblings();
-    abstract public function size();
 
 }
 

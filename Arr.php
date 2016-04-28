@@ -544,6 +544,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $removed_elements[0];
     }
 
+    public function popfirst() {
+        return $this->pop(0);
+    }
+
     public function pos() {
         return $this->current();
     }

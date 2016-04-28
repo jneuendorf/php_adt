@@ -94,6 +94,9 @@ function __clone($x) {
 }
 
 function __toString($x, $default_val=null) {
+    if ($x === undefined) {
+        return 'undefined';
+    }
     if ($x === null) {
         return 'null';
     }

@@ -1,5 +1,19 @@
 <?php
 
+function p(...$args) {
+    $res = '';
+    foreach ($args as $arg) {
+        if (!is_string($arg) || $arg === undefined) {
+            $res .= __toString($arg);
+        }
+        else {
+            $res .= $arg;
+        }
+    }
+    echo $res;
+    return $res;
+}
+
 function __equals($x, $y) {
     if ($x === $y) {
         return true;

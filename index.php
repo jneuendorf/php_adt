@@ -12,6 +12,7 @@ require_once 'init.php';
 require_once 'test/Test.php';
 
 echo '<h1>"undefined" constant</h1>';
+p('echoing undefined: ', undefined, '<br>');
 expect(undefined)->not_to_be(null);
 expect(undefined)->not_to_be([]);
 expect(undefined)->to_be(undefined);

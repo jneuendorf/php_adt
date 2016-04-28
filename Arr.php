@@ -6,10 +6,10 @@ require_once 'Dict.php';
 
 class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
-    // list of native array function that we can automatically create delegations (using the __callStatic() method)
-    protected static $class_methods = [
-        // 'array_fill',
-    ];
+    // // list of native array function that we can automatically create delegations (using the __callStatic() method)
+    // protected static $class_methods = [
+    //     // 'array_fill',
+    // ];
 
     // list of native array function that we can automatically create delegations (using the __call() method)
     protected static $instance_methods = [
@@ -24,8 +24,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_reduce',
         'array_slice',
         'array_sum',
-        // 'array_udiff',
-        // 'array_uintersect',
         'array_unique',
         'array_values',
     ];
@@ -41,14 +39,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // STATIC
-    public static function __callStatic($name, $args) {
-        $org_name = $name;
-        $name = 'array_'.$name;
-        if (in_array($name, static::$class_methods)) {
-            return new Arr(...call_user_func($name, ...$args));
-        }
-        throw new Exception("Cannot call $org_name on the Arr class!", 1);
-    }
+    // public static function __callStatic($name, $args) {
+    //     $org_name = $name;
+    //     $name = 'array_'.$name;
+    //     if (in_array($name, static::$class_methods)) {
+    //         return new Arr(...call_user_func($name, ...$args));
+    //     }
+    //     throw new Exception("Cannot call $org_name on the Arr class!", 1);
+    // }
 
     public static function from_array($array, $recursive=true) {
         $result = new Arr();

@@ -30,17 +30,63 @@ function __equals($x, $y) {
     return false;
 }
 
+function __get_type($x) {
+    if (is_bool($x)) {
+        return 'bool';
+    }
+    if (is_int($x) || is_float($x)) {
+        return 'number';
+    }
+    if (is_string($x)) {
+        return 'string';
+    }
+    if (is_array($x)) {
+        return 'array';
+    }
+    if (is_object($x)) {
+        return 'object';
+    }
+    throw new Exception("Could not determine type of given argument.", 1);
+
+}
+
+// the behavior of __less_than is essential for sorting
+function __less_than($x, $y) {
+    if (method_exists($x, "less_than")) {
+        return $x->less_than($y);
+    }
+
+    $type_x = __get_type($x);
+    $type_y = __get_type($y);
+
+    // normal compare
+    if ($type_x === $type_y) {
+        return $x < $y;
+    }
+
+    $ranking = [
+        'bool' => 0,
+        'number' => 1,
+        'string' => 2,
+        'array' => 3,
+        'object' => 4,
+        // resource
+    ];
+    // cross type compare => compare by type rank
+    return $ranking[$type_x] < $ranking[$type_y];
+}
+
 function __compare($x, $y) {
     if (method_exists($x, "compare")) {
         return $x->compare($y);
     }
     if (method_exists($y, "compare")) {
-        return $y->compare($x);
+        return -($y->compare($x));
     }
     if (__equals($x, $y)) {
         return 0;
     }
-    if ($x < $y) {
+    if (__less_than($x, $y)) {
         return -1;
     }
     return 1;
@@ -155,13 +201,15 @@ function __toString($x, $default_val=null) {
 
 function __mergesort_compare($a, $b) {
     return __compare($a, $b);
+    // return __compare($a, $b, false);
 }
 
 function __mergesort(&$array, $cmp_function='__mergesort_compare') {
     $length = count($array);
     // Arrays of size < 2 require no action.
-    if ($length < 2)
+    if ($length < 2) {
         return;
+    }
 
     // Split the array in half
     $halfway = $length / 2;

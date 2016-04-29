@@ -9,7 +9,7 @@ echo '<h1>Arr class</h1>';
 section('array creation',
     subsection('',
         new Test(
-            'new, range, from_array',
+            'new, range, from_iterable',
             [
                 function() {
                     return expect($this->arr1 instanceof Arr, 'new Arr instanceof Arr')->to_be(true) &&
@@ -18,8 +18,8 @@ section('array creation',
                 },
                 function () {
                     $array = [0, ['a','b'], 2];
-                    return expect(Arr::from_array($array), 'from_array recursive')->to_be(new Arr(0, new Arr('a','b'), 2)) &&
-                    expect(Arr::from_array($array, false), 'from_array non-recursive')->to_be(new Arr(0, ['a','b'], 2));
+                    return expect(Arr::from_iterable($array), 'from_iterable recursive')->to_be(new Arr(0, new Arr('a','b'), 2)) &&
+                    expect(Arr::from_iterable($array, false), 'from_iterable non-recursive')->to_be(new Arr(0, ['a','b'], 2));
                 }
             ],
             function () {
@@ -218,24 +218,31 @@ section('Arr instance methods',
                     return expect($a->sum(), 'sum')->to_be(array_sum($n));
                 },
                 function() {
-                    $res = true;
-                    if (!expect($this->arr->unique(SORT_REGULAR)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_REGULAR))) {
-                        echo '...SORT_REGULAR failed';
-                        $res = false;
-                    }
-                    if (!expect($this->arr->unique(SORT_NUMERIC)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_NUMERIC))) {
-                        echo '...SORT_NUMERIC failed';
-                        $res = false;
-                    }
-                    if (!expect($this->arr->unique(SORT_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_STRING))) {
-                        echo '...SORT_STRING failed';
-                        $res = false;
-                    }
-                    if (!expect($this->arr->unique(SORT_LOCALE_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_LOCALE_STRING))) {
-                        echo '...SORT_LOCALE_STRING failed';
-                        $res = false;
-                    }
-                    return $res;
+                    $arr = new Arr(1,2,true,false,0,1,true,'asdf');
+                    $equality = function($a, $b) {
+                        return $a == $b;
+                    };
+                    return expect($this->arr->unique(), 'unique')->to_be($this->arr) &&
+                    expect($arr->unique(), 'unique')->to_be(new Arr(1,2,true,false,0,'asdf')) &&
+                    expect($arr->unique($equality), 'unique by callback')->to_be(new Arr(1,2,false,'asdf'));
+                    // $res = true;
+                    // if (!expect($this->arr->unique(SORT_REGULAR)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_REGULAR))) {
+                    //     echo '...SORT_REGULAR failed';
+                    //     $res = false;
+                    // }
+                    // if (!expect($this->arr->unique(SORT_NUMERIC)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_NUMERIC))) {
+                    //     echo '...SORT_NUMERIC failed';
+                    //     $res = false;
+                    // }
+                    // if (!expect($this->arr->unique(SORT_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_STRING))) {
+                    //     echo '...SORT_STRING failed';
+                    //     $res = false;
+                    // }
+                    // if (!expect($this->arr->unique(SORT_LOCALE_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_LOCALE_STRING))) {
+                    //     echo '...SORT_LOCALE_STRING failed';
+                    //     $res = false;
+                    // }
+                    // return $res;
                 },
                 function() {
                     return expect($this->arr->values()->to_a(), 'values')->to_be(array_values($this->native));
@@ -414,7 +421,7 @@ section('Arr instance methods',
 );
 
 
-section('class methods', subsection('for "range" and "from_array" see array creation section', new Test('', [
+section('class methods', subsection('for "range" and "from_iterable" see array creation section', new Test('', [
     function() {
         return expect(Arr::fill(5, 'x')->to_a(), 'fill')->to_be(array_fill(0, 5, 'x')) &&
         expect(Arr::fill(5)->to_a(), 'fill')->to_be(array_fill(0, 5, null));

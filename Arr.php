@@ -24,7 +24,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_reduce',
         'array_slice',
         'array_sum',
-        'array_unique',
+        // 'array_unique',
         'array_values',
     ];
 
@@ -48,13 +48,13 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     //     throw new Exception("Cannot call $org_name on the Arr class!", 1);
     // }
 
-    public static function from_array($array, $recursive=true) {
+    public static function from_iterable($iterable, $recursive=true) {
         $result = new Arr();
-        foreach ($array as $key => $element) {
-            if ($recursive && is_array($element)) {
-                $element = Arr::from_array($element, $recursive);
+        foreach ($iterable as $key => $value) {
+            if ($recursive && (is_array($value) || ($value instanceof Traversable))) {
+                $value = Arr::from_iterable($value, $recursive);
             }
-            $result->push($element);
+            $result->push($value);
         }
         return $result;
     }
@@ -638,6 +638,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
         $this->_size += -count($removed_elements) + count($new_elements);
         return new static(...$removed_elements);
+    }
+
+    public function unique($equality='__equals') {
+        $res = new Arr();
+        foreach ($this as $idx => $element) {
+            if ($idx === 0 || !$res->has($element, $equality)) {
+                $res->push($element);
+            }
+        }
+        return $res;
     }
 
     // API-CHANGE: 'udiff': not implemented (callback can be passed to 'diff')

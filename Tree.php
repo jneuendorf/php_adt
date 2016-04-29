@@ -88,7 +88,9 @@ class Tree extends AbstractTree {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        $res = __hash($this->data_source);
+        // deeper levels has less impact because the greater the level the more nodes there are on that level
+        // so we wanna keep the hash as small as possible
+        $res = __hash($this->data_source) * ($this->depth() + 1);
         foreach ($this->_children as $child) {
             $res += __hash($child);
         }

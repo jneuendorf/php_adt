@@ -38,12 +38,20 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return "{\n".implode(", \n", $res)."\n}";
     }
 
+    public function to_a() {
+        return $this->items()->to_a();
+    }
+
     public function to_arr() {
         return $this->items();
     }
 
     public function to_dict() {
         return $this->copy();
+    }
+
+    public function to_set() {
+        return $this->items()->to_set();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +166,16 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         $res = 0;
         foreach ($this as $key => $value) {
             $res += __hash($key) + 3*__hash($value);
+        }
+        return $res;
+    }
+
+    // callback returns either the mapped pair (as array or Arr)! (not just the value)
+    public function map($callback) {
+        $res = new Dict($this->default_val);
+        foreach ($this as $key => $value) {
+            $mapped_pair = $callback($key, $value);
+            $res->put($mapped_pair[0], $mapped_pair[1]);
         }
         return $res;
     }

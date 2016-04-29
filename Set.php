@@ -37,6 +37,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return "{\n".implode(", \n", $res)."\n}";
     }
 
+    public function dict() {
+        return $this->_dict;
+    }
+
     // PROTECTED
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +130,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
     public function equals($set) {
         if ($set instanceof self) {
-            return $this->_dict->equals($set->to_dict());
+            return $this->_dict->equals($set->dict());
         }
         return false;
     }
@@ -143,6 +147,14 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    public function map($callback) {
+        $res = new Set();
+        foreach ($this as $idx => $element) {
+            $res->add($callback($element));
+        }
+        return $res;
+    }
+
     public function remove($element) {
         $this->_dict->remove($element);
         return $this;
@@ -152,12 +164,26 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->_dict->size();
     }
 
+    public function to_a() {
+        $res = [];
+        foreach ($this->_dict->keys() as $idx => $key) {
+            $res[] = $key;
+        }
+        return $res;
+    }
+
     public function to_arr() {
-        return $this->_dict->keys();
+        return Arr::from_iterable($this->_dict->keys());
     }
 
     public function to_dict() {
-        return $this->_dict->copy();
+        // return $this->_dict->copy();
+        $keys = $this->_dict->keys();
+        $res = new Dict();
+        foreach ($keys as $idx => $key) {
+            $res->put($key, $key);
+        }
+        return $res;
     }
 
     public function to_set() {

@@ -7,12 +7,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
     // maps hashes to lists of values
     protected $_dict;
-    // // protected $_size;
-    // // those 3 vars are needed for the iterator interface
-    // protected $_hash_idx;
-    // protected $_bucket_item_idx;
-    // protected $_hash_order;
-
+    
     public function __construct(...$elements) {
         $this->_dict = new Dict();
         $this->clear();

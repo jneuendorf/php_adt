@@ -33,22 +33,6 @@ abstract class AbstractMap extends AbstractCollection {
     // public function values() {}
 
 
-    protected function _get_hash($object) {
-        try {
-            $hash = __hash($object);
-        }
-        catch (Exception $e) {
-            if (is_object($object) && property_exists($object, '__uniqid__')) {
-                $hash = $object->__uniqid__;
-            }
-            else {
-                $hash = uniqid('', true);
-            }
-        }
-        return $hash;
-    }
-
-
 }
 
 ?>

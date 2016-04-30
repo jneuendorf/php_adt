@@ -6,14 +6,12 @@ require_once 'Arr.php';
 require_once 'Set.php';
 
 // NOTE: supports mutable objects as keys but if the key's hash changes Dict does NOT take care of it
-// TODO: inherit from Set
 class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
     public $default_val;
 
     // maps hashes to lists of values
     protected $_dict;
-    // protected $_size;
     // those 3 vars are needed for the iterator interface
     protected $_hash_idx;
     protected $_bucket_item_idx;
@@ -57,6 +55,20 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
+    protected function _get_hash($object) {
+        try {
+            $hash = __hash($object);
+        }
+        catch (Exception $e) {
+            if (is_object($object) && property_exists($object, '__uniqid__')) {
+                $hash = $object->__uniqid__;
+            }
+            else {
+                $hash = uniqid('', true);
+            }
+        }
+        return $hash;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC

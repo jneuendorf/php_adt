@@ -3,8 +3,6 @@
 require_once 'Super.php';
 
 abstract class AbstractCollection extends Super {
-    protected $_size = 0;
-
     abstract public function add(...$elements);
     abstract public function clear();
     // abstract public function copy($deep=false);

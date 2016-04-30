@@ -225,24 +225,6 @@ section('Arr instance methods',
                     return expect($this->arr->unique(), 'unique')->to_be($this->arr) &&
                     expect($arr->unique(), 'unique')->to_be(new Arr(1,2,true,false,0,'asdf')) &&
                     expect($arr->unique($equality), 'unique by callback')->to_be(new Arr(1,2,false,'asdf'));
-                    // $res = true;
-                    // if (!expect($this->arr->unique(SORT_REGULAR)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_REGULAR))) {
-                    //     echo '...SORT_REGULAR failed';
-                    //     $res = false;
-                    // }
-                    // if (!expect($this->arr->unique(SORT_NUMERIC)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_NUMERIC))) {
-                    //     echo '...SORT_NUMERIC failed';
-                    //     $res = false;
-                    // }
-                    // if (!expect($this->arr->unique(SORT_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_STRING))) {
-                    //     echo '...SORT_STRING failed';
-                    //     $res = false;
-                    // }
-                    // if (!expect($this->arr->unique(SORT_LOCALE_STRING)->to_a(), 'unique')->to_be(array_unique($this->native, SORT_LOCALE_STRING))) {
-                    //     echo '...SORT_LOCALE_STRING failed';
-                    //     $res = false;
-                    // }
-                    // return $res;
                 },
                 function() {
                     return expect($this->arr->values()->to_a(), 'values')->to_be(array_values($this->native));

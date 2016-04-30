@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This function is similar to language construct 'echo' but calls to __toString on non-string arguments before echoing.
+ * @param mixed $args Arguments to echo stringified.
+*/
 function p(...$args) {
     $res = '';
     foreach ($args as $arg) {

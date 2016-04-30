@@ -4,12 +4,12 @@ require_once 'init.php';
 require_once 'AbstractCollection.php';
 require_once 'Dict.php';
 
+/**
+ * Arr is a wrapper around the native array type.
+ * It provides a consistent API and some extra features. There are no keys...just plain indices. ^^
+ * @property int length Equivalent for calling the size() method.
+ */
 class Arr extends AbstractCollection implements ArrayAccess, Iterator {
-
-    // // list of native array function that we can automatically create delegations (using the __callStatic() method)
-    // protected static $class_methods = [
-    //     // 'array_fill',
-    // ];
 
     // list of native array function that we can automatically create delegations (using the __call() method)
     protected static $instance_methods = [
@@ -24,13 +24,25 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_reduce',
         'array_slice',
         'array_sum',
-        // 'array_unique',
         'array_values',
     ];
 
+    /**
+     * @var int $_size Internally used size of the Array.
+    */
+    protected $_size = 0;
+    /**
+    * @var array $_elements Internal array of elements.
+    */
     protected $_elements = [];
+    /**
+     * @var int $_position Internal pointer to the current element.
+    */
     protected $_position;
 
+    /**
+     * @param mixed... $elements
+    */
     public function __construct(...$elements) {
         foreach ($elements as $idx => $element) {
             array_push($this->_elements, $element);
@@ -39,15 +51,12 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // STATIC
-    // public static function __callStatic($name, $args) {
-    //     $org_name = $name;
-    //     $name = 'array_'.$name;
-    //     if (in_array($name, static::$class_methods)) {
-    //         return new Arr(...call_user_func($name, ...$args));
-    //     }
-    //     throw new Exception("Cannot call $org_name on the Arr class!", 1);
-    // }
 
+    /**
+     * @param Traversable $iterable
+     * @param bool $recursive
+     * @return Arr
+     */
     public static function from_iterable($iterable, $recursive=true) {
         $result = new Arr();
         foreach ($iterable as $key => $value) {
@@ -59,32 +68,32 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $result;
     }
 
-    public static function fill($num, $value=null) {
-        return new static(...array_fill(0, $num, $value));
+    /**
+     * @param int $count
+     * @param mixed $value
+     * @return Arr
+     */
+    public static function fill($count, $value=null) {
+        return new static(...array_fill(0, $count, $value));
     }
 
-    public static function range(...$args) {
-        return new static(...range(...$args));
+    /**
+     * @param mixed $start
+     * @param mixed $end
+     * @param number $step
+     * @return Arr
+     */
+    public static function range($start, $end, $step=1) {
+        return new static(...range($start, $end, $step));
     }
 
     // INSTANCE
 
     public function __get($name) {
-        switch ($name) {
-            case 'length':
-                return $this->_size;
-            default:
-                return null;
+        if ($name === 'length') {
+            return $this->_size;
         }
-    }
-
-    public function __set($name, $value) {
-        switch ($name) {
-            case 'length':
-                throw new Exception("Cannot set length property of Arr!", 1);
-            default:
-                return $this;
-        }
+        throw new Exception("Cannot get '$name' of instance of Arr!", 1);
     }
 
     public function __call($name, $args) {
@@ -100,14 +109,26 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Cannot call $org_name on instance of Arr!", 1);
     }
 
+    /**
+     * Stringyfies the Arr instance.
+     * @return string
+     */
     public function __toString() {
         return __toString($this->_elements);
     }
 
+    /**
+     * Reveals the internal array of elements. This should be used rarely.
+     * @return array
+     */
     public function elements() {
         return $this->_elements;
     }
 
+    /**
+     * Converts the Arr instance to a native array.
+     * @return array
+     */
     public function to_a() {
         $res = [];
         foreach ($this as $idx => $element) {
@@ -121,29 +142,52 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Creates a copy of the Arr instance.
+     * @return Arr
+     */
     public function to_arr() {
         return $this->copy();
     }
 
+    /**
+     * Converts the Arr instance to an instance of Dict (indices become the keys).
+     * @return Arr
+     */
     public function to_dict() {
         return new Dict(null, $this);
     }
 
+    /**
+    * Converts the Arr instance to an instance of Set.
+    * @return Arr
+    */
     public function to_set() {
         return new Set(...$this->_elements);
     }
 
     // use ...$args workaround for passing an optional parameter (incl. null)
-    public function first(...$args) {
+    // public function first(...$args) {
+    //     if ($this->_size >= 1) {
+    //         return $this->_elements[0];
+    //     }
+    //     // trigger exception
+    //     if (count($args) === 0) {
+    //         return $this->_elements[0];
+    //     }
+    //     // use default value
+    //     return $args[0];
+    // }
+    public function first($default_val=null) {
         if ($this->_size >= 1) {
             return $this->_elements[0];
         }
         // trigger exception
-        if (count($args) === 0) {
+        if (func_num_args() === 0) {
             return $this->_elements[0];
         }
         // use default value
-        return $args[0];
+        return $default_val;
     }
 
     public function second(...$args) {
@@ -366,9 +410,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING PSEUDO INTERFACE CLONABLE
 
-    public function __clone() {
-        return $this->copy();
-    }
+    // public function __clone() {
+    //     return $this->copy();
+    // }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR

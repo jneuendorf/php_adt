@@ -67,12 +67,15 @@ section('array access',
         new Test(
             'access convenience methods',
             function() {
+                $arr = new Arr();
                 return
-                expect($this->arr->first(), '$arr->first()')->to_be($this->native[0]) &&
-                expect($this->arr->second())->to_be($this->native[1]) &&
-                expect($this->arr->third())->to_be($this->native[2]) &&
-                expect($this->arr->penultimate())->to_be($this->native[1]) &&
-                expect($this->arr->last(), '$arr->last()')->to_be($this->native[2]);
+                expect($this->arr->first(), 'first')->to_be($this->native[0]) &&
+                expect($arr->first(null), 'first (empty arr w/ default)')->to_be(null) &&
+                expect(function() use ($arr){return $arr->first();}, 'first (empty arr)')->to_throw() &&
+                expect($this->arr->second(), 'second')->to_be($this->native[1]) &&
+                expect($this->arr->third(), 'third')->to_be($this->native[2]) &&
+                expect($this->arr->penultimate(), 'penultimate')->to_be($this->native[1]) &&
+                expect($this->arr->last(), 'last')->to_be($this->native[2]);
             },
             function () {
                 $this->native = [1,'asdf',true];

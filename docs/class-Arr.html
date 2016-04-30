@@ -152,7 +152,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 		
 		
 
-			<b>Located at</b> <a href="source-class-Arr.html#7-752" title="Go to source code">Arr.php</a>
+			<b>Located at</b> <a href="source-class-Arr.html#7-857" title="Go to source code">Arr.php</a>
 		<br>
 	</div>
 
@@ -317,6 +317,35 @@ It provides a consistent API and some extra features. There are no keys...just p
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="_convenience_get" id="__convenience_get">
+
+			<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#__convenience_get">#</a>
+			<code><a href="source-class-Arr.html#97-104" title="Go to source code">_convenience_get</a>( <span> <var>$index</var></span>, <span> <var>$args</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="__get" id="___get">
 
 			<td class="attributes"><code>
@@ -328,7 +357,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#___get">#</a>
-			<code><a href="source-class-Arr.html#92-97" title="Go to source code">__get</a>( <span> <var>$name</var></span> )</code>
+			<code><a href="source-class-Arr.html#109-114" title="Go to source code">__get</a>( <span> <var>$name</var></span> )</code>
 
 			<div class="description short">
 				
@@ -357,7 +386,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#___call">#</a>
-			<code><a href="source-class-Arr.html#99-110" title="Go to source code">__call</a>( <span> <var>$name</var></span>, <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#116-127" title="Go to source code">__call</a>( <span> <var>$name</var></span>, <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -379,24 +408,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				string
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-Arr.html#112-114" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-Arr.html#129-135" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Stringyfies the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Stringyfies the Arr instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
 
 
 
@@ -415,7 +448,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_elements">#</a>
-			<code><a href="source-class-Arr.html#116-122" title="Go to source code">elements</a>( )</code>
+			<code><a href="source-class-Arr.html#137-143" title="Go to source code">elements</a>( )</code>
 
 			<div class="description short">
 				<p>Reveals the internal array of elements. This should be used rarely.</p>
@@ -448,14 +481,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_a">#</a>
-			<code><a href="source-class-Arr.html#124-139" title="Go to source code">to_a</a>( )</code>
+			<code><a href="source-class-Arr.html#145-160" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
-				<p>Creates a representation of the Arr instance as native array.</p>
+				<p>Converts the Arr instance to a native array.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Creates a representation of the Arr instance as native array.</p>
+				<p>Converts the Arr instance to a native array.</p>
 
 
 
@@ -481,7 +514,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_arr">#</a>
-			<code><a href="source-class-Arr.html#141-147" title="Go to source code">to_arr</a>( )</code>
+			<code><a href="source-class-Arr.html#162-168" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
 				<p>Creates a copy of the Arr instance.</p>
@@ -514,14 +547,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_dict">#</a>
-			<code><a href="source-class-Arr.html#149-155" title="Go to source code">to_dict</a>( )</code>
+			<code><a href="source-class-Arr.html#170-176" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
-				<p>Converts the Arr instance to an instance of @Dict.</p>
+				<p>Converts the Arr instance to an instance of Dict (indices become the keys).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Converts the Arr instance to an instance of @Dict.</p>
+				<p>Converts the Arr instance to an instance of Dict (indices become the keys).</p>
 
 
 
@@ -540,24 +573,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_set">#</a>
-			<code><a href="source-class-Arr.html#157-159" title="Go to source code">to_set</a>( )</code>
+			<code><a href="source-class-Arr.html#178-184" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Converts the Arr instance to an instance of Set.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Converts the Arr instance to an instance of Set.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -569,25 +606,38 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_first">#</a>
-			<code><a href="source-class-Arr.html#162-172" title="Go to source code">first</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#186-194" title="Go to source code">first</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns the first element of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the first element of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd>An optional argument that (if given) is returned if there is no first element. If not given an exception may be thrown.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 
@@ -598,25 +648,38 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_second">#</a>
-			<code><a href="source-class-Arr.html#174-182" title="Go to source code">second</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#196-204" title="Go to source code">second</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns the second element of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the second element of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd>An optional argument that (if given) is returned if there is no second element. If not given an exception may be thrown.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 
@@ -627,25 +690,38 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_third">#</a>
-			<code><a href="source-class-Arr.html#184-192" title="Go to source code">third</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#206-214" title="Go to source code">third</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns the third element of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the third element of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd>An optional argument that (if given) is returned if there is no third element. If not given an exception may be thrown.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 
@@ -656,25 +732,38 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_penultimate">#</a>
-			<code><a href="source-class-Arr.html#194-202" title="Go to source code">penultimate</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#216-224" title="Go to source code">penultimate</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns the penultimate element of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the penultimate element of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd>An optional argument that (if given) is returned if there is no penultimate element. If not given an exception may be thrown.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 
@@ -685,25 +774,38 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_last">#</a>
-			<code><a href="source-class-Arr.html#204-212" title="Go to source code">last</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#226-234" title="Go to source code">last</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns the last element of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the last element of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd>An optional argument that (if given) is returned if there is no last element. If not given an exception may be thrown.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 
@@ -714,24 +816,33 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-Arr.html#218-223" title="Go to source code">add</a>( <span> <var>$objects</var></span> )</code>
+			<code><a href="source-class-Arr.html#240-250" title="Go to source code">add</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds one or more elements to the Arr instance. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds one or more elements to the Arr instance. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$elements</var></dt>
+						<dd>The elements to be added.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -743,24 +854,33 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Arr.html#225-234" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Arr.html#252-266" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a (potentially deep) copy of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a (potentially deep) copy of the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>Whether to copy recursively.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -772,24 +892,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-Arr.html#236-240" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-Arr.html#268-276" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Removes all elements from the Arr instance. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes all elements from the Arr instance. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -801,24 +925,33 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-Arr.html#242-259" title="Go to source code">equals</a>( <span> <var>$arr</var></span> )</code>
+			<code><a href="source-class-Arr.html#278-300" title="Go to source code">equals</a>( <span>mixed <var>$arr</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates whether the Arr instance is equals to another object.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates whether the Arr instance is equals to another object.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$arr</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -830,24 +963,35 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has">#</a>
-			<code><a href="source-class-Arr.html#261-263" title="Go to source code">has</a>( <span> <var>$object</var></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-Arr.html#302-310" title="Go to source code">has</a>( <span>mixed <var>$object</var></span>, <span>Callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates whether an object is containted in the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates whether an object is containted in the Arr instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+						<dt><var>$equality</var></dt>
+						<dd>This optional parameter can be used to define how objects are considered equal.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -859,24 +1003,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-Arr.html#265-271" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-Arr.html#312-322" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Calculates a hash value of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Calculates a hash value of the Arr instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -888,24 +1036,35 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-Arr.html#273-279" title="Go to source code">remove</a>( <span> <var>$object</var></span> )</code>
+			<code><a href="source-class-Arr.html#324-336" title="Go to source code">remove</a>( <span>mixed <var>$object</var></span>, <span>Callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Removes an object from the Arr instance if it exists.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes an object from the Arr instance if it exists.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$object</var></dt>
+						<dd></dd>
+						<dt><var>$equality</var></dt>
+						<dd>This optional parameter can be used to define how objects are considered equal.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -917,24 +1076,33 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove_at">#</a>
-			<code><a href="source-class-Arr.html#281-283" title="Go to source code">remove_at</a>( <span> <var>$index</var></span> )</code>
+			<code><a href="source-class-Arr.html#338-345" title="Go to source code">remove_at</a>( <span>integer <var>$index</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Removes an object from the Arr instance at a given index.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes an object from the Arr instance at a given index.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$index</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code><br>An Arr instance containing the removed element.
+					</div>
 
 
 
@@ -946,24 +1114,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-Arr.html#285-287" title="Go to source code">size</a>( )</code>
+			<code><a href="source-class-Arr.html#347-353" title="Go to source code">size</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the current size of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the current size of the Arr instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -973,210 +1145,32 @@ It provides a consistent API and some extra features. There are no keys...just p
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="_adjust_offset" id="__adjust_offset">
-
-			<td class="attributes"><code>
-				 protected 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#__adjust_offset">#</a>
-			<code><a href="source-class-Arr.html#292-300" title="Go to source code">_adjust_offset</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="_get_start_end_from_offset" id="__get_start_end_from_offset">
-
-			<td class="attributes"><code>
-				 protected 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#__get_start_end_from_offset">#</a>
-			<code><a href="source-class-Arr.html#302-349" title="Go to source code">_get_start_end_from_offset</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetExists" id="_offsetExists">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetExists">#</a>
-			<code><a href="source-class-Arr.html#351-360" title="Go to source code">offsetExists</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetExists()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetGet" id="_offsetGet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetGet">#</a>
-			<code><a href="source-class-Arr.html#362-368" title="Go to source code">offsetGet</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetGet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetSet" id="_offsetSet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetSet">#</a>
-			<code><a href="source-class-Arr.html#370-380" title="Go to source code">offsetSet</a>( <span> <var>$offset</var></span>, <span> <var>$value</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetSet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetUnset" id="_offsetUnset">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetUnset">#</a>
-			<code><a href="source-class-Arr.html#382-389" title="Go to source code">offsetUnset</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetUnset()</code></div>
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="current" id="_current">
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-Arr.html#401-403" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-Arr.html#478-484" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the current element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the current element.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -1190,24 +1184,28 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-Arr.html#405-407" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-Arr.html#486-492" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the index of the current element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the index of the current element.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -1228,14 +1226,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-Arr.html#409-411" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-Arr.html#494-499" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the next element (the one after the current element).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the next element (the one after the current element).</p>
 
 
 
@@ -1259,14 +1257,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-Arr.html#413-415" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-Arr.html#501-506" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the first element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the first element.</p>
 
 
 
@@ -1279,59 +1277,37 @@ It provides a consistent API and some extra features. There are no keys...just p
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="valid" id="_valid">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_valid">#</a>
-			<code><a href="source-class-Arr.html#417-419" title="Go to source code">valid</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>Iterator::valid()</code></div>
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="concat" id="_concat">
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_concat">#</a>
-			<code><a href="source-class-Arr.html#436-442" title="Go to source code">concat</a>( <span> <var>$arrays</var></span> )</code>
+			<code><a href="source-class-Arr.html#526-537" title="Go to source code">concat</a>( <span>mixed... <var>$arrs</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Concatenates the Arr instance with one or more Arr instances.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Concatenates the Arr instance with one or more Arr instances.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$arrs</var></dt>
+						<dd>The Arr instance(s) to be concatenated.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -1343,24 +1319,33 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_count_values">#</a>
-			<code><a href="source-class-Arr.html#445-451" title="Go to source code">count_values</a>( )</code>
+			<code><a href="source-class-Arr.html#540-551" title="Go to source code">count_values</a>( <span>Callable <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Counts how often each element occurs in the Arr instance and returns a dictionary in which each an elements maps to the number of its occurences.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Counts how often each element occurs in the Arr instance and returns a dictionary in which each an elements maps to the number of its occurences.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$group_func</var></dt>
+						<dd>Optionally, a function can be passed to define how the dictionary is built. See 'group_by()' for more details.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -1372,24 +1357,35 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_diff">#</a>
-			<code><a href="source-class-Arr.html#453-461" title="Go to source code">diff</a>( <span> <var>$arr</var></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-Arr.html#553-567" title="Go to source code">diff</a>( <span><code><a href="class-Arr.html">Arr</a></code> <var>$arr</var></span>, <span>Callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Calculates the difference between this Arr instance and the given one. The resulting Arr instance contains all the old elements except the ones also contained in the given instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Calculates the difference between this Arr instance and the given one. The resulting Arr instance contains all the old elements except the ones also contained in the given instance.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$arr</var></dt>
+						<dd>The Arr instance whose elements are excepted.</dd>
+						<dt><var>$equality</var></dt>
+						<dd>This optional parameter can be used to define how objects are considered equal.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -1408,14 +1404,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference">#</a>
-			<code><a href="source-class-Arr.html#464-466" title="Go to source code">difference</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#570-575" title="Go to source code">difference</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Synonym for 'diff()'.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Synonym for 'diff()'.</p>
 
 
 
@@ -1437,7 +1433,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_group_by">#</a>
-			<code><a href="source-class-Arr.html#468-485" title="Go to source code">group_by</a>( <span> <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Arr.html#577-594" title="Go to source code">group_by</a>( <span> <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				
@@ -1466,7 +1462,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_end">#</a>
-			<code><a href="source-class-Arr.html#490-493" title="Go to source code">end</a>( )</code>
+			<code><a href="source-class-Arr.html#599-602" title="Go to source code">end</a>( )</code>
 
 			<div class="description short">
 				
@@ -1495,7 +1491,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_flatten">#</a>
-			<code><a href="source-class-Arr.html#496-507" title="Go to source code">flatten</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Arr.html#605-616" title="Go to source code">flatten</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				
@@ -1524,7 +1520,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-Arr.html#510-512" title="Go to source code">get</a>( <span> <var>$idx</var></span> )</code>
+			<code><a href="source-class-Arr.html#619-621" title="Go to source code">get</a>( <span> <var>$idx</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1553,7 +1549,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersect">#</a>
-			<code><a href="source-class-Arr.html#514-522" title="Go to source code">intersect</a>( <span> <var>$arr</var></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-Arr.html#623-631" title="Go to source code">intersect</a>( <span> <var>$arr</var></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				
@@ -1582,7 +1578,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-Arr.html#528-530" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
+			<code><a href="source-class-Arr.html#637-639" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1611,7 +1607,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_merge">#</a>
-			<code><a href="source-class-Arr.html#533-545" title="Go to source code">merge</a>( <span> <var>$arrs</var></span> )</code>
+			<code><a href="source-class-Arr.html#642-654" title="Go to source code">merge</a>( <span> <var>$arrs</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1640,7 +1636,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_merge_recursive">#</a>
-			<code><a href="source-class-Arr.html#548-558" title="Go to source code">merge_recursive</a>( <span> <var>$arr</var></span> )</code>
+			<code><a href="source-class-Arr.html#657-667" title="Go to source code">merge_recursive</a>( <span> <var>$arr</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1669,7 +1665,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pop">#</a>
-			<code><a href="source-class-Arr.html#562-568" title="Go to source code">pop</a>( <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Arr.html#671-677" title="Go to source code">pop</a>( <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				
@@ -1698,7 +1694,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_popfirst">#</a>
-			<code><a href="source-class-Arr.html#570-572" title="Go to source code">popfirst</a>( )</code>
+			<code><a href="source-class-Arr.html#679-681" title="Go to source code">popfirst</a>( )</code>
 
 			<div class="description short">
 				
@@ -1727,7 +1723,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pos">#</a>
-			<code><a href="source-class-Arr.html#574-576" title="Go to source code">pos</a>( )</code>
+			<code><a href="source-class-Arr.html#683-685" title="Go to source code">pos</a>( )</code>
 
 			<div class="description short">
 				
@@ -1756,7 +1752,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_prev">#</a>
-			<code><a href="source-class-Arr.html#578-584" title="Go to source code">prev</a>( )</code>
+			<code><a href="source-class-Arr.html#687-693" title="Go to source code">prev</a>( )</code>
 
 			<div class="description short">
 				
@@ -1785,7 +1781,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_push">#</a>
-			<code><a href="source-class-Arr.html#587-591" title="Go to source code">push</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#696-700" title="Go to source code">push</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1814,7 +1810,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_replace">#</a>
-			<code><a href="source-class-Arr.html#594-603" title="Go to source code">replace</a>( <span> <var>$replacements</var></span> )</code>
+			<code><a href="source-class-Arr.html#703-712" title="Go to source code">replace</a>( <span> <var>$replacements</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1843,7 +1839,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reset">#</a>
-			<code><a href="source-class-Arr.html#608-610" title="Go to source code">reset</a>( )</code>
+			<code><a href="source-class-Arr.html#717-719" title="Go to source code">reset</a>( )</code>
 
 			<div class="description short">
 				
@@ -1872,7 +1868,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reversed">#</a>
-			<code><a href="source-class-Arr.html#613-615" title="Go to source code">reversed</a>( )</code>
+			<code><a href="source-class-Arr.html#722-724" title="Go to source code">reversed</a>( )</code>
 
 			<div class="description short">
 				
@@ -1901,7 +1897,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reverse">#</a>
-			<code><a href="source-class-Arr.html#618-630" title="Go to source code">reverse</a>( )</code>
+			<code><a href="source-class-Arr.html#727-739" title="Go to source code">reverse</a>( )</code>
 
 			<div class="description short">
 				
@@ -1930,7 +1926,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_search">#</a>
-			<code><a href="source-class-Arr.html#632-634" title="Go to source code">search</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#741-743" title="Go to source code">search</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1959,7 +1955,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_shift">#</a>
-			<code><a href="source-class-Arr.html#636-644" title="Go to source code">shift</a>( )</code>
+			<code><a href="source-class-Arr.html#745-753" title="Go to source code">shift</a>( )</code>
 
 			<div class="description short">
 				
@@ -1988,7 +1984,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_shuffle">#</a>
-			<code><a href="source-class-Arr.html#647-652" title="Go to source code">shuffle</a>( )</code>
+			<code><a href="source-class-Arr.html#756-761" title="Go to source code">shuffle</a>( )</code>
 
 			<div class="description short">
 				
@@ -2017,7 +2013,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_sort">#</a>
-			<code><a href="source-class-Arr.html#654-657" title="Go to source code">sort</a>( <span> <var>$cmp_function</var> = <span class="php-quote">'__mergesort_compare'</span></span> )</code>
+			<code><a href="source-class-Arr.html#763-766" title="Go to source code">sort</a>( <span> <var>$cmp_function</var> = <span class="php-quote">'__mergesort_compare'</span></span> )</code>
 
 			<div class="description short">
 				
@@ -2046,7 +2042,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_splice">#</a>
-			<code><a href="source-class-Arr.html#661-666" title="Go to source code">splice</a>( <span> <var>$offset</var></span>, <span> <var>$length</var></span>, <span> <var>$new_elements</var></span> )</code>
+			<code><a href="source-class-Arr.html#770-775" title="Go to source code">splice</a>( <span> <var>$offset</var></span>, <span> <var>$length</var></span>, <span> <var>$new_elements</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2075,7 +2071,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_unique">#</a>
-			<code><a href="source-class-Arr.html#668-676" title="Go to source code">unique</a>( <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-Arr.html#777-785" title="Go to source code">unique</a>( <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				
@@ -2104,7 +2100,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_unshift">#</a>
-			<code><a href="source-class-Arr.html#682-686" title="Go to source code">unshift</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#791-795" title="Go to source code">unshift</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2133,7 +2129,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_walk_recursive">#</a>
-			<code><a href="source-class-Arr.html#689-694" title="Go to source code">walk_recursive</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#798-803" title="Go to source code">walk_recursive</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2162,7 +2158,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_walk">#</a>
-			<code><a href="source-class-Arr.html#697-702" title="Go to source code">walk</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#806-811" title="Go to source code">walk</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2191,7 +2187,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_without">#</a>
-			<code><a href="source-class-Arr.html#704-706" title="Go to source code">without</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#813-815" title="Go to source code">without</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2220,7 +2216,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_append">#</a>
-			<code><a href="source-class-Arr.html#712-714" title="Go to source code">append</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-Arr.html#821-823" title="Go to source code">append</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2249,7 +2245,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_extend">#</a>
-			<code><a href="source-class-Arr.html#719-725" title="Go to source code">extend</a>( <span> <var>$iterable</var></span> )</code>
+			<code><a href="source-class-Arr.html#828-834" title="Go to source code">extend</a>( <span> <var>$iterable</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2278,7 +2274,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_index">#</a>
-			<code><a href="source-class-Arr.html#728-738" title="Go to source code">index</a>( <span> <var>$needle</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$stop</var> = <span class="php-keyword1">null</span></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-Arr.html#837-847" title="Go to source code">index</a>( <span> <var>$needle</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$stop</var> = <span class="php-keyword1">null</span></span>, <span> <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				
@@ -2307,7 +2303,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_insert">#</a>
-			<code><a href="source-class-Arr.html#740-742" title="Go to source code">insert</a>( <span> <var>$index</var></span>, <span> <var>$elements</var></span> )</code>
+			<code><a href="source-class-Arr.html#849-851" title="Go to source code">insert</a>( <span> <var>$index</var></span>, <span> <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				
@@ -2344,6 +2340,21 @@ It provides a consistent API and some extra features. There are no keys...just p
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Clonable.html#methods">Clonable</a></h3></div>
 			<p class="elementList">
 				<code><a href="class-Clonable.html#___clone">__clone()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>valid()</code>
 			</p>
 		</div>
 

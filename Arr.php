@@ -87,7 +87,24 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new static(...range($start, $end, $step));
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     // INSTANCE
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // PROTECTED
+
+    protected function _convenience_get($index, $args) {
+        // no default value => try at index
+        if (count($args) === 0) {
+            return $this->_elements[$this->_adjust_offset($index)];
+        }
+        // use default value
+        return $args[0];
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // PUBLIC
 
     public function __get($name) {
         if ($name === 'length') {
@@ -166,81 +183,77 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new Set(...$this->_elements);
     }
 
-    // use ...$args workaround for passing an optional parameter (incl. null)
-    // public function first(...$args) {
-    //     if ($this->_size >= 1) {
-    //         return $this->_elements[0];
-    //     }
-    //     // trigger exception
-    //     if (count($args) === 0) {
-    //         return $this->_elements[0];
-    //     }
-    //     // use default value
-    //     return $args[0];
-    // }
+    /**
+    * Returns the first element of the Arr instance.
+    * @param mixed $default_val An optional argument that (if given) is returned if there is no first element. If not given an exception may be thrown.
+    * @throws Exception
+    * @return mixed
+    */
     public function first($default_val=null) {
-        if ($this->_size >= 1) {
-            return $this->_elements[0];
-        }
-        // trigger exception
-        if (func_num_args() === 0) {
-            return $this->_elements[0];
-        }
-        // use default value
-        return $default_val;
+        return $this->_convenience_get(0, func_get_args());
     }
 
-    public function second(...$args) {
-        if ($this->_size >= 2) {
-            return $this->_elements[1];
-        }
-        if (count($args) === 0) {
-            return $this->_elements[1];
-        }
-        return $args[0];
+    /**
+    * Returns the second element of the Arr instance.
+    * @param mixed $default_val An optional argument that (if given) is returned if there is no second element. If not given an exception may be thrown.
+    * @throws Exception
+    * @return mixed
+    */
+    public function second($default_val=null) {
+        return $this->_convenience_get(1, func_get_args());
     }
 
-    public function third(...$args) {
-        if ($this->_size >= 3) {
-            return $this->_elements[2];
-        }
-        if (count($args) === 0) {
-            return $this->_elements[2];
-        }
-        return $args[0];
+    /**
+    * Returns the third element of the Arr instance.
+    * @param mixed $default_val An optional argument that (if given) is returned if there is no third element. If not given an exception may be thrown.
+    * @throws Exception
+    * @return mixed
+    */
+    public function third($default_val=null) {
+        return $this->_convenience_get(2, func_get_args());
     }
 
-    public function penultimate(...$args) {
-        if ($this->_size >= 2) {
-            return $this->_elements[$this->_size - 2];
-        }
-        if (count($args) === 0) {
-            return $this->_elements[$this->_size - 2];
-        }
-        return $args[0];
+    /**
+    * Returns the penultimate element of the Arr instance.
+    * @param mixed $default_val An optional argument that (if given) is returned if there is no penultimate element. If not given an exception may be thrown.
+    * @throws Exception
+    * @return mixed
+    */
+    public function penultimate($default_val=null) {
+        return $this->_convenience_get(-2, func_get_args());
     }
 
-    public function last(...$args) {
-        if ($this->_size >= 1) {
-            return $this->_elements[$this->_size - 1];
-        }
-        if (count($args) === 0) {
-            return $this->_elements[$this->_size - 1];
-        }
-        return $args[0];
+    /**
+    * Returns the last element of the Arr instance.
+    * @param mixed $default_val An optional argument that (if given) is returned if there is no last element. If not given an exception may be thrown.
+    * @throws Exception
+    * @return mixed
+    */
+    public function last($default_val=null) {
+        return $this->_convenience_get(-1, func_get_args());
     }
 
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
-    public function add(...$objects) {
-        foreach ($objects as $idx => $object) {
-            $this->push($object);
+    /**
+    * Adds one or more elements to the Arr instance. <span class="label label-info">Chainable</span>
+    * @param mixed... $elements The elements to be added.
+    * @return Arr
+    */
+    public function add(...$elements) {
+        foreach ($elements as $idx => $element) {
+            $this->push($element);
         }
         return $this;
     }
 
+    /**
+    * Creates a (potentially deep) copy of the Arr instance.
+    * @param bool $deep Whether to copy recursively.
+    * @return Arr
+    */
     public function copy($deep=false) {
         if (!$deep) {
             return new Arr(...$this->_elements);
@@ -252,14 +265,23 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Removes all elements from the Arr instance. <span class="label label-info">Chainable</span>
+    * @return Arr
+    */
     public function clear() {
         $this->_elements = [];
         $this->_size = 0;
         return $this;
     }
 
+    /**
+    * Indicates whether the Arr instance is equals to another object.
+    * @param mixed $arr
+    * @return bool
+    */
     public function equals($arr) {
-        if ($arr instanceof self) {
+        if (is_object($arr) && $arr instanceof self) {
             if ($this->size() !== $arr->size()) {
                 return false;
             }
@@ -277,10 +299,20 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return false;
     }
 
+    /**
+    * Indicates whether an object is containted in the Arr instance.
+    * @param mixed $object
+    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @return bool
+    */
     public function has($object, $equality='__equals') {
         return $this->index($object, 0, $this->_size, $equality) !== null;
     }
 
+    /**
+    * Calculates a hash value of the Arr instance.
+    * @return int
+    */
     public function hash() {
         $result = 0;
         foreach ($this->_elements as $idx => $element) {
@@ -289,18 +321,33 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $result;
     }
 
-    public function remove($object) {
-        $index = $this->index($object);
+    /**
+    * Removes an object from the Arr instance if it exists.
+    * @param mixed $object
+    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @return bool
+    */
+    public function remove($object, $equality='__equals') {
+        $index = $this->index($object, 0, $this->_size, $equality);
         if ($index !== null) {
             $this->splice($index, 1);
         }
         return $this;
     }
 
+    /**
+    * Removes an object from the Arr instance at a given index.
+    * @param int $index
+    * @return Arr An Arr instance containing the removed element.
+    */
     public function remove_at($index) {
         return $this->splice($index, 1);
     }
 
+    /**
+    * Returns the current size of the Arr instance.
+    * @return int
+    */
     public function size() {
         return $this->_size;
     }
@@ -308,6 +355,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
 
+    /**
+     * @internal
+    */
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
             if ($offset < 0) {
@@ -318,6 +368,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Undefined offset $offset!", 1);
     }
 
+    /**
+     * @internal
+    */
     protected function _get_start_end_from_offset($offset) {
         if (is_array($offset)) {
             if (is_int($offset[0]) && is_int($offset[1])) {
@@ -367,6 +420,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         ];
     }
 
+    /**
+     * @internal
+    */
     public function offsetExists($offset) {
         if (is_int($offset)) {
             if ($offset >= 0) {
@@ -378,6 +434,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return false;
     }
 
+    /**
+     * @internal
+    */
     public function offsetGet($offset) {
         $bounds = $this->_get_start_end_from_offset($offset);
         if (!$bounds['slicing']) {
@@ -386,6 +445,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->slice($bounds['start'], $bounds['end'] - $bounds['start']);
     }
 
+    /**
+     * @internal
+    */
     public function offsetSet($offset, $value) {
         // TODO enable slicing notation for setting subarrays
         // called like $my_arr[] = 2; => push
@@ -398,6 +460,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+     * @internal
+    */
     public function offsetUnset($offset) {
         if ($this->offsetExists($offset)) {
             unset($this->_elements[$offset]);
@@ -408,31 +473,41 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING PSEUDO INTERFACE CLONABLE
-
-    // public function __clone() {
-    //     return $this->copy();
-    // }
-
-    ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
 
+    /**
+    * Returns the current element.
+    * @return mixed
+    */
     public function current() {
         return $this->_elements[$this->_position];
     }
 
+    /**
+    * Returns the index of the current element.
+    * @return int
+    */
     public function key() {
         return $this->_position;
     }
 
+    /**
+    * Moves the cursor to the next element (the one after the current element).
+    */
     public function next() {
         $this->_position++;
     }
 
+    /**
+    * Moves the cursor to the first element.
+    */
     public function rewind() {
         $this->_position = 0;
     }
 
+    /**
+    * @internal
+    */
     public function valid() {
         return $this->_position >= 0 && $this->_position < $this->_size;
     }
@@ -443,32 +518,44 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // DELEGATIONS TO NATIVE METHODS
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // STATIC
-
-    ////////////////////////////////////////////////////////////////////////////////////
     // INSTANCE
-
     // implementations based on the API of native methods
-    // API-CHANGE: 'change_key_case' function not implemented
 
+    // API-CHANGE: 'change_key_case' function not implemented
     // API-CHANGE: new function 'concat'
-    public function concat(...$arrays) {
+    /**
+    * Concatenates the Arr instance with one or more Arr instances.
+    * @param mixed... $arrs The Arr instance(s) to be concatenated.
+    * @return Arr
+    */
+    public function concat(...$arrs) {
         $res = new Arr(...$this->_elements);
-        foreach ($arrays as $idx => $arr) {
-            $res->merge(...$arrays);
+        foreach ($arrs as $idx => $arr) {
+            $res->merge(...$arrs);
         }
         return $res;
     }
 
     // API-CHANGE: 'count_values': returns Dict
-    public function count_values() {
+    /**
+    * Counts how often each element occurs in the Arr instance and returns a dictionary in which each an elements maps to the number of its occurences.
+    * @param Callable $group_func Optionally, a function can be passed to define how the dictionary is built. See 'group_by()' for more details.
+    * @return Dict
+    */
+    public function count_values($group_func=null) {
         $res = new Dict();
-        foreach ($this->group_by() as $key => $value) {
+        foreach ($this->group_by($group_func) as $key => $value) {
             $res->put($key, $value->size());
         }
         return $res;
     }
 
+    /**
+    * Calculates the difference between this Arr instance and the given one. The resulting Arr instance contains all the old elements except the ones also contained in the given instance.
+    * @param Arr $arr The Arr instance whose elements are excepted.
+    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @return Arr
+    */
     public function diff($arr, $equality='__equals') {
         $res = new Arr();
         foreach ($this as $idx => $elem) {
@@ -480,6 +567,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: 'difference': alias for 'diff'
+    /**
+    * Synonym for 'diff()'.
+    */
     public function difference(...$args) {
         return $this->diff(...$args);
     }
@@ -763,10 +853,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // pop([index]) is implemented above (php array section)
     // remove(object) is implemented above (collection interface section)
 
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////
-    // PROTECTED
 
 }
 

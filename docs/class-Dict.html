@@ -83,6 +83,7 @@
 				<li><a href="function-__mergesort.html">__mergesort</a></li>
 				<li><a href="function-__mergesort_compare.html">__mergesort_compare</a></li>
 				<li><a href="function-__toString.html">__toString</a></li>
+				<li><a href="function-is_iterable.html">is_iterable</a></li>
 				<li><a href="function-p.html">p</a></li>
 			</ul>
 		</div>
@@ -160,7 +161,7 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 		
 		
 
-			<b>Located at</b> <a href="source-class-Dict.html#8-396" title="Go to source code">Dict.php</a>
+			<b>Located at</b> <a href="source-class-Dict.html#8-577" title="Go to source code">Dict.php</a>
 		<br>
 	</div>
 
@@ -180,16 +181,27 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Dict.html#46-55" title="Go to source code">__construct</a>( <span> <var>$default_val</var> = <span class="php-keyword1">null</span></span>, <span> <var>$iterable</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Dict.html#56-74" title="Go to source code">__construct</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span>, <span>Traversable <var>$iterable</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$key_equality</var> = <span class="php-quote">'__equals'</span></span>, <span>callable <var>$value_equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Constructor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Constructor.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd></dd>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+						<dt><var>$key_equality</var></dt>
+						<dd></dd>
+						<dt><var>$value_equality</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -209,7 +221,7 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-Dict.html#57-63" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-Dict.html#76-82" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
 				
@@ -231,24 +243,32 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				array
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_a">#</a>
-			<code><a href="source-class-Dict.html#65-67" title="Go to source code">to_a</a>( )</code>
+			<code><a href="source-class-Dict.html#84-90" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Converts the Dict instance to a native array. The result has the form</p>
+
+<pre>[[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...]</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Converts the Dict instance to a native array. The result has the form</p>
+
+<pre>[[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...]</pre>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 
@@ -260,24 +280,32 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_arr">#</a>
-			<code><a href="source-class-Dict.html#69-71" title="Go to source code">to_arr</a>( )</code>
+			<code><a href="source-class-Dict.html#92-98" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Converts the Dict instance to an instance of Arr. The result has the form</p>
+
+<pre>[[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...]</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Converts the Dict instance to an instance of Arr. The result has the form</p>
+
+<pre>[[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...]</pre>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -289,24 +317,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_dict">#</a>
-			<code><a href="source-class-Dict.html#73-75" title="Go to source code">to_dict</a>( )</code>
+			<code><a href="source-class-Dict.html#100-106" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Creates a copy of the Dict instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a copy of the Dict instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -318,181 +350,36 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Set.html">Set</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_set">#</a>
-			<code><a href="source-class-Dict.html#77-79" title="Go to source code">to_set</a>( )</code>
+			<code><a href="source-class-Dict.html#108-114" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Converts the Dict instance to an instance of Set. The result has the form</p>
+
+<pre>{[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...}</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Converts the Dict instance to an instance of Set. The result has the form</p>
+
+<pre>{[<span class="php-var">$key</span>, <span class="php-var">$value</span>], ...}</pre>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Set.html">Set</a></code>
+					</div>
 
 
 
 
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="_get_hash" id="__get_hash">
-
-			<td class="attributes"><code>
-				 protected 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#__get_hash">#</a>
-			<code><a href="source-class-Dict.html#84-97" title="Go to source code">_get_hash</a>( <span> <var>$object</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetExists" id="_offsetExists">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetExists">#</a>
-			<code><a href="source-class-Dict.html#105-107" title="Go to source code">offsetExists</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetExists()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetGet" id="_offsetGet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetGet">#</a>
-			<code><a href="source-class-Dict.html#109-111" title="Go to source code">offsetGet</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetGet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetSet" id="_offsetSet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetSet">#</a>
-			<code><a href="source-class-Dict.html#113-115" title="Go to source code">offsetSet</a>( <span> <var>$offset</var></span>, <span> <var>$value</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetSet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetUnset" id="_offsetUnset">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetUnset">#</a>
-			<code><a href="source-class-Dict.html#117-119" title="Go to source code">offsetUnset</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetUnset()</code></div>
 			</div>
 			</div></td>
 		</tr>
@@ -500,24 +387,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-Dict.html#124-126" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-Dict.html#174-180" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Gets the value at the current position of the cursor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Gets the value at the current position of the cursor.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -531,24 +422,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-Dict.html#128-130" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-Dict.html#182-188" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Gets the key at the current position of the cursor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Gets the key at the current position of the cursor.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -569,14 +464,14 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-Dict.html#132-142" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-Dict.html#190-203" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the next key-value pair.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the next key-value pair.</p>
 
 
 
@@ -600,14 +495,14 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-Dict.html#144-147" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-Dict.html#205-211" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the first key-value pair.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the first key-value pair.</p>
 
 
 
@@ -620,59 +515,37 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="valid" id="_valid">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_valid">#</a>
-			<code><a href="source-class-Dict.html#149-152" title="Go to source code">valid</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>Iterator::valid()</code></div>
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="add" id="_add">
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-Dict.html#157-162" title="Go to source code">add</a>( <span> <var>$keys</var></span> )</code>
+			<code><a href="source-class-Dict.html#224-235" title="Go to source code">add</a>( <span>ArrayAccess... <var>$pairs</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds one or more key-value pairs to the dictionary. Each pair must have the key at index zero and the value at index 1. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds one or more key-value pairs to the dictionary. Each pair must have the key at index zero and the value at index 1. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$pairs</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -686,24 +559,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-Dict.html#164-171" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-Dict.html#237-248" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Empties the dictionary. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Empties the dictionary. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -715,24 +592,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Dict.html#173-175" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Dict.html#250-270" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a new dictionary from this instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a new dictionary from this instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -751,7 +632,7 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-Dict.html#178-197" title="Go to source code">equals</a>( <span> <var>$map</var></span> )</code>
+			<code><a href="source-class-Dict.html#278-296" title="Go to source code">equals</a>( <span> <var>$map</var></span> )</code>
 
 			<div class="description short">
 				
@@ -773,24 +654,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has">#</a>
-			<code><a href="source-class-Dict.html#199-201" title="Go to source code">has</a>( <span> <var>$key</var></span> )</code>
+			<code><a href="source-class-Dict.html#298-305" title="Go to source code">has</a>( <span>mixed <var>$key</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Synonym for 'has_key()'.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Synonym for 'has_key()'.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -811,7 +701,7 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-Dict.html#203-209" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-Dict.html#307-313" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
 				
@@ -837,24 +727,35 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-Dict.html#212-219" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
+			<code><a href="source-class-Dict.html#315-327" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Maps each key-value pair to something new.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Maps each key-value pair to something new.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$callback</var></dt>
+						<dd><p>The mapping function. Index zero of the return value will be the key, index one the value.</p>
 
+<pre>ArrayAccess <span class="php-var">$callback</span>(<span class="php-var">$key</span>, <span class="php-var">$value</span>)</pre></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -866,24 +767,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-Dict.html#221-243" title="Go to source code">remove</a>( <span> <var>$key</var></span> )</code>
+			<code><a href="source-class-Dict.html#329-357" title="Go to source code">remove</a>( <span>mixed <var>$key</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Removes a key-value pair. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes a key-value pair. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -897,24 +807,35 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public static
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_fromkeys">#</a>
-			<code><a href="source-class-Dict.html#260-266" title="Go to source code">fromkeys</a>( <span> <var>$iterable</var> = []</span>, <span> <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Dict.html#374-386" title="Go to source code">fromkeys</a>( <span>Traversable <var>$iterable</var> = []</span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Returns a new dict with keys from $iterable and values equal to $value.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a new dict with keys from $iterable and values equal to $value.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd>Collection of keys.</dd>
+						<dt><var>$value</var></dt>
+						<dd>Value for all pairs.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -928,24 +849,37 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-Dict.html#268-284" title="Go to source code">get</a>( <span> <var>$key</var></span>, <span> <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Dict.html#388-410" title="Go to source code">get</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Get the value for the given key.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Get the value for the given key.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd>$key.</dd>
+						<dt><var>$default_val</var></dt>
+						<dd><p>This parameter can be used to return a special value of no value was found for the given key. This overrides</p>
 
+<pre><span class="php-var">$this</span>-&gt;default_val</pre></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -959,24 +893,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has_key">#</a>
-			<code><a href="source-class-Dict.html#286-290" title="Go to source code">has_key</a>( <span> <var>$key</var></span> )</code>
+			<code><a href="source-class-Dict.html#412-421" title="Go to source code">has_key</a>( <span>mixed <var>$key</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates if the dictionary contains the given key.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates if the dictionary contains the given key.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd>$key.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -990,24 +933,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has_value">#</a>
-			<code><a href="source-class-Dict.html#292-301" title="Go to source code">has_value</a>( <span> <var>$value</var></span> )</code>
+			<code><a href="source-class-Dict.html#423-437" title="Go to source code">has_value</a>( <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates if the dictionary contains the given value.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates if the dictionary contains the given value.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$value</var></dt>
+						<dd>$value.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -1021,24 +973,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_items">#</a>
-			<code><a href="source-class-Dict.html#303-311" title="Go to source code">items</a>( )</code>
+			<code><a href="source-class-Dict.html#439-451" title="Go to source code">items</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns an Arr instance containing all key-value pairs in form of Arr instances.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns an Arr instance containing all key-value pairs in form of Arr instances.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -1052,24 +1008,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_keys">#</a>
-			<code><a href="source-class-Dict.html#313-321" title="Go to source code">keys</a>( )</code>
+			<code><a href="source-class-Dict.html#453-465" title="Go to source code">keys</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a Set instance containing all keys.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a Set instance containing all keys.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -1083,24 +1043,35 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pop">#</a>
-			<code><a href="source-class-Dict.html#323-331" title="Go to source code">pop</a>( <span> <var>$key</var></span>, <span> <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Dict.html#467-485" title="Go to source code">pop</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Removes a key-value pair from the dictionary and returns the value of the removed item.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes a key-value pair from the dictionary and returns the value of the removed item.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd></dd>
+						<dt><var>$default_val</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -1114,25 +1085,40 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_popitem">#</a>
-			<code><a href="source-class-Dict.html#333-343" title="Go to source code">popitem</a>( )</code>
+			<code><a href="source-class-Dict.html#487-504" title="Go to source code">popitem</a>( <span>mixed <var>$key</var>,…</span>, <span>mixed <var>$default_val</var>,…</span> )</code>
 
 			<div class="description short">
-				
+				<p>Removes a key-value pair from the dictionary and returns an Arr instance containing the key and the value. An Exception is thrown if the dictionary is empty.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes a key-value pair from the dictionary and returns an Arr instance containing the key and the value. An Exception is thrown if the dictionary is empty.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var>,…</dt>
+						<dd></dd>
+						<dt><var>$default_val</var>,…</dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
 
 
 					<h4>Overrides</h4>
@@ -1145,24 +1131,35 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_put">#</a>
-			<code><a href="source-class-Dict.html#345-372" title="Go to source code">put</a>( <span> <var>$key</var></span>, <span> <var>$value</var></span> )</code>
+			<code><a href="source-class-Dict.html#506-539" title="Go to source code">put</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds a key-value pair to the dictionary. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds a key-value pair to the dictionary. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$key</var></dt>
+						<dd></dd>
+						<dt><var>$value</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -1176,24 +1173,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setdefault">#</a>
-			<code><a href="source-class-Dict.html#374-377" title="Go to source code">setdefault</a>( <span> <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Dict.html#541-549" title="Go to source code">setdefault</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Sets the default value for the dictionary. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Sets the default value for the dictionary. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$default_val</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -1207,24 +1213,33 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Dict.html">Dict</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_update">#</a>
-			<code><a href="source-class-Dict.html#379-384" title="Go to source code">update</a>( <span> <var>$iterable</var></span> )</code>
+			<code><a href="source-class-Dict.html#551-561" title="Go to source code">update</a>( <span>Traversable <var>$iterable</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Updates the dictionary from the given iterable. All items for $iterable are put into this instance. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Updates the dictionary from the given iterable. All items for $iterable are put into this instance. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Dict.html">Dict</a></code>
+					</div>
 
 
 
@@ -1238,24 +1253,28 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_values">#</a>
-			<code><a href="source-class-Dict.html#386-394" title="Go to source code">values</a>( )</code>
+			<code><a href="source-class-Dict.html#563-575" title="Go to source code">values</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a Set instance containing all values.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a Set instance containing all values.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -1285,6 +1304,21 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-Clonable.html#methods">Clonable</a></h3></div>
 			<p class="elementList">
 				<code><a href="class-Clonable.html#___clone">__clone()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>valid()</code>
 			</p>
 		</div>
 
@@ -1321,6 +1355,56 @@ The keys may be mutable but must manually be updated when modified (remove, modi
 			<td class="value">
 				<div>
 					<a href="#$default_val" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="key_equals" id="$key_equals">
+			<td class="attributes"><code>
+				public  
+				callable
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Dict.html#19-23" title="Go to source code"><var>$key_equals</var></a>
+
+				<div class="description short">
+					<p>A callable that determines when two keys are considered equal.</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>A callable that determines when two keys are considered equal.</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$key_equals" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="val_equals" id="$val_equals">
+			<td class="attributes"><code>
+				public  
+				callable
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Dict.html#24-28" title="Go to source code"><var>$val_equals</var></a>
+
+				<div class="description short">
+					<p>A callable that determines when two values are considered equal.</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>A callable that determines when two values are considered equal.</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$val_equals" class="anchor">#</a>
 					<code></code>
 				</div>
 			</td>

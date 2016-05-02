@@ -51,7 +51,7 @@ section('dict access', subsection('', new Test(
 
 
 
-section('set instance methods',
+section('dict instance methods',
     subsection(
         '',
         new Test(
@@ -169,9 +169,9 @@ section('set instance methods',
                     $dict = $this->dict->copy();
                     $data = new Dict(null, ['newkey' => 'newval', 'c' => 12, 4 => 'a']);
                     $dict->update($data);
-                    return expect($dict['newkey'], 'update')->to_be('newval') &&
-                    expect($dict['c'], 'update')->to_be(12) &&
-                    expect($dict[4], 'update')->to_be('a');
+                    return expect($dict['newkey'], 'update (new pair)')->to_be('newval') &&
+                    expect($dict['c'], 'update (updated pair)')->to_be(12) &&
+                    expect($dict[4], 'update (updated pair)')->to_be('a');
                 },
                 function() {
                     return expect($this->dict->values(), 'values')->to_be(new Set(1, 2, 3, 3.1, false));

@@ -13,7 +13,6 @@ require_once 'Dict.php';
  * @method Arr filter(callable $filter) See array_filter.
  * @method Arr keys() See array_keys.
  * @method Arr pad(int $size, mixed $value) See array_pad.
- * @method mixed rand() See array_rand.
  * @method mixed reduce(callable $callback, mixed $initial=null) See array_reduce.
  * @method mixed slice(int $offset, int $length=null) See array_slice.
  * @method number sum() See array_sum.
@@ -33,7 +32,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_keys',
         'array_pad',
         'array_product',
-        'array_rand',
         'array_reduce',
         'array_slice',
         'array_sum',
@@ -79,7 +77,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public static function from_iterable($iterable, $recursive=true) {
         $result = new static();
         foreach ($iterable as $key => $value) {
-            if ($recursive && (is_array($value) || ($value instanceof Traversable))) {
+            if ($recursive && is_iterable($value)) {
                 $value = static::from_iterable($value, $recursive);
             }
             $result->push($value);
@@ -173,7 +171,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
-     * Converts the Arr instance to a native array.
+     * Converts this Arr instance to a native array.
      * @return array
      */
     public function to_a() {
@@ -714,7 +712,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function merge(...$iterables) {
         foreach ($iterables as $key => $value) {
             // if ($value instanceof self) {
-            if (is_array($value) || ($value instanceof Traversable)) {
+            if (is_iterable($value)) {
                 foreach ($value as $i => $element) {
                     $this->push($element);
                 }
@@ -802,6 +800,24 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function push(...$args) {
         $this->_size = array_push($this->_elements, ...$args);
         return $this;
+    }
+
+    // API-CHANGE: 'rand': returns the val, not the index
+    /**
+    * Picks one or more random elements out of this Arr.
+    * @param int $count
+    * @return mixed
+    */
+    public function rand($count=1) {
+        if ($count === 1) {
+            return $this[array_rand($this->_elements)];
+        }
+        $random_indices = array_rand($this->_elements, $count);
+        $res = new Arr();
+        foreach ($random_indices as $idx) {
+            $res->push($this[array_rand($this->_elements)]);
+        }
+        return $res;
     }
 
     // API-CHANGE: 'replace': takes Dict as set of replacements

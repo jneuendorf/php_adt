@@ -192,9 +192,10 @@ section('Arr instance methods',
                     $arr = Arr::range(1,50);
                     $first = $arr->rand();
                     $second = $arr->rand();
+
                     return expect($arr->has($first), 'rand')->to_be(true) &&
                     expect($arr->has($second), 'rand')->to_be(true) &&
-                    expect($first == $second, 'rand (compare 2 rand values. run test again before checking code)')->to_be(false);
+                    expect($first, 'rand (compare 2 rand values. run test again before checking code)')->not_to_be($second);
                 },
                 function() {
                     $initial = '>>';

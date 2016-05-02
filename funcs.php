@@ -18,6 +18,10 @@ function p(...$args) {
     return $res;
 }
 
+function is_iterable($x) {
+    return is_array($x) || (is_object($x) && $x instanceof Traversable);
+}
+
 function __equals($x, $y) {
     if ($x === $y) {
         return true;
@@ -51,7 +55,6 @@ function __get_type($x) {
         return 'object';
     }
     throw new Exception("Could not determine type of given argument.", 1);
-
 }
 
 // the behavior of __less_than is essential for sorting

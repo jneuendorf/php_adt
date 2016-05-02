@@ -16,6 +16,16 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     * @var mixed
     */
     public $default_val;
+    /**
+    * A callable that determines when two keys are considered equal.
+    * @var callable
+    */
+    public $key_equals;
+    /**
+    * A callable that determines when two values are considered equal.
+    * @var callable
+    */
+    public $val_equals;
 
     /**
     * Maps hashes to lists of values (buckets).
@@ -42,12 +52,21 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     */
     protected $_hash_order;
 
-    // TODO: construct equality function
-    public function __construct($default_val=null, $iterable=null) {
+
+    /**
+    * Constructor.
+    * @param mixed $default_val
+    * @param Traversable $iterable
+    * @param callable $key_equality
+    * @param callable $value_equality
+    */
+    public function __construct($default_val=null, $iterable=null, $key_equality='__equals', $value_equality='__equals') {
         $this->clear();
         $this->default_val = $default_val;
+        $this->key_equals = $key_equality;
+        $this->val_equals = $value_equality;
 
-        if ($iterable !== null) {
+        if ($iterable !== null && is_iterable($iterable)) {
             foreach ($iterable as $key => $value) {
                 $this->put($key, $value);
             }
@@ -62,18 +81,34 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return "{\n".implode(", \n", $res)."\n}";
     }
 
+    /**
+     * Converts the Dict instance to a native array. The result has the form <code>[[$key, $value], ...]</code>
+     * @return array
+     */
     public function to_a() {
         return $this->items()->to_a();
     }
 
+    /**
+     * Converts the Dict instance to an instance of Arr. The result has the form <code>[[$key, $value], ...]</code>
+     * @return Arr
+     */
     public function to_arr() {
         return $this->items();
     }
 
+    /**
+     * Creates a copy of the Dict instance.
+     * @return Dict
+     */
     public function to_dict() {
         return $this->copy();
     }
 
+    /**
+     * Converts the Dict instance to an instance of Set. The result has the form <code>{[$key, $value], ...}</code>
+     * @return Set
+     */
     public function to_set() {
         return $this->items()->to_set();
     }
@@ -81,6 +116,9 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
+    /**
+     * @internal
+     */
     protected function _get_hash($object) {
         try {
             $hash = __hash($object);
@@ -102,18 +140,30 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
 
+    /**
+     * @internal
+     */
     public function offsetExists($offset) {
         return $this->has_key($offset);
     }
 
+    /**
+     * @internal
+     */
     public function offsetGet($offset) {
         return $this->get($offset);
     }
 
+    /**
+     * @internal
+     */
     public function offsetSet($offset, $value) {
         return $this->put($offset, $value);
     }
 
+    /**
+     * @internal
+     */
     public function offsetUnset($offset) {
         $this->remove($offset);
     }
@@ -121,14 +171,25 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
 
+    /**
+     * Gets the value at the current position of the cursor.
+     * @return mixed
+     */
     public function current() {
         return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx][1];
     }
 
+    /**
+     * Gets the key at the current position of the cursor.
+     * @return mixed
+     */
     public function key() {
         return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx][0];
     }
 
+    /**
+     * Moves the cursor to the next key-value pair.
+     */
     public function next() {
         // can proceed in current bucket
         if ($this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$this->_hash_idx]]) - 1) {
@@ -141,11 +202,17 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         }
     }
 
+    /**
+     * Moves the cursor to the first key-value pair.
+     */
     public function rewind() {
         $this->_hash_idx = 0;
         $this->_bucket_item_idx = 0;
     }
 
+    /**
+    * @internal
+    */
     public function valid() {
         $h_idx = $this->_hash_idx;
         return $h_idx >= 0 && $h_idx < count($this->_hash_order) && $this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$h_idx]]);
@@ -154,13 +221,23 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (COLLECTION)
 
-    public function add(...$keys) {
-        foreach ($keys as $idx => $key) {
-            $this->put($key, $this->default_val);
+    /**
+     * Adds one or more key-value pairs to the dictionary. Each pair must have the key at index zero and the value at index 1. <span class="label label-info">Chainable</span>
+     * @param ArrayAccess... $pairs
+     * @return Dict
+     */
+    public function add(...$pairs) {
+        foreach ($pairs as $idx => $pair) {
+            // $this->put($key, $this->default_val);
+            $this->put($pair[0], $pair[1]);
         }
         return $this;
     }
 
+    /**
+     * Empties the dictionary. <span class="label label-info">Chainable</span>
+     * @return Dict
+     */
     public function clear() {
         $this->_dict = [];
         $this->_size = 0;
@@ -170,10 +247,33 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $this;
     }
 
-    public function copy($deep = false) {
-        return new static($this->default_val, $this);
+    /**
+     * Creates a new dictionary from this instance.
+     * @return Dict
+     */
+    public function copy($deep=false) {
+        if (!$deep) {
+            return new static($this->default_val, $this);
+        }
+
+        $res = new static($this->default_val, null, $this->key_equals, $this->val_equals);
+        foreach ($this as $key => $value) {
+            if (is_object($key) && ($key instanceof Clonable)) {
+                $key = $key->copy(true);
+            }
+            if (is_object($$value) && ($$value instanceof Clonable)) {
+                $$value = $$value->copy(true);
+            }
+            $res->put($key, $value);
+        }
+        return $res;
     }
 
+    /**
+    * Indicates whether the Dict instance is equals to another object.
+    * @param mixed $map
+    * @return bool
+    */
     // REVIEW
     public function equals($map) {
         if ($map instanceof self) {
@@ -186,8 +286,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
             // hashes are equal => compare each entry
             $obj = new StdClass();
             foreach ($this as $key => $value) {
-                $map_value = $map->get($key, $obj);
-                if (!$map->has_key($key) || $map_value === $obj || !__equals($value, $map_value)) {
+                if (!$map->has_key($key) || !call_user_func($this->val_equals, $value, $map->get($key))) {
                     return false;
                 }
             }
@@ -196,6 +295,11 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return false;
     }
 
+    /**
+    * Synonym for 'has_key()'.
+    * @param mixed $key
+    * @return bool
+    */
     public function has($key) {
         return $this->has_key($key);
     }
@@ -208,9 +312,13 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $res;
     }
 
-    // callback returns either the mapped pair (as array or Arr)! (not just the value)
+    /**
+    * Maps each key-value pair to something new.
+    * @param callable $callback The mapping function. Index zero of the return value will be the key, index one the value. <code>ArrayAccess $callback($key, $value)</code>
+    * @return bool
+    */
     public function map($callback) {
-        $res = new Dict($this->default_val);
+        $res = new Dict($this->default_val, null, $this->key_equals, $this->val_equals);
         foreach ($this as $key => $value) {
             $mapped_pair = $callback($key, $value);
             $res->put($mapped_pair[0], $mapped_pair[1]);
@@ -218,12 +326,17 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Removes a key-value pair. <span class="label label-info">Chainable</span>
+    * @param mixed $key
+    * @return Dict
+    */
     public function remove($key) {
         if ($this->has_key($key)) {
             $hash = $this->_get_hash($key);
             $bucket = $this->_dict[$hash];
             foreach ($bucket as $idx => $tuple) {
-                if (__equals($key, $tuple[0])) {
+                if (call_user_func($this->key_equals, $key, $tuple[0])) {
                     // remove entire hash-bucket entry because will be empty
                     if (count($bucket) === 1) {
                         unset($this->_dict[$hash]);
@@ -232,6 +345,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
                     }
                     // remove tuple from the bucket
                     else {
+                        // REVIEW reassign array keys?
                         unset($this->_dict[$hash][$idx]);
                     }
                     $this->_size--;
@@ -257,6 +371,12 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING MAP (remaining function)
 
+    /**
+    * Returns a new dict with keys from $iterable and values equal to $value.
+    * @param Traversable $iterable Collection of keys.
+    * @param mixed $value Value for all pairs.
+    * @return Dict
+    */
     public static function fromkeys($iterable=[], $value=null) {
         $res = new static();
         foreach ($iterable as $idx => $key) {
@@ -265,6 +385,12 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Get the value for the given key.
+    * @param mixed $key.
+    * @param mixed $default_val This parameter can be used to return a special value of no value was found for the given key. This overrides <code>$this->default_val</code>
+    * @return Dict
+    */
     public function get($key, $default_val=null) {
         if (func_num_args() === 1) {
             $default_val = $this->default_val;
@@ -274,7 +400,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         if (array_key_exists($hash, $this->_dict)) {
             $bucket = $this->_dict[$hash];
             foreach ($bucket as $idx => $tuple) {
-                if (__equals($key, $tuple[0])) {
+                if (call_user_func($this->key_equals, $key, $tuple[0])) {
                     return $tuple[1];
                 }
             }
@@ -283,16 +409,26 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $default_val;
     }
 
+    /**
+    * Indicates if the dictionary contains the given key.
+    * @param mixed $key.
+    * @return bool
+    */
     public function has_key($key) {
         $default_val = new StdClass();
         $val = $this->get($key, $default_val);
         return $val !== $default_val;
     }
 
+    /**
+    * Indicates if the dictionary contains the given value.
+    * @param mixed $value.
+    * @return bool
+    */
     public function has_value($value) {
         foreach ($this->_dict as $key => $bucket) {
             foreach ($bucket as $idx => $tuple) {
-                if (__equals($value, $tuple[1])) {
+                if (call_user_func($this->val_equals, $value, $tuple[1])) {
                     return true;
                 }
             }
@@ -300,6 +436,10 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return false;
     }
 
+    /**
+    * Returns an Arr instance containing all key-value pairs in form of Arr instances.
+    * @return Arr
+    */
     public function items() {
         $res = new Arr();
         foreach ($this->_dict as $key => $bucket) {
@@ -310,6 +450,10 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Returns a Set instance containing all keys.
+    * @return Arr
+    */
     public function keys() {
         $res = new Set();
         foreach ($this->_dict as $hash => $bucket) {
@@ -320,21 +464,38 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $res;
     }
 
-    public function pop($key, $default=null) {
+    /**
+    * Removes a key-value pair from the dictionary and returns the value of the removed item.
+    * @param mixed $key
+    * @param mixed $default_val
+    * @return mixed
+    */
+    public function pop($key, $default_val=null) {
         if ($this->has($key)) {
             $res = $this->get($key);
             $this->remove($key);
             return $res;
         }
         // else
-        return $default;
+        if (func_num_args() === 1) {
+            return $this->default_val;
+        }
+        // else
+        return $default_val;
     }
 
+    /**
+    * Removes a key-value pair from the dictionary and returns an Arr instance containing the key and the value. An Exception is thrown if the dictionary is empty.
+    * @param mixed $key
+    * @param mixed $default_val
+    * @throws Exception
+    * @return mixed
+    */
     public function popitem() {
         if (!$this->is_empty()) {
             foreach ($this->_dict as $hash => $bucket) {
                 $tuple = $bucket[0];
-                $res = new Arr(...$tuple);
+                $res = new Arr($tuple[0], $tuple[1]);
                 $this->remove($tuple[0]);
                 return $res;
             }
@@ -342,6 +503,12 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         throw new Exception('Dict::popitem: Cannot pop an item from an empty dictionary.');
     }
 
+    /**
+    * Adds a key-value pair to the dictionary. <span class="label label-info">Chainable</span>
+    * @param mixed $key
+    * @param mixed $value
+    * @return Dict
+    */
     public function put($key, $value) {
         $hash = $this->_get_hash($key);
         // cache pseudo hash on key
@@ -359,7 +526,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         // else: add key with existing hash
         $list = $this->_dict[$hash];
         foreach ($list as $idx => $tuple) {
-            if (__equals($key, $tuple[0])) {
+            if (call_user_func($this->key_equals, $key, $tuple[0])) {
                 // also update key for potential reference equality
                 $this->_dict[$hash][$idx][0] = $key;
                 $this->_dict[$hash][$idx][1] = $value;
@@ -371,11 +538,21 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+    * Sets the default value for the dictionary. <span class="label label-info">Chainable</span>
+    * @param mixed $default_val
+    * @return Dict
+    */
     public function setdefault($default_val=null) {
         $this->default_val = $default_val;
         return $this;
     }
 
+    /**
+    * Updates the dictionary from the given iterable. All items for $iterable are put into this instance. <span class="label label-info">Chainable</span>
+    * @param Traversable $iterable
+    * @return Dict
+    */
     public function update($iterable) {
         foreach ($iterable as $key => $value) {
             $this->put($key, $value);
@@ -383,6 +560,10 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+    * Returns a Set instance containing all values.
+    * @return Arr
+    */
     public function values() {
         $res = new Set();
         foreach ($this->_dict as $hash => $bucket) {

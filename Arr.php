@@ -8,16 +8,29 @@ require_once 'Dict.php';
  * Arr is a wrapper around the native array type.
  * It provides a consistent API and some extra features. There are no keys...just plain indices. ^^
  * @property int length Equivalent for calling the size() method.
+ * @method Arr chunk(int $size) See array_chunk.
+ * @method Arr column(mixed $column_key) See array_column.
+ * @method Arr filter(callable $filter) See array_filter.
+ * @method Arr keys() See array_keys.
+ * @method Arr pad(int $size, mixed $value) See array_pad.
+ * @method mixed rand() See array_rand.
+ * @method mixed reduce(callable $callback, mixed $initial=null) See array_reduce.
+ * @method mixed slice(int $offset, int $length=null) See array_slice.
+ * @method number sum() See array_sum.
+ * @method Arr values() See array_values.
  */
 class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
-    // list of native array function that we can automatically create delegations (using the __call() method)
+    /**
+    * List of native array function that we can automatically create delegations (using the __call() method)
+    * @internal
+    * @var array
+    */
     protected static $instance_methods = [
         'array_chunk',
         'array_column',
         'array_filter',
         'array_keys',
-        'array_merge_recursive',
         'array_pad',
         'array_product',
         'array_rand',
@@ -28,20 +41,25 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ];
 
     /**
-     * @var int $_size Internally used size of the Array.
+    * @internal
+    * @var int $_size Internally used size of the Array.
     */
     protected $_size = 0;
     /**
+    * @internal
     * @var array $_elements Internal array of elements.
     */
     protected $_elements = [];
     /**
-     * @var int $_position Internal pointer to the current element.
+    * @internal
+    * @var int $_position Internal pointer to the current element.
     */
-    protected $_position;
+    protected $_position = 0;
 
     /**
+     * Constructor.
      * @param mixed... $elements
+     * @return Arr
     */
     public function __construct(...$elements) {
         foreach ($elements as $idx => $element) {
@@ -53,15 +71,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // STATIC
 
     /**
+     * Creates a new instance from an iterable.
      * @param Traversable $iterable
      * @param bool $recursive
      * @return Arr
      */
     public static function from_iterable($iterable, $recursive=true) {
-        $result = new Arr();
+        $result = new static();
         foreach ($iterable as $key => $value) {
             if ($recursive && (is_array($value) || ($value instanceof Traversable))) {
-                $value = Arr::from_iterable($value, $recursive);
+                $value = static::from_iterable($value, $recursive);
             }
             $result->push($value);
         }
@@ -69,6 +88,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
+     * Creates a new instance that's filled with $count entries of the value of the $value parameter.
      * @param int $count
      * @param mixed $value
      * @return Arr
@@ -78,8 +98,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
+     * Creates a new instance that's filled with values according to the defined range. Letters are allowed.
      * @param mixed $start
-     * @param mixed $end
+     * @param mixed $end Inclusive.
      * @param number $step
      * @return Arr
      */
@@ -94,6 +115,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
+    /**
+     * @internal
+    */
     protected function _convenience_get($index, $args) {
         // no default value => try at index
         if (count($args) === 0) {
@@ -106,6 +130,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
+    /**
+     * @internal
+    */
     public function __get($name) {
         if ($name === 'length') {
             return $this->_size;
@@ -113,6 +140,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Cannot get '$name' of instance of Arr!", 1);
     }
 
+    /**
+     * @internal
+    */
     public function __call($name, $args) {
         $org_name = $name;
         $name = 'array_'.$name;
@@ -302,7 +332,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     /**
     * Indicates whether an object is containted in the Arr instance.
     * @param mixed $object
-    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return bool
     */
     public function has($object, $equality='__equals') {
@@ -324,7 +354,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     /**
     * Removes an object from the Arr instance if it exists.
     * @param mixed $object
-    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return bool
     */
     public function remove($object, $equality='__equals') {
@@ -548,7 +578,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: 'count_values': returns Dict
     /**
     * Counts how often each element occurs in the Arr instance and returns a dictionary in which each an elements maps to the number of its occurences.
-    * @param Callable $group_func Optionally, a function can be passed to define how the dictionary is built. See 'group_by()' for more details.
+    * @param callable $group_func Optionally, a function can be passed to define how the dictionary is built. See 'group_by()' for more details.
     * @return Dict
     */
     public function count_values($group_func=null) {
@@ -562,7 +592,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     /**
     * Calculates the difference between this Arr instance and the given one. The resulting Arr instance contains all the old elements except the ones also contained in the given instance.
     * @param Arr $arr The Arr instance whose elements are excepted.
-    * @param Callable $equality This optional parameter can be used to define how objects are considered equal.
+    * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return Arr
     */
     public function diff($arr, $equality='__equals') {
@@ -585,8 +615,8 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * Groups the elements where each element is associated with what's returned by the 'group_func' parameter. Each group is an instance of Arr.
-    * @param Callable $group_func The argument is called with the currently iterated element. <code>mixed $group_func(mixed $current_element)</code>
-    * If no Callable is passed the elements are grouped by whatever is considered equal.
+    * @param callable $group_func The argument is called with the currently iterated element. <code>mixed $group_func(mixed $current_element)</code>
+    * If no callable is passed the elements are grouped by whatever is considered equal.
     * @return Dict
     * TODO: pass equality function to Dict constructor
     */
@@ -644,7 +674,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     /**
     * Returns the intersection of this and the given Arr instance.
     * @param Arr $arr
-    * @param Callable $equality
+    * @param callable $equality
     * @return Arr
     */
     public function intersect($arr, $equality='__equals') {
@@ -663,7 +693,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * Returns a new Arr instance with each element mapped to (potentially) another value.
-    * @param Callable $callback The parameter is called like this: <code>$callback($element, $idx)</code>
+    * @param callable $callback The parameter is called like this: <code>$callback($element, $idx)</code>
     * @return Arr
     */
     public function map($callback) {
@@ -684,7 +714,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function merge(...$iterables) {
         foreach ($iterables as $key => $value) {
             // if ($value instanceof self) {
-            if (is_array($value) || $value instanceof Traversable) {
+            if (is_array($value) || ($value instanceof Traversable)) {
                 foreach ($value as $i => $element) {
                     $this->push($element);
                 }
@@ -867,7 +897,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * Sorts the elements of this. <span class="label label-info">Chainable</span>
-    * @param Callable $cmp_function This optional parameter can be used to define how two elements compare.
+    * @param callable $cmp_function This optional parameter can be used to define how two elements compare.
     * @return Arr
     */
     public function sort($cmp_function='__mergesort_compare') {
@@ -893,7 +923,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * Returns a new Arr instance that has no duplicates (according to $equality).
-    * @param Callable $equality This optional parameter can be used to define equality of elements.
+    * @param callable $equality This optional parameter can be used to define equality of elements.
     * @return Arr
     */
     public function unique($equality='__equals') {
@@ -991,7 +1021,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     * @param mixed $needle
     * @param int $start Where to start searching (inclusive).
     * @param int $stop Where to stop searching (exclusive).
-    * @param Callable $equality This optional parameter can be used to define what elements is considered a match.
+    * @param callable $equality This optional parameter can be used to define what elements is considered a match.
     * @return int
     */
     public function index($needle, $start=0, $stop=null, $equality='__equals') {

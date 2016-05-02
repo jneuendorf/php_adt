@@ -59,6 +59,7 @@
 				<li><a href="class-Arr.html">Arr</a></li>
 				<li><a href="class-Clonable.html">Clonable</a></li>
 				<li><a href="class-Dict.html">Dict</a></li>
+				<li><a href="class-Lazy.html">Lazy</a></li>
 				<li class="active"><a href="class-Set.html">Set</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
@@ -98,6 +99,9 @@
 	<h1>Class Set</h1>
 
 
+	<div class="description">
+	<p>Set is class with no duplicate elements.</p>
+	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -149,7 +153,7 @@
 		
 		
 
-			<b>Located at</b> <a href="source-class-Set.html#6-308" title="Go to source code">Set.php</a>
+			<b>Located at</b> <a href="source-class-Set.html#6-347" title="Go to source code">Set.php</a>
 		<br>
 	</div>
 
@@ -169,16 +173,21 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Set.html#11-17" title="Go to source code">__construct</a>( <span> <var>$elements</var></span> )</code>
+			<code><a href="source-class-Set.html#18-28" title="Go to source code">__construct</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Constructor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Constructor.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$elements</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -198,16 +207,21 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_from_iterable">#</a>
-			<code><a href="source-class-Set.html#19-25" title="Go to source code">from_iterable</a>( <span> <var>$iterable</var></span> )</code>
+			<code><a href="source-class-Set.html#30-40" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a new set from the given iterable (keys are ignored).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a new set from the given iterable (keys are ignored).</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+					</dl></div>
 
 
 
@@ -220,24 +234,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				string
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-Set.html#27-33" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-Set.html#42-52" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Stringyfies the Set instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Stringyfies the Set instance.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
 
 
 
@@ -249,152 +267,32 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				array
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_dict">#</a>
-			<code><a href="source-class-Set.html#35-37" title="Go to source code">dict</a>( )</code>
+			<code><a href="source-class-Set.html#54-60" title="Go to source code">dict</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Exposes the interal array.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Exposes the interal array.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 
 
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetExists" id="_offsetExists">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetExists">#</a>
-			<code><a href="source-class-Set.html#44-46" title="Go to source code">offsetExists</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetExists()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetGet" id="_offsetGet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetGet">#</a>
-			<code><a href="source-class-Set.html#48-53" title="Go to source code">offsetGet</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetGet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetSet" id="_offsetSet">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetSet">#</a>
-			<code><a href="source-class-Set.html#55-57" title="Go to source code">offsetSet</a>( <span> <var>$offset</var></span>, <span> <var>$value</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetSet()</code></div>
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="offsetUnset" id="_offsetUnset">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_offsetUnset">#</a>
-			<code><a href="source-class-Set.html#59-63" title="Go to source code">offsetUnset</a>( <span> <var>$offset</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>ArrayAccess::offsetUnset()</code></div>
 			</div>
 			</div></td>
 		</tr>
@@ -402,24 +300,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-Set.html#68-71" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-Set.html#103-109" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the current element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the current element.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -433,24 +335,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-Set.html#73-80" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-Set.html#111-117" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the current element (since there are no keys).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the current element (since there are no keys).</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
 
 
 
@@ -471,14 +377,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-Set.html#82-93" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-Set.html#119-124" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the next element (the one after the current element).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the next element (the one after the current element).</p>
 
 
 
@@ -502,14 +408,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-Set.html#95-99" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-Set.html#126-131" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Moves the cursor to the first element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the cursor to the first element.</p>
 
 
 
@@ -522,59 +428,37 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="valid" id="_valid">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_valid">#</a>
-			<code><a href="source-class-Set.html#101-105" title="Go to source code">valid</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-					<h4>Implementation of</h4>
-					<div class="list"><code>Iterator::valid()</code></div>
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="add" id="_add">
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Set.html">Set</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-Set.html#110-115" title="Go to source code">add</a>( <span> <var>$elements</var></span> )</code>
+			<code><a href="source-class-Set.html#143-153" title="Go to source code">add</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds one or more elements to the set. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds one or more elements to the set. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$elements</var></dt>
+						<dd>The elements to be added.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Set.html">Set</a></code>
+					</div>
 
 
 
@@ -586,24 +470,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Set.html">Set</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-Set.html#117-120" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-Set.html#155-162" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Removes all elements from the set. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes all elements from the set. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Set.html">Set</a></code>
+					</div>
 
 
 
@@ -615,24 +503,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Set.html">Set</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Set.html#122-124" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Set.html#164-171" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a (potentially deep) copy of the set.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a (potentially deep) copy of the set.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>Whether to copy recursively.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Set.html">Set</a></code>
+					</div>
 
 
 
@@ -644,24 +541,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-Set.html#126-131" title="Go to source code">equals</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#173-183" title="Go to source code">equals</a>( <span>mixed <var>$set</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates whether the set is equals to another object.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates whether the set is equals to another object.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$set</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -680,7 +586,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has">#</a>
-			<code><a href="source-class-Set.html#133-135" title="Go to source code">has</a>( <span> <var>$element</var></span> )</code>
+			<code><a href="source-class-Set.html#185-187" title="Go to source code">has</a>( <span> <var>$element</var></span> )</code>
 
 			<div class="description short">
 				
@@ -709,7 +615,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-Set.html#137-143" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-Set.html#189-195" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
 				
@@ -742,7 +648,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-Set.html#145-151" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
+			<code><a href="source-class-Set.html#197-203" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				
@@ -771,7 +677,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-Set.html#153-156" title="Go to source code">remove</a>( <span> <var>$element</var></span> )</code>
+			<code><a href="source-class-Set.html#205-208" title="Go to source code">remove</a>( <span> <var>$element</var></span> )</code>
 
 			<div class="description short">
 				
@@ -800,7 +706,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-Set.html#158-160" title="Go to source code">size</a>( )</code>
+			<code><a href="source-class-Set.html#210-212" title="Go to source code">size</a>( )</code>
 
 			<div class="description short">
 				
@@ -831,7 +737,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_a">#</a>
-			<code><a href="source-class-Set.html#162-168" title="Go to source code">to_a</a>( )</code>
+			<code><a href="source-class-Set.html#214-220" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
 				
@@ -860,7 +766,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_arr">#</a>
-			<code><a href="source-class-Set.html#170-172" title="Go to source code">to_arr</a>( )</code>
+			<code><a href="source-class-Set.html#222-224" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
 				
@@ -889,7 +795,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_dict">#</a>
-			<code><a href="source-class-Set.html#174-182" title="Go to source code">to_dict</a>( )</code>
+			<code><a href="source-class-Set.html#226-233" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
 				
@@ -918,7 +824,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_set">#</a>
-			<code><a href="source-class-Set.html#184-186" title="Go to source code">to_set</a>( )</code>
+			<code><a href="source-class-Set.html#235-237" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
 				
@@ -947,7 +853,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference">#</a>
-			<code><a href="source-class-Set.html#190-198" title="Go to source code">difference</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#241-249" title="Go to source code">difference</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -976,7 +882,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference_update">#</a>
-			<code><a href="source-class-Set.html#200-205" title="Go to source code">difference_update</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#251-256" title="Go to source code">difference_update</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1005,7 +911,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_discard">#</a>
-			<code><a href="source-class-Set.html#207-209" title="Go to source code">discard</a>( <span> <var>$element</var></span> )</code>
+			<code><a href="source-class-Set.html#258-260" title="Go to source code">discard</a>( <span> <var>$element</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1034,7 +940,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersection">#</a>
-			<code><a href="source-class-Set.html#211-219" title="Go to source code">intersection</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#262-270" title="Go to source code">intersection</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1063,7 +969,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersection_update">#</a>
-			<code><a href="source-class-Set.html#221-228" title="Go to source code">intersection_update</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#272-279" title="Go to source code">intersection_update</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1092,7 +998,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdisjoint">#</a>
-			<code><a href="source-class-Set.html#230-232" title="Go to source code">isdisjoint</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#281-283" title="Go to source code">isdisjoint</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1121,7 +1027,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_issubset">#</a>
-			<code><a href="source-class-Set.html#234-244" title="Go to source code">issubset</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#285-295" title="Go to source code">issubset</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1150,7 +1056,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_issuperset">#</a>
-			<code><a href="source-class-Set.html#246-248" title="Go to source code">issuperset</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#297-299" title="Go to source code">issuperset</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1179,7 +1085,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_symmetric_difference">#</a>
-			<code><a href="source-class-Set.html#251-264" title="Go to source code">symmetric_difference</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#302-315" title="Go to source code">symmetric_difference</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1208,7 +1114,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_symmetric_difference_update">#</a>
-			<code><a href="source-class-Set.html#266-285" title="Go to source code">symmetric_difference_update</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#317-324" title="Go to source code">symmetric_difference_update</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1237,7 +1143,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_union">#</a>
-			<code><a href="source-class-Set.html#287-293" title="Go to source code">union</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#326-332" title="Go to source code">union</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1266,7 +1172,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_union_update">#</a>
-			<code><a href="source-class-Set.html#296-298" title="Go to source code">union_update</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#335-337" title="Go to source code">union_update</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1295,7 +1201,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_update">#</a>
-			<code><a href="source-class-Set.html#301-306" title="Go to source code">update</a>( <span> <var>$set</var></span> )</code>
+			<code><a href="source-class-Set.html#340-345" title="Go to source code">update</a>( <span> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				
@@ -1334,46 +1240,25 @@
 				<code><a href="class-Clonable.html#___clone">__clone()</a></code>
 			</p>
 		</div>
-
-
-
-
-
-
-
-
-
-
 		<div class="panel panel-default">
-            <div class="panel-heading"><h2>Properties summary</h2></div>
-			<table class="summary table table-bordered table-striped properties" id="properties">
-		<tr data-order="_dict" id="$_dict">
-			<td class="attributes"><code>
-				protected  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Set.html#9" title="Go to source code"><var>$_dict</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$_dict" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-			</table>
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
 		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>valid()</code>
+			</p>
+		</div>
+
+
+
+
 
 
 

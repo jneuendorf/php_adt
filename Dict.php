@@ -56,7 +56,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     /**
     * Constructor.
     * @param mixed $default_val
-    * @param Traversable $iterable
+    * @param Iterator $iterable
     * @param callable $key_equality
     * @param callable $value_equality
     */
@@ -373,7 +373,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
     /**
     * Returns a new dict with keys from $iterable and values equal to $value.
-    * @param Traversable $iterable Collection of keys.
+    * @param Iterator $iterable Collection of keys.
     * @param mixed $value Value for all pairs.
     * @return Dict
     */
@@ -550,7 +550,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
     /**
     * Updates the dictionary from the given iterable. All items for $iterable are put into this instance. <span class="label label-info">Chainable</span>
-    * @param Traversable $iterable
+    * @param Iterator $iterable
     * @return Dict
     */
     public function update($iterable) {

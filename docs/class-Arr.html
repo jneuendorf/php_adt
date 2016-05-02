@@ -59,6 +59,7 @@
 				<li class="active"><a href="class-Arr.html">Arr</a></li>
 				<li><a href="class-Clonable.html">Clonable</a></li>
 				<li><a href="class-Dict.html">Dict</a></li>
+				<li><a href="class-Lazy.html">Lazy</a></li>
 				<li><a href="class-Set.html">Set</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
@@ -211,7 +212,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_from_iterable">#</a>
-			<code><a href="source-class-Arr.html#71-86" title="Go to source code">from_iterable</a>( <span>Traversable <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+			<code><a href="source-class-Arr.html#71-86" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a new instance from an iterable.</p>
@@ -1582,7 +1583,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_merge">#</a>
-			<code><a href="source-class-Arr.html#707-725" title="Go to source code">merge</a>( <span>Traversable... <var>$iterables</var></span> )</code>
+			<code><a href="source-class-Arr.html#707-725" title="Go to source code">merge</a>( <span>Iterator... <var>$iterables</var></span> )</code>
 
 			<div class="description short">
 				<p>Merges the given iterable(s) into this Arr. <span class="label label-info">Chainable</span></p>
@@ -2364,7 +2365,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_extend">#</a>
-			<code><a href="source-class-Arr.html#1018-1025" title="Go to source code">extend</a>( <span>Traversable... <var>$iterables</var></span> )</code>
+			<code><a href="source-class-Arr.html#1018-1025" title="Go to source code">extend</a>( <span>Iterator... <var>$iterables</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'merge()'. <span class="label label-info">Chainable</span></p>

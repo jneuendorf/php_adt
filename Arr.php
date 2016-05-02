@@ -70,7 +70,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
      * Creates a new instance from an iterable.
-     * @param Traversable $iterable
+     * @param Iterator $iterable
      * @param bool $recursive
      * @return Arr
      */
@@ -706,7 +706,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: 'merge' is in place (not in place => concat)
     /**
     * Merges the given iterable(s) into this Arr. <span class="label label-info">Chainable</span>
-    * @param Traversable... $iterables
+    * @param Iterator... $iterables
     * @return Arr
     */
     public function merge(...$iterables) {
@@ -1017,7 +1017,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: 'extend': new function
     /**
     * Synonym for 'merge()'. <span class="label label-info">Chainable</span>
-    * @param Traversable... $iterables
+    * @param Iterator... $iterables
     * @return Arr
     */
     public function extend(...$iterables) {

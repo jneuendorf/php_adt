@@ -3,11 +3,22 @@
 require_once 'init.php';
 require_once 'AbstractCollection.php';
 
+/**
+ * Set is class with no duplicate elements.
+ */
 class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
-    // maps hashes to lists of values
+    /**
+     * The set elements' hashes are stored as keys for uniqueness. All values are true.
+     * @internal
+     * @var array $_dict
+    */
     protected $_dict;
-    
+
+    /**
+     * Constructor.
+     * @param mixed... $elements
+    */
     public function __construct(...$elements) {
         $this->_dict = new Dict();
         $this->clear();
@@ -16,6 +27,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         }
     }
 
+    /**
+     * Creates a new set from the given iterable (keys are ignored).
+     * @param Iterator $iterable
+    */
     public static function from_iterable($iterable) {
         $res = new static();
         foreach ($iterable as $idx => $element) {
@@ -24,6 +39,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Stringyfies the Set instance.
+     * @return string
+     */
     public function __toString() {
         $res = [];
         foreach ($this as $idx => $element) {
@@ -32,6 +51,10 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return "{\n".implode(", \n", $res)."\n}";
     }
 
+    /**
+     * Exposes the interal array.
+     * @return array
+     */
     public function dict() {
         return $this->_dict;
     }
@@ -41,10 +64,16 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
 
+    /**
+     * @internal
+    */
     public function offsetExists($offset) {
         return $this->has($offset);
     }
 
+    /**
+    * @internal
+    */
     public function offsetGet($offset) {
         if ($this->has($offset)) {
             return $offset;
@@ -52,10 +81,16 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return null;
     }
 
+    /**
+    * @internal
+    */
     public function offsetSet($offset, $value) {
         $this->add($value);
     }
 
+    /**
+    * @internal
+    */
     public function offsetUnset($offset) {
         if ($this->has($offset)) {
             $this->remove($offset);
@@ -65,48 +100,51 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ITERATOR
 
+    /**
+    * Returns the current element.
+    * @return mixed
+    */
     public function current() {
         return $this->_dict->key();
-        // return $this->_dict[$this->_hash_order[$this->_hash_idx]][$this->_bucket_item_idx];
     }
 
+    /**
+    * Returns the current element (since there are no keys).
+    * @return mixed
+    */
     public function key() {
-        // $idx = 0;
-        // for ($i = 0; $i < $this->_hash_idx; $i++) {
-        //     $idx += count($this->_dict[$this->_hash_order[$i]]);
-        // }
-        // return $idx + $this->_bucket_item_idx;
         return $this->_dict->key();
     }
 
+    /**
+    * Moves the cursor to the next element (the one after the current element).
+    */
     public function next() {
-        // // can proceed in current bucket
-        // if ($this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$this->_hash_idx]]) - 1) {
-        //     $this->_bucket_item_idx++;
-        // }
-        // // need to proceed to beginning of next bucket
-        // else {
-        //     $this->_hash_idx++;
-        //     $this->_bucket_item_idx = 0;
-        // }
         $this->_dict->next();
     }
 
+    /**
+    * Moves the cursor to the first element.
+    */
     public function rewind() {
-        // $this->_hash_idx = 0;
-        // $this->_bucket_item_idx = 0;
         $this->_dict->rewind();
     }
 
+    /**
+    * @internal
+    */
     public function valid() {
-        // $h_idx = $this->_hash_idx;
-        // return $h_idx >= 0 && $h_idx < count($this->_hash_order) && $this->_bucket_item_idx < count($this->_dict[$this->_hash_order[$h_idx]]);
         return $this->_dict->valid();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
+    /**
+    * Adds one or more elements to the set. <span class="label label-info">Chainable</span>
+    * @param mixed... $elements The elements to be added.
+    * @return Set
+    */
     public function add(...$elements) {
         foreach ($elements as $key => $element) {
             $this->_dict->put($element, true);
@@ -114,15 +152,29 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+    * Removes all elements from the set. <span class="label label-info">Chainable</span>
+    * @return Set
+    */
     public function clear() {
         $this->_dict->clear();
         return $this;
     }
 
+    /**
+    * Creates a (potentially deep) copy of the set.
+    * @param bool $deep Whether to copy recursively.
+    * @return Set
+    */
     public function copy($deep=false) {
         return static::from_iterable($this);
     }
 
+    /**
+    * Indicates whether the set is equals to another object.
+    * @param mixed $set
+    * @return bool
+    */
     public function equals($set) {
         if ($set instanceof self) {
             return $this->_dict->equals($set->dict());
@@ -172,7 +224,6 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     public function to_dict() {
-        // return $this->_dict->copy();
         $keys = $this->_dict->keys();
         $res = new Dict();
         foreach ($keys as $idx => $key) {
@@ -269,18 +320,6 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         foreach ($sym_diff as $idx => $element) {
             $this->add($element);
         }
-        // // union
-        // $this->update($set);
-        // // remove intersection
-        // foreach ($this as $idx => $element) {
-        //     var_dump('checking');
-        //     var_dump($element);
-        //     // element in intersection
-        //     if ($set->has($element)) {
-        //         var_dump("removed it!\n");
-        //         $this->remove($element);
-        //     }
-        // }
         return $this;
     }
 

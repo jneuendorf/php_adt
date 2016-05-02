@@ -19,7 +19,7 @@ function p(...$args) {
 }
 
 function is_iterable($x) {
-    return is_array($x) || (is_object($x) && $x instanceof Traversable);
+    return is_array($x) || (is_object($x) && $x instanceof Iterator);
 }
 
 function __equals($x, $y) {

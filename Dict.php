@@ -17,6 +17,7 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
     protected $_bucket_item_idx;
     protected $_hash_order;
 
+    // TODO: construct equality function
     public function __construct($default_val=null, $iterable=null) {
         $this->clear();
         $this->default_val = $default_val;

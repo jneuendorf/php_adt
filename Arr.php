@@ -484,6 +484,15 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
+    * Moves the cursor to the last element. <span class="label label-info">Chainable</span>
+    * @return Arr
+    */
+    public function end() {
+        $this->_position = $this->_size - 1;
+        return $this;
+    }
+
+    /**
     * Returns the index of the current element.
     * @return int
     */
@@ -574,6 +583,13 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->diff(...$args);
     }
 
+    /**
+    * Groups the elements where each element is associated with what's returned by the 'group_func' parameter. Each group is an instance of Arr.
+    * @param Callable $group_func The argument is called with the currently iterated element. <code>mixed $group_func(mixed $current_element)</code>
+    * If no Callable is passed the elements are grouped by whatever is considered equal.
+    * @return Dict
+    * TODO: pass equality function to Dict constructor
+    */
     public function group_by($group_func=null) {
         if ($group_func === null) {
             $group_func = function($elem) {
@@ -596,12 +612,12 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // current() is defined above (iterator interface section)
     // API-CHANGE: 'each' function not implemented
 
-    public function end() {
-        $this->_position = $this->_size - 1;
-        return $this;
-    }
-
     // API-CHANGE: new function 'flatten'
+    /**
+    * Flattens the list of contained elements.
+    * @param bool $deep Indicates whether to flatten all levels or just the first.
+    * @return Arr
+    */
     public function flatten($deep=false) {
         $flattened = new Arr();
         foreach ($this as $idx => $value) {
@@ -616,10 +632,21 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: new function 'get'
+    /**
+    * Gets an elements at a given index (negative numeric indices are possible).
+    * @param int|string|array $idx Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing
+    * @return mixed
+    */
     public function get($idx) {
         return $this->offsetGet($idx);
     }
 
+    /**
+    * Returns the intersection of this and the given Arr instance.
+    * @param Arr $arr
+    * @param Callable $equality
+    * @return Arr
+    */
     public function intersect($arr, $equality='__equals') {
         $res = new Arr();
         foreach ($this as $idx => $elem) {
@@ -634,26 +661,47 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // key() is defined above (iterator interface section)
     // API-CHANGE: 'key_exists' function not implemented
 
+    /**
+    * Returns a new Arr instance with each element mapped to (potentially) another value.
+    * @param Callable $callback The parameter is called like this: <code>$callback($element, $idx)</code>
+    * @return Arr
+    */
     public function map($callback) {
-        return new Arr(...array_map($callback, $this->_elements));
+        $res = new Arr();
+        foreach ($this as $idx => $element) {
+            $res->push($callback($element, $idx));
+        }
+        return $res;
+        // return new Arr(...array_map($callback, $this->_elements));
     }
 
     // API-CHANGE: 'merge' is in place (not in place => concat)
-    public function merge(...$arrs) {
-        foreach ($arrs as $idx => $arr) {
-            if ($arr instanceof self) {
-                foreach ($arr as $i => $element) {
+    /**
+    * Merges the given iterable(s) into this Arr. <span class="label label-info">Chainable</span>
+    * @param Traversable... $iterables
+    * @return Arr
+    */
+    public function merge(...$iterables) {
+        foreach ($iterables as $key => $value) {
+            // if ($value instanceof self) {
+            if (is_array($value) || $value instanceof Traversable) {
+                foreach ($value as $i => $element) {
                     $this->push($element);
                 }
             }
             else {
-                $this->push($arr);
+                $this->push($value);
             }
         }
         return $this;
     }
 
     // API-CHANGE: 'merge_recursive' is in place (not in place => concat)
+    /**
+    * Merges the given instance of Arr recursively into this Arr. <span class="label label-info">Chainable</span>
+    * @param Arr $arr
+    * @return Arr
+    */
     public function merge_recursive($arr) {
         foreach ($arr as $i => $element) {
             if ($element instanceof self && $this->_elements[$i] instanceof self) {
@@ -668,6 +716,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // next() is defined above (iterator interface section)
 
+    /**
+    * Removes an element from this Arr and returns that element. If an index is specified the according element will be removed. Otherwise the last element will be removed.
+    * @param int $index
+    * @return mixed
+    */
     public function pop($index=null) {
         if ($index === null) {
             $index = $this->_size - 1;
@@ -676,14 +729,32 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $removed_elements[0];
     }
 
+    /**
+    * Removes the first element from this Arr and returns that element.
+    * @return mixed
+    */
     public function popfirst() {
         return $this->pop(0);
     }
 
+    /**
+    * Synonym for 'current()'.
+    */
     public function pos() {
         return $this->current();
     }
 
+    /**
+    * Synonym for 'unshift()'.
+    */
+    public function prepend(...$elements) {
+        return $this->unshift(...$elements);
+    }
+
+    /**
+    * Opposite of 'next()'.
+    * @throws Exception
+    */
     public function prev() {
         $this->_position--;
         if ($this->_position >= 0 && $this->_position < $this->_size) {
@@ -693,13 +764,22 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: 'push': is chainable (returns $this instead of $new_length)
+    /**
+    * Adds one or more element to the end of this Arr. <span class="label label-info">Chainable</span>
+    * @param mixed... $args
+    * @return Arr
+    */
     public function push(...$args) {
-        $new_length = array_push($this->_elements, ...$args);
-        $this->_size = $new_length;
+        $this->_size = array_push($this->_elements, ...$args);
         return $this;
     }
 
     // API-CHANGE: 'replace': takes Dict as set of replacements
+    /**
+    * Replaces all occurences of the keys of the $replacements argument with the according value (of $replacements). <span class="label label-info">Chainable</span>
+    * @param Dict $replacements An instance of Dict mapping old to new values.
+    * @return Arr
+    */
     public function replace($replacements) {
         foreach ($replacements as $old_val => $new_val) {
             $idx = $this->index($old_val);
@@ -714,16 +794,29 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: 'replace_recursive': not implemented
 
     // API-CHANGE: 'reset': is chainable
+    /**
+    * Synonym for 'rewind()' but chainable. <span class="label label-info">Chainable</span>
+    * @return Arr
+    */
     public function reset() {
-        return $this->rewind();
+        $this->rewind();
+        return $this;
     }
 
     // API-CHANGE: 'reversed': is not in place (<=> array_reverse)
+    /**
+    * Returns a new Arr instance with reversed elements.
+    * @return Arr
+    */
     public function reversed() {
         return new static(...array_reverse($this->_elements));
     }
 
     // API-CHANGE: 'reverse': is in place
+    /**
+    * Reverses the elements of this. <span class="label label-info">Chainable</span>
+    * @return Arr
+    */
     public function reverse() {
         $left = 0;
         $right = $this->_size - 1;
@@ -738,10 +831,17 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+    * Synonym for 'index()'.
+    */
     public function search(...$args) {
         return $this->index(...$args);
     }
 
+    /**
+    * Shifts the first value off and returns it, shortening the Arr by one element and moving everything down. Also resets the cursor.
+    * @return mixed
+    */
     public function shift() {
         if ($this->_size > 0) {
             $removed_element = array_shift($this->_elements);
@@ -753,6 +853,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: 'shuffle': @throws Exception
+    /**
+    * Randomizes the order of the elements of this. <span class="label label-info">Chainable</span>
+    * @throws Exception
+    * @return Arr
+    */
     public function shuffle() {
         if (shuffle($this->_elements)) {
             return $this;
@@ -760,6 +865,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         throw new Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
     }
 
+    /**
+    * Sorts the elements of this. <span class="label label-info">Chainable</span>
+    * @param Callable $cmp_function This optional parameter can be used to define how two elements compare.
+    * @return Arr
+    */
     public function sort($cmp_function='__mergesort_compare') {
         __mergesort($this->_elements, $cmp_function);
         return $this;
@@ -767,6 +877,13 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // API-CHANGE: if $length is not given does NOT remove everything after $offset (including $offset) but does not remove anything
     // API-CHANGE: inserted elements are passed as separate parameters - not as an array of elements
+    /**
+    * Removes $length elements at an $offset from this Arr and adds the given $new_elements at that $offset. The removed elements are returned as an instance of Arr.
+    * @param int $offset Where to remove/insert.
+    * @param int $length How many elements to remove (optional).
+    * @param mixed... $new_elements Elements to insert (optional).
+    * @return Arr
+    */
     public function splice($offset, $length=0, ...$new_elements) {
         $offset = $this->_adjust_offset($offset);
         $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
@@ -774,6 +891,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return new static(...$removed_elements);
     }
 
+    /**
+    * Returns a new Arr instance that has no duplicates (according to $equality).
+    * @param Callable $equality This optional parameter can be used to define equality of elements.
+    * @return Arr
+    */
     public function unique($equality='__equals') {
         $res = new Arr();
         foreach ($this as $idx => $element) {
@@ -788,52 +910,90 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: 'uintersect': not implemented (callback can be passed to 'intersect')
 
     // API-CHANGE: 'unshift': chainable, @return $this instead of $new_length
-    public function unshift(...$args) {
-        $length = array_unshift($this->_elements, ...$args);
+    /**
+    * Add $elements to the beginning of this Arr. <span class="label label-info">Chainable</span>
+    * @param mixed... $elements
+    * @return Arr
+    */
+    public function unshift(...$elements) {
+        $length = array_unshift($this->_elements, ...$elements);
         $this->_size += $length;
         return $this;
     }
 
-    // API-CHANGE: 'walk_recursive': throws Exception
-    public function walk_recursive(...$args) {
-        if (array_walk_recursive($this->_elements, ...$args)) {
-            return $this;
-        }
-        throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
-    }
+    // // API-CHANGE: 'walk_recursive': throws Exception
+    // /**
+    // * Add $elements to the beginning of this Arr. <span class="label label-info">Chainable</span>
+    // * @param mixed... $elements
+    // * @throws Exception
+    // * @return Arr
+    // */
+    // public function walk_recursive(...$args) {
+    //     if (array_walk_recursive($this->_elements, ...$args)) {
+    //         return $this;
+    //     }
+    //     throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
+    // }
+    //
+    // // API-CHANGE: 'walk': throws Exception
+    // public function walk(...$args) {
+    //     if (array_walk($this->_elements, ...$args)) {
+    //         return $this;
+    //     }
+    //     throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
+    // }
 
-    // API-CHANGE: 'walk': throws Exception
-    public function walk(...$args) {
-        if (array_walk($this->_elements, ...$args)) {
-            return $this;
-        }
-        throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
-    }
     // API-CHANGE: 'without': new. like 'diff' but each argument is an element and not an Arr/array
-    public function without(...$args) {
-        return $this->diff(new Arr(...$args));
+    /**
+    * Returns a new Arr that does not contain any element of $elements. This method does the same as 'diff()' but takes the elements as separate arguments instead of an Arr.
+    * @param mixed... $elements
+    * @return Arr
+    */
+    public function without(...$elements) {
+        return $this->diff(new Arr(...$elements));
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
     // EXTENDING THE API: adapt to python mutable sequence API
 
     // API-CHANGE: 'append': new function (alias for push)
-    public function append(...$args) {
-        return $this->push(...$args);
+    /**
+    * Synonym for 'push()'. <span class="label label-info">Chainable</span>
+    * @param mixed... $elements
+    * @return Arr
+    */
+    public function append(...$elements) {
+        return $this->push(...$elements);
     }
 
     // clear() is implemented above (collection interface section)
 
     // API-CHANGE: 'extend': new function
-    public function extend($iterable) {
-        foreach ($iterable as $key => $value) {
-            $new_length = array_push($this->_elements, $value);
-        }
-        $this->_size = $new_length;
-        return $this;
+    /**
+    * Synonym for 'merge()'. <span class="label label-info">Chainable</span>
+    * @param Traversable... $iterables
+    * @return Arr
+    */
+    public function extend(...$iterables) {
+        return $this->merge(...$iterables);
     }
+    // public function extend($iterable) {
+    //     foreach ($iterable as $key => $value) {
+    //         $new_length = array_push($this->_elements, $value);
+    //     }
+    //     $this->_size = $new_length;
+    //     return $this;
+    // }
 
     // API-CHANGE: 'index': new function
+    /**
+    * Returns the first index of given $needle or null if the $needle is not found.
+    * @param mixed $needle
+    * @param int $start Where to start searching (inclusive).
+    * @param int $stop Where to stop searching (exclusive).
+    * @param Callable $equality This optional parameter can be used to define what elements is considered a match.
+    * @return int
+    */
     public function index($needle, $start=0, $stop=null, $equality='__equals') {
         if ($stop === null) {
             $stop = $this->_size;
@@ -846,8 +1006,15 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return null;
     }
 
+    /**
+    * Inserts one or more elements into this at a given $index. <span class="label label-info">Chainable</span>
+    * @param int $index Where to insert.
+    * @param mixed... $elements The element(s) to insert.
+    * @return Arr
+    */
     public function insert($index, ...$elements) {
-        return $this->splice($index, 0, ...$elements);
+        $this->splice($index, 0, ...$elements);
+        return $this;
     }
 
     // pop([index]) is implemented above (php array section)

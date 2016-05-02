@@ -182,10 +182,19 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return false;
     }
 
+    /**
+    * Indicates whether the given element is contained in this set.
+    * @param mixed $element
+    * @return bool
+    */
     public function has($element) {
         return $this->_dict->has($element);
     }
 
+    /**
+    * Calculates a hash value of the set.
+    * @return int
+    */
     public function hash() {
         $res = 0;
         foreach ($this as $idx => $value) {
@@ -194,6 +203,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Returns a new Set instance with each element mapped to (potentially) another value.
+    * @param callable $callback The parameter is called like this: <code>$callback($element)</code>
+    * @return Set
+    */
     public function map($callback) {
         $res = new Set();
         foreach ($this as $idx => $element) {
@@ -202,15 +216,28 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+    * Remove an element from a set if it is a member. If the element is not a member, do nothing. <span class="label label-info">Chainable</span>
+    * @param mixed $element
+    * @return Set
+    */
     public function remove($element) {
         $this->_dict->remove($element);
         return $this;
     }
 
+    /**
+    * Returns the current size of the set.
+    * @return int
+    */
     public function size() {
         return $this->_dict->size();
     }
 
+    /**
+     * Converts the set to a native array.
+     * @return array
+     */
     public function to_a() {
         $res = [];
         foreach ($this->_dict->keys() as $idx => $key) {
@@ -219,10 +246,18 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Converts the set to an instance of Arr.
+     * @return Arr
+     */
     public function to_arr() {
         return Arr::from_iterable($this->_dict->keys());
     }
 
+    /**
+     * Converts the set to an instance of Dict.
+     * @return Dict
+     */
     public function to_dict() {
         $keys = $this->_dict->keys();
         $res = new Dict();
@@ -232,12 +267,21 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Creates a copy of the set.
+     * @return Set
+     */
     public function to_set() {
         return $this->copy();
     }
 
     // PYTHON API
 
+    /**
+     * Returns the difference of two sets as a new set (all elements that are in this set but not the other).
+     * @param Set $set
+     * @return Set
+     */
     public function difference($set) {
         $res = new Set();
         foreach ($this as $idx => $element) {
@@ -248,6 +292,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Removes all elements of another set from this set. <span class="label label-info">Chainable</span>
+     * @param Set $set
+     * @return Set
+     */
     public function difference_update($set) {
         foreach ($set as $idx => $element) {
             $this->remove($element);
@@ -255,10 +304,20 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+     * Synonym for 'remove()'.
+     * @param mixed $element
+     * @return Set
+     */
     public function discard($element) {
         return $this->remove($element);
     }
 
+    /**
+     * Returns the intersection of two sets as a new set (all elements that are in both sets).
+     * @param Set $set
+     * @return Set
+     */
     public function intersection($set) {
         $res = new Set();
         foreach ($set as $idx => $element) {
@@ -269,6 +328,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Updates a set with the intersection of itself and another. <span class="label label-info">Chainable</span>
+     * @param Set $set
+     * @return Set
+     */
     public function intersection_update($set) {
         foreach ($this as $idx => $element) {
             if (!$set->has($element)) {
@@ -278,10 +342,20 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+     * Returns true if the intersection of two sets is empty.
+     * @param Set $set
+     * @return bool
+     */
     public function isdisjoint($set) {
         return $this->intersection($set)->is_empty();
     }
 
+    /**
+     * Reports whether another set contains this set.
+     * @param Set $set
+     * @return bool
+     */
     public function issubset($set) {
         if ($set->size() < $this->size()) {
             return false;
@@ -294,11 +368,20 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return true;
     }
 
+    /**
+     * Reports whether this set contains another set.
+     * @param Set $set
+     * @return bool
+     */
     public function issuperset($set) {
         return $set->issubset($this);
     }
 
-    // == union without intersection
+    /**
+     * Returns the symmetric difference of two sets as a new set (all elements that are in exactly one of the sets, union without intersection).
+     * @param Set $set
+     * @return Set
+     */
     public function symmetric_difference($set) {
         $res = new Set();
         foreach ($this as $idx => $element) {
@@ -314,6 +397,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $res;
     }
 
+    /**
+     * Updates a set with the symmetric difference of itself and another. <span class="label label-info">Chainable</span>
+     * @param Set $set
+     * @return Set
+     */
     public function symmetric_difference_update($set) {
         $sym_diff = $this->symmetric_difference($set);
         $this->clear();
@@ -323,6 +411,11 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
+    /**
+     * Return the union of sets as a new set (all elements that are in either set).
+     * @param Set $set
+     * @return Set
+     */
     public function union($set) {
         $res = $this->copy();
         foreach ($set as $idx => $element) {
@@ -332,11 +425,21 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     // API-CHANGE: added for naming consistency
+    /**
+     * Synonym for 'update()'. <span class="label label-info">Chainable</span>
+     * @param Set $set
+     * @return Set
+     */
     public function union_update($set) {
         return $this->update($set);
     }
 
     // union in place
+    /**
+     * Update a set with the union of itself and others. <span class="label label-info">Chainable</span>
+     * @param Set $set
+     * @return Set
+     */
     public function update($set) {
         foreach ($set as $idx => $element) {
             $this->add($element);

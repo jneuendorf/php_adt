@@ -22,6 +22,7 @@ function is_iterable($x) {
     return is_array($x) || (is_object($x) && $x instanceof Iterator);
 }
 
+
 function __equals($x, $y) {
     if ($x === $y) {
         return true;

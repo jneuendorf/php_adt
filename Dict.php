@@ -73,6 +73,10 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
         }
     }
 
+    /**
+     * Stringifies the dict instance.
+     * @return string
+     */
     public function __toString() {
         $res = [];
         foreach ($this as $key => $value) {

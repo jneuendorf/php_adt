@@ -4,7 +4,7 @@ require_once 'init.php';
 require_once 'AbstractCollection.php';
 
 /**
- * Set is class with no duplicate elements.
+ * Set is collection class with no duplicate elements.
  */
 class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
@@ -40,7 +40,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
-     * Stringyfies the Set instance.
+     * Stringifies the Set instance.
      * @return string
      */
     public function __toString() {
@@ -171,7 +171,7 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
-    * Indicates whether the set is equals to another object.
+    * Indicates whether the set is equal to another object.
     * @param mixed $set
     * @return bool
     */

@@ -155,7 +155,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
-     * Stringyfies the Arr instance.
+     * Stringifies the Arr instance.
      * @return string
      */
     public function __toString() {

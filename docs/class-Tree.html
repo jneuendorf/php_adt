@@ -99,6 +99,10 @@
 	<h1>Class Tree</h1>
 
 
+	<div class="description">
+	<p>Tree is class implementing a tree structure with nodes knowing both their children and their parents.
+In this documentation, 'tree' and 'node' will often describe the same thing from different perspectives.</p>
+	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -146,7 +150,7 @@
 		
 		
 
-			<b>Located at</b> <a href="source-class-Tree.html#7-319" title="Go to source code">Tree.php</a>
+			<b>Located at</b> <a href="source-class-Tree.html#7-491" title="Go to source code">Tree.php</a>
 		<br>
 	</div>
 
@@ -159,24 +163,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Tree.html#17-24" title="Go to source code">__construct</a>( <span> <var>$data_source</var> = <span class="php-keyword1">null</span></span>, <span> <var>$children</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Tree.html#44-57" title="Go to source code">__construct</a>( <span>mixed <var>$data_source</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-Arr.html">Arr</a></code> <var>$children</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Constructor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Constructor.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$data_source</var></dt>
+						<dd>Data associated with the node.</dd>
+						<dt><var>$children</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -188,53 +203,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				string
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-Tree.html#26-32" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-Tree.html#59-69" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Stringifies the Tree instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Stringifies the Tree instance.</p>
 
 
 
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="_level_order" id="__level_order">
-
-			<td class="attributes"><code>
-				 protected static
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#__level_order">#</a>
-			<code><a href="source-class-Tree.html#34-42" title="Go to source code">_level_order</a>( <span> <var>$tree_node</var></span>, <span> <var>$accumulator</var></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
 
 
 
@@ -253,16 +243,25 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_traverse">#</a>
-			<code><a href="source-class-Tree.html#46-67" title="Go to source code">traverse</a>( <span> <var>$tree_node</var></span>, <span> <var>$order</var></span>, <span> <var>$accumulator</var></span> )</code>
+			<code><a href="source-class-Tree.html#87-113" title="Go to source code">traverse</a>( <span><code><a href="class-Tree.html">Tree</a></code> <var>$tree_node</var></span>, <span>integer <var>$order</var></span>, <span><code><a href="class-Arr.html">Arr</a></code> <var>$accumulator</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a sequence of nodes by modifying the $accumulator parameter. This is used as a helper method internally. Therefore using the 'iterable()' method is recommended.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a sequence of nodes by modifying the $accumulator parameter. This is used as a helper method internally. Therefore using the 'iterable()' method is recommended.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tree_node</var></dt>
+						<dd>The root of the traversal.</dd>
+						<dt><var>$order</var></dt>
+						<dd>Either of the *_ORDER constants.</dd>
+						<dt><var>$accumulator</var></dt>
+						<dd>The sequence that holds the tree nodes in wanted order after this method has been called.</dd>
+					</dl></div>
 
 
 
@@ -275,24 +274,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_iterable">#</a>
-			<code><a href="source-class-Tree.html#69-73" title="Go to source code">iterable</a>( <span> <var>$order</var> = <code><a href="class-Tree.html#PRE_ORDER">Tree::<b>PRE_ORDER</b></a></code></span> )</code>
+			<code><a href="source-class-Tree.html#115-124" title="Go to source code">iterable</a>( <span>integer <var>$order</var> = <code><a href="class-Tree.html#PRE_ORDER">Tree::<b>PRE_ORDER</b></a></code></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a sequence of nodes in a certain order.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a sequence of nodes in a certain order.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$order</var></dt>
+						<dd>Either of the *_ORDER constants.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -304,24 +312,32 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pre_order">#</a>
-			<code><a href="source-class-Tree.html#76-78" title="Go to source code">pre_order</a>( )</code>
+			<code><a href="source-class-Tree.html#127-133" title="Go to source code">pre_order</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::PRE_ORDER)</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::PRE_ORDER)</pre>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -333,24 +349,32 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_post_order">#</a>
-			<code><a href="source-class-Tree.html#80-82" title="Go to source code">post_order</a>( )</code>
+			<code><a href="source-class-Tree.html#135-141" title="Go to source code">post_order</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::POST_ORDER)</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::POST_ORDER)</pre>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -362,24 +386,32 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_level_order">#</a>
-			<code><a href="source-class-Tree.html#84-86" title="Go to source code">level_order</a>( )</code>
+			<code><a href="source-class-Tree.html#143-149" title="Go to source code">level_order</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::LEVEL_ORDER)</pre>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Shortcut for calling</p>
+
+<pre><span class="php-var">$this</span>-&gt;iterable(Tree::LEVEL_ORDER)</pre>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -398,14 +430,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-Tree.html#90-98" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-Tree.html#153-165" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Calculates a hash value of the tree.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Calculates a hash value of the tree.</p>
 
 
 
@@ -424,24 +456,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Tree.html#102-111" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Tree.html#169-183" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a deep copy of the tree.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a deep copy of the tree.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>This parameter has no effect and exists due to the interface of clonable.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -453,24 +494,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-Tree.html#119-135" title="Go to source code">equals</a>( <span> <var>$tree</var></span> )</code>
+			<code><a href="source-class-Tree.html#191-212" title="Go to source code">equals</a>( <span>mixed <var>$tree</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Indicates whether the tree is equal to another object.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates whether the tree is equal to another object.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tree</var></dt>
+						<dd></dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -482,24 +532,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Set.html">Set</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_find">#</a>
-			<code><a href="source-class-Tree.html#137-145" title="Go to source code">find</a>( <span> <var>$filter</var></span> )</code>
+			<code><a href="source-class-Tree.html#214-227" title="Go to source code">find</a>( <span>callable <var>$filter</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Searches the tree for a node that fulfills the $filter and returns a Set of those nodes.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Searches the tree for a node that fulfills the $filter and returns a Set of those nodes.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$filter</var></dt>
+						<dd><p>The filter determines which nodes are considered valid.</p>
 
+<pre>boolean <span class="php-var">$filter</span>(<span class="php-var">$node</span>)</pre></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Set.html">Set</a></code>
+					</div>
 
 
 
@@ -511,24 +572,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_depth">#</a>
-			<code><a href="source-class-Tree.html#147-156" title="Go to source code">depth</a>( )</code>
+			<code><a href="source-class-Tree.html#229-242" title="Go to source code">depth</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the depth of the tree.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the depth of the tree.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -540,24 +605,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-Tree.html#158-164" title="Go to source code">size</a>( )</code>
+			<code><a href="source-class-Tree.html#244-254" title="Go to source code">size</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the size of the tree. That means the number of all nodes in the tree (including the root).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the size of the tree. That means the number of all nodes in the tree (including the root).</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -569,24 +638,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_level">#</a>
-			<code><a href="source-class-Tree.html#166-168" title="Go to source code">level</a>( )</code>
+			<code><a href="source-class-Tree.html#256-262" title="Go to source code">level</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the level of the node.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the level of the node.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
@@ -598,24 +671,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_root">#</a>
-			<code><a href="source-class-Tree.html#170-179" title="Go to source code">root</a>( )</code>
+			<code><a href="source-class-Tree.html#264-277" title="Go to source code">root</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the root of the node.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the root of the node.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -627,24 +704,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_parent">#</a>
-			<code><a href="source-class-Tree.html#181-183" title="Go to source code">parent</a>( )</code>
+			<code><a href="source-class-Tree.html#279-285" title="Go to source code">parent</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the parent of the node.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the parent of the node.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -656,24 +737,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_children">#</a>
-			<code><a href="source-class-Tree.html#185-187" title="Go to source code">children</a>( )</code>
+			<code><a href="source-class-Tree.html#287-293" title="Go to source code">children</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns the children of the node.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns the children of the node.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -685,24 +770,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_leaves">#</a>
-			<code><a href="source-class-Tree.html#189-200" title="Go to source code">leaves</a>( )</code>
+			<code><a href="source-class-Tree.html#295-310" title="Go to source code">leaves</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns all leaves of the tree.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns all leaves of the tree.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -714,24 +803,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_is_leaf">#</a>
-			<code><a href="source-class-Tree.html#202-204" title="Go to source code">is_leaf</a>( )</code>
+			<code><a href="source-class-Tree.html#312-318" title="Go to source code">is_leaf</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Indicates whether the node is a leaf (a leaf has no children).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Indicates whether the node is a leaf (a leaf has no children).</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
 
 
 
@@ -743,24 +836,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_siblings">#</a>
-			<code><a href="source-class-Tree.html#206-217" title="Go to source code">siblings</a>( )</code>
+			<code><a href="source-class-Tree.html#320-335" title="Go to source code">siblings</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a list of all siblings with the same parent.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a list of all siblings with the same parent.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -772,24 +869,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_level_siblings">#</a>
-			<code><a href="source-class-Tree.html#219-224" title="Go to source code">level_siblings</a>( )</code>
+			<code><a href="source-class-Tree.html#337-346" title="Go to source code">level_siblings</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a list of all nodes in the tree that have the same level.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a list of all nodes in the tree that have the same level.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -801,24 +902,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_descendants">#</a>
-			<code><a href="source-class-Tree.html#226-236" title="Go to source code">descendants</a>( )</code>
+			<code><a href="source-class-Tree.html#348-362" title="Go to source code">descendants</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a list of all nodes in the tree (except the current node).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a list of all nodes in the tree (except the current node).</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -830,53 +935,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_path_to_root">#</a>
-			<code><a href="source-class-Tree.html#239-247" title="Go to source code">path_to_root</a>( )</code>
+			<code><a href="source-class-Tree.html#364-376" title="Go to source code">path_to_root</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Returns a list of nodes that describes the path to the root node. The current node is not included.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Returns a list of nodes that describes the path to the root node. The current node is not included.</p>
 
 
 
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="path_from_root" id="_path_from_root">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_path_from_root">#</a>
-			<code><a href="source-class-Tree.html#249-251" title="Go to source code">path_from_root</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
 
 
 
@@ -888,24 +968,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_set_parent">#</a>
-			<code><a href="source-class-Tree.html#256-258" title="Go to source code">set_parent</a>( <span> <var>$new_parent</var></span> )</code>
+			<code><a href="source-class-Tree.html#389-396" title="Go to source code">set_parent</a>( <span> <var>$new_parent</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Sets the parent of a node. This method should be used carefully because the parent's children are not modified. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Sets the parent of a node. This method should be used carefully because the parent's children are not modified. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -917,24 +1001,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-Tree.html#260-279" title="Go to source code">add</a>( <span> <var>$tree_node</var></span>, <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Tree.html#398-423" title="Go to source code">add</a>( <span>mixed <var>$tree_node</var></span>, <span>integer <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds a node as child of the current node.  <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds a node as child of the current node.  <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tree_node</var></dt>
+						<dd>The new node. Also the data source for the node can be passed (it will be wrapped into a node automatically).</dd>
+						<dt><var>$index</var></dt>
+						<dd>The index can define at what position (among the siblings) the node will be added.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -946,24 +1041,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add_multiple">#</a>
-			<code><a href="source-class-Tree.html#281-290" title="Go to source code">add_multiple</a>( <span> <var>$tree_nodes</var></span>, <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Tree.html#425-440" title="Go to source code">add_multiple</a>( <span><code><a href="class-Arr.html">Arr</a></code> <var>$tree_nodes</var></span>, <span>integer <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Adds multiple nodes to the tree. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Adds multiple nodes to the tree. <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tree_nodes</var></dt>
+						<dd>The nodes to add.</dd>
+						<dt><var>$index</var></dt>
+						<dd>The index can define at what position (among the siblings) the nodes will be added.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -975,24 +1081,33 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Arr.html">Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_set_children">#</a>
-			<code><a href="source-class-Tree.html#292-299" title="Go to source code">set_children</a>( <span> <var>$tree_nodes</var></span> )</code>
+			<code><a href="source-class-Tree.html#442-454" title="Go to source code">set_children</a>( <span><code><a href="class-Arr.html">Arr</a></code> <var>$tree_nodes</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Sets the children of a node and returns the previous ones.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Sets the children of a node and returns the previous ones.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tree_nodes</var></dt>
+						<dd>The new children to add.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code><br>The children of the node before calling this method.
+					</div>
 
 
 
@@ -1004,24 +1119,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_move_to">#</a>
-			<code><a href="source-class-Tree.html#301-305" title="Go to source code">move_to</a>( <span> <var>$new_parent</var></span>, <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Tree.html#456-466" title="Go to source code">move_to</a>( <span><code><a href="class-Tree.html">Tree</a></code> <var>$new_parent</var></span>, <span>integer <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Moves the node to another place in the tree. It must not be used for moving a node between different trees! <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Moves the node to another place in the tree. It must not be used for moving a node between different trees! <span class="label label-info">Chainable</span></p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$new_parent</var></dt>
+						<dd>The new parent of the node.</dd>
+						<dt><var>$index</var></dt>
+						<dd>The index can define at what position (among the siblings) the node will be added.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -1033,24 +1159,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-Tree.html#307-313" title="Go to source code">remove</a>( )</code>
+			<code><a href="source-class-Tree.html#468-478" title="Go to source code">remove</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Removes a node (and the entire subtree) from the tree. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes a node (and the entire subtree) from the tree. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -1062,24 +1192,28 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Tree.html">Tree</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-Tree.html#315-318" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-Tree.html#480-490" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Removes all nodes from the tree. The children's parents will be set to null. <span class="label label-info">Chainable</span></p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Removes all nodes from the tree. The children's parents will be set to null. <span class="label label-info">Chainable</span></p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Tree.html">Tree</a></code>
+					</div>
 
 
 
@@ -1114,18 +1248,18 @@
 			<table class="summary table table-bordered table-striped constants" id="constants">
 			<tr data-order="PRE_ORDER" id="PRE_ORDER">
 
-				<td class="attributes"><code>integer</code></td>
+				<td class="attributes"><code><code><a href="class-Tree.html#PRE_ORDER">Tree::<b>PRE_ORDER</b></a></code></code></td>
 				<td class="name">
 					<code>
-						<a href="source-class-Tree.html#9" title="Go to source code"><b>PRE_ORDER</b></a>
+						<a href="source-class-Tree.html#12-16" title="Go to source code"><b>PRE_ORDER</b></a>
 					</code>
 
 					<div class="description short">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in pre order (parent before children).</p>
 					</div>
 
 					<div class="description detailed hidden">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in pre order (parent before children).</p>
 
 					</div>
 				</td>
@@ -1138,18 +1272,18 @@
 			</tr>
 			<tr data-order="POST_ORDER" id="POST_ORDER">
 
-				<td class="attributes"><code>integer</code></td>
+				<td class="attributes"><code><code><a href="class-Tree.html#POST_ORDER">Tree::<b>POST_ORDER</b></a></code></code></td>
 				<td class="name">
 					<code>
-						<a href="source-class-Tree.html#10" title="Go to source code"><b>POST_ORDER</b></a>
+						<a href="source-class-Tree.html#17-21" title="Go to source code"><b>POST_ORDER</b></a>
 					</code>
 
 					<div class="description short">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in post order (children before parent).</p>
 					</div>
 
 					<div class="description detailed hidden">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in post order (children before parent).</p>
 
 					</div>
 				</td>
@@ -1162,18 +1296,18 @@
 			</tr>
 			<tr data-order="LEVEL_ORDER" id="LEVEL_ORDER">
 
-				<td class="attributes"><code>integer</code></td>
+				<td class="attributes"><code><code><a href="class-Tree.html#LEVEL_ORDER">Tree::<b>LEVEL_ORDER</b></a></code></code></td>
 				<td class="name">
 					<code>
-						<a href="source-class-Tree.html#11" title="Go to source code"><b>LEVEL_ORDER</b></a>
+						<a href="source-class-Tree.html#22-26" title="Go to source code"><b>LEVEL_ORDER</b></a>
 					</code>
 
 					<div class="description short">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in level order (top to bottom).</p>
 					</div>
 
 					<div class="description detailed hidden">
-						
+						<p>This constant can be passed to the 'iterable()' method to traverse the tree in level order (top to bottom).</p>
 
 					</div>
 				</td>
@@ -1196,74 +1330,24 @@
 		<tr data-order="data_source" id="$data_source">
 			<td class="attributes"><code>
 				public  
-				
+				mixed
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Tree.html#13" title="Go to source code"><var>$data_source</var></a>
+					<a href="source-class-Tree.html#28-32" title="Go to source code"><var>$data_source</var></a>
 
 				<div class="description short">
-					
+					<p>This variables can hold anything associated with the tree node.</p>
 				</div>
 
 				<div class="description detailed hidden">
-					
+					<p>This variables can hold anything associated with the tree node.</p>
 
 				</div>
 			</td>
 			<td class="value">
 				<div>
 					<a href="#$data_source" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-		<tr data-order="_children" id="$_children">
-			<td class="attributes"><code>
-				protected  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Tree.html#14" title="Go to source code"><var>$_children</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$_children" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-		<tr data-order="_parent" id="$_parent">
-			<td class="attributes"><code>
-				protected  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Tree.html#15" title="Go to source code"><var>$_parent</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$_parent" class="anchor">#</a>
 					<code></code>
 				</div>
 			</td>

@@ -203,17 +203,14 @@ $o = (new Lazy($count, true))
     });
 var_dump('iteration...');
 foreach ($o as $key => $value) {
-    // var_dump($key);
     var_dump($value);
 }
 var_dump('iteration...');
 foreach ($o as $key => $value) {
-    // var_dump($key);
     var_dump($value);
 }
 var_dump('iteration...');
 foreach ($o as $key => $value) {
-    // var_dump($key);
     var_dump($value);
 }
 

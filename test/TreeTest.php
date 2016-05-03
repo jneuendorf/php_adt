@@ -121,10 +121,10 @@ section('tree instance methods',
                     return expect($this->tree->path_to_root(), 'path_to_root')->to_be(new Arr()) &&
                     expect($this->tree->children()->first()->path_to_root(), 'path_to_root')->to_be(new Arr($this->tree));
                 },
-                function() {
-                    return expect($this->tree->path_from_root(), 'path_from_root')->to_be(new Arr()) &&
-                    expect($this->tree->children()->first()->path_from_root(), 'path_from_root')->to_be(new Arr($this->tree));
-                },
+                // function() {
+                //     return expect($this->tree->path_from_root(), 'path_from_root')->to_be(new Arr()) &&
+                //     expect($this->tree->children()->first()->path_from_root(), 'path_from_root')->to_be(new Arr($this->tree));
+                // },
                 function() {
                     $tree = $this->tree->copy();
                     $tree->add_multiple(new Arr('a', 'b'), 1);

@@ -130,7 +130,7 @@
 		
 		
 
-			<b>Located at</b> <a href="source-class-Lazy.html#5-81" title="Go to source code">Lazy.php</a>
+			<b>Located at</b> <a href="source-class-Lazy.html#7-183" title="Go to source code">Lazy.php</a>
 		<br>
 	</div>
 
@@ -143,24 +143,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Lazy.html">Lazy</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Lazy.html#10-13" title="Go to source code">__construct</a>( <span> <var>$iterable</var></span> )</code>
+			<code><a href="source-class-Lazy.html#45-65" title="Go to source code">__construct</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$reiterable</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Constructor.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Constructor.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd>An iterable object or array (i.e. a generator) that will be wrapped into the instance.</dd>
+						<dt><var>$reiterable</var></dt>
+						<dd>Indicates whether to remember the iterated items. If true the instance can be iterated more than once.</dd>
+					</dl></div>
 
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Lazy.html">Lazy</a></code>
+					</div>
 
 
 
@@ -172,24 +183,66 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Lazy.html">Lazy</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Lazy.html#15-17" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Lazy.html#67-74" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a copy of the instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
+				<p>Creates a copy of the instance.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>This parameter has no effect. It is present only for interface consistency (clonable).</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Lazy.html">Lazy</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="iterable" id="_iterable">
+
+			<td class="attributes"><code>
+				 public 
+				Iterator
 				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_iterable">#</a>
+			<code><a href="source-class-Lazy.html#76-82" title="Go to source code">iterable</a>( )</code>
+
+			<div class="description short">
+				<p>Returns the internal iterable object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns the internal iterable object.</p>
 
 
 
+					<h4>Returns</h4>
+					<div class="list">
+						Iterator
+					</div>
 
 
 
@@ -208,7 +261,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-Lazy.html#22-28" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-Lazy.html#87-96" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the current element.</p>
@@ -236,27 +289,27 @@
 
 			<td class="attributes"><code>
 				 public 
-				integer
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-Lazy.html#30-36" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-Lazy.html#98-107" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
-				<p>Returns the index of the current element.</p>
+				<p>Returns the key of the current element.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Returns the index of the current element.</p>
+				<p>Returns the key of the current element.</p>
 
 
 
 					<h4>Returns</h4>
 					<div class="list">
-						integer
+						mixed
 					</div>
 
 
@@ -278,7 +331,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-Lazy.html#38-43" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-Lazy.html#109-124" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the next element (the one after the current element).</p>
@@ -309,7 +362,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-Lazy.html#45-51" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-Lazy.html#126-142" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the first element.</p>
@@ -333,24 +386,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Lazy.html">Lazy</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_filter">#</a>
-			<code><a href="source-class-Lazy.html#62-71" title="Go to source code">filter</a>( )</code>
+			<code><a href="source-class-Lazy.html#154-168" title="Go to source code">filter</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Filters the items of the iterable using the given callback.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Filters the items of the iterable using the given callback.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$callback</var></dt>
+						<dd><p>The callback determines what items to keep. If true is returned the item is kept.</p>
 
+<pre>boolean <span class="php-var">$callback</span>(<span class="php-var">$key</span>, <span class="php-var">$value</span>)</pre></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Lazy.html">Lazy</a></code>
+					</div>
 
 
 
@@ -362,24 +426,35 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-Lazy.html">Lazy</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-Lazy.html#73-80" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
+			<code><a href="source-class-Lazy.html#170-182" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
-				
+				<p>Maps the items of the iterable using the given callback.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Maps the items of the iterable using the given callback.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$callback</var></dt>
+						<dd><p>The callback determines the new value of the item. If true is returned the item is kept.</p>
 
+<pre>mixed <span class="php-var">$callback</span>(<span class="php-var">$key</span>, <span class="php-var">$value</span>)</pre></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Lazy.html">Lazy</a></code>
+					</div>
 
 
 
@@ -406,42 +481,6 @@
 
 
 
-
-
-
-
-
-
-		<div class="panel panel-default">
-            <div class="panel-heading"><h2>Properties summary</h2></div>
-			<table class="summary table table-bordered table-striped properties" id="properties">
-		<tr data-order="iterable" id="$iterable">
-			<td class="attributes"><code>
-				protected  
-				
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Lazy.html#7" title="Go to source code"><var>$iterable</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$iterable" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-			</table>
-		</div>
 
 
 

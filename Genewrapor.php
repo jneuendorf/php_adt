@@ -4,7 +4,12 @@ require_once 'funcs.php';
 require_once 'Clonable.php';
 require_once 'Arr.php';
 
-class Lazy extends Clonable implements Iterator {
+/**
+* The class is intended for wrapping generators but it can handle all types of iterables (implementing the Iterator interface).
+* That way generator functionaliy can be chained from different code parts (just like functions).
+* Also optionally this class makes it possible to reiterate over a generator.
+*/
+class Genewrapor extends Clonable implements Iterator {
     /**
     * Keep track of iteration progress of native arrays. The array itself does not know that...
     * @internal
@@ -46,7 +51,7 @@ class Lazy extends Clonable implements Iterator {
     * Constructor.
     * @param Iterator $iterable An iterable object or array (i.e. a generator) that will be wrapped into the instance.
     * @param bool $reiterable Indicates whether to remember the iterated items. If true the instance can be iterated more than once.
-    * @return Lazy
+    * @return Genewrapor
     */
     public function __construct($iterable, $reiterable=false) {
         // init generator if not initialized
@@ -54,7 +59,7 @@ class Lazy extends Clonable implements Iterator {
             $iterable = $iterable();
         }
         if (!is_iterable($iterable)) {
-            throw new Exception("Lazy::__construct: Expected \$iterable to be iterable. Got ".var_export($iterable, true), 1);
+            throw new Exception("Genewrapor::__construct: Expected \$iterable to be iterable. Got ".var_export($iterable, true), 1);
         }
         $this->iterable = $iterable;
         $this->reiterable = $reiterable;
@@ -67,9 +72,10 @@ class Lazy extends Clonable implements Iterator {
     /**
     * Creates a copy of the instance.
     * @param bool $deep This parameter has no effect. It is present only for interface consistency (clonable).
-    * @return Lazy
+    * @return Genewrapor
     */
     public function copy($deep=false) {
+        // TODO: clone the generator somehow
         return new static($this->iterable, $this->reiterable);
     }
 
@@ -79,6 +85,77 @@ class Lazy extends Clonable implements Iterator {
     */
     public function iterable() {
         return $this->iterable;
+    }
+
+    /**
+    * Indicates if the instance can be reiterated.
+    * @return bool
+    */
+    public function is_reiterable() {
+        return $this->reiterable || is_array($this->iterable) || !($this->iterable instanceof Generator);
+    }
+
+    /**
+    * Generates a list of key-value pairs from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.
+    * @param int $size
+    * @return Arr
+    */
+    public function items($size=PHP_INT_MAX) {
+        $res = new Arr();
+        $i = 0;
+        foreach ($this->iterable as $key => $value) {
+            if ($i > $size) {
+                break;
+            }
+            $res->push(new Arr($key, $value));
+            $i++;
+        }
+        return $res;
+    }
+
+    /**
+    * Synonym for 'items()'.
+    * @param int $size
+    * @return Arr
+    */
+    public function to_arr($size=PHP_INT_MAX) {
+        return $this->items($size);
+    }
+
+    /**
+    * Generates a list of keys from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.
+    * @param int $size
+    * @return Arr
+    */
+    public function keys($size=PHP_INT_MAX) {
+        $res = new Arr();
+        $i = 0;
+        foreach ($this->iterable as $key => $value) {
+            if ($i > $size) {
+                break;
+            }
+            $res->push($key);
+            $i++;
+        }
+        return $res;
+    }
+
+    /**
+    * Generates a list of values from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.
+    * @param int $size
+    * @return Arr
+    */
+    public function values($size=PHP_INT_MAX) {
+        $res = new Arr();
+        $i = 0;
+        foreach ($this->iterable as $key => $value) {
+            if ($i > $size) {
+                break;
+            }
+            $res->push($value);
+            $i++;
+        }
+        return $res;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +206,7 @@ class Lazy extends Clonable implements Iterator {
     public function rewind() {
         if ($this->using_cache === false && $this->started_iteration === true && $this->reiterable === true) {
             $this->using_cache = true;
-            var_dump('using the cache');
+            // var_dump('using the cache');
             $this->iterable = $this->cache;
         }
         if (!is_array($this->iterable)) {
@@ -154,7 +231,7 @@ class Lazy extends Clonable implements Iterator {
     /**
     * Filters the items of the iterable using the given callback.
     * @param callable $callback The callback determines what items to keep. If true is returned the item is kept. <code>boolean $callback($key, $value)</code>
-    * @return Lazy
+    * @return Genewrapor
     */
     public function filter($callback) {
         $iterable = $this->iterable;
@@ -170,7 +247,7 @@ class Lazy extends Clonable implements Iterator {
     /**
     * Maps the items of the iterable using the given callback.
     * @param callable $callback The callback determines the new value of the item. If true is returned the item is kept. <code>mixed $callback($key, $value)</code>
-    * @return Lazy
+    * @return Genewrapor
     */
     public function map($callback) {
         $iterable = $this->iterable;
@@ -181,60 +258,5 @@ class Lazy extends Clonable implements Iterator {
         }, $this->reiterable);
     }
 }
-
-
-$count = function($i=1) {
-    while ($i < 20) {
-        yield $i++;
-    }
-    yield $i;
-};
-
-
-echo '<pre>';
-// $o = new Lazy(new StdClass());
-$o = (new Lazy($count, true))
-    ->map(function($key, $val) {
-        // TODO: how to return key-value pair like in generator?
-        return $val * 2;
-    })
-    ->filter(function($key, $val) {
-        return $val >= 20;
-    });
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-
-echo '<hr>';
-$o = new Lazy([1,2,3,4]);
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-echo '<hr>';
-$o = new Lazy(new Arr(1,2,3,4));
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-var_dump('iteration...');
-foreach ($o as $key => $value) {
-    var_dump($value);
-}
-
-echo '</pre>';
 
 ?>

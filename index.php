@@ -19,11 +19,13 @@ expect(undefined)->not_to_be([]);
 expect(undefined)->to_be(undefined);
 
 
-require_once 'test/ArrTest.php';
-require_once 'test/DictTest.php';
-require_once 'test/SetTest.php';
-require_once 'test/TreeTest.php';
-require_once 'test/ConversionTest.php';
+// require_once 'test/ArrTest.php';
+// require_once 'test/DictTest.php';
+// require_once 'test/SetTest.php';
+// require_once 'test/TreeTest.php';
+// require_once 'test/ConversionTest.php';
+
+require_once 'test/GenewraporTest.php';
 
 Test::print_stats();
 

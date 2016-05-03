@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Lazy | php_adt</title>
+	<title>Class Genewrapor | php_adt</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
@@ -59,7 +59,7 @@
 				<li><a href="class-Arr.html">Arr</a></li>
 				<li><a href="class-Clonable.html">Clonable</a></li>
 				<li><a href="class-Dict.html">Dict</a></li>
-				<li class="active"><a href="class-Lazy.html">Lazy</a></li>
+				<li class="active"><a href="class-Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-Set.html">Set</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
@@ -96,9 +96,14 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class Lazy</h1>
+	<h1>Class Genewrapor</h1>
 
 
+	<div class="description">
+	<p>The class is intended for wrapping generators but it can handle all types of iterables (implementing the Iterator interface).
+That way generator functionaliy can be chained from different code parts (just like functions).
+Also optionally this class makes it possible to reiterate over a generator.</p>
+	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -109,7 +114,7 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>Lazy</span></b>			
+<b><span>Genewrapor</span></b>			
 			 implements 
 <span>Iterator</span>
 			
@@ -130,7 +135,7 @@
 		
 		
 
-			<b>Located at</b> <a href="source-class-Lazy.html#7-183" title="Go to source code">Lazy.php</a>
+			<b>Located at</b> <a href="source-class-Genewrapor.html#7-260" title="Go to source code">Genewrapor.php</a>
 		<br>
 	</div>
 
@@ -143,14 +148,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Lazy.html">Lazy</a></code>
+				<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Lazy.html#45-65" title="Go to source code">__construct</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$reiterable</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Genewrapor.html#50-70" title="Go to source code">__construct</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$reiterable</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Constructor.</p>
@@ -170,7 +175,7 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Lazy.html">Lazy</a></code>
+						<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 					</div>
 
 
@@ -183,14 +188,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Lazy.html">Lazy</a></code>
+				<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-Lazy.html#67-74" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-Genewrapor.html#72-80" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a copy of the instance.</p>
@@ -208,7 +213,7 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Lazy.html">Lazy</a></code>
+						<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 					</div>
 
 
@@ -228,7 +233,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_iterable">#</a>
-			<code><a href="source-class-Lazy.html#76-82" title="Go to source code">iterable</a>( )</code>
+			<code><a href="source-class-Genewrapor.html#82-88" title="Go to source code">iterable</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the internal iterable object.</p>
@@ -250,6 +255,191 @@
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="is_reiterable" id="_is_reiterable">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_is_reiterable">#</a>
+			<code><a href="source-class-Genewrapor.html#90-96" title="Go to source code">is_reiterable</a>( )</code>
+
+			<div class="description short">
+				<p>Indicates if the instance can be reiterated.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Indicates if the instance can be reiterated.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="items" id="_items">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Arr.html">Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_items">#</a>
+			<code><a href="source-class-Genewrapor.html#98-114" title="Go to source code">items</a>( <span>integer <var>$size</var> = PHP_INT_MAX</span> )</code>
+
+			<div class="description short">
+				<p>Generates a list of key-value pairs from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Generates a list of key-value pairs from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$size</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_arr" id="_to_arr">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Arr.html">Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_arr">#</a>
+			<code><a href="source-class-Genewrapor.html#116-123" title="Go to source code">to_arr</a>( <span>integer <var>$size</var> = PHP_INT_MAX</span> )</code>
+
+			<div class="description short">
+				<p>Synonym for 'items()'.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Synonym for 'items()'.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$size</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="keys" id="_keys">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Arr.html">Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_keys">#</a>
+			<code><a href="source-class-Genewrapor.html#125-141" title="Go to source code">keys</a>( <span>integer <var>$size</var> = PHP_INT_MAX</span> )</code>
+
+			<div class="description short">
+				<p>Generates a list of keys from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Generates a list of keys from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$size</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="values" id="_values">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Arr.html">Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_values">#</a>
+			<code><a href="source-class-Genewrapor.html#143-159" title="Go to source code">values</a>( <span>integer <var>$size</var> = PHP_INT_MAX</span> )</code>
+
+			<div class="description short">
+				<p>Generates a list of values from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Generates a list of values from the iterable. If the iterable is a generator and the reiterable flag has not been set to true.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$size</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Arr.html">Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="current" id="_current">
 
 			<td class="attributes"><code>
@@ -261,7 +451,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-Lazy.html#87-96" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-Genewrapor.html#164-173" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the current element.</p>
@@ -296,7 +486,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-Lazy.html#98-107" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-Genewrapor.html#175-184" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the key of the current element.</p>
@@ -331,7 +521,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-Lazy.html#109-124" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-Genewrapor.html#186-201" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the next element (the one after the current element).</p>
@@ -362,7 +552,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-Lazy.html#126-142" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-Genewrapor.html#203-219" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the first element.</p>
@@ -386,14 +576,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Lazy.html">Lazy</a></code>
+				<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_filter">#</a>
-			<code><a href="source-class-Lazy.html#154-168" title="Go to source code">filter</a>( <span>callable <var>$callback</var></span> )</code>
+			<code><a href="source-class-Genewrapor.html#231-245" title="Go to source code">filter</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				<p>Filters the items of the iterable using the given callback.</p>
@@ -413,7 +603,7 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Lazy.html">Lazy</a></code>
+						<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 					</div>
 
 
@@ -426,14 +616,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Lazy.html">Lazy</a></code>
+				<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-Lazy.html#170-182" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
+			<code><a href="source-class-Genewrapor.html#247-259" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				<p>Maps the items of the iterable using the given callback.</p>
@@ -453,7 +643,7 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Lazy.html">Lazy</a></code>
+						<code><a href="class-Genewrapor.html">Genewrapor</a></code>
 					</div>
 
 

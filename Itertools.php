@@ -61,8 +61,8 @@
   /**
    * Make an iterator that aggregates elements from each of the iterables.
    *
-   * Returns an iterator of Arr, where the i-th tuple contains the i-th element
-   * from each of the argument sequences or iterables. The iterator stops when
+   * Returns an iterator of Arr, where the i-th Arr contains the i-th element
+   * from each of the argument iterables. The iterator stops when
    * the shortest input iterable is exhausted.
   */
   function zip(...$iterables) {
@@ -146,9 +146,9 @@
       $s = new Slice(...$args);
       $indices = iter(range($s->start, $s->stop-1, $s->step));
 
-      if ($indices->valid()) {
+      try {
         $next_index = inext($indices);
-      } else {
+      } catch (StopIteration $e) {
         return;
       }
 

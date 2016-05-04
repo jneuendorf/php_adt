@@ -313,7 +313,7 @@ section('Arr instance methods',
                 return expect($this->arr->flatten(), 'flatten')->to_be($this->arr);
             },
             function() {
-                $mapping = function($e) {
+                $mapping = function($idx, $e) {
                     return __toString($e).'STRING';
                 };
                 $r = new Arr();

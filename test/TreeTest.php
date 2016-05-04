@@ -128,18 +128,18 @@ section('tree instance methods',
                 function() {
                     $tree = $this->tree->copy();
                     $tree->add_multiple(new Arr('a', 'b'), 1);
-                    $expected = $this->children->copy()->map(function($node){return $node->data_source;});
+                    $expected = $this->children->copy()->map(function($idx, $node){return $node->data_source;});
                     $expected->insert(1, 'a', 'b');
-                    return expect($tree->children()->map(function($node){return $node->data_source;}), 'add_multiple')->to_be($expected);
+                    return expect($tree->children()->map(function($idx, $node){return $node->data_source;}), 'add_multiple')->to_be($expected);
                 },
                 function() {
                     $tree = $this->tree->copy();
                     $tree->children()->first()->add('subchild');
                     $subchild = $tree->children()->first()->children()->first();
                     $subchild->move_to($tree, 1);
-                    $expected = $this->tree->children()->map(function($node){return $node->data_source;});
+                    $expected = $this->tree->children()->map(function($idx, $node){return $node->data_source;});
                     $expected->insert(1, 'subchild');
-                    return expect($tree->children()->map(function($node){return $node->data_source;}), 'add_multiple')
+                    return expect($tree->children()->map(function($idx, $node){return $node->data_source;}), 'add_multiple')
                             ->to_be($expected);
                 },
             ],
@@ -159,7 +159,7 @@ section('iteration', subsection('foreach + tree->iterable()',
             $children = new Arr(new Tree(1), new Tree(2), new Tree(3), new Tree('4'));
             $tree = new Tree('root', $children);
 
-            return expect($tree->iterable(Tree::PRE_ORDER)->map(function($node) {return $node->data_source;}))
+            return expect($tree->iterable(Tree::PRE_ORDER)->map(function($idx, $node) {return $node->data_source;}))
                     ->to_be(new Arr('root', 1, 2, 3, '4')) &&
             expect($tree->iterable(Tree::PRE_ORDER))->to_be($tree->pre_order());
         }

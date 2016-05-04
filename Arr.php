@@ -697,7 +697,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function map($callback) {
         $res = new Arr();
         foreach ($this as $idx => $element) {
-            $res->push($callback($element, $idx));
+            $res->push($callback($idx, $element));
         }
         return $res;
         // return new Arr(...array_map($callback, $this->_elements));

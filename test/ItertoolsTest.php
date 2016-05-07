@@ -168,17 +168,31 @@ section('something cool', subsection('', new Test(
     ]
 )));
 
-section('permutations', subsection('', new Test(
+section('product', subsection('', new Test(
     '',
     [
       function() {
-        // return expect(
-        //     Arr::from_iterable(
-        //       permutations([1,2])
-        //     )
-        //   )
-        //   ->to_be(new Arr(new Arr(1,2), new Arr(2,1)));
-        // TODO: super fancy slicing
+        return expect(
+            Arr::from_iterable(product([1,2], [3]))
+          )
+          ->to_be(new Arr(new Arr(1,3), new Arr(2,3)));
+        return true;
+      },
+      function() {
+        return expect(
+            Arr::from_iterable(
+              product(...repeat([0,1], 3))->map(
+                function($idx, $triple) {
+                  return $triple->reduce(function($a, $b) {return $a.$b;});
+                }
+              )
+            )
+          )
+          ->to_be(Arr::from_iterable(
+            iter(range(0, 7))->map(function($ix, $item) {
+              return str_pad(decbin($item), 3, "0", STR_PAD_LEFT);
+            })
+          ));
         return true;
       },
     ]

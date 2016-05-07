@@ -221,68 +221,38 @@
    * in each permutation.
   */
   function permutations($iterable, $r=null) {
-    // $pool = Arr::from_iterable($iterable);
-    // $n = $pool->length;
-    // $r = $r === null ? $n : $r;
-    // if ($r > $n) {
-    //   return;
-    // }
-    //
-    // $indices = Arr::from_iterable(range(0, $n));
-    // $cycles = Arr::from_iterable(range($n, $n-$r, -1));
-    // yield (
-    //   $indices[[null, $r]]->map(
-    //     function($idx, $i) use ($pool) {return $pool[$i];})
-    // );
-    // while ($n) {
-    //   $nobreak = true;
-    //   foreach (range($r-1, 0, -1) as $i) {
-    //     $cycles[$i] -= 1;
-    //     if ($cycles[$i] == 0) {
-    //       $indices[[$i]] = $indices[[$i+1]] + $indices[[$i, $i+1]];
-    //       $cycles[$i] = $n - $i;
-    //     } else {
-    //       $j = $cycles[$i];
-    //       list($indices[$i], $indices[-$j]) = [$indices[-$j], $indices[$i]];
-    //       yield (
-    //         $indices[[null, $r]]->map(
-    //           function($idx, $i) use ($pool) {return $pool[$i];})
-    //       );
-    //       $nobreak = false;
-    //       break;
-    //     }
-    //   }
-    //   if ($nobreak) {
-    //     return;
-    //   }
-    // }
+
   }
 
   /**
   * Cartesian product of input iterables.
   */
-  // function product(...$iterables, $r=1) {
-    // $pools = array_map(
-    //   function($pools) {return Arr::from_iterable($pool)},
-    //   $iterables
-    // )
-    // $pools = Arr::from_iterable(islice(cycle($pools), $repeat))
-    // $result = [[]];
-    //
-    // foreach ($pools as $pool) {
-    //   // $result = [x+[y] for x in result for y in pool]
-    //   $r = [];
-    //   foreach ($result as $x) {
-    //     foreach ($pool as $y) {
-    //
-    //     }
-    //   }
-    //   $result = $r;
-    // }
-    // foreach ($results as $prod) {
-    //   yield Arr::from_iterable($prod);
-    // }
-  // }
+  function product(...$iterables) {
+    return iter(function() use ($iterables) {
+      $pools = array_map(
+        function($pool) {return Arr::from_iterable($pool);},
+        $iterables
+      );
+      $result = [[]];
+      foreach ($pools as $pool) {
+        // $result = [x+[y] for x in result for y in pool]
+        $r = [];
+        foreach ($result as $x) {
+          foreach ($pool as $y) {
+            $r[] = Arr::from_iterable($x)->concat([$y]);
+          }
+        }
+        $result = $r;
+      }
+      foreach ($result as $prod) {
+        yield Arr::from_iterable($prod);
+      }
+    });
+  }
+
+  function repeat($thing, $times) {
+    return islice(cycle([$thing]), $times);
+  }
 
 
 ?>

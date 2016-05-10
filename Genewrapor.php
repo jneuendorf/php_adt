@@ -257,6 +257,27 @@ class Genewrapor extends Clonable implements Iterator {
             }
         }, $this->reiterable);
     }
+
+    /**
+    * reduce($callback[, initial])
+    * Apply function of two arguments cumulatively to the items of this
+    * Genewrapor, from left to right, so as to reduce the Genewrapor to a
+    * single value.
+    * @return mixed
+    */
+    public function reduce($callback, ...$args) {
+        if (count($args) == 1) {
+          $last = $args[0];
+        } else {
+          $last = $this->current();
+          $this->next();
+        }
+        while ($this->valid()) {
+          $last = $callback($last, $this->current());
+          $this->next();
+        }
+        return $last;
+    }
 }
 
 ?>

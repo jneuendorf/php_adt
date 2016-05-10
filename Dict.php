@@ -582,5 +582,3 @@ class Dict extends AbstractMap implements ArrayAccess, Iterator {
 
 class_alias('Dict', 'HashMap');
 class_alias('Dict', 'Dictionary');
-
-?>

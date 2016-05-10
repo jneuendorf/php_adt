@@ -11,5 +11,3 @@ abstract class Clonable {
 
     abstract public function copy($deep=false);
 }
-
-?>

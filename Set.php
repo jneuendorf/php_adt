@@ -446,7 +446,4 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         }
         return $this;
     }
-
 }
-
-?>

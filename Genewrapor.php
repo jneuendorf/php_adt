@@ -279,5 +279,3 @@ class Genewrapor extends Clonable implements Iterator {
         return $last;
     }
 }
-
-?>

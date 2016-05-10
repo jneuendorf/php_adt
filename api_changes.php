@@ -37,5 +37,3 @@ foreach ($files as $idx => $file) {
     $changes = get_changes($content);
     print_changes($file, $changes);
 }
-
-?>

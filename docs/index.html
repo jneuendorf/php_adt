@@ -61,6 +61,7 @@
 				<li><a href="class-Dict.html">Dict</a></li>
 				<li><a href="class-Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-Set.html">Set</a></li>
+				<li><a href="class-Slice.html">Slice</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
 			</ul>
@@ -71,6 +72,10 @@
 			</ul>
 
 
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-StopIteration.html">StopIteration</a></li>
+			</ul>
 
 
 			<h3>Functions</h3>
@@ -84,8 +89,19 @@
 				<li><a href="function-__mergesort.html">__mergesort</a></li>
 				<li><a href="function-__mergesort_compare.html">__mergesort_compare</a></li>
 				<li><a href="function-__toString.html">__toString</a></li>
+				<li><a href="function-chain.html">chain</a></li>
+				<li><a href="function-cycle.html">cycle</a></li>
+				<li><a href="function-enumerate.html">enumerate</a></li>
+				<li><a href="function-inext.html">inext</a></li>
 				<li><a href="function-is_iterable.html">is_iterable</a></li>
+				<li><a href="function-islice.html">islice</a></li>
+				<li><a href="function-iter.html">iter</a></li>
 				<li><a href="function-p.html">p</a></li>
+				<li><a href="function-permutations.html">permutations</a></li>
+				<li><a href="function-product.html">product</a></li>
+				<li><a href="function-repeat.html">repeat</a></li>
+				<li><a href="function-step.html">step</a></li>
+				<li><a href="function-zip.html">zip</a></li>
 			</ul>
 		</div>
 	</div>
@@ -143,6 +159,10 @@ Also optionally this class makes it possible to reiterate over a generator.</p><
 	<td>Set is collection class with no duplicate elements.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Slice.html">Slice</a></td>
+	<td></td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Super.html">Super</a></td>
 	<td></td>
 </tr>
@@ -165,6 +185,15 @@ In this documentation, 'tree' and 'node' will often describe the same thing from
 </div>
 
 
+<div class="panel panel-default">
+    <div class="panel-heading"><h2>Exceptions summary</h2></div>
+	<table class="summary table table-bordered table-striped" id="exceptions">
+<tr>
+	<td class="name"><a href="class-StopIteration.html">StopIteration</a></td>
+	<td>raised when trying to iterate over an empty iterator.</td>
+</tr>
+	</table>
+</div>
 
 
 <div class="panel panel-default">
@@ -207,12 +236,63 @@ In this documentation, 'tree' and 'node' will often describe the same thing from
 	<td></td>
 </tr>
 <tr>
+	<td class="name"><a href="function-chain.html">chain</a></td>
+	<td><p>Make an iterator that returns elements from the first iterable until it is
+exhausted, then proceeds to the next iterable, until all of the iterables
+are exhausted. Used for treating consecutive sequences as a single
+sequence.</p></td>
+</tr>
+<tr>
+	<td class="name"><a href="function-cycle.html">cycle</a></td>
+	<td><p>Make an iterator returning elements from the iterable and saving a copy of
+each. When the iterable is exhausted, return elements from the saved copy.
+Repeats indefinitely.</p></td>
+</tr>
+<tr>
+	<td class="name"><a href="function-enumerate.html">enumerate</a></td>
+	<td>yields zip(step(), $iterable) as key => value pairs.</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-inext.html">inext</a></td>
+	<td><p>get an iterator's current value v, advance the iterator, and return v,
+raises StopIteration if the given iterator is empty.</p></td>
+</tr>
+<tr>
 	<td class="name"><a href="function-is_iterable.html">is_iterable</a></td>
 	<td></td>
 </tr>
 <tr>
+	<td class="name"><a href="function-islice.html">islice</a></td>
+	<td>islice(iterable, [start, ]stop[, step]).</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-iter.html">iter</a></td>
+	<td>Return an iterator for a given iterable.</td>
+</tr>
+<tr>
 	<td class="name"><a href="function-p.html">p</a></td>
 	<td>This function is similar to language construct 'echo' but calls to __toString on non-string arguments before echoing.</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-permutations.html">permutations</a></td>
+	<td>Return successive r length permutations of elements in the iterable.</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-product.html">product</a></td>
+	<td>Cartesian product of input iterables.</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-repeat.html">repeat</a></td>
+	<td>create an Iterator that yields a given $thing $times times.</td>
+</tr>
+<tr>
+	<td class="name"><a href="function-step.html">step</a></td>
+	<td><p>Make an iterator that returns evenly spaced values starting with number
+start.</p></td>
+</tr>
+<tr>
+	<td class="name"><a href="function-zip.html">zip</a></td>
+	<td>Make an iterator that aggregates elements from each of the iterables.</td>
 </tr>
 	</table>
 </div>
@@ -224,6 +304,6 @@ In this documentation, 'tree' and 'node' will often describe the same thing from
 	</div>
 </div>
 <script src="resources/combined.js?edfab5a12949d9ce25427ee2c6530c561f7e1adb"></script>
-<script src="elementlist.js?5aabe01631d364e16f966d5124baa37aec397ab5"></script>
+<script src="elementlist.js?8606569930c0f6c34e04664bb703461fd8397c46"></script>
 </body>
 </html>

@@ -489,5 +489,3 @@ class Tree extends AbstractTree {
         return $this;
     }
 }
-
-?>

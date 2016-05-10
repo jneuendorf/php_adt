@@ -6,5 +6,3 @@ Interface Hashable {
     */
     public function hash();
 }
-
-?>

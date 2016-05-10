@@ -62,6 +62,7 @@
 				<li><a href="class-Dict.html">Dict</a></li>
 				<li><a href="class-Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-Set.html">Set</a></li>
+				<li><a href="class-Slice.html">Slice</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
 			</ul>
@@ -72,6 +73,10 @@
 			</ul>
 
 
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-StopIteration.html">StopIteration</a></li>
+			</ul>
 
 
 			<h3>Functions</h3>
@@ -85,8 +90,19 @@
 				<li><a href="function-__mergesort.html">__mergesort</a></li>
 				<li><a href="function-__mergesort_compare.html">__mergesort_compare</a></li>
 				<li><a href="function-__toString.html">__toString</a></li>
+				<li><a href="function-chain.html">chain</a></li>
+				<li><a href="function-cycle.html">cycle</a></li>
+				<li><a href="function-enumerate.html">enumerate</a></li>
+				<li><a href="function-inext.html">inext</a></li>
 				<li><a href="function-is_iterable.html">is_iterable</a></li>
+				<li><a href="function-islice.html">islice</a></li>
+				<li><a href="function-iter.html">iter</a></li>
 				<li><a href="function-p.html">p</a></li>
+				<li><a href="function-permutations.html">permutations</a></li>
+				<li><a href="function-product.html">product</a></li>
+				<li><a href="function-repeat.html">repeat</a></li>
+				<li><a href="function-step.html">step</a></li>
+				<li><a href="function-zip.html">zip</a></li>
 			</ul>
 		</div>
 	</div>
@@ -355,10 +371,29 @@
 </span><span id="257" class="l"><a href="#257">257 </a>            }
 </span><span id="258" class="l"><a href="#258">258 </a>        }, <span class="php-var">$this</span>-&gt;reiterable);
 </span><span id="259" class="l"><a href="#259">259 </a>    }
-</span><span id="260" class="l"><a href="#260">260 </a>}
-</span><span id="261" class="l"><a href="#261">261 </a>
-</span><span id="262" class="l"><a href="#262">262 </a><span class="xlang">?&gt;</span>
-</span><span id="263" class="l"><a href="#263">263 </a></span></code></pre>
+</span><span id="260" class="l"><a href="#260">260 </a>
+</span><span id="261" class="l"><a href="#261">261 </a>    <span class="php-comment">/**
+</span></span><span id="262" class="l"><a href="#262">262 </a><span class="php-comment">    * reduce($callback[, initial])
+</span></span><span id="263" class="l"><a href="#263">263 </a><span class="php-comment">    * Apply function of two arguments cumulatively to the items of this
+</span></span><span id="264" class="l"><a href="#264">264 </a><span class="php-comment">    * Genewrapor, from left to right, so as to reduce the Genewrapor to a
+</span></span><span id="265" class="l"><a href="#265">265 </a><span class="php-comment">    * single value.
+</span></span><span id="266" class="l"><a href="#266">266 </a><span class="php-comment">    * @return mixed
+</span></span><span id="267" class="l"><a href="#267">267 </a><span class="php-comment">    */</span>
+</span><span id="268" class="l"><a href="#268">268 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> reduce(<span class="php-var">$callback</span>, ...<span class="php-var">$args</span>) {
+</span><span id="269" class="l"><a href="#269">269 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$args</span>) == <span class="php-num">1</span>) {
+</span><span id="270" class="l"><a href="#270">270 </a>          <span class="php-var">$last</span> = <span class="php-var">$args</span>[<span class="php-num">0</span>];
+</span><span id="271" class="l"><a href="#271">271 </a>        } <span class="php-keyword1">else</span> {
+</span><span id="272" class="l"><a href="#272">272 </a>          <span class="php-var">$last</span> = <span class="php-var">$this</span>-&gt;<span class="php-keyword2">current</span>();
+</span><span id="273" class="l"><a href="#273">273 </a>          <span class="php-var">$this</span>-&gt;<span class="php-keyword2">next</span>();
+</span><span id="274" class="l"><a href="#274">274 </a>        }
+</span><span id="275" class="l"><a href="#275">275 </a>        <span class="php-keyword1">while</span> (<span class="php-var">$this</span>-&gt;valid()) {
+</span><span id="276" class="l"><a href="#276">276 </a>          <span class="php-var">$last</span> = <span class="php-var">$callback</span>(<span class="php-var">$last</span>, <span class="php-var">$this</span>-&gt;<span class="php-keyword2">current</span>());
+</span><span id="277" class="l"><a href="#277">277 </a>          <span class="php-var">$this</span>-&gt;<span class="php-keyword2">next</span>();
+</span><span id="278" class="l"><a href="#278">278 </a>        }
+</span><span id="279" class="l"><a href="#279">279 </a>        <span class="php-keyword1">return</span> <span class="php-var">$last</span>;
+</span><span id="280" class="l"><a href="#280">280 </a>    }
+</span><span id="281" class="l"><a href="#281">281 </a>}
+</span><span id="282" class="l"><a href="#282">282 </a></span></code></pre>
 	</div>
 
 	<div id="footer">
@@ -366,6 +401,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?edfab5a12949d9ce25427ee2c6530c561f7e1adb"></script>
-<script src="elementlist.js?5aabe01631d364e16f966d5124baa37aec397ab5"></script>
+<script src="elementlist.js?8606569930c0f6c34e04664bb703461fd8397c46"></script>
 </body>
 </html>

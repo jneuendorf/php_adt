@@ -31,8 +31,4 @@ abstract class AbstractMap extends AbstractCollection {
     public function setdefault() {}
     public function update($iterable) {}
     // public function values() {}
-
-
 }
-
-?>

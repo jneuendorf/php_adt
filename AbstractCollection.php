@@ -25,5 +25,3 @@ abstract class AbstractCollection extends Super {
     abstract public function to_set();
     abstract public function to_dict();
 }
-
-?>

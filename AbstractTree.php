@@ -19,8 +19,4 @@ abstract class AbstractTree extends Super {
     abstract public function remove();
     abstract public function root();
     abstract public function siblings();
-
 }
-
-
-?>

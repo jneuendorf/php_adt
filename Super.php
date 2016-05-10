@@ -10,9 +10,6 @@ abstract class Super extends Clonable implements Countable, Hashable {
     public function count() {
         return $this->size();
     }
-    
+
     abstract public function size();
 }
-
-
-?>

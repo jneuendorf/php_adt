@@ -252,5 +252,3 @@ function __mergesort(&$array, $cmp_function='__mergesort_compare') {
         $array[] = $array2[$ptr2++];
     }
 }
-
-?>

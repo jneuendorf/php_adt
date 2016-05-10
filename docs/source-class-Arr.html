@@ -62,6 +62,7 @@
 				<li><a href="class-Dict.html">Dict</a></li>
 				<li><a href="class-Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-Set.html">Set</a></li>
+				<li><a href="class-Slice.html">Slice</a></li>
 				<li><a href="class-Super.html">Super</a></li>
 				<li><a href="class-Tree.html">Tree</a></li>
 			</ul>
@@ -72,6 +73,10 @@
 			</ul>
 
 
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-StopIteration.html">StopIteration</a></li>
+			</ul>
 
 
 			<h3>Functions</h3>
@@ -85,8 +90,19 @@
 				<li><a href="function-__mergesort.html">__mergesort</a></li>
 				<li><a href="function-__mergesort_compare.html">__mergesort_compare</a></li>
 				<li><a href="function-__toString.html">__toString</a></li>
+				<li><a href="function-chain.html">chain</a></li>
+				<li><a href="function-cycle.html">cycle</a></li>
+				<li><a href="function-enumerate.html">enumerate</a></li>
+				<li><a href="function-inext.html">inext</a></li>
 				<li><a href="function-is_iterable.html">is_iterable</a></li>
+				<li><a href="function-islice.html">islice</a></li>
+				<li><a href="function-iter.html">iter</a></li>
 				<li><a href="function-p.html">p</a></li>
+				<li><a href="function-permutations.html">permutations</a></li>
+				<li><a href="function-product.html">product</a></li>
+				<li><a href="function-repeat.html">repeat</a></li>
+				<li><a href="function-step.html">step</a></li>
+				<li><a href="function-zip.html">zip</a></li>
 			</ul>
 		</div>
 	</div>
@@ -795,7 +811,7 @@
 </span><span id="697" class="l"><a href="#697"> 697 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> map(<span class="php-var">$callback</span>) {
 </span><span id="698" class="l"><a href="#698"> 698 </a>        <span class="php-var">$res</span> = <span class="php-keyword1">new</span> Arr();
 </span><span id="699" class="l"><a href="#699"> 699 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span> <span class="php-keyword1">as</span> <span class="php-var">$idx</span> =&gt; <span class="php-var">$element</span>) {
-</span><span id="700" class="l"><a href="#700"> 700 </a>            <span class="php-var">$res</span>-&gt;push(<span class="php-var">$callback</span>(<span class="php-var">$element</span>, <span class="php-var">$idx</span>));
+</span><span id="700" class="l"><a href="#700"> 700 </a>            <span class="php-var">$res</span>-&gt;push(<span class="php-var">$callback</span>(<span class="php-var">$idx</span>, <span class="php-var">$element</span>));
 </span><span id="701" class="l"><a href="#701"> 701 </a>        }
 </span><span id="702" class="l"><a href="#702"> 702 </a>        <span class="php-keyword1">return</span> <span class="php-var">$res</span>;
 </span><span id="703" class="l"><a href="#703"> 703 </a>        <span class="php-comment">// return new Arr(...array_map($callback, $this-&gt;_elements));</span>
@@ -1163,12 +1179,8 @@
 </span><span id="1065" class="l"><a href="#1065">1065 </a>
 </span><span id="1066" class="l"><a href="#1066">1066 </a>    <span class="php-comment">// pop([index]) is implemented above (php array section)</span>
 </span><span id="1067" class="l"><a href="#1067">1067 </a>    <span class="php-comment">// remove(object) is implemented above (collection interface section)</span>
-</span><span id="1068" class="l"><a href="#1068">1068 </a>
-</span><span id="1069" class="l"><a href="#1069">1069 </a>
-</span><span id="1070" class="l"><a href="#1070">1070 </a>}
-</span><span id="1071" class="l"><a href="#1071">1071 </a>
-</span><span id="1072" class="l"><a href="#1072">1072 </a><span class="xlang">?&gt;</span>
-</span><span id="1073" class="l"><a href="#1073">1073 </a></span></code></pre>
+</span><span id="1068" class="l"><a href="#1068">1068 </a>}
+</span><span id="1069" class="l"><a href="#1069">1069 </a></span></code></pre>
 	</div>
 
 	<div id="footer">
@@ -1176,6 +1188,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?edfab5a12949d9ce25427ee2c6530c561f7e1adb"></script>
-<script src="elementlist.js?5aabe01631d364e16f966d5124baa37aec397ab5"></script>
+<script src="elementlist.js?8606569930c0f6c34e04664bb703461fd8397c46"></script>
 </body>
 </html>

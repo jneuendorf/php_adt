@@ -69,7 +69,6 @@ section('step', subsection('', new Test(
     ]
 )));
 
-// TODO: tell Jim, that I don't like the Dict constructor signature
 section('enumerate', subsection('', new Test(
     '',
     [
@@ -193,6 +192,19 @@ section('product', subsection('', new Test(
               return str_pad(decbin($item), 3, "0", STR_PAD_LEFT);
             })
           ));
+        return true;
+      },
+    ]
+)));
+
+section('permutations', subsection('', new Test(
+    '',
+    [
+      function() {
+        return expect(
+            Arr::from_iterable(permutations([1,2,3]))
+          )
+          ->to_be(new Arr(new Arr(1,2,3), new Arr(1,3,2), new Arr(2,1,3), new Arr(2,3,1), new Arr(3,1,2), new Arr(3,2,1)));
         return true;
       },
     ]

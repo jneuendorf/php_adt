@@ -1,6 +1,7 @@
 <?php
   require_once __DIR__.'/Genewrapor.php';
   require_once __DIR__.'/Arr.php';
+  require_once __DIR__.'/Set.php';
 
   /**
    * most of the code is heavily inspired by
@@ -185,8 +186,6 @@
     });
   }
 
-  // TODO: accumulate -> maybe a method on Genewrapor?
-
   /**
    * Make an iterator that returns elements from the first iterable until it is
    * exhausted, then proceeds to the next iterable, until all of the iterables
@@ -203,9 +202,6 @@
     });
   }
 
-  // TODO: groupby is cool, but should maybe be a method of dict
-  // TODO: i think I want some `join` function. implode doesn't work on Genewrapors
-
   /**
    * Return successive r length permutations of elements in the iterable.
    *
@@ -221,7 +217,22 @@
    * in each permutation.
   */
   function permutations($iterable, $r=null) {
+    // TODO: this is not very efficient
+    return iter(function() use ($iterable, $r) {
+      $pool = Arr::from_iterable($iterable);
+      $n = $pool->length;
+      $r = $r === null ? $n : $r;
 
+      foreach (product(...repeat(range(0, $n-1), $r)) as $indices) {
+        if (Set::from_iterable($indices)->size() === $r) {
+          $perm = new Arr();
+          foreach ($indices as $i) {
+            $perm->append($pool[$i]);
+          }
+          yield $perm;
+        }
+      }
+    });
   }
 
   /**
@@ -250,6 +261,9 @@
     });
   }
 
+  /**
+  * create an Iterator that yields a given $thing $times times.
+  */
   function repeat($thing, $times) {
     return islice(cycle([$thing]), $times);
   }

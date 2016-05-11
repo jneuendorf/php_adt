@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__.'/Genewrapor.php';
-require_once __DIR__.'/Arr.php';
-require_once __DIR__.'/Set.php';
+
+require_once __DIR__.'/../Genewrapor.php';
+require_once __DIR__.'/../Arr.php';
+require_once __DIR__.'/../Set.php';
 
 /**
  * most of the code is heavily inspired by

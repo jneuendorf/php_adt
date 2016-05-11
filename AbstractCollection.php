@@ -1,15 +1,18 @@
 <?php
 
+namespace _php_adt;
+
 require_once 'Super.php';
 
+/**
+* Interface for AbstractMap, Arr, Set implementing is_empty() and size().
+*/
 abstract class AbstractCollection extends Super {
     abstract public function add(...$elements);
     abstract public function clear();
-    // abstract public function copy($deep=false);
     abstract public function equals($collection);
     abstract public function has($element);
     abstract public function map($callback);
-    // abstract public function hash();
     abstract public function remove($element);
 
     public function is_empty() {

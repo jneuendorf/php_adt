@@ -9,7 +9,7 @@ require_once 'Arr.php';
 * That way generator functionaliy can be chained from different code parts (just like functions).
 * Also optionally this class makes it possible to reiterate over a generator.
 */
-class Genewrapor extends Clonable implements Iterator {
+class Genewrapor extends _php_adt\Clonable implements Iterator {
     /**
     * Keep track of iteration progress of native arrays. The array itself does not know that...
     * @internal

@@ -1,7 +1,12 @@
 <?php
 
+namespace _php_adt;
+
 require_once 'AbstractCollection.php';
 
+/**
+* Interface for Dict.
+*/
 abstract class AbstractMap extends AbstractCollection {
     // from collection
     public function add(...$keys) {}

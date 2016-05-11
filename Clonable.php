@@ -1,5 +1,7 @@
 <?php
 
+namespace _php_adt;
+
 abstract class Clonable {
     /**
     * Make subclasses clonable using the 'clone' keyword.

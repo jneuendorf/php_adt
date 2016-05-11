@@ -1,12 +1,13 @@
 <?php
 
+
 require_once 'init.php';
 require_once 'AbstractCollection.php';
 
 /**
  * Set is collection class with no duplicate elements.
  */
-class Set extends AbstractCollection implements ArrayAccess, Iterator {
+class Set extends _php_adt\AbstractCollection implements ArrayAccess, Iterator {
 
     /**
      * The set elements' hashes are stored as keys for uniqueness. All values are true.

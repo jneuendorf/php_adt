@@ -2,8 +2,10 @@
 
 require_once 'Super.php';
 
-abstract class AbstractTree extends Super {
-
+/**
+* Interface for Tree.
+*/
+abstract class AbstractTree extends _php_adt\Super {
     abstract public function add($tree_node, $index=null);
     abstract public function children();
     abstract public function clear();

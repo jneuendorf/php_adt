@@ -9,6 +9,7 @@
 <?php
 
 require_once 'init.php';
+require_once 'init.itertools.php';
 require_once 'test/Test.php';
 
 

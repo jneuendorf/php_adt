@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__.'/../Tree.php';
-require_once __DIR__.'/Test.php';
+// require_once __DIR__.'/../Tree.php';
+// require_once __DIR__.'/Test.php';
 
 
 echo '<h1>Tree class</h1>';

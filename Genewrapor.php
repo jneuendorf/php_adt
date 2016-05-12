@@ -1,15 +1,15 @@
 <?php
 
-require_once 'funcs.php';
-require_once 'Clonable.php';
-require_once 'Arr.php';
+// import('Arr');
+
+use _php_adt\Clonable as Clonable;
 
 /**
 * The class is intended for wrapping generators but it can handle all types of iterables (implementing the Iterator interface).
 * That way generator functionaliy can be chained from different code parts (just like functions).
 * Also optionally this class makes it possible to reiterate over a generator.
 */
-class Genewrapor extends _php_adt\Clonable implements Iterator {
+class Genewrapor extends Clonable implements \Iterator {
     /**
     * Keep track of iteration progress of native arrays. The array itself does not know that...
     * @internal
@@ -92,7 +92,7 @@ class Genewrapor extends _php_adt\Clonable implements Iterator {
     * @return bool
     */
     public function is_reiterable() {
-        return $this->reiterable || is_array($this->iterable) || !($this->iterable instanceof Generator);
+        return $this->reiterable || is_array($this->iterable) || !($this->iterable instanceof \Generator);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__.'/../Dict.php';
-require_once __DIR__.'/Test.php';
+// require_once __DIR__.'/../Dict.php';
+// require_once __DIR__.'/Test.php';
 
 
 echo '<h1>Dict class</h1>';

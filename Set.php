@@ -1,13 +1,15 @@
 <?php
 
+require_once '_php_adt/AbstractCollection.php';
 
-require_once 'init.php';
-require_once 'AbstractCollection.php';
+use \_php_adt\AbstractCollection as AbstractCollection;
+use \ArrayAccess as ArrayAccess;
+use \Iterator as Iterator;
 
 /**
  * Set is collection class with no duplicate elements.
  */
-class Set extends _php_adt\AbstractCollection implements ArrayAccess, Iterator {
+class Set extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
      * The set elements' hashes are stored as keys for uniqueness. All values are true.

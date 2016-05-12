@@ -1,8 +1,9 @@
 <?php
 
-require_once 'init.php';
-require_once 'Arr.php';
-require_once 'AbstractTree.php';
+require_once '_php_adt/AbstractTree.php';
+import('Arr');
+
+use _php_adt\AbstractTree as AbstractTree;
 
 /**
  * Tree is class implementing a tree structure with nodes knowing both their children and their parents.

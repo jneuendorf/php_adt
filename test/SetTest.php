@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__.'/../Set.php';
-require_once __DIR__.'/Test.php';
+// require_once __DIR__.'/../Set.php';
+// require_once __DIR__.'/Test.php';
 
 echo '<h1>Set class</h1>';
 

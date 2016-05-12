@@ -1,8 +1,11 @@
 <?php
 
-require_once 'init.php';
-require_once 'AbstractCollection.php';
-require_once 'Dict.php';
+require_once '_php_adt/AbstractCollection.php';
+import('Dict');
+
+use \_php_adt\AbstractCollection as AbstractCollection;
+use \ArrayAccess as ArrayAccess;
+use \Iterator as Iterator;
 
 /**
  * Arr is a wrapper around the native array type.
@@ -18,7 +21,7 @@ require_once 'Dict.php';
  * @method number sum() See array_sum.
  * @method Arr values() See array_values.
  */
-class Arr extends _php_adt\AbstractCollection implements ArrayAccess, Iterator {
+class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * List of native array function that we can automatically create delegations (using the __call() method)

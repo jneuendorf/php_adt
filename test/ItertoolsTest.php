@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__.'/Test.php';
-require_once __DIR__.'/../Genewrapor.php';
-require_once __DIR__.'/../Arr.php';
-require_once __DIR__.'/../Dict.php';
-require_once __DIR__.'/../itertools/itertools.php';
+// require_once __DIR__.'/Test.php';
+// require_once __DIR__.'/../Genewrapor.php';
+// require_once __DIR__.'/../Arr.php';
+// require_once __DIR__.'/../Dict.php';
+// require_once __DIR__.'/../itertools.php';
 
 echo '<h1>itertools</h1>';
 

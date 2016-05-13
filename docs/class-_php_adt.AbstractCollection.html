@@ -102,7 +102,7 @@
 
 
 	<div class="description">
-	<p>Interface for AbstractMap, Arr, Set implementing is_empty() and size().</p>
+	<p>Interface for AbstractMap, Arr, Set implementing a standard size() method.</p>
 	</div>
 
 	<dl class="tree well">
@@ -125,17 +125,6 @@
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
-			<a href="class-_php_adt.AbstractSequence.html"><span>_php_adt\AbstractSequence</span></a>
-			
-			 implements 
-<span>ArrayAccess</span>, 
-			
-<span>Iterator</span>
-			
-			
-		</dd>
-		<dd style="padding-left:90px">
-			<img src="resources/inherit.png" alt="Extended by">
 <b><span>_php_adt\AbstractCollection</span></b>			
 			
 			
@@ -155,6 +144,7 @@
 	<div>
 		<h3>Indirect known subclasses</h3>
 		<p class="elementList">
+			<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>, 
 			<code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code>
 		</p>
 	</div>
@@ -169,7 +159,7 @@
 		<b>Namespace:</b> <a href="namespace-_php_adt.html">_php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-_php_adt.AbstractCollection.html#11-25" title="Go to source code">AbstractCollection.php</a>
+			<b>Located at</b> <a href="source-class-_php_adt.AbstractCollection.html#13-27" title="Go to source code">AbstractCollection.php</a>
 		<br>
 	</div>
 
@@ -189,7 +179,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-_php_adt.AbstractCollection.html#15" title="Go to source code">add</a>( <span> <var>$elements</var></span> )</code>
+			<code><a href="source-class-_php_adt.AbstractCollection.html#17" title="Go to source code">add</a>( <span> <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				
@@ -218,7 +208,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has">#</a>
-			<code><a href="source-class-_php_adt.AbstractCollection.html#17" title="Go to source code">has</a>( <span> <var>$element</var></span> )</code>
+			<code><a href="source-class-_php_adt.AbstractCollection.html#19" title="Go to source code">has</a>( <span> <var>$element</var></span> )</code>
 
 			<div class="description short">
 				
@@ -247,7 +237,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-_php_adt.AbstractCollection.html#18" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
+			<code><a href="source-class-_php_adt.AbstractCollection.html#20" title="Go to source code">map</a>( <span> <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				
@@ -276,7 +266,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-_php_adt.AbstractCollection.html#19" title="Go to source code">remove</a>( <span> <var>$element</var></span> )</code>
+			<code><a href="source-class-_php_adt.AbstractCollection.html#21" title="Go to source code">remove</a>( <span> <var>$element</var></span> )</code>
 
 			<div class="description short">
 				
@@ -305,7 +295,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-_php_adt.AbstractCollection.html#21-23" title="Go to source code">size</a>( )</code>
+			<code><a href="source-class-_php_adt.AbstractCollection.html#23-25" title="Go to source code">size</a>( )</code>
 
 			<div class="description short">
 				
@@ -327,17 +317,6 @@
 		</div>
 
 		<div class="panel panel-default">
-	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.AbstractSequence.html#methods">_php_adt\AbstractSequence</a></h3></div>
-			<p class="elementList">
-				<code><a href="class-_php_adt.AbstractSequence.html#_clear">clear()</a></code>, 
-				<code><a href="class-_php_adt.AbstractSequence.html#_to_a">to_a()</a></code>, 
-				<code><a href="class-_php_adt.AbstractSequence.html#_to_arr">to_arr()</a></code>, 
-				<code><a href="class-_php_adt.AbstractSequence.html#_to_dict">to_dict()</a></code>, 
-				<code><a href="class-_php_adt.AbstractSequence.html#_to_set">to_set()</a></code>, 
-				<code><a href="class-_php_adt.AbstractSequence.html#_to_str">to_str()</a></code>
-			</p>
-		</div>
-		<div class="panel panel-default">
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Super.html#methods">_php_adt\Super</a></h3></div>
 			<p class="elementList">
 				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>, 
@@ -350,25 +329,6 @@
 			<p class="elementList">
 				<code><a href="class-_php_adt.Clonable.html#___clone">__clone()</a></code>, 
 				<code><a href="class-_php_adt.Clonable.html#_copy">copy()</a></code>
-			</p>
-		</div>
-		<div class="panel panel-default">
-	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
-			<p class="elementList">
-				<code>current()</code>, 
-				<code>key()</code>, 
-				<code>next()</code>, 
-				<code>rewind()</code>, 
-				<code>valid()</code>
-			</p>
-		</div>
-		<div class="panel panel-default">
-	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
-			<p class="elementList">
-				<code>offsetExists()</code>, 
-				<code>offsetGet()</code>, 
-				<code>offsetSet()</code>, 
-				<code>offsetUnset()</code>
 			</p>
 		</div>
 		<div class="panel panel-default">

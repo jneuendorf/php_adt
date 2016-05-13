@@ -80,11 +80,11 @@
 				<li><a href="class-_php_adt.Clonable.html">_php_adt\Clonable</a></li>
 				<li><a href="class-_php_adt.Super.html">_php_adt\Super</a></li>
 				<li><a href="class-php_adt.Arr.html">php_adt\Arr</a></li>
+				<li><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></li>
 				<li><a href="class-php_adt.Dict.html">php_adt\Dict</a></li>
 				<li><a href="class-php_adt.Genewrapor.html">php_adt\Genewrapor</a></li>
 				<li><a href="class-php_adt.itertools.Slice.html">php_adt\itertools\Slice</a></li>
 				<li><a href="class-php_adt.Set.html">php_adt\Set</a></li>
-				<li><a href="class-php_adt.Str.html">php_adt\Str</a></li>
 				<li><a href="class-php_adt.Tree.html">php_adt\Tree</a></li>
 			</ul>
 
@@ -123,33 +123,35 @@
 <div id="right">
 	<div id="rightInner">
 <div id="source">
-	<pre class="numbers"><code><span class="l"><a href="#1"> 1 </a></span><span class="l"><a href="#2"> 2 </a></span></span><span class="l"><a href="#3"> 3 </a></span></span><span class="l"><a href="#4"> 4 </a></span><span class="l"><a href="#5"> 5 </a></span><span class="l"><a href="#6"> 6 </a></span><span class="l"><a href="#7"> 7 </a></span><span class="l"><a href="#8"> 8 </a></span><span class="l"><a href="#9"> 9 </a></span><span class="l"><a href="#10">10 </a></span><span class="l"><a href="#11">11 </a></span></span><span class="l"><a href="#12">12 </a></span></span><span class="l"><a href="#13">13 </a></span><span class="l"><a href="#14">14 </a></span><span class="l"><a href="#15">15 </a></span><span class="l"><a href="#16">16 </a></span><span class="l"><a href="#17">17 </a></span><span class="l"><a href="#18">18 </a></span><span class="l"><a href="#19">19 </a></span><span class="l"><a href="#20">20 </a></span><span class="l"><a href="#21">21 </a></span><span class="l"><a href="#22">22 </a></span><span class="l"><a href="#23">23 </a></span><span class="l"><a href="#24">24 </a></span><span class="l"><a href="#25">25 </a></span><span class="l"><a href="#26">26 </a></span></code></pre>
+	<pre class="numbers"><code><span class="l"><a href="#1"> 1 </a></span><span class="l"><a href="#2"> 2 </a></span></span><span class="l"><a href="#3"> 3 </a></span></span><span class="l"><a href="#4"> 4 </a></span><span class="l"><a href="#5"> 5 </a></span><span class="l"><a href="#6"> 6 </a></span><span class="l"><a href="#7"> 7 </a></span><span class="l"><a href="#8"> 8 </a></span><span class="l"><a href="#9"> 9 </a></span><span class="l"><a href="#10">10 </a></span><span class="l"><a href="#11">11 </a></span><span class="l"><a href="#12">12 </a></span><span class="l"><a href="#13">13 </a></span></span><span class="l"><a href="#14">14 </a></span></span><span class="l"><a href="#15">15 </a></span><span class="l"><a href="#16">16 </a></span><span class="l"><a href="#17">17 </a></span><span class="l"><a href="#18">18 </a></span><span class="l"><a href="#19">19 </a></span><span class="l"><a href="#20">20 </a></span><span class="l"><a href="#21">21 </a></span><span class="l"><a href="#22">22 </a></span><span class="l"><a href="#23">23 </a></span><span class="l"><a href="#24">24 </a></span><span class="l"><a href="#25">25 </a></span><span class="l"><a href="#26">26 </a></span><span class="l"><a href="#27">27 </a></span><span class="l"><a href="#28">28 </a></span></code></pre>
 	<pre class="code"><code><span id="1" class="l"><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l"><span class="php-comment">/**
 </span></span><span id="3" class="l"><span class="php-comment">* @package _php_adt
 </span></span><span id="4" class="l"><span class="php-comment">*/</span>
 </span><span id="5" class="l"><span class="php-keyword1">namespace</span> _php_adt;
 </span><span id="6" class="l">
-</span><span id="7" class="l"><span class="php-keyword1">require_once</span> <span class="php-quote">'_php_adt/AbstractSequence.php'</span>;
-</span><span id="8" class="l">
-</span><span id="9" class="l"><span class="php-keyword1">use</span> \_php_adt\AbstractSequence <span class="php-keyword1">as</span> AbstractSequence;
-</span><span id="10" class="l">
-</span><span id="11" class="l"><span class="php-comment">/**
-</span></span><span id="12" class="l"><span class="php-comment">* Interface for AbstractMap, Arr, Set implementing is_empty() and size().
-</span></span><span id="13" class="l"><span class="php-comment">*/</span>
-</span><span id="14" class="l"><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> AbstractCollection <span class="php-keyword1">extends</span> AbstractSequence {
-</span><span id="15" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> add(...<span class="php-var">$elements</span>);
-</span><span id="16" class="l">    <span class="php-comment">// abstract public function equals($collection);</span>
-</span><span id="17" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> has(<span class="php-var">$element</span>);
-</span><span id="18" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> map(<span class="php-var">$callback</span>);
-</span><span id="19" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> remove(<span class="php-var">$element</span>);
-</span><span id="20" class="l">
-</span><span id="21" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> size() {
-</span><span id="22" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_size;
-</span><span id="23" class="l">    }
-</span><span id="24" class="l">
-</span><span id="25" class="l">}
-</span><span id="26" class="l"></span></code></pre>
+</span><span id="7" class="l"><span class="php-comment">// require_once '_php_adt/AbstractSequence.php';</span>
+</span><span id="8" class="l"><span class="php-keyword1">require_once</span> <span class="php-quote">'_php_adt/Super.php'</span>;
+</span><span id="9" class="l">
+</span><span id="10" class="l"><span class="php-comment">// use \_php_adt\AbstractSequence as AbstractSequence;</span>
+</span><span id="11" class="l"><span class="php-keyword1">use</span> \_php_adt\Super <span class="php-keyword1">as</span> Super;
+</span><span id="12" class="l">
+</span><span id="13" class="l"><span class="php-comment">/**
+</span></span><span id="14" class="l"><span class="php-comment">* Interface for AbstractMap, Arr, Set implementing a standard size() method.
+</span></span><span id="15" class="l"><span class="php-comment">*/</span>
+</span><span id="16" class="l"><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> AbstractCollection <span class="php-keyword1">extends</span> Super {
+</span><span id="17" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> add(...<span class="php-var">$elements</span>);
+</span><span id="18" class="l">    <span class="php-comment">// abstract public function equals($collection);</span>
+</span><span id="19" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> has(<span class="php-var">$element</span>);
+</span><span id="20" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> map(<span class="php-var">$callback</span>);
+</span><span id="21" class="l">    <span class="php-keyword1">abstract</span> <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> remove(<span class="php-var">$element</span>);
+</span><span id="22" class="l">
+</span><span id="23" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> size() {
+</span><span id="24" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_size;
+</span><span id="25" class="l">    }
+</span><span id="26" class="l">
+</span><span id="27" class="l">}
+</span><span id="28" class="l"></span></code></pre>
 </div>
 	</div>
 
@@ -158,6 +160,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?4798c26e5a86d6bdd47a560b9997c84339683f24"></script>
-<script src="elementlist.js?35d496ae9041f5cf603b3efb23bd0b84bce37321"></script>
+<script src="elementlist.js?e97e9000566807e279c1253136c1f6a16df4db4a"></script>
 </body>
 </html>

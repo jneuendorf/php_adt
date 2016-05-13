@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class php_adt\Str | php_adt</title>
+	<title>Class php_adt\CharArr | php_adt</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -74,10 +74,10 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-php_adt.Arr.html">Arr</a></li>
+				<li class="active"><a href="class-php_adt.CharArr.html">CharArr</a></li>
 				<li><a href="class-php_adt.Dict.html">Dict</a></li>
 				<li><a href="class-php_adt.Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-php_adt.Set.html">Set</a></li>
-				<li class="active"><a href="class-php_adt.Str.html">Str</a></li>
 				<li><a href="class-php_adt.Tree.html">Tree</a></li>
 			</ul>
 
@@ -94,9 +94,13 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class Str</h1>
+	<h1>Class CharArr</h1>
 
 
+	<div class="description">
+	<p>Arr is a wrapper around the native array type.
+It provides a consistent API and some extra features. There are no keys...just plain indices. ^^</p>
+	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -118,7 +122,14 @@
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
-			<a href="class-_php_adt.AbstractSequence.html"><span>_php_adt\AbstractSequence</span></a>
+			<a href="class-_php_adt.AbstractCollection.html"><span>_php_adt\AbstractCollection</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-php_adt.Arr.html"><span>php_adt\Arr</span></a>
 			
 			 implements 
 <span>ArrayAccess</span>, 
@@ -127,9 +138,9 @@
 			
 			
 		</dd>
-		<dd style="padding-left:90px">
+		<dd style="padding-left:120px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>php_adt\Str</span></b>			
+<b><span>php_adt\CharArr</span></b>			
 			
 			
 		</dd>
@@ -148,7 +159,7 @@
 		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-php_adt.Str.html#16-527" title="Go to source code">Str.ns.php</a>
+			<b>Located at</b> <a href="source-class-php_adt.CharArr.html#18-489" title="Go to source code">CharArr.ns.php</a>
 		<br>
 	</div>
 
@@ -161,27 +172,159 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-php_adt.Str.html#27-30" title="Go to source code">__construct</a>( <span> <var>$str</var> = <span class="php-quote">''</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#20-34" title="Go to source code">__construct</a>( <span>mixed... <var>$str</var> = <span class="php-quote">''</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Constructor.</p>
 			</div>
 
 			<div class="description detailed hidden">
+				<p>Constructor.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$str</var></dt>
+						<dd>$elements</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#___construct">php_adt\Arr::__construct</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="from_iterable" id="_from_iterable">
+
+			<td class="attributes"><code>
+				 public static
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
 				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_from_iterable">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#38-55" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a new instance from an iterable.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new instance from an iterable.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+						<dt><var>$recursive</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_from_iterable">php_adt\Arr::from_iterable</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="range" id="_range">
+
+			<td class="attributes"><code>
+				 public static
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_range">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#57-66" title="Go to source code">range</a>( <span>mixed <var>$start</var></span>, <span>mixed <var>$end</var></span>, <span>number <var>$step</var> = <span class="php-num">1</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a new instance that's filled with values according to the defined letter range.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new instance that's filled with values according to the defined letter range.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd>Inclusive.</dd>
+						<dt><var>$step</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_range">php_adt\Arr::range</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__toString" id="___toString">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___toString">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#68-74" title="Go to source code">__toString</a>( )</code>
+
+			<div class="description short">
+				<p>Stringifies the CharArr instance.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Stringifies the CharArr instance.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#___toString">php_adt\Arr::__toString</a></code></div>
 
 			</div>
 			</div></td>
@@ -190,27 +333,38 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-php_adt.Str.html#39-41" title="Go to source code">copy</a>( <span> <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#82-84" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
-				
+				<p>Creates a (potentially deep) copy of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Creates a (potentially deep) copy of the Arr instance.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>Whether to copy recursively.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
 
 
 
-
-
-
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_copy">php_adt\Arr::copy</a></code></div>
 
 			</div>
 			</div></td>
@@ -226,14 +380,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-php_adt.Str.html#45-47" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#88-90" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
-				
+				<p>Calculates a hash value of the Arr instance.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				
+				<p>Calculates a hash value of the Arr instance.</p>
 
 
 
@@ -244,39 +398,48 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_hash">php_adt\Arr::hash</a></code></div>
 
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="clear" id="_clear">
+		<tr data-order="get" id="_get">
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+				mixed
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-php_adt.Str.html#52-60" title="Go to source code">clear</a>( )</code>
+			<a class="anchor" href="#_get">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#95-97" title="Go to source code">get</a>( <span>integer|string|array <var>$index</var></span> )</code>
 
 			<div class="description short">
-				<p>Empties the Str instance. <span class="label label-info">Chainable</span></p>
+				<p>Gets an elements at a given index (negative numeric indices are possible).</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Empties the Str instance. <span class="label label-info">Chainable</span></p>
+				<p>Gets an elements at a given index (negative numeric indices are possible).</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$index</var></dt>
+						<dd>Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing</dd>
+					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+						mixed
 					</div>
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_get">php_adt\Arr::get</a></code></div>
 
 			</div>
 			</div></td>
@@ -292,7 +455,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-php_adt.Str.html#62-81" title="Go to source code">equals</a>( <span>mixed <var>$str</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#103-124" title="Go to source code">equals</a>( <span>mixed <var>$str</var></span> )</code>
 
 			<div class="description short">
 				<p>Indicates whether the Str instance is equals to another object.</p>
@@ -315,6 +478,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_equals">php_adt\Arr::equals</a></code></div>
 
 			</div>
 			</div></td>
@@ -330,7 +495,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_a">#</a>
-			<code><a href="source-class-php_adt.Str.html#83-93" title="Go to source code">to_a</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#126-136" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
 				<p>Converts this Str instance to a native array.</p>
@@ -348,6 +513,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_a">php_adt\Arr::to_a</a></code></div>
 
 			</div>
 			</div></td>
@@ -363,7 +530,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_arr">#</a>
-			<code><a href="source-class-php_adt.Str.html#95-101" title="Go to source code">to_arr</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#138-144" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
 				<p>Creates a copy of the Str instance.</p>
@@ -381,6 +548,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_arr">php_adt\Arr::to_arr</a></code></div>
 
 			</div>
 			</div></td>
@@ -396,7 +565,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_dict">#</a>
-			<code><a href="source-class-php_adt.Str.html#103-109" title="Go to source code">to_dict</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#146-152" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Str instance to an instance of Dict (indices become the keys).</p>
@@ -414,6 +583,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_dict">php_adt\Arr::to_dict</a></code></div>
 
 			</div>
 			</div></td>
@@ -422,14 +593,14 @@
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+				Str
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_str">#</a>
-			<code><a href="source-class-php_adt.Str.html#111-117" title="Go to source code">to_str</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#154-160" title="Go to source code">to_str</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Str instance to an instance of Str.</p>
@@ -442,11 +613,13 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+						Str
 					</div>
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_str">php_adt\Arr::to_str</a></code></div>
 
 			</div>
 			</div></td>
@@ -462,7 +635,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_set">#</a>
-			<code><a href="source-class-php_adt.Str.html#119-125" title="Go to source code">to_set</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#162-168" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Str instance to an instance of Set.</p>
@@ -476,6 +649,41 @@
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_set">php_adt\Arr::to_set</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_s" id="_to_s">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_s">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#170-176" title="Go to source code">to_s</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to a string.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to a string.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string
 					</div>
 
 
@@ -495,7 +703,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-php_adt.Str.html#249-255" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#213-219" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
 				<p>Gets the current character.</p>
@@ -513,6 +721,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_current">php_adt\Arr::current</a></code></div>
 
 			</div>
 			</div></td>
@@ -528,7 +738,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-php_adt.Str.html#257-263" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#221-227" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
 				<p>Gets the index of the current character.</p>
@@ -546,6 +756,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_key">php_adt\Arr::key</a></code></div>
 
 			</div>
 			</div></td>
@@ -561,7 +773,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-php_adt.Str.html#265-270" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#229-234" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the next key-value pair.</p>
@@ -575,6 +787,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_next">php_adt\Arr::next</a></code></div>
 
 			</div>
 			</div></td>
@@ -590,7 +804,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-php_adt.Str.html#272-277" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#236-241" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the first key-value pair.</p>
@@ -604,6 +818,8 @@
 
 
 
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_rewind">php_adt\Arr::rewind</a></code></div>
 
 			</div>
 			</div></td>
@@ -619,7 +835,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_valid">#</a>
-			<code><a href="source-class-php_adt.Str.html#279-284" title="Go to source code">valid</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#243-248" title="Go to source code">valid</a>( )</code>
 
 			<div class="description short">
 				
@@ -637,7 +853,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="is_empty" id="_is_empty">
+		<tr data-order="slice" id="_slice">
 
 			<td class="attributes"><code>
 				 public 
@@ -647,8 +863,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_is_empty">#</a>
-			<code><a href="source-class-php_adt.Str.html#288-290" title="Go to source code">is_empty</a>( )</code>
+			<a class="anchor" href="#_slice">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#252-254" title="Go to source code">slice</a>( <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$length</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				
@@ -663,36 +879,7 @@
 
 
 					<h4>Overrides</h4>
-					<div class="list"><code><a href="class-_php_adt.Super.html#_is_empty">_php_adt\Super::is_empty</a></code></div>
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="size" id="_size">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-php_adt.Str.html#291-293" title="Go to source code">size</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
+					<div class="list"><code><a href="class-php_adt.Arr.html#_slice">php_adt\Arr::slice</a></code></div>
 
 			</div>
 			</div></td>
@@ -708,7 +895,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_char_at">#</a>
-			<code><a href="source-class-php_adt.Str.html#296-301" title="Go to source code">char_at</a>( <span> <var>$index</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#257-262" title="Go to source code">char_at</a>( <span> <var>$index</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns the char value at the specified index.</p>
@@ -730,27 +917,38 @@
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_concat">#</a>
-			<code><a href="source-class-php_adt.Str.html#302-307" title="Go to source code">concat</a>( <span> <var>$str</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#263-269" title="Go to source code">concat</a>( <span>mixed... <var>$strs</var></span> )</code>
 
 			<div class="description short">
-				<p>Concatenates the specified string to the end of this string.</p>
+				<p>Concatenates the specified strings to the end of this string.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Concatenates the specified string to the end of this string.</p>
+				<p>Concatenates the specified strings to the end of this string.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$strs</var></dt>
+						<dd>$arrs The Arr instance(s) to be concatenated.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
 
 
 
-
-
-
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_concat">php_adt\Arr::concat</a></code></div>
 
 			</div>
 			</div></td>
@@ -766,7 +964,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_contains">#</a>
-			<code><a href="source-class-php_adt.Str.html#308-313" title="Go to source code">contains</a>( <span> <var>$str</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#270-275" title="Go to source code">contains</a>( <span> <var>$str</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns true if and only if this string contains the specified sequence of char values.</p>
@@ -795,7 +993,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_matches">#</a>
-			<code><a href="source-class-php_adt.Str.html#314-319" title="Go to source code">matches</a>( <span> <var>$pattern</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#276-281" title="Go to source code">matches</a>( <span> <var>$pattern</var></span> )</code>
 
 			<div class="description short">
 				<p>Tells whether or not this string matches the given regular expression.</p>
@@ -824,7 +1022,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_substring">#</a>
-			<code><a href="source-class-php_adt.Str.html#320-325" title="Go to source code">substring</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#282-287" title="Go to source code">substring</a>( )</code>
 
 			<div class="description short">
 				<p>Returns a string that is a substring of this string.</p>
@@ -853,7 +1051,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_trim">#</a>
-			<code><a href="source-class-php_adt.Str.html#326-331" title="Go to source code">trim</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#288-293" title="Go to source code">trim</a>( )</code>
 
 			<div class="description short">
 				<p>Returns a string whose value is this string, with any leading and trailing whitespace removed.</p>
@@ -882,7 +1080,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_capitalized">#</a>
-			<code><a href="source-class-php_adt.Str.html#334-339" title="Go to source code">capitalized</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#296-301" title="Go to source code">capitalized</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with its first character capitalized and the rest lowercased.</p>
@@ -911,7 +1109,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_casefold">#</a>
-			<code><a href="source-class-php_adt.Str.html#340-347" title="Go to source code">casefold</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#302-309" title="Go to source code">casefold</a>( )</code>
 
 			<div class="description short">
 				<p>Return a casefolded copy of the string. Casefolded strings may be used for caseless matching.
@@ -944,7 +1142,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_center">#</a>
-			<code><a href="source-class-php_adt.Str.html#348-353" title="Go to source code">center</a>( <span> <var>$width</var></span>, <span> <var>$fillchar</var> = <span class="php-quote">' '</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#310-315" title="Go to source code">center</a>( <span> <var>$width</var></span>, <span> <var>$fillchar</var> = <span class="php-quote">' '</span></span> )</code>
 
 			<div class="description short">
 				<p>Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).</p>
@@ -973,7 +1171,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_count_py">#</a>
-			<code><a href="source-class-php_adt.Str.html#354-359" title="Go to source code">count_py</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#316-321" title="Go to source code">count_py</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.</p>
@@ -1002,7 +1200,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_endswith">#</a>
-			<code><a href="source-class-php_adt.Str.html#360-365" title="Go to source code">endswith</a>( <span> <var>$suffix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#322-327" title="Go to source code">endswith</a>( <span> <var>$suffix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return True if the string ends with the specified suffix, otherwise return False. suffix can also be a tuple of suffixes to look for. With optional start, test beginning at that position. With optional end, stop comparing at that position.</p>
@@ -1031,7 +1229,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_expandtabs">#</a>
-			<code><a href="source-class-php_adt.Str.html#366-371" title="Go to source code">expandtabs</a>( <span> <var>$tabsize</var> = <span class="php-num">4</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#328-333" title="Go to source code">expandtabs</a>( <span> <var>$tabsize</var> = <span class="php-num">4</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size. Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on). To expand the string, the current column is set to zero and the string is examined character by character. If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.) If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero. Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.</p>
@@ -1060,7 +1258,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_find">#</a>
-			<code><a href="source-class-php_adt.Str.html#372-377" title="Go to source code">find</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#334-339" title="Go to source code">find</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.</p>
@@ -1089,7 +1287,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_format">#</a>
-			<code><a href="source-class-php_adt.Str.html#378-383" title="Go to source code">format</a>( <span> <var>$args</var></span>, <span> <var>$kwargs</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#340-345" title="Go to source code">format</a>( <span> <var>$args</var></span>, <span> <var>$kwargs</var></span> )</code>
 
 			<div class="description short">
 				<p>Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}. Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.</p>
@@ -1111,14 +1309,14 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="attributes"><code>
 				 public 
-				
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_index">#</a>
-			<code><a href="source-class-php_adt.Str.html#384-389" title="Go to source code">index</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#346-351" title="Go to source code">index</a>( <span>mixed <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Like find(), but raise ValueError when the substring is not found.</p>
@@ -1128,10 +1326,27 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 				<p>Like find(), but raise ValueError when the substring is not found.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sub</var></dt>
+						<dd>$needle</dd>
+						<dt><var>$start</var></dt>
+						<dd>Where to start searching (inclusive).</dd>
+						<dt><var>$end</var></dt>
+						<dd>$stop Where to stop searching (exclusive).</dd>
+						<dt><var>$equality</var></dt>
+						<dd>This optional parameter can be used to define what elements is considered a match.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
 
 
 
-
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_index">php_adt\Arr::index</a></code></div>
 
 			</div>
 			</div></td>
@@ -1147,7 +1362,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isalnum">#</a>
-			<code><a href="source-class-php_adt.Str.html#390-395" title="Go to source code">isalnum</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#352-357" title="Go to source code">isalnum</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().</p>
@@ -1176,7 +1391,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isalpha">#</a>
-			<code><a href="source-class-php_adt.Str.html#396-401" title="Go to source code">isalpha</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#358-363" title="Go to source code">isalpha</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are alphabetic and there is at least one character, false otherwise. Alphabetic characters are those characters defined in the Unicode character database as “Letter”, i.e., those with general category property being one of “Lm”, “Lt”, “Lu”, “Ll”, or “Lo”. Note that this is different from the “Alphabetic” property defined in the Unicode Standard.</p>
@@ -1205,7 +1420,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdecimal">#</a>
-			<code><a href="source-class-php_adt.Str.html#402-407" title="Go to source code">isdecimal</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#364-369" title="Go to source code">isdecimal</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are decimal characters and there is at least one character, false otherwise. Decimal characters are those from general category “Nd”. This category includes digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO.</p>
@@ -1234,7 +1449,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdigit">#</a>
-			<code><a href="source-class-php_adt.Str.html#408-413" title="Go to source code">isdigit</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#370-375" title="Go to source code">isdigit</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are digits and there is at least one character, false otherwise. Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. Formally, a digit is a character that has the property value Numeric_Type=Digit or Numeric_Type=Decimal.</p>
@@ -1263,7 +1478,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_islower">#</a>
-			<code><a href="source-class-php_adt.Str.html#414-419" title="Go to source code">islower</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#376-381" title="Go to source code">islower</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all cased characters in the string are lowercase and there is at least one cased character, false otherwise.</p>
@@ -1292,7 +1507,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isnumeric">#</a>
-			<code><a href="source-class-php_adt.Str.html#420-425" title="Go to source code">isnumeric</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#382-387" title="Go to source code">isnumeric</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are numeric characters, and there is at least one character, false otherwise. Numeric characters include digit characters, and all characters that have the Unicode numeric value property, e.g. U+2155, VULGAR FRACTION ONE FIFTH. Formally, numeric characters are those with the property value Numeric_Type=Digit, Numeric_Type=Decimal or Numeric_Type=Numeric.</p>
@@ -1321,7 +1536,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isprintable">#</a>
-			<code><a href="source-class-php_adt.Str.html#426-431" title="Go to source code">isprintable</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#388-393" title="Go to source code">isprintable</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are printable or the string is empty, false otherwise. Nonprintable characters are those characters defined in the Unicode character database as “Other” or “Separator”, excepting the ASCII space (0x20) which is considered printable. (Note that printable characters in this context are those which should not be escaped when repr() is invoked on a string. It has no bearing on the handling of strings written to sys.stdout or sys.stderr.)</p>
@@ -1350,7 +1565,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isspace">#</a>
-			<code><a href="source-class-php_adt.Str.html#432-437" title="Go to source code">isspace</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#394-399" title="Go to source code">isspace</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if there are only whitespace characters in the string and there is at least one character, false otherwise. Whitespace characters are those characters defined in the Unicode character database as “Other” or “Separator” and those with bidirectional property being one of “WS”, “B”, or “S”.</p>
@@ -1379,7 +1594,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_istitle">#</a>
-			<code><a href="source-class-php_adt.Str.html#438-443" title="Go to source code">istitle</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#400-405" title="Go to source code">istitle</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.</p>
@@ -1408,7 +1623,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isupper">#</a>
-			<code><a href="source-class-php_adt.Str.html#444-449" title="Go to source code">isupper</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#406-411" title="Go to source code">isupper</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all cased characters [4] in the string are uppercase and there is at least one cased character, false otherwise.</p>
@@ -1430,14 +1645,14 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="attributes"><code>
 				 public 
-				
+				Str
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_join">#</a>
-			<code><a href="source-class-php_adt.Str.html#450-455" title="Go to source code">join</a>( <span> <var>$iterable</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#412-417" title="Go to source code">join</a>( <span>Str <var>$iterable</var> = []</span> )</code>
 
 			<div class="description short">
 				<p>Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.</p>
@@ -1447,10 +1662,21 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 				<p>Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd>$glue</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						Str
+					</div>
 
 
 
-
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_join">php_adt\Arr::join</a></code></div>
 
 			</div>
 			</div></td>
@@ -1466,7 +1692,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_lower">#</a>
-			<code><a href="source-class-php_adt.Str.html#457-463" title="Go to source code">lower</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#419-425" title="Go to source code">lower</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all the cased characters converted to lowercase.
@@ -1497,7 +1723,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_partition">#</a>
-			<code><a href="source-class-php_adt.Str.html#464-469" title="Go to source code">partition</a>( <span> <var>$sep</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#426-431" title="Go to source code">partition</a>( <span> <var>$sep</var></span> )</code>
 
 			<div class="description short">
 				<p>Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.</p>
@@ -1519,14 +1745,14 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="attributes"><code>
 				 public 
-				
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_replace">#</a>
-			<code><a href="source-class-php_adt.Str.html#470-475" title="Go to source code">replace</a>( <span> <var>$old</var></span>, <span> <var>$new</var></span>, <span> <var>$count</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#432-437" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code> <var>$old</var></span>, <span> <var>$new</var> = <span class="php-keyword1">null</span></span>, <span> <var>$count</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.</p>
@@ -1536,10 +1762,25 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 				<p>Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.</p>
 
 
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$old</var></dt>
+						<dd>$replacements An instance of Dict mapping old to new values.</dd>
+						<dt><var>$new</var></dt>
+						<dd></dd>
+						<dt><var>$count</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
 
 
 
-
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_replace">php_adt\Arr::replace</a></code></div>
 
 			</div>
 			</div></td>
@@ -1555,7 +1796,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_split">#</a>
-			<code><a href="source-class-php_adt.Str.html#476-481" title="Go to source code">split</a>( <span> <var>$sep</var> = <span class="php-keyword1">null</span></span>, <span> <var>$maxsplit</var> = -<span class="php-num">1</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#438-443" title="Go to source code">split</a>( <span> <var>$sep</var> = <span class="php-keyword1">null</span></span>, <span> <var>$maxsplit</var> = -<span class="php-num">1</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).</p>
@@ -1584,7 +1825,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_splitlines">#</a>
-			<code><a href="source-class-php_adt.Str.html#482-487" title="Go to source code">splitlines</a>( <span> <var>$keepends</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#444-449" title="Go to source code">splitlines</a>( <span> <var>$keepends</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.</p>
@@ -1613,7 +1854,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_startswith">#</a>
-			<code><a href="source-class-php_adt.Str.html#489-494" title="Go to source code">startswith</a>( <span> <var>$prefix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#451-456" title="Go to source code">startswith</a>( <span> <var>$prefix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for. With optional start, test string beginning at that position. With optional end, stop comparing string at that position.</p>
@@ -1642,7 +1883,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_strip">#</a>
-			<code><a href="source-class-php_adt.Str.html#496-501" title="Go to source code">strip</a>( <span> <var>$chars</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#458-463" title="Go to source code">strip</a>( <span> <var>$chars</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.</p>
@@ -1671,7 +1912,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_swapcase">#</a>
-			<code><a href="source-class-php_adt.Str.html#502-507" title="Go to source code">swapcase</a>( <span> <var>$target_case</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#464-469" title="Go to source code">swapcase</a>( <span> <var>$target_case</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.</p>
@@ -1700,7 +1941,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_title">#</a>
-			<code><a href="source-class-php_adt.Str.html#508-513" title="Go to source code">title</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#470-475" title="Go to source code">title</a>( )</code>
 
 			<div class="description short">
 				<p>Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.</p>
@@ -1729,7 +1970,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_upper">#</a>
-			<code><a href="source-class-php_adt.Str.html#515-520" title="Go to source code">upper</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#477-482" title="Go to source code">upper</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all the cased characters [4] converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).</p>
@@ -1758,7 +1999,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_zfill">#</a>
-			<code><a href="source-class-php_adt.Str.html#521-526" title="Go to source code">zfill</a>( <span> <var>$width</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#483-488" title="Go to source code">zfill</a>( <span> <var>$width</var></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string left filled with ASCII '0' digits to make a string of length width. A leading sign prefix ('+'/'-') is handled by inserting the padding after the sign character rather than before. The original string is returned if width is less than or equal to len(s).</p>
@@ -1780,9 +2021,60 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 		</div>
 
 		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-php_adt.Arr.html#methods">php_adt\Arr</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-php_adt.Arr.html#__get_at">_get_at()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_add">add()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_append">append()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_clear">clear()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_count_values">count_values()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_diff">diff()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_difference">difference()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_elements">elements()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_end">end()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_extend">extend()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_fill">fill()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_first">first()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_flatten">flatten()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_group_by">group_by()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_has">has()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_insert">insert()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_intersect">intersect()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_last">last()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_map">map()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_merge">merge()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_merge_recursive">merge_recursive()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_penultimate">penultimate()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_pop">pop()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_popfirst">popfirst()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_pos">pos()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_prepend">prepend()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_prev">prev()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_push">push()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_rand">rand()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_remove">remove()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_remove_at">remove_at()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reset">reset()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reverse">reverse()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reversed">reversed()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_search">search()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_second">second()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_shift">shift()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_shuffle">shuffle()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_size">size()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_sort">sort()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_splice">splice()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_third">third()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_unique">unique()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_unshift">unshift()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_without">without()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Super.html#methods">_php_adt\Super</a></h3></div>
 			<p class="elementList">
-				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>
+				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>, 
+				<code><a href="class-_php_adt.Super.html#_is_empty">is_empty()</a></code>
 			</p>
 		</div>
 		<div class="panel panel-default">
@@ -1803,43 +2095,21 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 
 
-
-
-
-
-
-
-
 		<div class="panel panel-default">
-            <div class="panel-heading"><h2>Properties summary</h2></div>
-			<table class="summary table table-bordered table-striped properties" id="properties">
-		<tr data-order="_str" id="$_str">
-			<td class="attributes"><code>
-				protected  
-				string
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-php_adt.Str.html#17-20" title="Go to source code"><var>$_str</var></a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</td>
-			<td class="value">
-				<div>
-					<a href="#$_str" class="anchor">#</a>
-					<code></code>
-				</div>
-			</td>
-		</tr>
-			</table>
+            <div class="panel-heading"><h3>Magic methods inherited from <a href="class-php_adt.Arr.html#methods">php_adt\Arr</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-php_adt.Arr.html#m_chunk">chunk()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_column">column()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_filter">filter()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_keys">keys()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_pad">pad()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_reduce">reduce()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_slice">slice()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_sum">sum()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_values">values()</a></code>
+			</p>
 		</div>
+
 
 
 

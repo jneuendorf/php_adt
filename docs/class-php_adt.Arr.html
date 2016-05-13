@@ -74,10 +74,10 @@
 			<h3>Classes</h3>
 			<ul>
 				<li class="active"><a href="class-php_adt.Arr.html">Arr</a></li>
+				<li><a href="class-php_adt.CharArr.html">CharArr</a></li>
 				<li><a href="class-php_adt.Dict.html">Dict</a></li>
 				<li><a href="class-php_adt.Genewrapor.html">Genewrapor</a></li>
 				<li><a href="class-php_adt.Set.html">Set</a></li>
-				<li><a href="class-php_adt.Str.html">Str</a></li>
 				<li><a href="class-php_adt.Tree.html">Tree</a></li>
 			</ul>
 
@@ -122,23 +122,12 @@ It provides a consistent API and some extra features. There are no keys...just p
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
-			<a href="class-_php_adt.AbstractSequence.html"><span>_php_adt\AbstractSequence</span></a>
-			
-			 implements 
-<span>ArrayAccess</span>, 
-			
-<span>Iterator</span>
-			
-			
-		</dd>
-		<dd style="padding-left:90px">
-			<img src="resources/inherit.png" alt="Extended by">
 			<a href="class-_php_adt.AbstractCollection.html"><span>_php_adt\AbstractCollection</span></a>
 			
 			
 			
 		</dd>
-		<dd style="padding-left:120px">
+		<dd style="padding-left:90px">
 			<img src="resources/inherit.png" alt="Extended by">
 <b><span>php_adt\Arr</span></b>			
 			 implements 
@@ -151,6 +140,12 @@ It provides a consistent API and some extra features. There are no keys...just p
 	</dl>
 
 
+	<div>
+		<h3>Direct known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+		</p>
+	</div>
 
 
 
@@ -163,7 +158,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-php_adt.Arr.html#13-1088" title="Go to source code">Arr.ns.php</a>
+			<b>Located at</b> <a href="source-class-php_adt.Arr.html#13-1070" title="Go to source code">Arr.ns.php</a>
 		<br>
 	</div>
 
@@ -183,7 +178,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-php_adt.Arr.html#63-73" title="Go to source code">__construct</a>( <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#62-72" title="Go to source code">__construct</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Constructor.</p>
@@ -221,7 +216,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_from_iterable">#</a>
-			<code><a href="source-class-php_adt.Arr.html#77-92" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#76-91" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a new instance from an iterable.</p>
@@ -261,7 +256,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_fill">#</a>
-			<code><a href="source-class-php_adt.Arr.html#94-102" title="Go to source code">fill</a>( <span>integer <var>$count</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#93-101" title="Go to source code">fill</a>( <span>integer <var>$count</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a new instance that's filled with $count entries of the value of the $value parameter.</p>
@@ -301,7 +296,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_range">#</a>
-			<code><a href="source-class-php_adt.Arr.html#104-113" title="Go to source code">range</a>( <span>mixed <var>$start</var></span>, <span>mixed <var>$end</var></span>, <span>number <var>$step</var> = <span class="php-num">1</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#103-112" title="Go to source code">range</a>( <span>mixed <var>$start</var></span>, <span>mixed <var>$end</var></span>, <span>number <var>$step</var> = <span class="php-num">1</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a new instance that's filled with values according to the defined range. Letters are allowed.</p>
@@ -343,7 +338,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#___toString">#</a>
-			<code><a href="source-class-php_adt.Arr.html#163-169" title="Go to source code">__toString</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#162-168" title="Go to source code">__toString</a>( )</code>
 
 			<div class="description short">
 				<p>Stringifies the Arr instance.</p>
@@ -376,7 +371,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_elements">#</a>
-			<code><a href="source-class-php_adt.Arr.html#171-177" title="Go to source code">elements</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#170-176" title="Go to source code">elements</a>( )</code>
 
 			<div class="description short">
 				<p>Reveals the internal array of elements. This should be used rarely.</p>
@@ -409,7 +404,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_a">#</a>
-			<code><a href="source-class-php_adt.Arr.html#179-194" title="Go to source code">to_a</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#178-193" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
 				<p>Converts this Arr instance to a native array.</p>
@@ -442,7 +437,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_arr">#</a>
-			<code><a href="source-class-php_adt.Arr.html#196-202" title="Go to source code">to_arr</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#195-201" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
 				<p>Creates a copy of the Arr instance.</p>
@@ -475,7 +470,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_dict">#</a>
-			<code><a href="source-class-php_adt.Arr.html#204-210" title="Go to source code">to_dict</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#203-209" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Arr instance to an instance of Dict (indices become the keys).</p>
@@ -501,14 +496,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+				Str
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_str">#</a>
-			<code><a href="source-class-php_adt.Arr.html#212-218" title="Go to source code">to_str</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#211-217" title="Go to source code">to_str</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Arr instance to an instance of Str.</p>
@@ -521,7 +516,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+						Str
 					</div>
 
 
@@ -541,7 +536,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_to_set">#</a>
-			<code><a href="source-class-php_adt.Arr.html#220-226" title="Go to source code">to_set</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#219-225" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
 				<p>Converts the Arr instance to an instance of Set.</p>
@@ -574,7 +569,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_first">#</a>
-			<code><a href="source-class-php_adt.Arr.html#228-236" title="Go to source code">first</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#227-235" title="Go to source code">first</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the first element of the Arr instance.</p>
@@ -616,7 +611,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_second">#</a>
-			<code><a href="source-class-php_adt.Arr.html#238-246" title="Go to source code">second</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#237-245" title="Go to source code">second</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the second element of the Arr instance.</p>
@@ -658,7 +653,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_third">#</a>
-			<code><a href="source-class-php_adt.Arr.html#248-256" title="Go to source code">third</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#247-255" title="Go to source code">third</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the third element of the Arr instance.</p>
@@ -700,7 +695,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_penultimate">#</a>
-			<code><a href="source-class-php_adt.Arr.html#258-266" title="Go to source code">penultimate</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#257-265" title="Go to source code">penultimate</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the penultimate element of the Arr instance.</p>
@@ -742,7 +737,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_last">#</a>
-			<code><a href="source-class-php_adt.Arr.html#268-276" title="Go to source code">last</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#267-275" title="Go to source code">last</a>( <span>mixed <var>$default_val</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the last element of the Arr instance.</p>
@@ -773,6 +768,64 @@ It provides a consistent API and some extra features. There are no keys...just p
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="_get_at" id="__get_at">
+
+			<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#__get_at">#</a>
+			<code><a href="source-class-php_adt.Arr.html#281-283" title="Go to source code">_get_at</a>( <span> <var>$index</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="slice" id="_slice">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_slice">#</a>
+			<code><a href="source-class-php_adt.Arr.html#285-287" title="Go to source code">slice</a>( <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$length</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="add" id="_add">
 
 			<td class="attributes"><code>
@@ -784,7 +837,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-php_adt.Arr.html#282-292" title="Go to source code">add</a>( <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#293-303" title="Go to source code">add</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds one or more elements to the Arr instance. <span class="label label-info">Chainable</span></p>
@@ -822,7 +875,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_copy">#</a>
-			<code><a href="source-class-php_adt.Arr.html#294-308" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#305-319" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a (potentially deep) copy of the Arr instance.</p>
@@ -860,7 +913,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-php_adt.Arr.html#310-319" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#321-330" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
 				<p>Removes all elements from the Arr instance. <span class="label label-info">Chainable</span></p>
@@ -893,7 +946,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_equals">#</a>
-			<code><a href="source-class-php_adt.Arr.html#321-343" title="Go to source code">equals</a>( <span>mixed <var>$arr</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#332-354" title="Go to source code">equals</a>( <span>mixed <var>$arr</var></span> )</code>
 
 			<div class="description short">
 				<p>Indicates whether the Arr instance is equals to another object.</p>
@@ -931,7 +984,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_has">#</a>
-			<code><a href="source-class-php_adt.Arr.html#345-353" title="Go to source code">has</a>( <span>mixed <var>$object</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#356-364" title="Go to source code">has</a>( <span>mixed <var>$object</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Indicates whether an object is containted in the Arr instance.</p>
@@ -971,7 +1024,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hash">#</a>
-			<code><a href="source-class-php_adt.Arr.html#355-365" title="Go to source code">hash</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#366-376" title="Go to source code">hash</a>( )</code>
 
 			<div class="description short">
 				<p>Calculates a hash value of the Arr instance.</p>
@@ -1004,7 +1057,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-php_adt.Arr.html#367-379" title="Go to source code">remove</a>( <span>mixed <var>$object</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#378-390" title="Go to source code">remove</a>( <span>mixed <var>$object</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Removes an object from the Arr instance if it exists.</p>
@@ -1044,7 +1097,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_remove_at">#</a>
-			<code><a href="source-class-php_adt.Arr.html#381-388" title="Go to source code">remove_at</a>( <span>integer <var>$index</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#392-399" title="Go to source code">remove_at</a>( <span>integer <var>$index</var></span> )</code>
 
 			<div class="description short">
 				<p>Removes an object from the Arr instance at a given index.</p>
@@ -1082,7 +1135,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_size">#</a>
-			<code><a href="source-class-php_adt.Arr.html#390-396" title="Go to source code">size</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#401-407" title="Go to source code">size</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the current size of the Arr instance.</p>
@@ -1117,7 +1170,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_current">#</a>
-			<code><a href="source-class-php_adt.Arr.html#521-527" title="Go to source code">current</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#532-538" title="Go to source code">current</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the current element.</p>
@@ -1152,7 +1205,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_end">#</a>
-			<code><a href="source-class-php_adt.Arr.html#529-536" title="Go to source code">end</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#540-547" title="Go to source code">end</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the last element. <span class="label label-info">Chainable</span></p>
@@ -1185,7 +1238,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_key">#</a>
-			<code><a href="source-class-php_adt.Arr.html#538-544" title="Go to source code">key</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#549-555" title="Go to source code">key</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the index of the current element.</p>
@@ -1220,7 +1273,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_next">#</a>
-			<code><a href="source-class-php_adt.Arr.html#546-551" title="Go to source code">next</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#557-562" title="Go to source code">next</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the next element (the one after the current element).</p>
@@ -1251,7 +1304,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rewind">#</a>
-			<code><a href="source-class-php_adt.Arr.html#553-558" title="Go to source code">rewind</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#564-569" title="Go to source code">rewind</a>( )</code>
 
 			<div class="description short">
 				<p>Moves the cursor to the first element.</p>
@@ -1282,7 +1335,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_concat">#</a>
-			<code><a href="source-class-php_adt.Arr.html#574-585" title="Go to source code">concat</a>( <span>mixed... <var>$arrs</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#585-596" title="Go to source code">concat</a>( <span>mixed... <var>$arrs</var></span> )</code>
 
 			<div class="description short">
 				<p>Concatenates the Arr instance with one or more Arr instances.</p>
@@ -1320,7 +1373,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_count_values">#</a>
-			<code><a href="source-class-php_adt.Arr.html#588-599" title="Go to source code">count_values</a>( <span>callable <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#599-610" title="Go to source code">count_values</a>( <span>callable <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Counts how often each element occurs in the Arr instance and returns a dictionary in which each an elements maps to the number of its occurences.</p>
@@ -1358,7 +1411,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_diff">#</a>
-			<code><a href="source-class-php_adt.Arr.html#601-615" title="Go to source code">diff</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#612-626" title="Go to source code">diff</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Calculates the difference between this Arr instance and the given one. The resulting Arr instance contains all the old elements except the ones also contained in the given instance.</p>
@@ -1398,7 +1451,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference">#</a>
-			<code><a href="source-class-php_adt.Arr.html#618-623" title="Go to source code">difference</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#629-634" title="Go to source code">difference</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'diff()'.</p>
@@ -1427,7 +1480,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_group_by">#</a>
-			<code><a href="source-class-php_adt.Arr.html#625-649" title="Go to source code">group_by</a>( <span>callable <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#636-660" title="Go to source code">group_by</a>( <span>callable <var>$group_func</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Groups the elements where each element is associated with what's returned by the 'group_func' parameter. Each group is an instance of Arr.</p>
@@ -1469,7 +1522,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_flatten">#</a>
-			<code><a href="source-class-php_adt.Arr.html#655-671" title="Go to source code">flatten</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#666-682" title="Go to source code">flatten</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Flattens the list of contained elements.</p>
@@ -1507,7 +1560,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_get">#</a>
-			<code><a href="source-class-php_adt.Arr.html#674-681" title="Go to source code">get</a>( <span>integer|string|array <var>$idx</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#685-692" title="Go to source code">get</a>( <span>integer|string|array <var>$index</var></span> )</code>
 
 			<div class="description short">
 				<p>Gets an elements at a given index (negative numeric indices are possible).</p>
@@ -1519,7 +1572,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$idx</var></dt>
+						<dt><var>$index</var></dt>
 						<dd>Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing</dd>
 					</dl></div>
 
@@ -1545,7 +1598,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersect">#</a>
-			<code><a href="source-class-php_adt.Arr.html#683-697" title="Go to source code">intersect</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#694-708" title="Go to source code">intersect</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the intersection of this and the given Arr instance.</p>
@@ -1578,14 +1631,14 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+				Str
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_join">#</a>
-			<code><a href="source-class-php_adt.Arr.html#699-706" title="Go to source code">join</a>( <span><code><a href="class-php_adt.Str.html">php_adt\Str</a></code> <var>$glue</var> = <span class="php-quote">''</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#710-717" title="Go to source code">join</a>( <span>Str <var>$glue</var> = <span class="php-quote">''</span></span> )</code>
 
 			<div class="description short">
 				<p>Joins all elements with $glue as delimiter.</p>
@@ -1603,7 +1656,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
+						Str
 					</div>
 
 
@@ -1623,7 +1676,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_map">#</a>
-			<code><a href="source-class-php_adt.Arr.html#712-724" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#723-735" title="Go to source code">map</a>( <span>callable <var>$callback</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns a new Arr instance with each element mapped to (potentially) another value.</p>
@@ -1663,7 +1716,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_merge">#</a>
-			<code><a href="source-class-php_adt.Arr.html#727-745" title="Go to source code">merge</a>( <span>Iterator... <var>$iterables</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#738-756" title="Go to source code">merge</a>( <span>Iterator... <var>$iterables</var></span> )</code>
 
 			<div class="description short">
 				<p>Merges the given iterable(s) into this Arr. <span class="label label-info">Chainable</span></p>
@@ -1701,7 +1754,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_merge_recursive">#</a>
-			<code><a href="source-class-php_adt.Arr.html#748-763" title="Go to source code">merge_recursive</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#759-774" title="Go to source code">merge_recursive</a>( <span><code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code> <var>$arr</var></span> )</code>
 
 			<div class="description short">
 				<p>Merges the given instance of Arr recursively into this Arr. <span class="label label-info">Chainable</span></p>
@@ -1739,7 +1792,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pop">#</a>
-			<code><a href="source-class-php_adt.Arr.html#767-778" title="Go to source code">pop</a>( <span>integer <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#778-789" title="Go to source code">pop</a>( <span>integer <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Removes an element from this Arr and returns that element. If an index is specified the according element will be removed. Otherwise the last element will be removed.</p>
@@ -1777,7 +1830,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_popfirst">#</a>
-			<code><a href="source-class-php_adt.Arr.html#780-786" title="Go to source code">popfirst</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#791-797" title="Go to source code">popfirst</a>( )</code>
 
 			<div class="description short">
 				<p>Removes the first element from this Arr and returns that element.</p>
@@ -1810,7 +1863,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_pos">#</a>
-			<code><a href="source-class-php_adt.Arr.html#788-793" title="Go to source code">pos</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#799-804" title="Go to source code">pos</a>( )</code>
 
 			<div class="description short">
 				<p>Synonym for 'current()'.</p>
@@ -1839,7 +1892,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_prepend">#</a>
-			<code><a href="source-class-php_adt.Arr.html#795-800" title="Go to source code">prepend</a>( <span> <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#806-811" title="Go to source code">prepend</a>( <span> <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'unshift()'.</p>
@@ -1868,7 +1921,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_prev">#</a>
-			<code><a href="source-class-php_adt.Arr.html#802-812" title="Go to source code">prev</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#813-823" title="Go to source code">prev</a>( )</code>
 
 			<div class="description short">
 				<p>Opposite of 'next()'.</p>
@@ -1901,7 +1954,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_push">#</a>
-			<code><a href="source-class-php_adt.Arr.html#815-823" title="Go to source code">push</a>( <span>mixed... <var>$args</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#826-834" title="Go to source code">push</a>( <span>mixed... <var>$args</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds one or more element to the end of this Arr. <span class="label label-info">Chainable</span></p>
@@ -1939,7 +1992,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_rand">#</a>
-			<code><a href="source-class-php_adt.Arr.html#826-841" title="Go to source code">rand</a>( <span>integer <var>$count</var> = <span class="php-num">1</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#837-852" title="Go to source code">rand</a>( <span>integer <var>$count</var> = <span class="php-num">1</span></span> )</code>
 
 			<div class="description short">
 				<p>Picks one or more random elements out of this Arr.</p>
@@ -1977,7 +2030,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_replace">#</a>
-			<code><a href="source-class-php_adt.Arr.html#844-858" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code> <var>$replacements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#855-869" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code> <var>$replacements</var></span> )</code>
 
 			<div class="description short">
 				<p>Replaces all occurences of the keys of the $replacements argument with the according value (of $replacements). <span class="label label-info">Chainable</span></p>
@@ -2015,7 +2068,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reset">#</a>
-			<code><a href="source-class-php_adt.Arr.html#863-870" title="Go to source code">reset</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#874-881" title="Go to source code">reset</a>( )</code>
 
 			<div class="description short">
 				<p>Synonym for 'rewind()' but chainable. <span class="label label-info">Chainable</span></p>
@@ -2048,7 +2101,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reversed">#</a>
-			<code><a href="source-class-php_adt.Arr.html#873-879" title="Go to source code">reversed</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#884-890" title="Go to source code">reversed</a>( )</code>
 
 			<div class="description short">
 				<p>Returns a new Arr instance with reversed elements.</p>
@@ -2081,7 +2134,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_reverse">#</a>
-			<code><a href="source-class-php_adt.Arr.html#882-898" title="Go to source code">reverse</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#893-909" title="Go to source code">reverse</a>( )</code>
 
 			<div class="description short">
 				<p>Reverses the elements of this. <span class="label label-info">Chainable</span></p>
@@ -2114,7 +2167,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_search">#</a>
-			<code><a href="source-class-php_adt.Arr.html#900-905" title="Go to source code">search</a>( <span> <var>$args</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#911-916" title="Go to source code">search</a>( <span> <var>$args</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'index()'.</p>
@@ -2143,7 +2196,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_shift">#</a>
-			<code><a href="source-class-php_adt.Arr.html#907-919" title="Go to source code">shift</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#918-930" title="Go to source code">shift</a>( )</code>
 
 			<div class="description short">
 				<p>Shifts the first value off and returns it, shortening the Arr by one element and moving everything down. Also resets the cursor.</p>
@@ -2176,7 +2229,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_shuffle">#</a>
-			<code><a href="source-class-php_adt.Arr.html#922-932" title="Go to source code">shuffle</a>( )</code>
+			<code><a href="source-class-php_adt.Arr.html#933-943" title="Go to source code">shuffle</a>( )</code>
 
 			<div class="description short">
 				<p>Randomizes the order of the elements of this. <span class="label label-info">Chainable</span></p>
@@ -2213,7 +2266,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_sort">#</a>
-			<code><a href="source-class-php_adt.Arr.html#934-942" title="Go to source code">sort</a>( <span>callable <var>$cmp_function</var> = <span class="php-quote">'__mergesort_compare'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#945-953" title="Go to source code">sort</a>( <span>callable <var>$cmp_function</var> = <span class="php-quote">'__mergesort_compare'</span></span> )</code>
 
 			<div class="description short">
 				<p>Sorts the elements of this. <span class="label label-info">Chainable</span></p>
@@ -2251,7 +2304,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_splice">#</a>
-			<code><a href="source-class-php_adt.Arr.html#946-958" title="Go to source code">splice</a>( <span>integer <var>$offset</var></span>, <span>integer <var>$length</var></span>, <span>mixed... <var>$new_elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#957-969" title="Go to source code">splice</a>( <span>integer <var>$offset</var></span>, <span>integer <var>$length</var></span>, <span>mixed... <var>$new_elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Removes $length elements at an $offset from this Arr and adds the given $new_elements at that $offset. The removed elements are returned as an instance of Arr.</p>
@@ -2293,7 +2346,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_unique">#</a>
-			<code><a href="source-class-php_adt.Arr.html#960-973" title="Go to source code">unique</a>( <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#971-984" title="Go to source code">unique</a>( <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns a new Arr instance that has no duplicates (according to $equality).</p>
@@ -2331,7 +2384,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_unshift">#</a>
-			<code><a href="source-class-php_adt.Arr.html#979-988" title="Go to source code">unshift</a>( <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#990-999" title="Go to source code">unshift</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Add $elements to the beginning of this Arr. <span class="label label-info">Chainable</span></p>
@@ -2369,7 +2422,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_without">#</a>
-			<code><a href="source-class-php_adt.Arr.html#1013-1020" title="Go to source code">without</a>( <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#1002-1009" title="Go to source code">without</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns a new Arr that does not contain any element of $elements. This method does the same as 'diff()' but takes the elements as separate arguments instead of an Arr.</p>
@@ -2407,7 +2460,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_append">#</a>
-			<code><a href="source-class-php_adt.Arr.html#1026-1033" title="Go to source code">append</a>( <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#1015-1022" title="Go to source code">append</a>( <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'push()'. <span class="label label-info">Chainable</span></p>
@@ -2445,7 +2498,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_extend">#</a>
-			<code><a href="source-class-php_adt.Arr.html#1038-1045" title="Go to source code">extend</a>( <span>Iterator... <var>$iterables</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#1027-1034" title="Go to source code">extend</a>( <span>Iterator... <var>$iterables</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'merge()'. <span class="label label-info">Chainable</span></p>
@@ -2483,7 +2536,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_index">#</a>
-			<code><a href="source-class-php_adt.Arr.html#1055-1073" title="Go to source code">index</a>( <span>mixed <var>$needle</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$stop</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#1037-1055" title="Go to source code">index</a>( <span>mixed <var>$needle</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$stop</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-quote">'__equals'</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns the first index of given $needle or null if the $needle is not found.</p>
@@ -2527,7 +2580,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_insert">#</a>
-			<code><a href="source-class-php_adt.Arr.html#1075-1084" title="Go to source code">insert</a>( <span>integer <var>$index</var></span>, <span>mixed... <var>$elements</var></span> )</code>
+			<code><a href="source-class-php_adt.Arr.html#1057-1066" title="Go to source code">insert</a>( <span>integer <var>$index</var></span>, <span>mixed... <var>$elements</var></span> )</code>
 
 			<div class="description short">
 				<p>Inserts one or more elements into this at a given $index. <span class="label label-info">Chainable</span></p>

@@ -77,27 +77,17 @@ class CharArr extends Arr {
     // PUBLIC
 
     public function copy($deep=false) {
-        return __clone($this->_str);
+        return static::from_iterable($this);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        return __hash($this->_str);
+        return __hash($this->to_s());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ABSTRACTSET
-
-    /**
-    * Empties the Str instance. <span class="label label-info">Chainable</span>
-    * @return Str
-    */
-    public function clear() {
-        $this->_str = '';
-        $this->_position = 0;
-        return $this;
-    }
 
     public function get($index) {
         return $this->offsetGet($index);
@@ -117,13 +107,15 @@ class CharArr extends Arr {
             if ($this->size() !== $str->size()) {
                 return false;
             }
-            // hashes are equal => compare each entry
             foreach ($this as $idx => $char) {
                 if ($char !== $str[$idx]) {
                     return false;
                 }
             }
             return true;
+        }
+        elseif (is_string($str)) {
+            return $this->to_s() === $str;
         }
         return false;
     }
@@ -254,15 +246,8 @@ class CharArr extends Arr {
 
     //
 
-    public function is_empty() {
-        return $this->size() === 0;
-    }
-    public function size() {
-
-    }
-
     public function slice($start=0, $length=null) {
-
+        return new static(implode('', array_slice($this->_elements, $start, $length)));
     }
 
     // JAVA INTERFACE

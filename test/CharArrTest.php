@@ -2,7 +2,7 @@
 
 echo '<h1>CharrArr (aka Str) class</h1>';
 
-section('array creation',
+section('creation',
     subsection('',
         new Test(
             'new, range, from_iterable',
@@ -22,6 +22,27 @@ section('array creation',
             function () {
                 $this->str1 = new CharArr('asdf');
                 $this->str2 = CharArr::range('a', 'z');
+            }
+        )
+    )
+);
+
+section('abstract sequence (partly) (for the rest see array access and conversion)',
+    subsection('',
+        new Test(
+            'clear, slice',
+            [
+                function() {
+                    return expect($this->str->slice(1,2), 'slice')->to_be('sd');
+                },
+                function() {
+                    $this->str->clear();
+                    return expect($this->str->size(), 'clear (size)')->to_be(0) &&
+                    expect($this->str, 'clear (\'\')')->to_be('');
+                }
+            ],
+            function () {
+                $this->str = new CharArr('asdf');
             }
         )
     )

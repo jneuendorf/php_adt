@@ -21,13 +21,57 @@ class CharArr extends Arr {
         if (is_object($str) && $str instanceof self) {
             $str = $str->to_s();
         }
-        $chars = [];
-        for ($i = 0; $i < strlen($str); $i++) {
-            $chars[] = $str[$i];
+        if (!is_array($str)) {
+            $chars = [];
+            for ($i = 0; $i < strlen($str); $i++) {
+                $chars[] = $str[$i];
+            }
         }
-        parent::__construct($chars);
+        else {
+            $chars = $str;
+        }
+        parent::__construct(...$chars);
     }
 
+    // STATIC
+
+    /**
+     * Creates a new instance from an iterable.
+     * @param Iterator $iterable
+     * @param bool $recursive
+     * @return CharArr
+     */
+    public static function from_iterable($iterable, $recursive=true) {
+        if (is_object($iterable) && method_exists($iterable, 'to_a')) {
+            $result = $iterable->to_a();
+        }
+        else {
+            $result = [];
+            foreach ($iterable as $key => $value) {
+                $result[] = $value;
+            }
+        }
+        return new static(implode('', $result));
+    }
+
+    /**
+     * Creates a new instance that's filled with values according to the defined letter range.
+     * @param mixed $start
+     * @param mixed $end Inclusive.
+     * @param number $step
+     * @return Arr
+     */
+    public static function range($start, $end, $step=1) {
+        return static::from_iterable(range($start, $end, $step));
+    }
+
+    /**
+     * Stringifies the CharArr instance.
+     * @return string
+     */
+    public function __toString() {
+        return implode('', $this->_elements);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
@@ -36,27 +80,17 @@ class CharArr extends Arr {
     // PUBLIC
 
     public function copy($deep=false) {
-        return __clone($this->_str);
+        return static::from_iterable($this);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        return __hash($this->_str);
+        return __hash($this->to_s());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ABSTRACTSET
-
-    /**
-    * Empties the Str instance. <span class="label label-info">Chainable</span>
-    * @return Str
-    */
-    public function clear() {
-        $this->_str = '';
-        $this->_position = 0;
-        return $this;
-    }
 
     public function get($index) {
         return $this->offsetGet($index);
@@ -76,13 +110,15 @@ class CharArr extends Arr {
             if ($this->size() !== $str->size()) {
                 return false;
             }
-            // hashes are equal => compare each entry
             foreach ($this as $idx => $char) {
                 if ($char !== $str[$idx]) {
                     return false;
                 }
             }
             return true;
+        }
+        elseif (is_string($str)) {
+            return $this->to_s() === $str;
         }
         return false;
     }
@@ -136,7 +172,7 @@ class CharArr extends Arr {
     * @return string
     */
     public function to_s() {
-        return $this->join();
+        return implode('', $this->_elements);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -213,15 +249,8 @@ class CharArr extends Arr {
 
     //
 
-    public function is_empty() {
-        return $this->size() === 0;
-    }
-    public function size() {
-
-    }
-
     public function slice($start=0, $length=null) {
-
+        return new static(implode('', array_slice($this->_elements, $start, $length)));
     }
 
     // JAVA INTERFACE
@@ -458,5 +487,5 @@ class CharArr extends Arr {
 
     }
 }
-
+// namespace dependent class aliasing
 class_alias((__NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\').'CharArr', 'Str');

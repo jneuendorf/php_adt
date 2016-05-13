@@ -1,5 +1,5 @@
 # the following files must be prefixed by the namespace php_adt
-PHP_ADT_FILES = "Arr.php Dict.php Genewrapor.php Set.php Tree.php"
+PHP_ADT_FILES = "Arr.php Dict.php Genewrapor.php Set.php Str.php Tree.php"
 TEST_FILES = "test/ArrTest.php test/ConversionTest.php test/DictTest.php test/GenewraporTest.php test/ItertoolsTest.php test/SetTest.php test/Test.php test/TreeTest.php"
 
 

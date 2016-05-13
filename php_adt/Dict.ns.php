@@ -119,6 +119,14 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
         return $this->items()->to_set();
     }
 
+    /**
+    * Converts the Dict instance to an instance of Str.
+    * @return Str
+    */
+    public function to_str() {
+        return $this->to_arr()->to_str();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 

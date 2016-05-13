@@ -4,29 +4,22 @@
 */
 namespace _php_adt;
 
-require_once 'Super.php';
+require_once '_php_adt/AbstractSet.php';
+
+use \_php_adt\AbstractSet as AbstractSet;
 
 /**
 * Interface for AbstractMap, Arr, Set implementing is_empty() and size().
 */
-abstract class AbstractCollection extends Super {
+abstract class AbstractCollection extends AbstractSet {
     abstract public function add(...$elements);
-    abstract public function clear();
-    abstract public function equals($collection);
+    // abstract public function equals($collection);
     abstract public function has($element);
     abstract public function map($callback);
     abstract public function remove($element);
-
-    public function is_empty() {
-        return $this->size() === 0;
-    }
 
     public function size() {
         return $this->_size;
     }
 
-    abstract public function to_a();
-    abstract public function to_arr();
-    abstract public function to_set();
-    abstract public function to_dict();
 }

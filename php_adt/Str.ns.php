@@ -1,5 +1,8 @@
 <?php
 
+namespace php_adt;
+
+use \StdClass as StdClass; use \Exception as Exception;
 require_once '_php_adt/Clonable.php';
 require_once '_php_adt/Hashable.php';
 // import('Clonable', '_php_adt');

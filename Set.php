@@ -278,6 +278,14 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->copy();
     }
 
+    /**
+     * Creates a copy of the set.
+     * @return Set
+     */
+    public function to_str() {
+        return $this->to_arr()->to_str();
+    }
+
     // PYTHON API
 
     /**

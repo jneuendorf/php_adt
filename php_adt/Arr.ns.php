@@ -210,6 +210,14 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     /**
+    * Converts the Arr instance to an instance of Str.
+    * @return Str
+    */
+    public function to_str() {
+        return $this->join();
+    }
+
+    /**
     * Converts the Arr instance to an instance of Set.
     * @return Arr
     */
@@ -557,10 +565,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
 
     ////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////
-    // DELEGATIONS TO NATIVE METHODS
-
-    ////////////////////////////////////////////////////////////////////////////////////
     // INSTANCE
     // implementations based on the API of native methods
 
@@ -689,6 +693,15 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             }
         }
         return $res;
+    }
+
+    /**
+    * Joins all elements with $glue as delimiter.
+    * @param Str $glue
+    * @return Str
+    */
+    public function join($glue='') {
+        return $glue->join($this);
     }
 
     // API-CHANGE: 'extract' function not implemented

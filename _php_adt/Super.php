@@ -19,5 +19,10 @@ abstract class Super extends Clonable implements \Countable, Hashable {
         return $this->size();
     }
 
+    public function is_empty() {
+        return $this->size() === 0;
+    }
+
+    abstract public function equals($object);
     abstract public function size();
 }

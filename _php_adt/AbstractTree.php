@@ -15,7 +15,7 @@ abstract class AbstractTree extends Super {
     abstract public function clear();
     abstract public function depth();
     abstract public function descendants();
-    abstract public function equals($tree);
+    // abstract public function equals($tree);
     abstract public function find($filter);
     abstract public function is_leaf();
     abstract public function leaves();

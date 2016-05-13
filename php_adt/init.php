@@ -12,6 +12,7 @@ require_once 'php_adt/Arr.ns.php';
 require_once 'php_adt/Dict.ns.php';
 require_once 'php_adt/Genewrapor.ns.php';
 require_once 'php_adt/Set.ns.php';
+require_once 'php_adt/Str.ns.php';
 require_once 'php_adt/Tree.ns.php';
 
 set_include_path($orig_include_path);

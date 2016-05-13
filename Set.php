@@ -62,6 +62,18 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this->_dict;
     }
 
+    public function get($index) {
+        return $this->offsetGet($index);
+    }
+
+    protected function _get_at($index) {
+        return $this->offsetGet($index);
+    }
+
+    public function slice($start=0, $length=null) {
+        throw new \Exception(get_called_class()." does not support slicing", 1);
+    }
+
     // PROTECTED
 
     ////////////////////////////////////////////////////////////////////////////////////

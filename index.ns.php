@@ -28,6 +28,7 @@ expect(undefined)->to_be(undefined);
 
 require_once 'test/ItertoolsTest.ns.php';
 require_once 'test/ArrTest.ns.php';
+require_once 'test/CharArrTest.ns.php';
 require_once 'test/DictTest.ns.php';
 require_once 'test/SetTest.ns.php';
 require_once 'test/TreeTest.ns.php';

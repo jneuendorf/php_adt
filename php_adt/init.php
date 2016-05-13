@@ -9,6 +9,7 @@ set_include_path(__DIR__.'/..');
 
 require_once '_php_adt/init.php';
 require_once 'php_adt/Arr.ns.php';
+require_once 'php_adt/CharArr.ns.php';
 require_once 'php_adt/Dict.ns.php';
 require_once 'php_adt/Genewrapor.ns.php';
 require_once 'php_adt/Set.ns.php';

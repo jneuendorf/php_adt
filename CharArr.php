@@ -1,6 +1,6 @@
 <?php
 
-require_once '_php_adt/AbstractSet.php';
+// require_once '_php_adt/AbstractSequence.php';
 // require_once '_php_adt/Clonable.php';
 // require_once '_php_adt/Hashable.php';
 // import('Clonable', '_php_adt');
@@ -8,24 +8,67 @@ require_once '_php_adt/AbstractSet.php';
 
 // use _php_adt\Clonable as Clonable;
 // use _php_adt\Hashable as Hashable;
-use _php_adt\AbstractSet as AbstractSet;
+// use _php_adt\AbstractSequence as AbstractSequence;
+// use _php_adt\Arr as Arr;
+import('Arr');
 
-class Str extends AbstractSet {
-    /**
-    * @var string
-    */
-    protected $_str;
-    /**
-    * @internal
-    * @var int
-    */
-    protected $_position;
+class CharArr extends Arr {
 
     public function __construct($str='') {
-        $this->_str = $str;
-        $this->_position = 0;
+        if (is_object($str) && $str instanceof self) {
+            $str = $str->to_s();
+        }
+        if (!is_array($str)) {
+            $chars = [];
+            for ($i = 0; $i < strlen($str); $i++) {
+                $chars[] = $str[$i];
+            }
+        }
+        else {
+            $chars = $str;
+        }
+        parent::__construct(...$chars);
     }
 
+    // STATIC
+
+    /**
+     * Creates a new instance from an iterable.
+     * @param Iterator $iterable
+     * @param bool $recursive
+     * @return CharArr
+     */
+    public static function from_iterable($iterable, $recursive=true) {
+        if (is_object($iterable) && method_exists($iterable, 'to_a')) {
+            $result = $iterable->to_a();
+        }
+        else {
+            $result = [];
+            foreach ($iterable as $key => $value) {
+                $result[] = $value;
+            }
+        }
+        return new static(implode('', $result));
+    }
+
+    /**
+     * Creates a new instance that's filled with values according to the defined letter range.
+     * @param mixed $start
+     * @param mixed $end Inclusive.
+     * @param number $step
+     * @return Arr
+     */
+    public static function range($start, $end, $step=1) {
+        return static::from_iterable(range($start, $end, $step));
+    }
+
+    /**
+     * Stringifies the CharArr instance.
+     * @return string
+     */
+    public function __toString() {
+        return implode('', $this->_elements);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
@@ -55,6 +98,14 @@ class Str extends AbstractSet {
         $this->_position = 0;
         return $this;
     }
+
+    public function get($index) {
+        return $this->offsetGet($index);
+    }
+
+    // protected function _get_at($index) {
+    //     return $this->offsetGet($index);
+    // }
 
     /**
     * Indicates whether the Str instance is equals to another object.
@@ -121,105 +172,23 @@ class Str extends AbstractSet {
         return new Set(...$this->to_a());
     }
 
+    /**
+    * Converts the Str instance to a string.
+    * @return string
+    */
+    public function to_s() {
+        return implode('', $this->_elements);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
-    // TODO: somehow share code with Arr class (sequence should NOT inherit from collection though)
-    /**
-     * @internal
-    */
-    protected function _adjust_offset($offset) {
-        if ($this->offsetExists($offset)) {
-            if ($offset < 0) {
-                $offset += $this->size();
-            }
-            return $offset;
-        }
-        throw new Exception("Undefined offset $offset!", 1);
-    }
-
-    /**
-     * @internal
-    */
-    protected function _get_start_end_from_offset($offset) {
-        if (is_array($offset)) {
-            if (is_int($offset[0]) && is_int($offset[1])) {
-                $use_slicing = true;
-                $start = $offset[0];
-                $end = $offset[1];
-            }
-            else {
-                throw new Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
-            }
-        }
-        else if (is_string($offset)) {
-            $offset = preg_replace('/\s+/', '', $offset);
-            if (preg_match('/^\-?\d+\:(\-?\d+)?$/', $offset) === 1) {
-                $use_slicing = true;
-                $parts = explode(':', $offset);
-                $start = (int) $parts[0];
-                if (strlen($parts[1]) > 0) {
-                    $end = (int) $parts[1];
-                }
-                else {
-                    $end = null;
-                }
-            }
-            else {
-                throw new Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:(int2)\'.');
-            }
-        }
-        else if (is_int($offset)) {
-            $use_slicing = false;
-            $start = $offset;
-            $end = $offset;
-        }
-        else {
-            throw new Exception('Invalid offset. Use null ($a[]=4) to push, int for index access or for slicing use [start, end] or \'start:end\'!');
-        }
-        try {
-            $end = $this->_adjust_offset($end);
-        } catch (Exception $e) {
-            $end = $this->size();
-        }
-
-        return [
-            'start' => $this->_adjust_offset($start),
-            'end' => $end,
-            'slicing' => $use_slicing
-        ];
-    }
-
-    /**
-     * @internal
-    */
-    public function offsetExists($offset) {
-        if (is_int($offset)) {
-            if ($offset >= 0) {
-                return $offset < $this->size();
-            }
-            // else: negative
-            return abs($offset) <= $this->size();
-        }
-        return false;
-    }
-
-    /**
-     * @internal
-    */
-    public function offsetGet($offset) {
-        $bounds = $this->_get_start_end_from_offset($offset);
-        if (!$bounds['slicing']) {
-            return $this->_elements[$bounds['start']];
-        }
-        return $this->slice($bounds['start'], $bounds['end'] - $bounds['start']);
-    }
 
     /**
      * @internal
     */
     public function offsetSet($offset, $value) {
-        // TODO enable slicing notation for setting subarrays: $arr[2:4] = new Arr(12,13);
-        // called like $my_arr[] = 2; => push
+        // TODO enable slicing notation for setting substrings: $str[2:4] = new Str('ab');
+        // called like $my_str[] = '2'; => concat
         if ($offset === null) {
             $this->push($value);
         }
@@ -233,11 +202,14 @@ class Str extends AbstractSet {
      * @internal
     */
     public function offsetUnset($offset) {
-        if ($this->offsetExists($offset)) {
-            unset($this->_elements[$offset]);
-            // reassign keys
-            $this->_elements = array_values($this->_elements);
+        $offset = $this->_adjust_offset($offset);
+        $str = '';
+        foreach ($this as $idx => $char) {
+            if ($idx !== $offset) {
+                $str .= $char;
+            }
         }
+        $this->_str = $str;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -289,6 +261,10 @@ class Str extends AbstractSet {
 
     }
 
+    public function slice($start=0, $length=null) {
+
+    }
+
     // JAVA INTERFACE
     /**
     * Returns the char value at the specified index.
@@ -297,9 +273,10 @@ class Str extends AbstractSet {
         return $this[$index];
     }
     /**
-    * Concatenates the specified string to the end of this string.
+    * Concatenates the specified strings to the end of this string.
     */
-    public function concat($str) {
+    public function concat(...$strs) {
+        // TODO
         return new Str($this->_str.$str->to_str());
     }
     /**
@@ -381,7 +358,7 @@ class Str extends AbstractSet {
     /**
     * Like find(), but raise ValueError when the substring is not found.
     */
-    public function index($sub, $start=0, $end=null) {
+    public function index($sub, $start=0, $end=null, $equality=null) {
 
     }
     /**
@@ -447,7 +424,7 @@ class Str extends AbstractSet {
     /**
     * Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.
     */
-    public function join($iterable) {
+    public function join($iterable=[]) {
         // use __toString()
     }
 
@@ -467,7 +444,7 @@ class Str extends AbstractSet {
     /**
     * Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.
     */
-    public function replace($old, $new, $count=null) {
+    public function replace($old, $new=null, $count=null) {
 
     }
     /**
@@ -522,3 +499,5 @@ class Str extends AbstractSet {
 
     }
 }
+// namespace dependent class aliasing
+class_alias((__NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\').'CharArr', 'Str');

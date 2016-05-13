@@ -36,7 +36,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         'array_pad',
         'array_product',
         'array_reduce',
-        'array_slice',
         'array_sum',
         'array_values',
     ];
@@ -276,6 +275,18 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
+    protected function _get_at($index) {
+        return $this->_elements[$index];
+    }
+
+    public function slice($start=0, $length=null) {
+        return new static(...array_slice($this->_elements, $start, $length));
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING COLLECTION
+
     /**
     * Adds one or more elements to the Arr instance. <span class="label label-info">Chainable</span>
     * @param mixed... $elements The elements to be added.
@@ -393,7 +404,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // IMPLEMENTING ARRAYACCESS
+    // IMPLEMENTING ARRAYACCESS (rest implemented in AbstractSequence)
 
     /**
      * @internal
@@ -401,7 +412,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     protected function _adjust_offset($offset) {
         if ($this->offsetExists($offset)) {
             if ($offset < 0) {
-                $offset += $this->_size;
+                $offset += $this->size();
             }
             return $offset;
         }
@@ -466,10 +477,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function offsetExists($offset) {
         if (is_int($offset)) {
             if ($offset >= 0) {
-                return $offset < $this->_size;
+                return $offset < $this->size();
             }
             // else: negative
-            return abs($offset) <= $this->_size;
+            return abs($offset) <= $this->size();
         }
         return false;
     }
@@ -480,7 +491,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function offsetGet($offset) {
         $bounds = $this->_get_start_end_from_offset($offset);
         if (!$bounds['slicing']) {
-            return $this->_elements[$bounds['start']];
+            return $this->_get_at($bounds['start']);
         }
         return $this->slice($bounds['start'], $bounds['end'] - $bounds['start']);
     }
@@ -670,11 +681,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     // API-CHANGE: new function 'get'
     /**
     * Gets an elements at a given index (negative numeric indices are possible).
-    * @param int|string|array $idx Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing
+    * @param int|string|array $index Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing
     * @return mixed
     */
-    public function get($idx) {
-        return $this->offsetGet($idx);
+    public function get($index) {
+        return $this->offsetGet($index);
     }
 
     /**
@@ -984,28 +995,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 
-    // // API-CHANGE: 'walk_recursive': throws Exception
-    // /**
-    // * Add $elements to the beginning of this Arr. <span class="label label-info">Chainable</span>
-    // * @param mixed... $elements
-    // * @throws Exception
-    // * @return Arr
-    // */
-    // public function walk_recursive(...$args) {
-    //     if (array_walk_recursive($this->_elements, ...$args)) {
-    //         return $this;
-    //     }
-    //     throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
-    // }
-    //
-    // // API-CHANGE: 'walk': throws Exception
-    // public function walk(...$args) {
-    //     if (array_walk($this->_elements, ...$args)) {
-    //         return $this;
-    //     }
-    //     throw new Exception("Arr::walk_recursive: Some unknow error during recursion.", 1);
-    // }
-
     // API-CHANGE: 'without': new. like 'diff' but each argument is an element and not an Arr/array
     /**
     * Returns a new Arr that does not contain any element of $elements. This method does the same as 'diff()' but takes the elements as separate arguments instead of an Arr.
@@ -1040,13 +1029,6 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function extend(...$iterables) {
         return $this->merge(...$iterables);
     }
-    // public function extend($iterable) {
-    //     foreach ($iterable as $key => $value) {
-    //         $new_length = array_push($this->_elements, $value);
-    //     }
-    //     $this->_size = $new_length;
-    //     return $this;
-    // }
 
     // API-CHANGE: 'index': new function
     /**

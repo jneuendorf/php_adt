@@ -151,6 +151,10 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
+    public function slice($start=0, $length=null) {
+        throw new \Exception(get_called_class()." does not support slicing", 1);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
 
@@ -421,6 +425,10 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
             return $default_val;
         }
         return $default_val;
+    }
+
+    protected function _get_at($key) {
+        return $this->get($key);
     }
 
     /**

@@ -158,6 +158,7 @@ function __clone($x) {
     if (is_array($x)) {
         return array_merge($x);
     }
+    // string... ($x no passed by reference so a copy is made automatically)
     return $x;
 }
 

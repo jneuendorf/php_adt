@@ -217,7 +217,7 @@ function chain(...$iterables) {
 /**
  * Return successive r length permutations of elements in the iterable.
  *
- * If r is not specified or is None, then r defaults to the length of the
+ * If r is not specified or is null, then r defaults to the length of the
  * iterable and all possible full-length permutations are generated.
  *
  * Permutations are emitted in lexicographic sort order. So, if the input

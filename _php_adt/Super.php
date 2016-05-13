@@ -3,11 +3,13 @@
 * @package _php_adt
 */
 namespace _php_adt;
-use _php_adt\Clonable as Clonable;
-use _php_adt\Hashable as Hashable;
 
 require_once 'Clonable.php';
 require_once 'Hashable.php';
+
+use _php_adt\Clonable as Clonable;
+use _php_adt\Hashable as Hashable;
+
 
 abstract class Super extends Clonable implements \Countable, Hashable {
 

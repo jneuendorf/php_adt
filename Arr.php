@@ -1,7 +1,7 @@
 <?php
 
 require_once '_php_adt/AbstractCollection.php';
-import('Dict');
+// import('Dict');
 
 use \_php_adt\AbstractCollection as AbstractCollection;
 use \ArrayAccess as ArrayAccess;
@@ -396,7 +396,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             }
             return $offset;
         }
-        throw new Exception("Undefined offset $offset!", 1);
+        throw new \Exception("Undefined offset $offset!", 1);
     }
 
     /**
@@ -410,7 +410,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
                 $end = $offset[1];
             }
             else {
-                throw new Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
+                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
             }
         }
         else if (is_string($offset)) {
@@ -427,7 +427,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
                 }
             }
             else {
-                throw new Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:(int2)\'.');
+                throw new \Exception('Invalid string offset \''.$offset.'\'. String offsets must have the form \'int1:(int2)\'.');
             }
         }
         else if (is_int($offset)) {
@@ -436,11 +436,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $end = $offset;
         }
         else {
-            throw new Exception('Invalid offset. Use null ($a[]=4) to push, int for index access or for slicing use [start, end] or \'start:end\'!');
+            throw new \Exception('Invalid offset. Use null ($a[]=4) to push, int for index access or for slicing use [start, end] or \'start:end\'!');
         }
         try {
             $end = $this->_adjust_offset($end);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $end = $this->size();
         }
 
@@ -791,7 +791,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         if ($this->_position >= 0 && $this->_position < $this->_size) {
             return $this->_elements[$this->_position];
         }
-        throw new Exception("Arr::next: Invalid position", 1);
+        throw new \Exception("Arr::next: Invalid position", 1);
     }
 
     // API-CHANGE: 'push': is chainable (returns $this instead of $new_length)
@@ -911,7 +911,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         if (shuffle($this->_elements)) {
             return $this;
         }
-        throw new Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
+        throw new \Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
     }
 
     /**

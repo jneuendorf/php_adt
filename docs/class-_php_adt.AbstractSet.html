@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class _php_adt\AbstractTree | php_adt</title>
+	<title>Class _php_adt\AbstractSet | php_adt</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -75,8 +75,8 @@
 			<ul>
 				<li><a href="class-_php_adt.AbstractCollection.html">AbstractCollection</a></li>
 				<li><a href="class-_php_adt.AbstractMap.html">AbstractMap</a></li>
-				<li><a href="class-_php_adt.AbstractSet.html">AbstractSet</a></li>
-				<li class="active"><a href="class-_php_adt.AbstractTree.html">AbstractTree</a></li>
+				<li class="active"><a href="class-_php_adt.AbstractSet.html">AbstractSet</a></li>
+				<li><a href="class-_php_adt.AbstractTree.html">AbstractTree</a></li>
 				<li><a href="class-_php_adt.Clonable.html">Clonable</a></li>
 				<li><a href="class-_php_adt.Super.html">Super</a></li>
 			</ul>
@@ -98,12 +98,9 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class AbstractTree</h1>
+	<h1>Class AbstractSet</h1>
 
 
-	<div class="description">
-	<p>Interface for Tree.</p>
-	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -125,7 +122,11 @@
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>_php_adt\AbstractTree</span></b>			
+<b><span>_php_adt\AbstractSet</span></b>			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>
 			
 			
 		</dd>
@@ -135,10 +136,20 @@
 	<div>
 		<h3>Direct known subclasses</h3>
 		<p class="elementList">
-			<code><a href="class-php_adt.Tree.html">php_adt\Tree</a></code>
+			<code><a href="class-_php_adt.AbstractCollection.html">_php_adt\AbstractCollection</a></code>, 
+			<code><a href="class-php_adt.Str.html">php_adt\Str</a></code>
 		</p>
 	</div>
 
+	<div>
+		<h3>Indirect known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-_php_adt.AbstractMap.html">_php_adt\AbstractMap</a></code>, 
+			<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>, 
+			<code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code>, 
+			<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+		</p>
+	</div>
 
 
 
@@ -150,7 +161,7 @@
 		<b>Namespace:</b> <a href="namespace-_php_adt.html">_php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-_php_adt.AbstractTree.html#9-28" title="Go to source code">AbstractTree.php</a>
+			<b>Located at</b> <a href="source-class-_php_adt.AbstractSet.html#10-19" title="Go to source code">AbstractSet.php</a>
 		<br>
 	</div>
 
@@ -159,64 +170,6 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h2>Methods summary</h2></div>
 			<table class="summary table table-bordered table-striped methods" id="methods">
-		<tr data-order="add" id="_add">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_add">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#13" title="Go to source code">add</a>( <span> <var>$tree_node</var></span>, <span> <var>$index</var> = <span class="php-keyword1">null</span></span> )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="children" id="_children">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_children">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#14" title="Go to source code">children</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="clear" id="_clear">
 
 			<td class="attributes"><code>
@@ -228,7 +181,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_clear">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#15" title="Go to source code">clear</a>( )</code>
+			<code><a href="source-class-_php_adt.AbstractSet.html#11" title="Go to source code">clear</a>( )</code>
 
 			<div class="description short">
 				
@@ -246,7 +199,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="depth" id="_depth">
+		<tr data-order="to_a" id="_to_a">
 
 			<td class="attributes"><code>
 				abstract public 
@@ -256,8 +209,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_depth">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#16" title="Go to source code">depth</a>( )</code>
+			<a class="anchor" href="#_to_a">#</a>
+			<code><a href="source-class-_php_adt.AbstractSet.html#13" title="Go to source code">to_a</a>( )</code>
 
 			<div class="description short">
 				
@@ -275,7 +228,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="descendants" id="_descendants">
+		<tr data-order="to_arr" id="_to_arr">
 
 			<td class="attributes"><code>
 				abstract public 
@@ -285,8 +238,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_descendants">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#17" title="Go to source code">descendants</a>( )</code>
+			<a class="anchor" href="#_to_arr">#</a>
+			<code><a href="source-class-_php_adt.AbstractSet.html#14" title="Go to source code">to_arr</a>( )</code>
 
 			<div class="description short">
 				
@@ -304,7 +257,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="find" id="_find">
+		<tr data-order="to_set" id="_to_set">
 
 			<td class="attributes"><code>
 				abstract public 
@@ -314,8 +267,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_find">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#19" title="Go to source code">find</a>( <span> <var>$filter</var></span> )</code>
+			<a class="anchor" href="#_to_set">#</a>
+			<code><a href="source-class-_php_adt.AbstractSet.html#15" title="Go to source code">to_set</a>( )</code>
 
 			<div class="description short">
 				
@@ -333,7 +286,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="is_leaf" id="_is_leaf">
+		<tr data-order="to_str" id="_to_str">
 
 			<td class="attributes"><code>
 				abstract public 
@@ -343,8 +296,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_is_leaf">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#20" title="Go to source code">is_leaf</a>( )</code>
+			<a class="anchor" href="#_to_str">#</a>
+			<code><a href="source-class-_php_adt.AbstractSet.html#16" title="Go to source code">to_str</a>( )</code>
 
 			<div class="description short">
 				
@@ -362,7 +315,7 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="leaves" id="_leaves">
+		<tr data-order="to_dict" id="_to_dict">
 
 			<td class="attributes"><code>
 				abstract public 
@@ -372,182 +325,8 @@
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_leaves">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#21" title="Go to source code">leaves</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="level_siblings" id="_level_siblings">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_level_siblings">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#22" title="Go to source code">level_siblings</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="level" id="_level">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_level">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#23" title="Go to source code">level</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="parent" id="_parent">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_parent">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#24" title="Go to source code">parent</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="remove" id="_remove">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_remove">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#25" title="Go to source code">remove</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="root" id="_root">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_root">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#26" title="Go to source code">root</a>( )</code>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
-		<tr data-order="siblings" id="_siblings">
-
-			<td class="attributes"><code>
-				abstract public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#_siblings">#</a>
-			<code><a href="source-class-_php_adt.AbstractTree.html#27" title="Go to source code">siblings</a>( )</code>
+			<a class="anchor" href="#_to_dict">#</a>
+			<code><a href="source-class-_php_adt.AbstractSet.html#17" title="Go to source code">to_dict</a>( )</code>
 
 			<div class="description short">
 				
@@ -588,6 +367,25 @@
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Hashable.html#methods">_php_adt\Hashable</a></h3></div>
 			<p class="elementList">
 				<code><a href="class-_php_adt.Hashable.html#_hash">hash()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>current()</code>, 
+				<code>key()</code>, 
+				<code>next()</code>, 
+				<code>rewind()</code>, 
+				<code>valid()</code>
 			</p>
 		</div>
 

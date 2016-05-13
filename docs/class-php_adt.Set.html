@@ -77,6 +77,7 @@
 				<li><a href="class-php_adt.Dict.html">Dict</a></li>
 				<li><a href="class-php_adt.Genewrapor.html">Genewrapor</a></li>
 				<li class="active"><a href="class-php_adt.Set.html">Set</a></li>
+				<li><a href="class-php_adt.Str.html">Str</a></li>
 				<li><a href="class-php_adt.Tree.html">Tree</a></li>
 			</ul>
 
@@ -120,12 +121,23 @@
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-_php_adt.AbstractSet.html"><span>_php_adt\AbstractSet</span></a>
+			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by">
 			<a href="class-_php_adt.AbstractCollection.html"><span>_php_adt\AbstractCollection</span></a>
 			
 			
 			
 		</dd>
-		<dd style="padding-left:90px">
+		<dd style="padding-left:120px">
 			<img src="resources/inherit.png" alt="Extended by">
 <b><span>php_adt\Set</span></b>			
 			 implements 
@@ -150,7 +162,7 @@
 		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-php_adt.Set.html#12-455" title="Go to source code">Set.ns.php</a>
+			<b>Located at</b> <a href="source-class-php_adt.Set.html#12-463" title="Go to source code">Set.ns.php</a>
 		<br>
 	</div>
 
@@ -888,6 +900,39 @@
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="to_str" id="_to_str">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_str">#</a>
+			<code><a href="source-class-php_adt.Set.html#284-290" title="Go to source code">to_str</a>( )</code>
+
+			<div class="description short">
+				<p>Creates a copy of the set.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a copy of the set.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="difference" id="_difference">
 
 			<td class="attributes"><code>
@@ -899,7 +944,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference">#</a>
-			<code><a href="source-class-php_adt.Set.html#286-299" title="Go to source code">difference</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#294-307" title="Go to source code">difference</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns the difference of two sets as a new set (all elements that are in this set but not the other).</p>
@@ -937,7 +982,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_difference_update">#</a>
-			<code><a href="source-class-php_adt.Set.html#301-311" title="Go to source code">difference_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#309-319" title="Go to source code">difference_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Removes all elements of another set from this set. <span class="label label-info">Chainable</span></p>
@@ -975,7 +1020,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_discard">#</a>
-			<code><a href="source-class-php_adt.Set.html#313-320" title="Go to source code">discard</a>( <span>mixed <var>$element</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#321-328" title="Go to source code">discard</a>( <span>mixed <var>$element</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'remove()'.</p>
@@ -1013,7 +1058,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersection">#</a>
-			<code><a href="source-class-php_adt.Set.html#322-335" title="Go to source code">intersection</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#330-343" title="Go to source code">intersection</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns the intersection of two sets as a new set (all elements that are in both sets).</p>
@@ -1051,7 +1096,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_intersection_update">#</a>
-			<code><a href="source-class-php_adt.Set.html#337-349" title="Go to source code">intersection_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#345-357" title="Go to source code">intersection_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Updates a set with the intersection of itself and another. <span class="label label-info">Chainable</span></p>
@@ -1089,7 +1134,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdisjoint">#</a>
-			<code><a href="source-class-php_adt.Set.html#351-358" title="Go to source code">isdisjoint</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#359-366" title="Go to source code">isdisjoint</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns true if the intersection of two sets is empty.</p>
@@ -1127,7 +1172,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_issubset">#</a>
-			<code><a href="source-class-php_adt.Set.html#360-375" title="Go to source code">issubset</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#368-383" title="Go to source code">issubset</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Reports whether another set contains this set.</p>
@@ -1165,7 +1210,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_issuperset">#</a>
-			<code><a href="source-class-php_adt.Set.html#377-384" title="Go to source code">issuperset</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#385-392" title="Go to source code">issuperset</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Reports whether this set contains another set.</p>
@@ -1203,7 +1248,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_symmetric_difference">#</a>
-			<code><a href="source-class-php_adt.Set.html#386-404" title="Go to source code">symmetric_difference</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#394-412" title="Go to source code">symmetric_difference</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Returns the symmetric difference of two sets as a new set (all elements that are in exactly one of the sets, union without intersection).</p>
@@ -1241,7 +1286,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_symmetric_difference_update">#</a>
-			<code><a href="source-class-php_adt.Set.html#406-418" title="Go to source code">symmetric_difference_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#414-426" title="Go to source code">symmetric_difference_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Updates a set with the symmetric difference of itself and another. <span class="label label-info">Chainable</span></p>
@@ -1279,7 +1324,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_union">#</a>
-			<code><a href="source-class-php_adt.Set.html#420-431" title="Go to source code">union</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#428-439" title="Go to source code">union</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Return the union of sets as a new set (all elements that are in either set).</p>
@@ -1317,7 +1362,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_union_update">#</a>
-			<code><a href="source-class-php_adt.Set.html#434-441" title="Go to source code">union_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#442-449" title="Go to source code">union_update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Synonym for 'update()'. <span class="label label-info">Chainable</span></p>
@@ -1355,7 +1400,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_update">#</a>
-			<code><a href="source-class-php_adt.Set.html#444-454" title="Go to source code">update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
+			<code><a href="source-class-php_adt.Set.html#452-462" title="Go to source code">update</a>( <span><code><a href="class-php_adt.Set.html">php_adt\Set</a></code> <var>$set</var></span> )</code>
 
 			<div class="description short">
 				<p>Update a set with the union of itself and others. <span class="label label-info">Chainable</span></p>
@@ -1386,15 +1431,10 @@
 		</div>
 
 		<div class="panel panel-default">
-	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.AbstractCollection.html#methods">_php_adt\AbstractCollection</a></h3></div>
-			<p class="elementList">
-				<code><a href="class-_php_adt.AbstractCollection.html#_is_empty">is_empty()</a></code>
-			</p>
-		</div>
-		<div class="panel panel-default">
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Super.html#methods">_php_adt\Super</a></h3></div>
 			<p class="elementList">
-				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>
+				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>, 
+				<code><a href="class-_php_adt.Super.html#_is_empty">is_empty()</a></code>
 			</p>
 		</div>
 		<div class="panel panel-default">

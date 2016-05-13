@@ -1,14 +1,16 @@
 <?php
 
-require_once '_php_adt/Clonable.php';
-require_once '_php_adt/Hashable.php';
+require_once '_php_adt/AbstractSet.php';
+// require_once '_php_adt/Clonable.php';
+// require_once '_php_adt/Hashable.php';
 // import('Clonable', '_php_adt');
 // import('Hashable', '_php_adt');
 
-use _php_adt\Clonable as Clonable;
-use _php_adt\Hashable as Hashable;
+// use _php_adt\Clonable as Clonable;
+// use _php_adt\Hashable as Hashable;
+use _php_adt\AbstractSet as AbstractSet;
 
-class Str extends Clonable implements \ArrayAccess, Hashable, \Iterator {
+class Str extends AbstractSet {
     /**
     * @var string
     */
@@ -39,6 +41,84 @@ class Str extends Clonable implements \ArrayAccess, Hashable, \Iterator {
     // IMPLEMENTING HASHABLE
     public function hash() {
         return __hash($this->_str);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // IMPLEMENTING ABSTRACTSET
+
+    /**
+    * Empties the Str instance. <span class="label label-info">Chainable</span>
+    * @return Str
+    */
+    public function clear() {
+        $this->_str = '';
+        $this->_position = 0;
+        return $this;
+    }
+
+    /**
+    * Indicates whether the Str instance is equals to another object.
+    * @param mixed $str
+    * @return bool
+    */
+    public function equals($str) {
+        if (is_object($str) && $str instanceof self) {
+            if ($this->size() !== $str->size()) {
+                return false;
+            }
+            // hashes are equal => compare each entry
+            foreach ($this as $idx => $char) {
+                if ($char !== $str[$idx]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Converts this Str instance to a native array.
+     * @return array
+     */
+    public function to_a() {
+        $res = [];
+        foreach ($this as $char) {
+            $res[] = $element;
+        }
+        return $res;
+    }
+
+    /**
+     * Creates a copy of the Str instance.
+     * @return Arr
+     */
+    public function to_arr() {
+        return new Arr(...$this->to_a());
+    }
+
+    /**
+     * Converts the Str instance to an instance of Dict (indices become the keys).
+     * @return Dict
+     */
+    public function to_dict() {
+        return new Arr(null, $this->to_a());
+    }
+
+    /**
+    * Converts the Str instance to an instance of Str.
+    * @return Str
+    */
+    public function to_str() {
+        return $this->copy();
+    }
+
+    /**
+    * Converts the Str instance to an instance of Set.
+    * @return Set
+    */
+    public function to_set() {
+        return new Set(...$this->to_a());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -271,7 +351,7 @@ class Str extends Clonable implements \ArrayAccess, Hashable, \Iterator {
     /**
     * Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.
     */
-    public function count($sub, $start=0, $end=null) {
+    public function count_py($sub, $start=0, $end=null) {
 
     }
     /**

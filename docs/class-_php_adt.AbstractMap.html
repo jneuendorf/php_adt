@@ -75,6 +75,7 @@
 			<ul>
 				<li><a href="class-_php_adt.AbstractCollection.html">AbstractCollection</a></li>
 				<li class="active"><a href="class-_php_adt.AbstractMap.html">AbstractMap</a></li>
+				<li><a href="class-_php_adt.AbstractSet.html">AbstractSet</a></li>
 				<li><a href="class-_php_adt.AbstractTree.html">AbstractTree</a></li>
 				<li><a href="class-_php_adt.Clonable.html">Clonable</a></li>
 				<li><a href="class-_php_adt.Super.html">Super</a></li>
@@ -124,12 +125,23 @@
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-_php_adt.AbstractSet.html"><span>_php_adt\AbstractSet</span></a>
+			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by">
 			<a href="class-_php_adt.AbstractCollection.html"><span>_php_adt\AbstractCollection</span></a>
 			
 			
 			
 		</dd>
-		<dd style="padding-left:90px">
+		<dd style="padding-left:120px">
 			<img src="resources/inherit.png" alt="Extended by">
 <b><span>_php_adt\AbstractMap</span></b>			
 			
@@ -606,21 +618,27 @@
 		<div class="panel panel-default">
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.AbstractCollection.html#methods">_php_adt\AbstractCollection</a></h3></div>
 			<p class="elementList">
-				<code><a href="class-_php_adt.AbstractCollection.html#_clear">clear()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_equals">equals()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_is_empty">is_empty()</a></code>, 
 				<code><a href="class-_php_adt.AbstractCollection.html#_map">map()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_size">size()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_to_a">to_a()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_to_arr">to_arr()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_to_dict">to_dict()</a></code>, 
-				<code><a href="class-_php_adt.AbstractCollection.html#_to_set">to_set()</a></code>
+				<code><a href="class-_php_adt.AbstractCollection.html#_size">size()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.AbstractSet.html#methods">_php_adt\AbstractSet</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-_php_adt.AbstractSet.html#_clear">clear()</a></code>, 
+				<code><a href="class-_php_adt.AbstractSet.html#_to_a">to_a()</a></code>, 
+				<code><a href="class-_php_adt.AbstractSet.html#_to_arr">to_arr()</a></code>, 
+				<code><a href="class-_php_adt.AbstractSet.html#_to_dict">to_dict()</a></code>, 
+				<code><a href="class-_php_adt.AbstractSet.html#_to_set">to_set()</a></code>, 
+				<code><a href="class-_php_adt.AbstractSet.html#_to_str">to_str()</a></code>
 			</p>
 		</div>
 		<div class="panel panel-default">
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Super.html#methods">_php_adt\Super</a></h3></div>
 			<p class="elementList">
-				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>
+				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>, 
+				<code><a href="class-_php_adt.Super.html#_equals">equals()</a></code>, 
+				<code><a href="class-_php_adt.Super.html#_is_empty">is_empty()</a></code>
 			</p>
 		</div>
 		<div class="panel panel-default">
@@ -634,6 +652,25 @@
 	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Hashable.html#methods">_php_adt\Hashable</a></h3></div>
 			<p class="elementList">
 				<code><a href="class-_php_adt.Hashable.html#_hash">hash()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>current()</code>, 
+				<code>key()</code>, 
+				<code>next()</code>, 
+				<code>rewind()</code>, 
+				<code>valid()</code>
 			</p>
 		</div>
 

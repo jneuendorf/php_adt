@@ -200,7 +200,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
      * Converts the Arr instance to an instance of Dict (indices become the keys).
-     * @return Arr
+     * @return Dict
      */
     public function to_dict() {
         return new Dict(null, $this);
@@ -216,7 +216,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     /**
     * Converts the Arr instance to an instance of Set.
-    * @return Arr
+    * @return Set
     */
     public function to_set() {
         return new Set(...$this->_elements);
@@ -311,6 +311,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function clear() {
         $this->_elements = [];
         $this->_size = 0;
+        $this->_position = 0;
         return $this;
     }
 

@@ -42,13 +42,16 @@ abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator
     */
     protected function _get_start_end_from_offset($offset) {
         if (is_array($offset)) {
+            if (count($offset) === 1) {
+                $offset[] = null;
+            }
             if (is_int($offset[0]) && is_int($offset[1])) {
                 $use_slicing = true;
                 $start = $offset[0];
                 $end = $offset[1];
             }
             else {
-                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
+                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1(,int2)]\'.');
             }
         }
         else if (is_string($offset)) {
@@ -108,6 +111,7 @@ abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator
     */
     public function offsetGet($offset) {
         $bounds = $this->_get_start_end_from_offset($offset);
+        var_dump($bounds);
         if (!$bounds['slicing']) {
             return $this->_get_at($bounds['start']);
         }

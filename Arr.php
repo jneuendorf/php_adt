@@ -275,9 +275,9 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COLLECTION
 
-    protected function _get_at($index) {
-        return $this->_elements[$index];
-    }
+    // protected function _get_at($index) {
+    //     return $this->_elements[$index];
+    // }
 
     public function slice($start=0, $length=null) {
         return new static(...array_slice($this->_elements, $start, $length));
@@ -424,13 +424,16 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     */
     protected function _get_start_end_from_offset($offset) {
         if (is_array($offset)) {
-            if (is_int($offset[0]) && is_int($offset[1])) {
+            if (count($offset) === 1) {
+                $offset[] = null;
+            }
+            if (is_int($offset[0]) && (is_int($offset[1]) || $offset[1] === null)) {
                 $use_slicing = true;
                 $start = $offset[0];
                 $end = $offset[1];
             }
             else {
-                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1,int2]\'.');
+                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1(,int2)]\'.');
             }
         }
         else if (is_string($offset)) {
@@ -491,7 +494,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function offsetGet($offset) {
         $bounds = $this->_get_start_end_from_offset($offset);
         if (!$bounds['slicing']) {
-            return $this->_get_at($bounds['start']);
+            return $this->_elements[$bounds['start']];
         }
         return $this->slice($bounds['start'], $bounds['end'] - $bounds['start']);
     }

@@ -83,7 +83,8 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        return __hash($this->to_s());
+        var_dump(implode('', $this->_elements));
+        return __hash(implode('', $this->_elements));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -107,12 +108,7 @@ class CharArr extends Arr {
             if ($this->size() !== $str->size()) {
                 return false;
             }
-            foreach ($this as $idx => $char) {
-                if ($char !== $str[$idx]) {
-                    return false;
-                }
-            }
-            return true;
+            return $this->to_s() === $str->to_s();
         }
         elseif (is_string($str)) {
             return $this->to_s() === $str;
@@ -127,7 +123,7 @@ class CharArr extends Arr {
     public function to_a() {
         $res = [];
         foreach ($this as $char) {
-            $res[] = $element;
+            $res[] = $char;
         }
         return $res;
     }
@@ -145,7 +141,7 @@ class CharArr extends Arr {
      * @return Dict
      */
     public function to_dict() {
-        return new Arr(null, $this->to_a());
+        return new Dict(null, $this->to_a());
     }
 
     /**
@@ -174,6 +170,11 @@ class CharArr extends Arr {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
+
+    public function offsetGet($offset) {
+        $result = parent::offsetGet($offset);
+        return new static($result);
+    }
 
     /**
      * @internal
@@ -212,37 +213,37 @@ class CharArr extends Arr {
      * @return mixed
      */
     public function current() {
-        return $this->_str[$this->_position];
+        return new static(parent::current());
     }
 
-    /**
-     * Gets the index of the current character.
-     * @return mixed
-     */
-    public function key() {
-        return $this->_position;
-    }
-
-    /**
-     * Moves the cursor to the next key-value pair.
-     */
-    public function next() {
-        $this->_position++;
-    }
-
-    /**
-     * Moves the cursor to the first key-value pair.
-     */
-    public function rewind() {
-        $this->_position = 0;
-    }
-
-    /**
-    *
-    */
-    public function valid() {
-        return $this->_position >= 0 && $this->_position < $this->size();
-    }
+    // /**
+    //  * Gets the index of the current character.
+    //  * @return mixed
+    //  */
+    // public function key() {
+    //     return $this->_position;
+    // }
+    //
+    // /**
+    //  * Moves the cursor to the next key-value pair.
+    //  */
+    // public function next() {
+    //     $this->_position++;
+    // }
+    //
+    // /**
+    //  * Moves the cursor to the first key-value pair.
+    //  */
+    // public function rewind() {
+    //     $this->_position = 0;
+    // }
+    //
+    // /**
+    // *
+    // */
+    // public function valid() {
+    //     return $this->_position >= 0 && $this->_position < $this->size();
+    // }
 
     //
 
@@ -485,4 +486,5 @@ class CharArr extends Arr {
     }
 }
 // namespace dependent class aliasing
-class_alias((__NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\').'CharArr', 'Str');
+$ns_prefix = __NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\';
+class_alias($ns_prefix.'CharArr', $ns_prefix.'Str');

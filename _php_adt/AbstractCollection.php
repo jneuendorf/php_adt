@@ -8,7 +8,7 @@ namespace _php_adt;
 require_once '_php_adt/Super.php';
 
 // use \_php_adt\AbstractSequence as AbstractSequence;
-use \_php_adt\Super as Super;
+// use \_php_adt\Super as Super;
 
 /**
 * Interface for AbstractMap, Arr, Set implementing a standard size() method.

@@ -36,6 +36,21 @@ function __equals($x, $y) {
     if (__hash($x) !== __hash($y)) {
         return false;
     }
+    if (is_object($x) && is_object($y) && get_class($x) !== get_class($y)) {
+        return false;
+    }
+    // iterables of same class without equals() method
+    if (is_array($x) && is_array($y)) {
+        if (count($x) != count($y)) {
+            return false;
+        }
+        foreach ($x as $idx => $value) {
+            if (!__equals($value, $y[$idx])) {
+                return false;
+            }
+        }
+        return true;
+    }
     return false;
 }
 
@@ -55,7 +70,7 @@ function __get_type($x) {
     if (is_object($x)) {
         return 'object';
     }
-    throw new Exception("Could not determine type of given argument.", 1);
+    throw new \Exception("Could not determine type of given argument.", 1);
 }
 
 // the behavior of __less_than is essential for sorting
@@ -133,7 +148,7 @@ function __hash($x) {
         return (int) $x;
     }
     if (is_object($x)) {
-        if ([property_exists($x, '__uniqid__')]) {
+        if (property_exists($x, '__uniqid__')) {
             $id = $x->__uniqid__;
         }
         else {
@@ -145,7 +160,7 @@ function __hash($x) {
     if ($x === null) {
         return 0;
     }
-    throw new Exception("Given parameter does not support hashing! ".var_export($x, true), 1);
+    throw new \Exception("Given parameter does not support hashing! ".var_export($x, true), 1);
 }
 
 function __clone($x) {

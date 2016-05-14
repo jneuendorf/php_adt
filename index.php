@@ -27,7 +27,6 @@ require_once 'test/DictTest.php';
 require_once 'test/SetTest.php';
 require_once 'test/TreeTest.php';
 require_once 'test/ConversionTest.php';
-
 require_once 'test/GenewraporTest.php';
 
 Test::print_stats();

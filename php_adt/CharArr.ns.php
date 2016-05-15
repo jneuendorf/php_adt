@@ -2,18 +2,7 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
-// require_once '_php_adt/AbstractSequence.php';
-// require_once '_php_adt/Clonable.php';
-// require_once '_php_adt/Hashable.php';
-// import('Clonable', '_php_adt');
-// import('Hashable', '_php_adt');
-
-// use _php_adt\Clonable as Clonable;
-// use _php_adt\Hashable as Hashable;
-// use _php_adt\AbstractSequence as AbstractSequence;
-// use _php_adt\Arr as Arr;
-import('Arr');
+use \StdClass as StdClass; use \Exception as Exception;import('Arr');
 
 class CharArr extends Arr {
 
@@ -76,6 +65,17 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
+    protected function _to_s($object) {
+        if (is_string($object)) {
+            return $object;
+        }
+        if (is_object($object) && $object instanceof self) {
+            return $object->to_s();
+        }
+        throw new \Exception('Could not convert given object to native string.', 1);
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
@@ -86,7 +86,6 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
     public function hash() {
-        var_dump(implode('', $this->_elements));
         return __hash(implode('', $this->_elements));
     }
 
@@ -265,14 +264,26 @@ class CharArr extends Arr {
     * Concatenates the specified strings to the end of this string.
     */
     public function concat(...$strs) {
-        // TODO
-        return new Str($this->_str.$str->to_str());
+        $chars = $this->to_str();
+        foreach ($strs as $str) {
+            try {
+                $chars .= $this->_to_s($str);
+            } catch (\Exception $e) {
+                throw new \Exception('CharArr::concat: Can only concat strings and CharArr instances. Got '.$chars, 1);
+            }
+        }
+        return new Str($chars);
     }
     /**
     * Returns true if and only if this string contains the specified sequence of char values.
     */
     public function contains($str) {
-
+        try {
+            $substr = $this->_to_s($str);
+        } catch (\Exception $e) {
+            throw new \Exception('CharArr::concat: Can only concat strings and CharArr instances. Got '.$str, 1);
+        }
+        return strpos($this->to_str(), $substr) !== false;
     }
     /**
     * Tells whether or not this string matches the given regular expression.

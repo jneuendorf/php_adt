@@ -56,7 +56,7 @@ section('abstract sequence (partly) (for the rest see array access and conversio
 section('array access',
     subsection('',
         new Test(
-            '[], get',
+            '[], get (implicit slicing)',
             [
                 function() {
                     $str = $this->str;
@@ -123,8 +123,35 @@ section('conversion',
                 function() {
                     return expect($this->str->to_set(), 'to_set')->to_be(new Set(...$this->chars));
                 },
+            ],
+            function () {
+                $this->chars = ['a', 's', 'd', 'f'];
+                $this->str = new CharArr('asdf');
+            }
+        )
+    )
+);
+
+
+section('instance methods (java-like)',
+    subsection('',
+        new Test(
+            'char_at',
+            [
                 function() {
-                    return expect($this->str->to_set(), 'to_set')->to_be(new Set(...$this->chars));
+                    return expect($this->str->char_at(1), 'char_at')->to_be($this->chars[1]) &&
+                    expect($this->str->char_at(-1), 'char_at')->to_be($this->chars[count($this->chars) -1]);
+                },
+                function() {
+                    return expect($this->str->concat('xyz'), 'concat')->to_be(implode('', $this->chars).'xyz') &&
+                    expect($this->str->concat(new CharArr('xyz')), 'concat')->to_be(implode('', $this->chars).'xyz') &&
+                    expect($this->str->concat(new CharArr('xyz'), '123'), 'concat')->to_be(implode('', $this->chars).'xyz123');
+                },
+                function() {
+                    return expect($this->str->contains('xyz'), 'contains')->to_be(false) &&
+                    expect($this->str->contains(new CharArr('xyz')), 'contains')->to_be(false) &&
+                    expect($this->str->contains(new CharArr('as')), 'contains')->to_be(true) &&
+                    expect($this->str->contains('as'), 'contains')->to_be(true);
                 },
             ],
             function () {

@@ -111,7 +111,6 @@ abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator
     */
     public function offsetGet($offset) {
         $bounds = $this->_get_start_end_from_offset($offset);
-        var_dump($bounds);
         if (!$bounds['slicing']) {
             return $this->_get_at($bounds['start']);
         }

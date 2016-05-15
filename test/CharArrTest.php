@@ -150,6 +150,24 @@ section('instance methods (java-like)',
                     expect($this->str->contains(new CharArr('as')), 'contains')->to_be(true) &&
                     expect($this->str->contains('as'), 'contains')->to_be(true);
                 },
+                function() {
+                    $str = $this->str;
+                    return expect($this->str->matches('/asdF/gi'), 'matches')->to_be(true) &&
+                    expect($this->str->matches('/^asdf$/'), 'matches')->to_be(true) &&
+                    expect($this->str->matches('/.*/'), 'matches')->to_be(true) &&
+                    expect($this->str->matches('/ASDF/g'), 'matches')->to_be(false) &&
+                    expect(function() use ($str) {return $str->matches('/////');}, 'matches')->to_throw() &&
+                    expect(function() use ($str) {return $str->matches('a/b');}, 'matches')->to_throw();
+                },
+                function() {
+                    return expect($this->str->substring(1), 'substring')->to_be($this->str->slice(1)) &&
+                    expect($this->str->substring(1, 3), 'substring')->to_be($this->str->slice(1, 2));
+                },
+                function() {
+                    $str = new CharArr("\t haha \n");
+                    return expect($this->str->trim(), 'trim')->to_be($this->str) &&
+                    expect($str->trim(), 'trim')->to_be('haha');
+                },
             ],
             function () {
                 $this->chars = ['a', 's', 'd', 'f'];

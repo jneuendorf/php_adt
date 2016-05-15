@@ -264,7 +264,7 @@ class CharArr extends Arr {
     * Concatenates the specified strings to the end of this string.
     */
     public function concat(...$strs) {
-        $chars = $this->to_str();
+        $chars = $this->to_s();
         foreach ($strs as $str) {
             try {
                 $chars .= $this->_to_s($str);
@@ -283,25 +283,51 @@ class CharArr extends Arr {
         } catch (\Exception $e) {
             throw new \Exception('CharArr::concat: Can only concat strings and CharArr instances. Got '.$str, 1);
         }
-        return strpos($this->to_str(), $substr) !== false;
+        return strpos($this->to_s(), $substr) !== false;
     }
     /**
     * Tells whether or not this string matches the given regular expression.
+    * Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once
     */
     public function matches($pattern) {
+        $pattern = $this->_to_s($pattern);
+        $err_message = "CharArr::matches: Invalid regular expression '$pattern'.";
 
+        $parts = explode('/', $pattern);
+        $num_parts = count($parts);
+        $last_part = $parts[$num_parts - 1];
+        // g flag provided but this will cause an error in preg_match => remove it because it won't change the result
+        if (strpos($last_part, 'g') !== false) {
+            $last_part = str_replace('g', '', $last_part);
+            $parts[$num_parts - 1] = $last_part;
+            $pattern = implode('/', $parts);
+        }
+
+        try {
+            $preg_res = preg_match($pattern, $this->to_s());
+        }
+        catch (\Exception $e) {
+            throw new \Exception($err_message.' Error from '.$e->getmessage());
+        }
+        if ($preg_res === false) {
+            throw new \Exception($err_message);
+        }
+        return $preg_res === 1;
     }
     /**
     * Returns a string that is a substring of this string.
     */
-    public function substring() {
-
+    public function substring($start=0, $end=null) {
+        if ($end === null) {
+            $end = $this->size();
+        }
+        return $this->slice($start, $end - $start);
     }
     /**
     * Returns a string whose value is this string, with any leading and trailing whitespace removed.
     */
     public function trim() {
-
+        return new static(trim($this->to_s()));
     }
 
     // PYTHON INTERFACE

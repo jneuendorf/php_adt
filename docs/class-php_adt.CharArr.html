@@ -161,7 +161,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-php_adt.CharArr.html#7-501" title="Go to source code">CharArr.ns.php</a>
+			<b>Located at</b> <a href="source-class-php_adt.CharArr.html#7-527" title="Go to source code">CharArr.ns.php</a>
 		<br>
 	</div>
 
@@ -898,14 +898,16 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_matches">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#288-293" title="Go to source code">matches</a>( <span> <var>$pattern</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#288-316" title="Go to source code">matches</a>( <span> <var>$pattern</var></span> )</code>
 
 			<div class="description short">
-				<p>Tells whether or not this string matches the given regular expression.</p>
+				<p>Tells whether or not this string matches the given regular expression.
+Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Tells whether or not this string matches the given regular expression.</p>
+				<p>Tells whether or not this string matches the given regular expression.
+Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once</p>
 
 
 
@@ -927,7 +929,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_substring">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#294-299" title="Go to source code">substring</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#317-325" title="Go to source code">substring</a>( <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns a string that is a substring of this string.</p>
@@ -956,7 +958,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_trim">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#300-305" title="Go to source code">trim</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#326-331" title="Go to source code">trim</a>( )</code>
 
 			<div class="description short">
 				<p>Returns a string whose value is this string, with any leading and trailing whitespace removed.</p>
@@ -985,7 +987,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_capitalized">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#308-313" title="Go to source code">capitalized</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#334-339" title="Go to source code">capitalized</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with its first character capitalized and the rest lowercased.</p>
@@ -1014,7 +1016,7 @@ It provides a consistent API and some extra features. There are no keys...just p
 
 			<td class="name"><div>
 			<a class="anchor" href="#_casefold">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#314-321" title="Go to source code">casefold</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#340-347" title="Go to source code">casefold</a>( )</code>
 
 			<div class="description short">
 				<p>Return a casefolded copy of the string. Casefolded strings may be used for caseless matching.
@@ -1047,7 +1049,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_center">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#322-327" title="Go to source code">center</a>( <span> <var>$width</var></span>, <span> <var>$fillchar</var> = <span class="php-quote">' '</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#348-353" title="Go to source code">center</a>( <span> <var>$width</var></span>, <span> <var>$fillchar</var> = <span class="php-quote">' '</span></span> )</code>
 
 			<div class="description short">
 				<p>Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).</p>
@@ -1076,7 +1078,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_count_py">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#328-333" title="Go to source code">count_py</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#354-359" title="Go to source code">count_py</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.</p>
@@ -1105,7 +1107,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_endswith">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#334-339" title="Go to source code">endswith</a>( <span> <var>$suffix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#360-365" title="Go to source code">endswith</a>( <span> <var>$suffix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return True if the string ends with the specified suffix, otherwise return False. suffix can also be a tuple of suffixes to look for. With optional start, test beginning at that position. With optional end, stop comparing at that position.</p>
@@ -1134,7 +1136,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_expandtabs">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#340-345" title="Go to source code">expandtabs</a>( <span> <var>$tabsize</var> = <span class="php-num">4</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#366-371" title="Go to source code">expandtabs</a>( <span> <var>$tabsize</var> = <span class="php-num">4</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size. Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on). To expand the string, the current column is set to zero and the string is examined character by character. If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.) If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero. Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.</p>
@@ -1163,7 +1165,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_find">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#346-351" title="Go to source code">find</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#372-377" title="Go to source code">find</a>( <span> <var>$sub</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.</p>
@@ -1192,7 +1194,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_format">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#352-357" title="Go to source code">format</a>( <span> <var>$args</var></span>, <span> <var>$kwargs</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#378-383" title="Go to source code">format</a>( <span> <var>$args</var></span>, <span> <var>$kwargs</var></span> )</code>
 
 			<div class="description short">
 				<p>Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}. Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.</p>
@@ -1221,7 +1223,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_index">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#358-363" title="Go to source code">index</a>( <span>mixed <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#384-389" title="Go to source code">index</a>( <span>mixed <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Like find(), but raise ValueError when the substring is not found.</p>
@@ -1267,7 +1269,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isalnum">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#364-369" title="Go to source code">isalnum</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#390-395" title="Go to source code">isalnum</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().</p>
@@ -1296,7 +1298,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isalpha">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#370-375" title="Go to source code">isalpha</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#396-401" title="Go to source code">isalpha</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are alphabetic and there is at least one character, false otherwise. Alphabetic characters are those characters defined in the Unicode character database as “Letter”, i.e., those with general category property being one of “Lm”, “Lt”, “Lu”, “Ll”, or “Lo”. Note that this is different from the “Alphabetic” property defined in the Unicode Standard.</p>
@@ -1325,7 +1327,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdecimal">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#376-381" title="Go to source code">isdecimal</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#402-407" title="Go to source code">isdecimal</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are decimal characters and there is at least one character, false otherwise. Decimal characters are those from general category “Nd”. This category includes digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO.</p>
@@ -1354,7 +1356,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isdigit">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#382-387" title="Go to source code">isdigit</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#408-413" title="Go to source code">isdigit</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are digits and there is at least one character, false otherwise. Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. Formally, a digit is a character that has the property value Numeric_Type=Digit or Numeric_Type=Decimal.</p>
@@ -1383,7 +1385,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_islower">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#388-393" title="Go to source code">islower</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#414-419" title="Go to source code">islower</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all cased characters in the string are lowercase and there is at least one cased character, false otherwise.</p>
@@ -1412,7 +1414,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isnumeric">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#394-399" title="Go to source code">isnumeric</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#420-425" title="Go to source code">isnumeric</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are numeric characters, and there is at least one character, false otherwise. Numeric characters include digit characters, and all characters that have the Unicode numeric value property, e.g. U+2155, VULGAR FRACTION ONE FIFTH. Formally, numeric characters are those with the property value Numeric_Type=Digit, Numeric_Type=Decimal or Numeric_Type=Numeric.</p>
@@ -1441,7 +1443,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isprintable">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#400-405" title="Go to source code">isprintable</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#426-431" title="Go to source code">isprintable</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all characters in the string are printable or the string is empty, false otherwise. Nonprintable characters are those characters defined in the Unicode character database as “Other” or “Separator”, excepting the ASCII space (0x20) which is considered printable. (Note that printable characters in this context are those which should not be escaped when repr() is invoked on a string. It has no bearing on the handling of strings written to sys.stdout or sys.stderr.)</p>
@@ -1470,7 +1472,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isspace">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#406-411" title="Go to source code">isspace</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#432-437" title="Go to source code">isspace</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if there are only whitespace characters in the string and there is at least one character, false otherwise. Whitespace characters are those characters defined in the Unicode character database as “Other” or “Separator” and those with bidirectional property being one of “WS”, “B”, or “S”.</p>
@@ -1499,7 +1501,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_istitle">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#412-417" title="Go to source code">istitle</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#438-443" title="Go to source code">istitle</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.</p>
@@ -1528,7 +1530,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_isupper">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#418-423" title="Go to source code">isupper</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#444-449" title="Go to source code">isupper</a>( )</code>
 
 			<div class="description short">
 				<p>Return true if all cased characters [4] in the string are uppercase and there is at least one cased character, false otherwise.</p>
@@ -1557,7 +1559,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_join">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#424-429" title="Go to source code">join</a>( <span>Str <var>$iterable</var> = []</span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#450-455" title="Go to source code">join</a>( <span>Str <var>$iterable</var> = []</span> )</code>
 
 			<div class="description short">
 				<p>Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.</p>
@@ -1597,7 +1599,7 @@ The casefolding algorithm is described in section 3.13 of the Unicode Standard.<
 
 			<td class="name"><div>
 			<a class="anchor" href="#_lower">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#431-437" title="Go to source code">lower</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#457-463" title="Go to source code">lower</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all the cased characters converted to lowercase.
@@ -1628,7 +1630,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_partition">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#438-443" title="Go to source code">partition</a>( <span> <var>$sep</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#464-469" title="Go to source code">partition</a>( <span> <var>$sep</var></span> )</code>
 
 			<div class="description short">
 				<p>Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.</p>
@@ -1657,7 +1659,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_replace">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#444-449" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code> <var>$old</var></span>, <span> <var>$new</var> = <span class="php-keyword1">null</span></span>, <span> <var>$count</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#470-475" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code> <var>$old</var></span>, <span> <var>$new</var> = <span class="php-keyword1">null</span></span>, <span> <var>$count</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.</p>
@@ -1701,7 +1703,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_split">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#450-455" title="Go to source code">split</a>( <span> <var>$sep</var> = <span class="php-keyword1">null</span></span>, <span> <var>$maxsplit</var> = -<span class="php-num">1</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#476-481" title="Go to source code">split</a>( <span> <var>$sep</var> = <span class="php-keyword1">null</span></span>, <span> <var>$maxsplit</var> = -<span class="php-num">1</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).</p>
@@ -1730,7 +1732,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_splitlines">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#456-461" title="Go to source code">splitlines</a>( <span> <var>$keepends</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#482-487" title="Go to source code">splitlines</a>( <span> <var>$keepends</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.</p>
@@ -1759,7 +1761,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_startswith">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#463-468" title="Go to source code">startswith</a>( <span> <var>$prefix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#489-494" title="Go to source code">startswith</a>( <span> <var>$prefix</var></span>, <span> <var>$start</var> = <span class="php-num">0</span></span>, <span> <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for. With optional start, test string beginning at that position. With optional end, stop comparing string at that position.</p>
@@ -1788,7 +1790,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_strip">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#470-475" title="Go to source code">strip</a>( <span> <var>$chars</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#496-501" title="Go to source code">strip</a>( <span> <var>$chars</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.</p>
@@ -1817,7 +1819,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_swapcase">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#476-481" title="Go to source code">swapcase</a>( <span> <var>$target_case</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#502-507" title="Go to source code">swapcase</a>( <span> <var>$target_case</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.</p>
@@ -1846,7 +1848,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_title">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#482-487" title="Go to source code">title</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#508-513" title="Go to source code">title</a>( )</code>
 
 			<div class="description short">
 				<p>Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.</p>
@@ -1875,7 +1877,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_upper">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#489-494" title="Go to source code">upper</a>( )</code>
+			<code><a href="source-class-php_adt.CharArr.html#515-520" title="Go to source code">upper</a>( )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string with all the cased characters [4] converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).</p>
@@ -1904,7 +1906,7 @@ The lowercasing algorithm used is described in section 3.13 of the Unicode Stand
 
 			<td class="name"><div>
 			<a class="anchor" href="#_zfill">#</a>
-			<code><a href="source-class-php_adt.CharArr.html#495-500" title="Go to source code">zfill</a>( <span> <var>$width</var></span> )</code>
+			<code><a href="source-class-php_adt.CharArr.html#521-526" title="Go to source code">zfill</a>( <span> <var>$width</var></span> )</code>
 
 			<div class="description short">
 				<p>Return a copy of the string left filled with ASCII '0' digits to make a string of length width. A leading sign prefix ('+'/'-') is handled by inserting the padding after the sign character rather than before. The original string is returned if width is less than or equal to len(s).</p>

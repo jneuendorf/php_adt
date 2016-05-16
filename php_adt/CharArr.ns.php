@@ -6,6 +6,16 @@ use \StdClass as StdClass; use \Exception as Exception;import('Arr');
 
 class CharArr extends Arr {
 
+    /**
+    * Cached string value.
+    * @var string
+    */
+    protected $_str;
+
+    /**
+    * Constructor
+    * @param string|CharArr|array $str
+    */
     public function __construct($str='') {
         if (is_object($str) && $str instanceof self) {
             $str = $str->to_s();
@@ -20,6 +30,7 @@ class CharArr extends Arr {
             $chars = $str;
         }
         parent::__construct(...$chars);
+        $this->cache();
     }
 
     // STATIC
@@ -59,11 +70,25 @@ class CharArr extends Arr {
      * @return string
      */
     public function __toString() {
-        return implode('', $this->_elements);
+        return $this->to_s();
+    }
+
+    /**
+    *
+    */
+    public function clear() {
+        parent::clear();
+        $this->cache();
+        return $this;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
+
+    protected function cache() {
+        $this->_str = implode('', $this->_elements);
+        return $this;
+    }
 
     protected function _to_s($object) {
         if (is_string($object)) {
@@ -73,7 +98,6 @@ class CharArr extends Arr {
             return $object->to_s();
         }
         throw new \Exception('Could not convert given object to native string.', 1);
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -167,7 +191,7 @@ class CharArr extends Arr {
     * @return string
     */
     public function to_s() {
-        return implode('', $this->_elements);
+        return $this->_str;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -190,6 +214,7 @@ class CharArr extends Arr {
         else {
             $this->_elements[$this->_adjust_offset($offset)] = $value;
         }
+        $this->cache();
         return $this;
     }
 
@@ -256,6 +281,7 @@ class CharArr extends Arr {
     // JAVA INTERFACE
     /**
     * Returns the char value at the specified index.
+    * @return CharArr
     */
     public function char_at($index) {
         return $this[$index];
@@ -334,8 +360,11 @@ class CharArr extends Arr {
     /**
     * Return a copy of the string with its first character capitalized and the rest lowercased.
     */
-    public function capitalized() {
-
+    public function capitalize() {
+        if ($this->is_empty()) {
+            return new static();
+        }
+        return new static(strtoupper(parent::offsetGet(0)).implode('', array_slice($this->_elements, 1)));
     }
     /**
     * Return a casefolded copy of the string. Casefolded strings may be used for caseless matching.
@@ -343,49 +372,130 @@ class CharArr extends Arr {
     * The casefolding algorithm is described in section 3.13 of the Unicode Standard.
     */
     public function casefold() {
-
+        // TODO: can this be done with a reasonable amount of effort?
     }
     /**
     * Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).
     */
     public function center($width, $fillchar=' ') {
-
+        $size = $this->size();
+        if ($width < $size) {
+            return $this->copy();
+        }
+        $width -= $size;
+        $first_half = ceil($width / 2);
+        $second_half = floor($width / 2);
+        return new static(str_repeat($fillchar, $first_half).$this->to_s().str_repeat($fillchar, $second_half));
     }
     /**
     * Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.
     */
-    public function count_py($sub, $start=0, $end=null) {
-
+    public function count_substr($sub, $start=0, $end=null) {
+        if ($end === null) {
+            $end = $this->size();
+        }
+        return substr_count($this->to_s(), $sub, $start, $end - $start);
     }
     /**
-    * Return True if the string ends with the specified suffix, otherwise return False. suffix can also be a tuple of suffixes to look for. With optional start, test beginning at that position. With optional end, stop comparing at that position.
+    * Return True if the string ends with the specified suffix, otherwise return False.
     */
-    public function endswith($suffix, $start=0, $end=null) {
-
+    public function endswith($suffix) {
+        $suffix = $this->_to_s($suffix);
+        if ($suffix === '') {
+            return true;
+        }
+        $haystack = $this->to_s();
+        $pos = strlen($haystack) - strlen($suffix);
+        return ($pos >= 0 && strpos($haystack, $suffix, $pos) !== false);
     }
     /**
     * Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size. Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on). To expand the string, the current column is set to zero and the string is examined character by character. If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.) If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero. Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.
     */
     public function expandtabs($tabsize=4) {
-
+        return new static(str_replace("\t", str_repeat(' ', $tabsize), $this->to_s()));
     }
     /**
     * Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+    * @return int
     */
     public function find($sub, $start=0, $end=null) {
-
+        $sub = $this->_to_s($sub);
+        $res = strpos($this->to_s(), $sub, $start);
+        if ($res === false) {
+            return -1;
+        }
+        if ($end === null) {
+            $end = $this->size();
+        }
+        if ($res <= $end - strlen($sub)) {
+            return $res;
+        }
+        return -1;
     }
     /**
-    * Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}. Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.
+    * Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}.
+    * Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.
+    * This method will internally use multiple calls of str_replace. For that reason using e.g. '{0}'.format('{1}', 2) will result in '2';
+    * @param string... $args Each (except the last) argument must be a string or an object with a <code>__toString()</code> method. The last argument may be an associative array or a Dict instance. If it's a Dict the keys must be strings of have a <code>__toString()</code> method.
+    * @throws Exception
     */
-    public function format($args, $kwargs) {
+    public function format(...$args) {
+        // TODO: does it make sense to implement all of python's cababilities (https://pyformat.info/) ? probably not...
+        $last_arg = $args[count($args) - 1];
+        unset($args[count($args) - 1]);
+        // merge associative last argument into args because those key-value pairs are handled normally (because the keys are strings)
+        if (is_array($last_arg)) {
+            // manual merge because array_merge will change indices
+            foreach ($last_arg as $key => $value) {
+                $args[$key] = $value;
+            }
+            $kwargs = null;
+        }
+        elseif (is_object($last_arg) && $last_arg instanceof Dict) {
+            $kwargs = $last_arg;
+        }
 
+        $new_res = $this->to_s();
+        $new_res_len = strlen($new_res);
+        $res = '';
+        $replace_count = 0;
+        // fill empty '{}'s with indices
+        for ($i = 0; $i < $new_res_len - 1; $i++) {
+            // append char
+            if (!($new_res[$i] === '{' && $new_res[$i + 1] === '}')) {
+                $res .= $new_res[$i];
+            }
+            else {
+                $res .= '{'.$replace_count.'}';
+                $replace_count++;
+                $i++;
+            }
+        }
+        // append last char because we skipped it in the loop for easier checking
+        $res .= $new_res[$new_res_len -1];
+        unset($new_res);
+        $num_args = count($args);
+
+        foreach ($args as $key => $value) {
+            $res = str_replace('{'.$key.'}', $value.'', $res);
+        }
+        if ($kwargs !== null) {
+            foreach ($kwargs as $key => $value) {
+                $res = str_replace('{'.$key.'}', $value.'', $res);
+            }
+        }
+        return $res;
     }
     /**
     * Like find(), but raise ValueError when the substring is not found.
+    * @throws Exception
     */
     public function index($sub, $start=0, $end=null, $equality=null) {
-
+        $res = $this->find($sub, $start, $end);
+        if ($res !== -1) {
+            return $res;
+        }
+        throw new \Exception("CharArr::index: Could not find '$sub' in '".$this->to_s()."'.", 1);
     }
     /**
     * Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().
@@ -490,7 +600,10 @@ class CharArr extends Arr {
     * Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for. With optional start, test string beginning at that position. With optional end, stop comparing string at that position.
     */
     public function startswith($prefix, $start=0, $end=null) {
-
+        // function startsWith($haystack, $needle) {
+        //     // search backwards starting from haystack length characters from the end
+        //     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+        // }
     }
 
     /**

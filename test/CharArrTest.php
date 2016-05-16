@@ -168,6 +168,59 @@ section('instance methods (java-like)',
                     return expect($this->str->trim(), 'trim')->to_be($this->str) &&
                     expect($str->trim(), 'trim')->to_be('haha');
                 },
+                function() {
+                    return expect((new CharArr())->capitalize(), 'capitalize')->to_be('') &&
+                    expect($this->str->capitalize(), 'capitalize')->to_be('Asdf');
+                },
+                function() {
+                    return expect($this->str->center(10), 'center')->to_be('   asdf   ') &&
+                    expect($this->str->center(10, '*'), 'center')->to_be('***asdf***') &&
+                    expect($this->str->center(3, '*'), 'center')->to_be('asdf');
+                },
+                function() {
+                    return expect($this->str->count_substr('asdf'), 'count_substr')->to_be(1) &&
+                    expect($this->str->count_substr('a'), 'count_substr')->to_be(1) &&
+                    expect($this->str->count_substr('a', 3), 'count_substr')->to_be(0) &&
+                    expect($this->str->count_substr('f', 0, 2), 'count_substr')->to_be(0) &&
+                    expect($this->str->count_substr('z'), 'count_substr')->to_be(0);
+                },
+                function() {
+                    $str = new CharArr('abcdef');
+                    return expect($str->endswith("ab"), 'endswith')->to_be(false) &&
+                    expect($str->endswith("cd"), 'endswith')->to_be(false) &&
+                    expect($str->endswith("ef"), 'endswith')->to_be(true) &&
+                    expect($str->endswith(""), 'endswith')->to_be(true) &&
+                    expect((new CharArr())->endswith("abcdef"), 'endswith')->to_be(false);
+                },
+                function() {
+                    $str = new CharArr("col1\tcol2\tcol3");
+                    return expect($str->expandtabs(), 'expandtabs')->to_be("col1    col2    col3") &&
+                    expect($str->expandtabs(2), 'expandtabs')->to_be("col1  col2  col3");
+                },
+                function() {
+                    return expect($this->str->find('sd'), 'find')->to_be(1) &&
+                    expect($this->str->find('a'), 'find')->to_be(0) &&
+                    expect($this->str->find('a', 1), 'find')->to_be(-1) &&
+                    expect($this->str->find('f'), 'find')->to_be(3) &&
+                    expect($this->str->find('f', 0, 2), 'find')->to_be(-1);
+                },
+                function() {
+                    $str = new CharArr('{1} {A} {} {1337} {b} {my_key}');
+                    $kwargs = ['A' => 2, 'b' => 'zz', 1337 => -1];
+                    $dict = new Dict(null, $kwargs);
+                    $dict->put(
+                        new class {
+                            public function __toString() {
+                                return 'my_key';
+                            }
+                        },
+                        'awesome'
+                    );
+                    $args1 = ['val0', 'val1', $kwargs];
+                    $args2 = ['val0', 'val1', $dict];
+                    return expect($str->format(...$args1), 'format')->to_be('val1 2 val0 -1 zz {my_key}') &&
+                    expect($str->format(...$args2), 'format')->to_be('val1 2 val0 -1 zz awesome');
+                },
             ],
             function () {
                 $this->chars = ['a', 's', 'd', 'f'];

@@ -7,7 +7,7 @@ namespaced:
 	/usr/bin/env php ./make/add_namespace.php $(PHP_ADT_FILES) php_adt
 	/usr/bin/env php ./make/add_namespace.php $(TEST_FILES) php_adt test
 
-api:
+api: namespaced
 	rm -rf docs
 	mkdir docs
 	./apigen.phar generate --source="_php_adt,php_adt" --destination="docs" --template-theme bootstrap --title "php_adt" --tree --exclude="*init.php"

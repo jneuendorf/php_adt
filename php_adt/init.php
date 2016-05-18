@@ -2,7 +2,7 @@
 
 // include this file for using all the classes that come with php_adt (Arr, Dict, Genewrapor, Set, Tree) (namespaced)
 
-$namespaced = true;
+$__namespaced = true;
 
 $orig_include_path = get_include_path();
 set_include_path(__DIR__.'/..');

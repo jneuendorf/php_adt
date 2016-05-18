@@ -17,22 +17,21 @@ set_error_handler("exception_error_handler");
 
 
 function import($class, $subdir='') {
-    global $namespaced;
+    global $__namespaced;
     $path = get_include_path();
 
     if (strlen($subdir) > 0 && $subdir[0] != '/') {
         $subdir = '/'.$subdir;
     }
 
-    // path is the same because when the include_path will differs depending on $namespaced (see init.php files)
+    // path is the same because when the include_path will differs depending on $__namespaced (see init.php files)
     $dir = $path.$subdir;
 
-    if ($namespaced) {
+    if ($__namespaced) {
         $dir = $path.'/php_adt'.$subdir;
         $class = $class.'.ns.php';
     }
     else {
-        // $dir = $path.'/'.$subdir;
         $class = $class.'.php';
     }
 

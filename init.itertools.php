@@ -2,7 +2,7 @@
 
 // include this file for using the itertools functionality (non-namespaced)
 
-$namespaced = false;
+$__namespaced = false;
 
 $orig_include_path = get_include_path();
 set_include_path(__DIR__);

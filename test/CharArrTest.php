@@ -223,14 +223,12 @@ section('instance methods (java-like)',
                 },
                 function() {
                     $str = new CharArr('i am an untitlecased string :)');
-                    return expect(true, 'TODO: istitle')->to_be(true);
-                    // return expect($str->istitle(), 'istitle')->to_be(false) &&
-                    // expect($str->title()->istitle(), 'istitle')->to_be(true);
+                    return expect($str->istitle(), 'istitle')->to_be(false) &&
+                    expect($str->title()->istitle(), 'istitle')->to_be(true);
                 },
                 function() {
-                    return expect(true, 'TODO: isupper')->to_be(true);
-                    // return expect($this->str->isupper(), 'isupper')->to_be(false) &&
-                    // expect($this->str->upper()->isupper(), 'isupper')->to_be(true);
+                    return expect($this->str->isupper(), 'isupper')->to_be(false) &&
+                    expect($this->str->upper()->isupper(), 'isupper')->to_be(true);
                 },
                 function() {
                     $arr = new Arr(1, 2, 3, 4);
@@ -281,6 +279,13 @@ section('instance methods (java-like)',
                     $str2 = new CharArr("0000000this is string example...00...wow!!!0000000");
                     return expect($str1->strip(), 'strip')->to_be('text word1') &&
                     expect($str2->strip('0'), 'strip')->to_be('this is string example...00...wow!!!');
+                },
+                function() {
+                    $str = new CharArr('word1 word2 word3 word4 word5');
+                    return expect($str->title(), 'title')->to_be('Word1 Word2 Word3 Word4 Word5');
+                },
+                function() {
+                    return expect($this->str->upper(), 'upper')->to_be(strtoupper($this->str->to_s()));
                 },
             ],
             function () {

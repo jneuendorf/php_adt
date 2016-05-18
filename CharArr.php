@@ -684,28 +684,54 @@ class CharArr extends Arr {
     /**
     * Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.
     */
-    public function swapcase($target_case=null) {
-
+    public function swapcase() {
+        if ($target_case === null) {
+            if ($this->isupper()) {
+                return $this->lower();
+            }
+            return $this->upper();
+        }
     }
     /**
     * Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.
     */
     public function title() {
-
+        $next_upper = true;
+        $chars = '';
+        foreach ($this as $char) {
+            if ($next_upper) {
+                $chars .= strtoupper($char);
+                $next_upper = false;
+            }
+            else {
+                $chars .= $char;
+                if (trim($char) === '') {
+                    $next_upper = true;
+                }
+            }
+        }
+        return new static($chars);
     }
 
     /**
-    * Return a copy of the string with all the cased characters [4] converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).
+    * Return a copy of the string with all the cased characters converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).
     */
     public function upper() {
-
+        return new static(strtoupper($this->to_s()));
     }
-    /**
-    * Return a copy of the string left filled with ASCII '0' digits to make a string of length width. A leading sign prefix ('+'/'-') is handled by inserting the padding after the sign character rather than before. The original string is returned if width is less than or equal to len(s).
-    */
-    public function zfill($width) {
 
-    }
+    // /**
+    // * Return a copy of the string left filled with ASCII '0' digits to make a string of length width.
+    // * A leading sign prefix ('+'/'-') is handled by inserting the padding after the sign character rather than before.
+    // * The original string is returned if width is less than or equal to len(s).
+    // */
+    // public function zfill($width) {
+    //     $size = $this->size();
+    //     if ($width <= $size) {
+    //         return $this->copy();
+    //     }
+    //
+    // }
 }
 // namespace dependent class aliasing
 $ns_prefix = __NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\';

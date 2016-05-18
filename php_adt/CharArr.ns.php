@@ -4,10 +4,14 @@ namespace php_adt;
 
 use \StdClass as StdClass; use \Exception as Exception;import('Arr');
 
+/**
+ * CharArr is a subclass of Arr: An array of characters.
+ * Therefore all inherited methods can be used but most of the class'es behavior is more string- than array-like.
+*/
 class CharArr extends Arr {
-
     /**
     * Cached string value.
+    * @internal
     * @var string
     */
     protected $_str;
@@ -15,6 +19,7 @@ class CharArr extends Arr {
     /**
     * Constructor
     * @param string|CharArr|array $str
+    * @return CharArr
     */
     public function __construct($str='') {
         if (is_object($str) && $str instanceof self) {
@@ -59,7 +64,7 @@ class CharArr extends Arr {
      * @param mixed $start
      * @param mixed $end Inclusive.
      * @param number $step
-     * @return Arr
+     * @return CharArr
      */
     public static function range($start, $end, $step=1) {
         return static::from_iterable(range($start, $end, $step));
@@ -71,21 +76,6 @@ class CharArr extends Arr {
      */
     public function __toString() {
         return $this->to_s();
-    }
-
-    /**
-    *
-    */
-    public function clear() {
-        parent::clear();
-        $this->cache();
-        return $this;
-    }
-
-    public function lorem($paragraphs=1, $sep=' ') {
-        $sep = $this->_to_s($sep);
-        return str_repeat('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.$sep, $paragraphs);
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -109,26 +99,56 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
+    /**
+    * Empties the CharArr.
+    * @return CharArr
+    */
+    public function clear() {
+        parent::clear();
+        $this->cache();
+        return $this;
+    }
+
+    /**
+    * Creates a copy of the CharArr instnace.
+    * @return CharArr
+    */
     public function copy($deep=false) {
         return static::from_iterable($this);
     }
 
+    /**
+    * Creates a CharArr containt $paragraphs paragraphs of lorem ipsum.
+    * @param int $paragraphs
+    * @param CharArr|string $sep
+    * @return CharArr
+    */
+    public function lorem($paragraphs=1, $sep=' ') {
+        $sep = $this->_to_s($sep);
+        return str_repeat('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.$sep, $paragraphs);
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING HASHABLE
+    /**
+    * Calculates a hash value of the CharArr instance.
+    * @return int
+    */
     public function hash() {
-        return __hash(implode('', $this->_elements));
+        return __hash($this->to_s());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ABSTRACTSET
 
+    /**
+    * Retrieves the character at index $index.
+    * @return CharrArr
+    */
     public function get($index) {
-        return $this->offsetGet($index);
+        return $this[$index];
     }
-
-    // protected function _get_at($index) {
-    //     return $this->offsetGet($index);
-    // }
 
     /**
     * Indicates whether the Str instance is equals to another object.
@@ -181,6 +201,13 @@ class CharArr extends Arr {
     * @return Str
     */
     public function to_str() {
+        return $this->to_chararr();
+    }
+    /**
+    * Converts the Str instance to an instance of Str.
+    * @return Str
+    */
+    public function to_chararr() {
         return $this->copy();
     }
 
@@ -200,9 +227,21 @@ class CharArr extends Arr {
         return $this->_str;
     }
 
+    /**
+    * Returns a slice (substring) of the instance with optional length. Default is from $start to the end.
+    * @param int $start Index to start slicing (inclusive).
+    * @param int $length How many characters to slice.
+    * @return CharArr
+    */
+    public function slice($start=0, $length=null) {
+        return new static(implode('', array_slice($this->_elements, $start, $length)));
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING ARRAYACCESS
-
+    /**
+     * @internal
+    */
     public function offsetGet($offset) {
         $result = parent::offsetGet($offset);
         return new static($result);
@@ -243,45 +282,10 @@ class CharArr extends Arr {
 
     /**
      * Gets the current character.
-     * @return mixed
+     * @return CharArr
      */
     public function current() {
         return new static(parent::current());
-    }
-
-    // /**
-    //  * Gets the index of the current character.
-    //  * @return mixed
-    //  */
-    // public function key() {
-    //     return $this->_position;
-    // }
-    //
-    // /**
-    //  * Moves the cursor to the next key-value pair.
-    //  */
-    // public function next() {
-    //     $this->_position++;
-    // }
-    //
-    // /**
-    //  * Moves the cursor to the first key-value pair.
-    //  */
-    // public function rewind() {
-    //     $this->_position = 0;
-    // }
-    //
-    // /**
-    // *
-    // */
-    // public function valid() {
-    //     return $this->_position >= 0 && $this->_position < $this->size();
-    // }
-
-    //
-
-    public function slice($start=0, $length=null) {
-        return new static(implode('', array_slice($this->_elements, $start, $length)));
     }
 
     // JAVA INTERFACE
@@ -294,6 +298,8 @@ class CharArr extends Arr {
     }
     /**
     * Concatenates the specified strings to the end of this string.
+    * @param CharArr|string... $strs
+    * @return CharArr
     */
     public function concat(...$strs) {
         $chars = $this->to_s();
@@ -308,6 +314,7 @@ class CharArr extends Arr {
     }
     /**
     * Returns true if and only if this string contains the specified sequence of char values.
+    * @return bool
     */
     public function contains($str) {
         try {
@@ -320,6 +327,8 @@ class CharArr extends Arr {
     /**
     * Tells whether or not this string matches the given regular expression.
     * Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once
+    * @param CharArr|string $pattern
+    * @return CharArr
     */
     public function matches($pattern) {
         $pattern = $this->_to_s($pattern);
@@ -347,7 +356,10 @@ class CharArr extends Arr {
         return $preg_res === 1;
     }
     /**
-    * Returns a string that is a substring of this string.
+    * Liek <code>slice</code> returns a string that is a substring of this string but the 2nd argument in an exclusive index.
+    * @param int $start
+    * @param int $end
+    * @return CharArr
     */
     public function substring($start=0, $end=null) {
         if ($end === null) {
@@ -357,6 +369,7 @@ class CharArr extends Arr {
     }
     /**
     * Returns a string whose value is this string, with any leading and trailing whitespace removed.
+    * @return CharArr
     */
     public function trim() {
         return new static(trim($this->to_s()));
@@ -365,6 +378,7 @@ class CharArr extends Arr {
     // PYTHON INTERFACE
     /**
     * Return a copy of the string with its first character capitalized and the rest lowercased.
+    * @return CharArr
     */
     public function capitalize() {
         if ($this->is_empty()) {
@@ -372,16 +386,12 @@ class CharArr extends Arr {
         }
         return new static(strtoupper(parent::offsetGet(0)).implode('', array_slice($this->_elements, 1)));
     }
-    /**
-    * Return a casefolded copy of the string. Casefolded strings may be used for caseless matching.
-    * Casefolding is similar to lowercasing but more aggressive because it is intended to remove all case distinctions in a string. For example, the German lowercase letter 'ß' is equivalent to "ss". Since it is already lowercase, lower() would do nothing to 'ß'; casefold() converts it to "ss".
-    * The casefolding algorithm is described in section 3.13 of the Unicode Standard.
-    */
-    public function casefold() {
-        // TODO: can this be done with a reasonable amount of effort?
-    }
+
     /**
     * Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).
+    * @param int $width
+    * @param CharArr|string $fillchar
+    * @return CharArr
     */
     public function center($width, $fillchar=' ') {
         $size = $this->size();
@@ -395,6 +405,10 @@ class CharArr extends Arr {
     }
     /**
     * Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.
+    * @param CharArr|string $sub
+    * @param int $start
+    * @param int $end
+    * @return int
     */
     public function count_substr($sub, $start=0, $end=null) {
         if ($end === null) {
@@ -415,13 +429,23 @@ class CharArr extends Arr {
         return ($pos >= 0 && strpos($haystack, $suffix, $pos) !== false);
     }
     /**
-    * Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size. Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on). To expand the string, the current column is set to zero and the string is examined character by character. If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.) If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero. Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.
+    * Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size.
+    * Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on).
+    * To expand the string, the current column is set to zero and the string is examined character by character.
+    * If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.)
+    * If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero.
+    * Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.
+    * @param int $tabsize
+    * @return CharArr
     */
     public function expandtabs($tabsize=4) {
         return new static(str_replace("\t", str_repeat(' ', $tabsize), $this->to_s()));
     }
     /**
     * Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.
+    * @param CharArr|string $sub
+    * @param int $start
+    * @param int $end
     * @return int
     */
     public function find($sub, $start=0, $end=null) {
@@ -438,6 +462,7 @@ class CharArr extends Arr {
         }
         return -1;
     }
+
     /**
     * Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}.
     * Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.
@@ -492,9 +517,15 @@ class CharArr extends Arr {
         }
         return $res;
     }
+
     /**
     * Like find(), but raise ValueError when the substring is not found.
+    * @param CharArr|string $sub
+    * @param int $start
+    * @param int $end
+    * @param callable $equality This parameter does not have any effect and exists only due to inheritance of the Arr class.
     * @throws Exception
+    * @return int
     */
     public function index($sub, $start=0, $end=null, $equality=null) {
         $res = $this->find($sub, $start, $end);
@@ -504,57 +535,9 @@ class CharArr extends Arr {
         throw new \Exception("CharArr::index: Could not find '$sub' in '".$this->to_s()."'.", 1);
     }
 
-    // /**
-    // * Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().
-    // */
-    // public function isalnum() {
-    //
-    // }
-    // /**
-    // * Return true if all characters in the string are alphabetic and there is at least one character, false otherwise. Alphabetic characters are those characters defined in the Unicode character database as “Letter”, i.e., those with general category property being one of “Lm”, “Lt”, “Lu”, “Ll”, or “Lo”. Note that this is different from the “Alphabetic” property defined in the Unicode Standard.
-    // */
-    // public function isalpha() {
-    //
-    // }
-    // /**
-    // * Return true if all characters in the string are decimal characters and there is at least one character, false otherwise. Decimal characters are those from general category “Nd”. This category includes digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO.
-    // */
-    // public function isdecimal() {
-    //
-    // }
-    // /**
-    // * Return true if all characters in the string are digits and there is at least one character, false otherwise. Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. Formally, a digit is a character that has the property value Numeric_Type=Digit or Numeric_Type=Decimal.
-    // */
-    // public function isdigit() {
-    //
-    // }
-    // /**
-    // * Return true if all cased characters in the string are lowercase and there is at least one cased character, false otherwise.
-    // */
-    // public function islower() {
-    //
-    // }
-    // /**
-    // * Return true if all characters in the string are numeric characters, and there is at least one character, false otherwise. Numeric characters include digit characters, and all characters that have the Unicode numeric value property, e.g. U+2155, VULGAR FRACTION ONE FIFTH. Formally, numeric characters are those with the property value Numeric_Type=Digit, Numeric_Type=Decimal or Numeric_Type=Numeric.
-    // */
-    // public function isnumeric() {
-    //
-    // }
-    // /**
-    // * Return true if all characters in the string are printable or the string is empty, false otherwise. Nonprintable characters are those characters defined in the Unicode character database as “Other” or “Separator”, excepting the ASCII space (0x20) which is considered printable. (Note that printable characters in this context are those which should not be escaped when repr() is invoked on a string. It has no bearing on the handling of strings written to sys.stdout or sys.stderr.)
-    // */
-    // public function isprintable() {
-    //
-    // }
-    // /**
-    // * Return true if there are only whitespace characters in the string and there is at least one character, false otherwise. Whitespace characters are those characters defined in the Unicode character database as “Other” or “Separator” and those with bidirectional property being one of “WS”, “B”, or “S”.
-    // */
-    // public function isspace() {
-    //
-    // }
-
     /**
     * Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.
+    * @return bool
     */
     public function istitle() {
         return !$this->is_empty() && $this->equals($this->title());
@@ -562,6 +545,7 @@ class CharArr extends Arr {
 
     /**
     * Return true if all cased characters in the string are uppercase and there is at least one cased character, false otherwise.
+    * @return bool
     */
     public function isupper() {
         return !$this->is_empty() && $this->to_s() === strtoupper($this->to_s());
@@ -569,6 +553,8 @@ class CharArr extends Arr {
 
     /**
     * Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.
+    * @param Traversable|array $iterable
+    * @return CharArr
     */
     public function join($iterable=[]) {
         $parts = [];
@@ -580,7 +566,7 @@ class CharArr extends Arr {
 
     /**
     * Return a copy of the string with all the cased characters converted to lowercase.
-    * The lowercasing algorithm used is described in section 3.13 of the Unicode Standard.
+    * @return CharArr
     */
     public function lower() {
         return new static(strtolower($this->to_s()));
@@ -588,6 +574,8 @@ class CharArr extends Arr {
 
     /**
     * Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.
+    * @param CharArr|string $sep
+    * @return Arr
     */
     public function partition($sep) {
         $sep = $this->_to_s($sep);
@@ -601,6 +589,10 @@ class CharArr extends Arr {
 
     /**
     * Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.
+    * @param CharArr|string $old
+    * @param CharArr|string $new
+    * @param int $count
+    * @return CharArr
     */
     public function replace($old, $new=null, $count=null) {
         $old = $this->_to_s($old);
@@ -632,6 +624,9 @@ class CharArr extends Arr {
     /**
     * Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).
     * If sep is not specified or is None, any whitespace string is a separator and empty strings are removed from the result.
+    * @param CharArr|string $sep The separator (may be a pattern).
+    * @param int $maxsplit
+    * @return Arr
     */
     public function split($sep='/\s+/', $maxsplit=-1) {
         $sep = $this->_to_s($sep);
@@ -643,10 +638,11 @@ class CharArr extends Arr {
 
     /**
     * Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.
+    * @param bool $keepends
+    * @return Arr
     */
     public function splitlines($keepends=false) {
         $pattern = '/(\n|\r\n|\r)/';
-        // PREG_SPLIT_DELIM_CAPTURE
         if (!$keepends) {
             return $this->split($pattern);
         }
@@ -666,6 +662,8 @@ class CharArr extends Arr {
 
     /**
     * Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for.
+    * @param CharArr|string $prefix
+    * @return bool
     */
     public function startswith($prefix) {
         // search backwards starting from haystack length characters from the end
@@ -675,6 +673,8 @@ class CharArr extends Arr {
 
     /**
     * Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.
+    * @param CharArr|string $chars
+    * @return CharArr
     */
     public function strip($chars=null) {
         $str = $this->to_s();
@@ -682,32 +682,48 @@ class CharArr extends Arr {
             return new static(trim($str));
         }
         $chars = $this->_to_s($chars);
-        return preg_replace('/(^['.$chars.']*|['.$chars.']*$)/', '', $str);
+        return new CharArr(preg_replace('/(^['.$chars.']*|['.$chars.']*$)/', '', $str));
     }
     /**
     * Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.
+    * @return CharArr
     */
-    public function swapcase($target_case=null) {
-
+    public function swapcase() {
+        if ($target_case === null) {
+            if ($this->isupper()) {
+                return $this->lower();
+            }
+            return $this->upper();
+        }
     }
     /**
     * Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.
+    * @return CharArr
     */
     public function title() {
-
+        $next_upper = true;
+        $chars = '';
+        foreach ($this as $char) {
+            if ($next_upper) {
+                $chars .= strtoupper($char);
+                $next_upper = false;
+            }
+            else {
+                $chars .= $char;
+                if (trim($char) === '') {
+                    $next_upper = true;
+                }
+            }
+        }
+        return new static($chars);
     }
 
     /**
-    * Return a copy of the string with all the cased characters [4] converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).
+    * Return a copy of the string with all the cased characters converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).
+    * @return CharArr
     */
     public function upper() {
-
-    }
-    /**
-    * Return a copy of the string left filled with ASCII '0' digits to make a string of length width. A leading sign prefix ('+'/'-') is handled by inserting the padding after the sign character rather than before. The original string is returned if width is less than or equal to len(s).
-    */
-    public function zfill($width) {
-
+        return new static(strtoupper($this->to_s()));
     }
 }
 // namespace dependent class aliasing

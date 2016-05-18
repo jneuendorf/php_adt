@@ -9,7 +9,7 @@ use \Iterator as Iterator;
 
 /**
  * Arr is a wrapper around the native array type.
- * It provides a consistent API and some extra features. There are no keys...just plain indices. ^^
+ * It provides a consistent API and some extra features. There are no keys...just plain indices.
  * @property int length Equivalent for calling the size() method.
  * @method Arr chunk(int $size) See array_chunk.
  * @method Arr column(mixed $column_key) See array_column.

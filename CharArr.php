@@ -79,6 +79,12 @@ class CharArr extends Arr {
         return $this;
     }
 
+    public function lorem($paragraphs=1, $sep=' ') {
+        $sep = $this->_to_s($sep);
+        return str_repeat('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.$sep, $paragraphs);
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
 
@@ -494,71 +500,79 @@ class CharArr extends Arr {
         }
         throw new \Exception("CharArr::index: Could not find '$sub' in '".$this->to_s()."'.", 1);
     }
-    /**
-    * Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().
-    */
-    public function isalnum() {
 
-    }
-    /**
-    * Return true if all characters in the string are alphabetic and there is at least one character, false otherwise. Alphabetic characters are those characters defined in the Unicode character database as “Letter”, i.e., those with general category property being one of “Lm”, “Lt”, “Lu”, “Ll”, or “Lo”. Note that this is different from the “Alphabetic” property defined in the Unicode Standard.
-    */
-    public function isalpha() {
+    // /**
+    // * Return true if all characters in the string are alphanumeric and there is at least one character, false otherwise. A character c is alphanumeric if one of the following returns True: c.isalpha(), c.isdecimal(), c.isdigit(), or c.isnumeric().
+    // */
+    // public function isalnum() {
+    //
+    // }
+    // /**
+    // * Return true if all characters in the string are alphabetic and there is at least one character, false otherwise. Alphabetic characters are those characters defined in the Unicode character database as “Letter”, i.e., those with general category property being one of “Lm”, “Lt”, “Lu”, “Ll”, or “Lo”. Note that this is different from the “Alphabetic” property defined in the Unicode Standard.
+    // */
+    // public function isalpha() {
+    //
+    // }
+    // /**
+    // * Return true if all characters in the string are decimal characters and there is at least one character, false otherwise. Decimal characters are those from general category “Nd”. This category includes digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO.
+    // */
+    // public function isdecimal() {
+    //
+    // }
+    // /**
+    // * Return true if all characters in the string are digits and there is at least one character, false otherwise. Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. Formally, a digit is a character that has the property value Numeric_Type=Digit or Numeric_Type=Decimal.
+    // */
+    // public function isdigit() {
+    //
+    // }
+    // /**
+    // * Return true if all cased characters in the string are lowercase and there is at least one cased character, false otherwise.
+    // */
+    // public function islower() {
+    //
+    // }
+    // /**
+    // * Return true if all characters in the string are numeric characters, and there is at least one character, false otherwise. Numeric characters include digit characters, and all characters that have the Unicode numeric value property, e.g. U+2155, VULGAR FRACTION ONE FIFTH. Formally, numeric characters are those with the property value Numeric_Type=Digit, Numeric_Type=Decimal or Numeric_Type=Numeric.
+    // */
+    // public function isnumeric() {
+    //
+    // }
+    // /**
+    // * Return true if all characters in the string are printable or the string is empty, false otherwise. Nonprintable characters are those characters defined in the Unicode character database as “Other” or “Separator”, excepting the ASCII space (0x20) which is considered printable. (Note that printable characters in this context are those which should not be escaped when repr() is invoked on a string. It has no bearing on the handling of strings written to sys.stdout or sys.stderr.)
+    // */
+    // public function isprintable() {
+    //
+    // }
+    // /**
+    // * Return true if there are only whitespace characters in the string and there is at least one character, false otherwise. Whitespace characters are those characters defined in the Unicode character database as “Other” or “Separator” and those with bidirectional property being one of “WS”, “B”, or “S”.
+    // */
+    // public function isspace() {
+    //
+    // }
 
-    }
-    /**
-    * Return true if all characters in the string are decimal characters and there is at least one character, false otherwise. Decimal characters are those from general category “Nd”. This category includes digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO.
-    */
-    public function isdecimal() {
-
-    }
-    /**
-    * Return true if all characters in the string are digits and there is at least one character, false otherwise. Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. Formally, a digit is a character that has the property value Numeric_Type=Digit or Numeric_Type=Decimal.
-    */
-    public function isdigit() {
-
-    }
-    /**
-    * Return true if all cased characters in the string are lowercase and there is at least one cased character, false otherwise.
-    */
-    public function islower() {
-
-    }
-    /**
-    * Return true if all characters in the string are numeric characters, and there is at least one character, false otherwise. Numeric characters include digit characters, and all characters that have the Unicode numeric value property, e.g. U+2155, VULGAR FRACTION ONE FIFTH. Formally, numeric characters are those with the property value Numeric_Type=Digit, Numeric_Type=Decimal or Numeric_Type=Numeric.
-    */
-    public function isnumeric() {
-
-    }
-    /**
-    * Return true if all characters in the string are printable or the string is empty, false otherwise. Nonprintable characters are those characters defined in the Unicode character database as “Other” or “Separator”, excepting the ASCII space (0x20) which is considered printable. (Note that printable characters in this context are those which should not be escaped when repr() is invoked on a string. It has no bearing on the handling of strings written to sys.stdout or sys.stderr.)
-    */
-    public function isprintable() {
-
-    }
-    /**
-    * Return true if there are only whitespace characters in the string and there is at least one character, false otherwise. Whitespace characters are those characters defined in the Unicode character database as “Other” or “Separator” and those with bidirectional property being one of “WS”, “B”, or “S”.
-    */
-    public function isspace() {
-
-    }
     /**
     * Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.
     */
     public function istitle() {
-
+        return !$this->is_empty() && $this->equals($this->title());
     }
+
     /**
-    * Return true if all cased characters [4] in the string are uppercase and there is at least one cased character, false otherwise.
+    * Return true if all cased characters in the string are uppercase and there is at least one cased character, false otherwise.
     */
     public function isupper() {
-
+        return !$this->is_empty() && $this->to_s() === strtoupper($this->to_s());
     }
+
     /**
     * Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.
     */
     public function join($iterable=[]) {
-        // use __toString()
+        $parts = [];
+        foreach ($iterable as $key => $value) {
+            $parts[] = $value;
+        }
+        return new static(implode($this->to_s(), $parts));
     }
 
     /**
@@ -566,48 +580,106 @@ class CharArr extends Arr {
     * The lowercasing algorithm used is described in section 3.13 of the Unicode Standard.
     */
     public function lower() {
-
+        return new static(strtolower($this->to_s()));
     }
+
     /**
     * Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.
     */
     public function partition($sep) {
-
+        $sep = $this->_to_s($sep);
+        $str = $this->to_s();
+        $pos = strpos($str, $sep);
+        if ($pos !== false) {
+            return new Arr(new static(substr($str, 0, $pos)), new static($sep), new static(substr($str, $pos + strlen($sep))));
+        }
+        return new Arr($this->copy(), new static(), new static());
     }
+
     /**
     * Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.
     */
     public function replace($old, $new=null, $count=null) {
+        $old = $this->_to_s($old);
+        $str = $this->to_s();
+        $pos = strpos($str, $old);
+        if ($pos === false) {
+            return $this->copy();
+        }
 
+        $new = $this->_to_s($new);
+        if ($count === null) {
+            return new static(str_replace($old, $new, $str));
+        }
+        // find the last of $cound occurrences of $old
+        $i = 1; // because the first $pos was already retrived above
+        $n = strlen($old);
+        while($i < $count) {
+            $tmp = strpos($str, $old, $pos + $n);
+            if ($tmp === false) {
+                // last pos before tmp is saved
+                break;
+            }
+            $pos = $tmp;
+            $i++;
+        }
+        return new static(str_replace($old, $new, substr($str, 0, $pos + $n)).substr($str, $pos + $n));
     }
+
     /**
     * Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).
+    * If sep is not specified or is None, any whitespace string is a separator and empty strings are removed from the result.
     */
-    public function split($sep=null, $maxsplit=-1) {
-
+    public function split($sep='/\s+/', $maxsplit=-1) {
+        $sep = $this->_to_s($sep);
+        if (strlen($sep) < 2 || ($sep[0] !== '/' && $sep[strlen($sep) - 1] !== '/')) {
+            $sep = '/'.$sep.'/';
+        }
+        return new Arr(...preg_split($sep, $this->to_s(), $maxsplit));
     }
+
     /**
     * Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.
     */
     public function splitlines($keepends=false) {
-
+        $pattern = '/(\n|\r\n|\r)/';
+        // PREG_SPLIT_DELIM_CAPTURE
+        if (!$keepends) {
+            return $this->split($pattern);
+        }
+        // $splitted = preg_split($sep, $this->to_s());
+        $splitted = preg_split($pattern, $this->to_s(), -1, PREG_SPLIT_DELIM_CAPTURE);
+        $parts = [];
+        for ($i = 0; $i < count($splitted); $i += 2) {
+            if (isset($splitted[$i + 1])) {
+                $parts[] = $splitted[$i].$splitted[$i + 1];
+            }
+            else {
+                $parts[] = $splitted[$i];
+            }
+        }
+        return new Arr(...$parts);
     }
 
     /**
-    * Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for. With optional start, test string beginning at that position. With optional end, stop comparing string at that position.
+    * Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for.
     */
-    public function startswith($prefix, $start=0, $end=null) {
-        // function startsWith($haystack, $needle) {
-        //     // search backwards starting from haystack length characters from the end
-        //     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
-        // }
+    public function startswith($prefix) {
+        // search backwards starting from haystack length characters from the end
+        $str = $this->to_s();
+        return $prefix === "" || strrpos($str, $prefix, -strlen($str)) !== false;
     }
 
     /**
     * Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.
     */
     public function strip($chars=null) {
-
+        $str = $this->to_s();
+        if ($chars === null) {
+            return new static(trim($str));
+        }
+        $chars = $this->_to_s($chars);
+        return preg_replace('/(^['.$chars.']*|['.$chars.']*$)/', '', $str);
     }
     /**
     * Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.

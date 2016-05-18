@@ -221,6 +221,67 @@ section('instance methods (java-like)',
                     return expect($str->format(...$args1), 'format')->to_be('val1 2 val0 -1 zz {my_key}') &&
                     expect($str->format(...$args2), 'format')->to_be('val1 2 val0 -1 zz awesome');
                 },
+                function() {
+                    $str = new CharArr('i am an untitlecased string :)');
+                    return expect(true, 'TODO: istitle')->to_be(true);
+                    // return expect($str->istitle(), 'istitle')->to_be(false) &&
+                    // expect($str->title()->istitle(), 'istitle')->to_be(true);
+                },
+                function() {
+                    return expect(true, 'TODO: isupper')->to_be(true);
+                    // return expect($this->str->isupper(), 'isupper')->to_be(false) &&
+                    // expect($this->str->upper()->isupper(), 'isupper')->to_be(true);
+                },
+                function() {
+                    $arr = new Arr(1, 2, 3, 4);
+                    return expect($this->str->join($arr), 'join')->to_be(implode($this->str->to_s(), $arr->to_a()));
+                },
+                function() {
+                    $str = new CharArr('UPPER');
+                    return expect($this->str->lower(), 'lower')->to_be($this->str) &&
+                    expect($str->lower(), 'lower')->to_be(strtolower($str->to_s()));
+                },
+                function() {
+                    $str = new CharArr('hello, world');
+                    $partitioned1 = $str->partition(',');
+                    $partitioned2 = $str->partition('%');
+                    return expect($partitioned1->first(), 'partition')->to_be('hello') &&
+                    expect($partitioned1->second(), 'partition')->to_be(',') &&
+                    expect($partitioned1->third(), 'partition')->to_be(' world') &&
+                    expect($partitioned2->first(), 'partition')->to_be('hello, world') &&
+                    expect($partitioned2->second(), 'partition')->to_be('') &&
+                    expect($partitioned2->third(), 'partition')->to_be('');
+                },
+                function() {
+                    $str = new CharArr('word1 word2 word3 word4 word5');
+                    return expect($this->str->replace('as', '__'), 'replace')->to_be('__df') &&
+                    expect($this->str->replace('_X_', '<>'), 'replace')->to_be($this->str) &&
+                    expect($str->replace('word', '+', 3), 'replace')->to_be('+1 +2 +3 word4 word5');
+                },
+                function() {
+                    $str = new CharArr('word1 word2 word3 word4 word5');
+                    return expect($this->str->split(''), 'split')->to_be(new Arr('', 'a', 's', 'd', 'f', '')) &&
+                    expect($str->split(' ', 3), 'split')->to_be(new Arr('word1', 'word2', 'word3 word4 word5'));
+                },
+                function() {
+                    $str = new CharArr("word1\nword2\rword3\r\nword4 word5");
+                    return expect($str->splitlines(), 'splitlines')->to_be(new Arr('word1', 'word2', 'word3', 'word4 word5')) &&
+                    expect($str->splitlines(true), 'splitlines')->to_be(new Arr("word1\n", "word2\r", "word3\r\n", 'word4 word5'));
+                },
+                function() {
+                    $str = new CharArr('abcdef');
+                    return expect($str->startswith("ab"), 'startswith')->to_be(true) &&
+                    expect($str->startswith("cd"), 'startswith')->to_be(false) &&
+                    expect($str->startswith("ef"), 'startswith')->to_be(false) &&
+                    expect($str->startswith(""), 'startswith')->to_be(true) &&
+                    expect((new CharArr())->startswith("abcdef"), 'startswith')->to_be(false);
+                },
+                function() {
+                    $str1 = new CharArr("  \ttext word1\t");
+                    $str2 = new CharArr("0000000this is string example...00...wow!!!0000000");
+                    return expect($str1->strip(), 'strip')->to_be('text word1') &&
+                    expect($str2->strip('0'), 'strip')->to_be('this is string example...00...wow!!!');
+                },
             ],
             function () {
                 $this->chars = ['a', 's', 'd', 'f'];

@@ -15,6 +15,9 @@ require_once '/path/to/php_adt/php_adt/init.php';
 // // import itertools functionality into \php_adt\itertools namespace
 // require_once '/path/to/php_adt/php_adt/itertools/init.php';
 
+use php_adt\Arr as Arr;
+$array = new Arr(1, 'a');
+
 ?>
 <html>
 ...
@@ -30,6 +33,8 @@ require_once '/path/to/php_adt/init.php';
 
 // // import itertools functionality into global namespace
 // require_once '/path/to/php_adt/init.itertools.php';
+
+$array = new Arr(1, 'a');
 
 ?>
 <html>

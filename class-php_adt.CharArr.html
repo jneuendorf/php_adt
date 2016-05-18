@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class php_adt\CharArr | php_adt</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">php_adt</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-php_adt.html" title="Summary of php_adt"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+					<li class="divider-vertical"></li>
+
+					<li>
+						<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+					</li>
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li>
+						<a href="namespace-_php_adt.html">
+							_php_adt						</a>
+							</li>
+					<li class="active">
+						<a href="namespace-php_adt.html">
+							php_adt<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-php_adt.itertools.html">
+							itertools						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-php_adt.Arr.html">Arr</a></li>
+				<li class="active"><a href="class-php_adt.CharArr.html">CharArr</a></li>
+				<li><a href="class-php_adt.Dict.html">Dict</a></li>
+				<li><a href="class-php_adt.Genewrapor.html">Genewrapor</a></li>
+				<li><a href="class-php_adt.Set.html">Set</a></li>
+				<li><a href="class-php_adt.Tree.html">Tree</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class CharArr</h1>
+
+
+	<div class="description">
+	<p>CharArr is a subclass of Arr: An array of characters.
+Therefore all inherited methods can be used but most of the class'es behavior is more string- than array-like.</p>
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-_php_adt.Clonable.html"><span>_php_adt\Clonable</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-_php_adt.Super.html"><span>_php_adt\Super</span></a>
+			
+			 implements 
+				<a href="class-_php_adt.Comparable.html"><span>_php_adt\Comparable</span></a>, 
+			
+<span>Countable</span>, 
+			
+				<a href="class-_php_adt.Hashable.html"><span>_php_adt\Hashable</span></a>
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-_php_adt.AbstractCollection.html"><span>_php_adt\AbstractCollection</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-php_adt.Arr.html"><span>php_adt\Arr</span></a>
+			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>
+			
+			
+		</dd>
+		<dd style="padding-left:120px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>php_adt\CharArr</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-php_adt.CharArr.html#7-728" title="Go to source code">CharArr.ns.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#19-39" title="Go to source code">__construct</a>( <span>string|<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|array <var>$str</var> = <span class="php-quote">''</span></span> )</code>
+
+			<div class="description short">
+				<p>Constructor</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Constructor</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$str</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#___construct">php_adt\Arr::__construct</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="from_iterable" id="_from_iterable">
+
+			<td class="attributes"><code>
+				 public static
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_from_iterable">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#43-60" title="Go to source code">from_iterable</a>( <span>Iterator <var>$iterable</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a new instance from an iterable.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new instance from an iterable.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+						<dt><var>$recursive</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_from_iterable">php_adt\Arr::from_iterable</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="range" id="_range">
+
+			<td class="attributes"><code>
+				 public static
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_range">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#62-71" title="Go to source code">range</a>( <span>mixed <var>$start</var></span>, <span>mixed <var>$end</var></span>, <span>number <var>$step</var> = <span class="php-num">1</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a new instance that's filled with values according to the defined letter range.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new instance that's filled with values according to the defined letter range.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd>Inclusive.</dd>
+						<dt><var>$step</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_range">php_adt\Arr::range</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__toString" id="___toString">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___toString">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#73-79" title="Go to source code">__toString</a>( )</code>
+
+			<div class="description short">
+				<p>Stringifies the CharArr instance.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Stringifies the CharArr instance.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#___toString">php_adt\Arr::__toString</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="cache" id="_cache">
+
+			<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_cache">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#84-87" title="Go to source code">cache</a>( )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="_to_s" id="__to_s">
+
+			<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#__to_s">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#89-97" title="Go to source code">_to_s</a>( <span> <var>$object</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="clear" id="_clear">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_clear">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#102-110" title="Go to source code">clear</a>( )</code>
+
+			<div class="description short">
+				<p>Empties the CharArr.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Empties the CharArr.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_clear">php_adt\Arr::clear</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="copy" id="_copy">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_copy">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#112-118" title="Go to source code">copy</a>( <span>boolean <var>$deep</var> = <span class="php-keyword1">false</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a copy of the CharArr instnace.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a copy of the CharArr instnace.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$deep</var></dt>
+						<dd>Whether to copy recursively.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_copy">php_adt\Arr::copy</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lorem" id="_lorem">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lorem">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#120-130" title="Go to source code">lorem</a>( <span>integer <var>$paragraphs</var> = <span class="php-num">1</span></span>, <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sep</var> = <span class="php-quote">' '</span></span> )</code>
+
+			<div class="description short">
+				<p>Creates a CharArr containt $paragraphs paragraphs of lorem ipsum.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a CharArr containt $paragraphs paragraphs of lorem ipsum.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$paragraphs</var></dt>
+						<dd></dd>
+						<dt><var>$sep</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="hash" id="_hash">
+
+			<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_hash">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#134-140" title="Go to source code">hash</a>( )</code>
+
+			<div class="description short">
+				<p>Calculates a hash value of the CharArr instance.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Calculates a hash value of the CharArr instance.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_hash">php_adt\Arr::hash</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="get" id="_get">
+
+			<td class="attributes"><code>
+				 public 
+				CharrArr
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_get">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#145-151" title="Go to source code">get</a>( <span>integer|string|array <var>$index</var></span> )</code>
+
+			<div class="description short">
+				<p>Retrieves the character at index $index.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Retrieves the character at index $index.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$index</var></dt>
+						<dd>Positive integer -> normal index, negative integer -> counting from the end, string 'idx1:(idx2)' -> slicing, array [idx1,idx2] -> slicing</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						CharrArr
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_get">php_adt\Arr::get</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="equals" id="_equals">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_equals">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#153-169" title="Go to source code">equals</a>( <span>mixed <var>$str</var></span> )</code>
+
+			<div class="description short">
+				<p>Indicates whether the Str instance is equals to another object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Indicates whether the Str instance is equals to another object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$str</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_equals">php_adt\Arr::equals</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_a" id="_to_a">
+
+			<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_a">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#171-181" title="Go to source code">to_a</a>( )</code>
+
+			<div class="description short">
+				<p>Converts this Str instance to a native array.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts this Str instance to a native array.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_a">php_adt\Arr::to_a</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_arr" id="_to_arr">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_arr">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#183-189" title="Go to source code">to_arr</a>( )</code>
+
+			<div class="description short">
+				<p>Creates a copy of the Str instance.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a copy of the Str instance.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_arr">php_adt\Arr::to_arr</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_dict" id="_to_dict">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_dict">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#191-197" title="Go to source code">to_dict</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to an instance of Dict (indices become the keys).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to an instance of Dict (indices become the keys).</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Dict.html">php_adt\Dict</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_dict">php_adt\Arr::to_dict</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_str" id="_to_str">
+
+			<td class="attributes"><code>
+				 public 
+				Str
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_str">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#199-205" title="Go to source code">to_str</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to an instance of Str.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to an instance of Str.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						Str
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_str">php_adt\Arr::to_str</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_chararr" id="_to_chararr">
+
+			<td class="attributes"><code>
+				 public 
+				Str
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_chararr">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#206-212" title="Go to source code">to_chararr</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to an instance of Str.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to an instance of Str.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						Str
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_set" id="_to_set">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_set">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#214-220" title="Go to source code">to_set</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to an instance of Set.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to an instance of Set.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Set.html">php_adt\Set</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_to_set">php_adt\Arr::to_set</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="to_s" id="_to_s">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_to_s">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#222-228" title="Go to source code">to_s</a>( )</code>
+
+			<div class="description short">
+				<p>Converts the Str instance to a string.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Converts the Str instance to a string.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						string
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="slice" id="_slice">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_slice">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#230-238" title="Go to source code">slice</a>( <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$length</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Returns a slice (substring) of the instance with optional length. Default is from $start to the end.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns a slice (substring) of the instance with optional length. Default is from $start to the end.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$start</var></dt>
+						<dd>Index to start slicing (inclusive).</dd>
+						<dt><var>$length</var></dt>
+						<dd>How many characters to slice.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_slice">php_adt\Arr::slice</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="current" id="_current">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_current">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#283-289" title="Go to source code">current</a>( )</code>
+
+			<div class="description short">
+				<p>Gets the current character.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets the current character.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_current">php_adt\Arr::current</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="char_at" id="_char_at">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_char_at">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#292-298" title="Go to source code">char_at</a>( <span> <var>$index</var></span> )</code>
+
+			<div class="description short">
+				<p>Returns the char value at the specified index.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns the char value at the specified index.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="concat" id="_concat">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_concat">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#299-314" title="Go to source code">concat</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string... <var>$strs</var></span> )</code>
+
+			<div class="description short">
+				<p>Concatenates the specified strings to the end of this string.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Concatenates the specified strings to the end of this string.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$strs</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_concat">php_adt\Arr::concat</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="contains" id="_contains">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_contains">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#315-326" title="Go to source code">contains</a>( <span> <var>$str</var></span> )</code>
+
+			<div class="description short">
+				<p>Returns true if and only if this string contains the specified sequence of char values.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns true if and only if this string contains the specified sequence of char values.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="matches" id="_matches">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_matches">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#327-357" title="Go to source code">matches</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$pattern</var></span> )</code>
+
+			<div class="description short">
+				<p>Tells whether or not this string matches the given regular expression.
+Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Tells whether or not this string matches the given regular expression.
+Options/flags: g global search, i case insensitive, m make dot match newlines, x ignore whitespace in regex, o perform #{...} substitutions only once</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$pattern</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="substring" id="_substring">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_substring">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#358-369" title="Go to source code">substring</a>( <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Liek</p>
+
+<pre>slice</pre>
+
+<p>returns a string that is a substring of this string but the 2nd argument in an exclusive index.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Liek</p>
+
+<pre>slice</pre>
+
+<p>returns a string that is a substring of this string but the 2nd argument in an exclusive index.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="trim" id="_trim">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_trim">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#370-376" title="Go to source code">trim</a>( )</code>
+
+			<div class="description short">
+				<p>Returns a string whose value is this string, with any leading and trailing whitespace removed.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns a string whose value is this string, with any leading and trailing whitespace removed.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="capitalize" id="_capitalize">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_capitalize">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#379-388" title="Go to source code">capitalize</a>( )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with its first character capitalized and the rest lowercased.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with its first character capitalized and the rest lowercased.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="center" id="_center">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_center">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#390-405" title="Go to source code">center</a>( <span>integer <var>$width</var></span>, <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$fillchar</var> = <span class="php-quote">' '</span></span> )</code>
+
+			<div class="description short">
+				<p>Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space). The original string is returned if width is less than or equal to len(s).</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$width</var></dt>
+						<dd></dd>
+						<dt><var>$fillchar</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="count_substr" id="_count_substr">
+
+			<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_count_substr">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#406-418" title="Go to source code">count_substr</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sub</var></dt>
+						<dd></dd>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="endswith" id="_endswith">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_endswith">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#419-430" title="Go to source code">endswith</a>( <span> <var>$suffix</var></span> )</code>
+
+			<div class="description short">
+				<p>Return True if the string ends with the specified suffix, otherwise return False.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return True if the string ends with the specified suffix, otherwise return False.</p>
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="expandtabs" id="_expandtabs">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_expandtabs">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#431-443" title="Go to source code">expandtabs</a>( <span>integer <var>$tabsize</var> = <span class="php-num">4</span></span> )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size.
+Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on).
+To expand the string, the current column is set to zero and the string is examined character by character.
+If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.)
+If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero.
+Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string where all tab characters are replaced by one or more spaces, depending on the current column and the given tab size.
+Tab positions occur every tabsize characters (default is 4, giving tab positions at columns 0, 8, 16 and so on).
+To expand the string, the current column is set to zero and the string is examined character by character.
+If the character is a tab (\t), one or more space characters are inserted in the result until the current column is equal to the next tab position. (The tab character itself is not copied.)
+If the character is a newline (\n) or return (\r), it is copied and the current column is reset to zero.
+Any other character is copied unchanged and the current column is incremented by one regardless of how the character is represented when printed.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$tabsize</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="find" id="_find">
+
+			<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_find">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#444-464" title="Go to source code">find</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return the lowest index in the string where substring sub is found within the slice s[start:end]. Optional arguments start and end are interpreted as in slice notation. Return -1 if sub is not found.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sub</var></dt>
+						<dd></dd>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="format" id="_format">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_format">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#466-519" title="Go to source code">format</a>( <span>string... <var>$args</var></span> )</code>
+
+			<div class="description short">
+				<p>Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}.
+Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.
+This method will internally use multiple calls of str_replace. For that reason using e.g. '{0}'.format('{1}', 2) will result in '2';</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}.
+Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.
+This method will internally use multiple calls of str_replace. For that reason using e.g. '{0}'.format('{1}', 2) will result in '2';</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$args</var></dt>
+						<dd><p>Each (except the last) argument must be a string or an object with a</p>
+
+<pre>__toString()</pre>
+
+<p>method. The last argument may be an associative array or a Dict instance. If it's a Dict the keys must be strings of have a</p>
+
+<pre>__toString()</pre>
+
+<p>method.</p></dd>
+					</dl></div>
+
+
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="index" id="_index">
+
+			<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_index">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#521-536" title="Go to source code">index</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sub</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span>, <span>integer <var>$end</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$equality</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Like find(), but raise ValueError when the substring is not found.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Like find(), but raise ValueError when the substring is not found.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sub</var></dt>
+						<dd></dd>
+						<dt><var>$start</var></dt>
+						<dd></dd>
+						<dt><var>$end</var></dt>
+						<dd></dd>
+						<dt><var>$equality</var></dt>
+						<dd>This parameter does not have any effect and exists only due to inheritance of the Arr class.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						Exception
+					</div>
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_index">php_adt\Arr::index</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="istitle" id="_istitle">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_istitle">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#538-544" title="Go to source code">istitle</a>( )</code>
+
+			<div class="description short">
+				<p>Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return true if the string is a titlecased string and there is at least one character, for example uppercase characters may only follow uncased characters and lowercase characters only cased ones. Return false otherwise.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="isupper" id="_isupper">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_isupper">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#546-552" title="Go to source code">isupper</a>( )</code>
+
+			<div class="description short">
+				<p>Return true if all cased characters in the string are uppercase and there is at least one cased character, false otherwise.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return true if all cased characters in the string are uppercase and there is at least one cased character, false otherwise.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="join" id="_join">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_join">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#554-565" title="Go to source code">join</a>( <span>Traversable|array <var>$iterable</var> = []</span> )</code>
+
+			<div class="description short">
+				<p>Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a string which is the concatenation of the strings in the iterable iterable. A TypeError will be raised if there are any non-string values in iterable, including bytes objects. The separator between elements is the string providing this method.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$iterable</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_join">php_adt\Arr::join</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="lower" id="_lower">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_lower">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#567-573" title="Go to source code">lower</a>( )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with all the cased characters converted to lowercase.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with all the cased characters converted to lowercase.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="partition" id="_partition">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_partition">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#575-588" title="Go to source code">partition</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sep</var></span> )</code>
+
+			<div class="description short">
+				<p>Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Split the string at the first occurrence of sep, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sep</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="replace" id="_replace">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_replace">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#590-622" title="Go to source code">replace</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$old</var></span>, <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$new</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$count</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with all occurrences of substring old replaced by new. If the optional argument count is given, only the first count occurrences are replaced.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$old</var></dt>
+						<dd></dd>
+						<dt><var>$new</var></dt>
+						<dd></dd>
+						<dt><var>$count</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+					<h4>Overrides</h4>
+					<div class="list"><code><a href="class-php_adt.Arr.html#_replace">php_adt\Arr::replace</a></code></div>
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="split" id="_split">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_split">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#624-637" title="Go to source code">split</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$sep</var> = <span class="php-quote">'/\s+/'</span></span>, <span>integer <var>$maxsplit</var> = -<span class="php-num">1</span></span> )</code>
+
+			<div class="description short">
+				<p>Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).
+If sep is not specified or is None, any whitespace string is a separator and empty strings are removed from the result.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).
+If sep is not specified or is None, any whitespace string is a separator and empty strings are removed from the result.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sep</var></dt>
+						<dd>The separator (may be a pattern).</dd>
+						<dt><var>$maxsplit</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="splitlines" id="_splitlines">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_splitlines">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#639-661" title="Go to source code">splitlines</a>( <span>boolean <var>$keepends</var> = <span class="php-keyword1">false</span></span> )</code>
+
+			<div class="description short">
+				<p>Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a list of the lines in the string, breaking at line boundaries. Line breaks are not included in the resulting list unless keepends is given and true.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$keepends</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="startswith" id="_startswith">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_startswith">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#663-672" title="Go to source code">startswith</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$prefix</var></span> )</code>
+
+			<div class="description short">
+				<p>Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$prefix</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="strip" id="_strip">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_strip">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#674-686" title="Go to source code">strip</a>( <span><code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>|string <var>$chars</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with the leading and trailing characters removed. The chars argument is a string specifying the set of characters to be removed. If omitted or null, the chars argument defaults to removing whitespace. The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$chars</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="swapcase" id="_swapcase">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_swapcase">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#687-698" title="Go to source code">swapcase</a>( )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with uppercase characters converted to lowercase and vice versa. Note that it is not necessarily true that s.swapcase().swapcase() == s.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="title" id="_title">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_title">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#699-719" title="Go to source code">title</a>( )</code>
+
+			<div class="description short">
+				<p>Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="upper" id="_upper">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_upper">#</a>
+			<code><a href="source-class-php_adt.CharArr.html#721-727" title="Go to source code">upper</a>( )</code>
+
+			<div class="description short">
+				<p>Return a copy of the string with all the cased characters converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Return a copy of the string with all the cased characters converted to uppercase. Note that str.upper().isupper() might be False if s contains uncased characters or if the Unicode category of the resulting character(s) is not “Lu” (Letter, uppercase), but e.g. “Lt” (Letter, titlecase).</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-php_adt.CharArr.html">php_adt\CharArr</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-php_adt.Arr.html#methods">php_adt\Arr</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-php_adt.Arr.html#_add">add()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_append">append()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_count_values">count_values()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_diff">diff()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_difference">difference()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_elements">elements()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_end">end()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_extend">extend()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_fill">fill()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_first">first()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_flatten">flatten()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_group_by">group_by()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_has">has()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_insert">insert()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_intersect">intersect()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_key">key()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_last">last()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_map">map()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_merge">merge()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_merge_recursive">merge_recursive()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_next">next()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_penultimate">penultimate()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_pop">pop()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_popfirst">popfirst()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_pos">pos()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_prepend">prepend()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_prev">prev()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_push">push()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_rand">rand()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_remove">remove()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_remove_at">remove_at()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reset">reset()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reverse">reverse()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_reversed">reversed()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_rewind">rewind()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_search">search()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_second">second()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_shift">shift()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_shuffle">shuffle()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_size">size()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_sort">sort()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_splice">splice()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_third">third()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_unique">unique()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_unshift">unshift()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#_without">without()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Super.html#methods">_php_adt\Super</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-_php_adt.Super.html#_count">count()</a></code>, 
+				<code><a href="class-_php_adt.Super.html#_is_empty">is_empty()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from <a href="class-_php_adt.Clonable.html#methods">_php_adt\Clonable</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-_php_adt.Clonable.html#___clone">__clone()</a></code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from Iterator</h3></div>
+			<p class="elementList">
+				<code>valid()</code>
+			</p>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading"><h3>Methods inherited from ArrayAccess</h3></div>
+			<p class="elementList">
+				<code>offsetExists()</code>, 
+				<code>offsetGet()</code>, 
+				<code>offsetSet()</code>, 
+				<code>offsetUnset()</code>
+			</p>
+		</div>
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Magic methods inherited from <a href="class-php_adt.Arr.html#methods">php_adt\Arr</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-php_adt.Arr.html#m_chunk">chunk()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_column">column()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_filter">filter()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_keys">keys()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_pad">pad()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_reduce">reduce()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_slice">slice()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_sum">sum()</a></code>, 
+				<code><a href="class-php_adt.Arr.html#m_values">values()</a></code>
+			</p>
+		</div>
+
+
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		php_adt API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

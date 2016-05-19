@@ -32,7 +32,6 @@ class CharArr extends Arr {
             $chars = $str;
         }
         parent::__construct(...$chars);
-        $this->cache();
     }
 
     // STATIC
@@ -77,12 +76,24 @@ class CharArr extends Arr {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
+    /**
+     * @internal
+    */
+    protected function on_change() {
+        return $this->cache();
+    }
 
+    /**
+     * @internal
+    */
     protected function cache() {
         $this->_str = implode('', $this->_elements);
         return $this;
     }
 
+    /**
+     * @internal
+    */
     protected function _to_s($object) {
         if (is_string($object)) {
             return $object;
@@ -96,15 +107,15 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
-    /**
-    * Empties the CharArr.
-    * @return CharArr
-    */
-    public function clear() {
-        parent::clear();
-        $this->cache();
-        return $this;
-    }
+    // /**
+    // * Empties the CharArr.
+    // * @return CharArr
+    // */
+    // public function clear() {
+    //     parent::clear();
+    //     $this->on_change();
+    //     return $this;
+    // }
 
     /**
     * Creates a copy of the CharArr instnace.
@@ -256,7 +267,7 @@ class CharArr extends Arr {
         else {
             $this->_elements[$this->_adjust_offset($offset)] = $value;
         }
-        $this->cache();
+        $this->on_change();
         return $this;
     }
 

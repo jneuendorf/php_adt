@@ -208,12 +208,13 @@ section('instance methods (java-like)',
                     $str = new CharArr('{1} {A} {} {1337} {b} {my_key}');
                     $kwargs = ['A' => 2, 'b' => 'zz', 1337 => -1];
                     $dict = new Dict(null, $kwargs);
+                    class Stringifyable {
+                        public function __toString() {
+                            return 'my_key';
+                        }
+                    }
                     $dict->put(
-                        new class {
-                            public function __toString() {
-                                return 'my_key';
-                            }
-                        },
+                        new Stringifyable(),
                         'awesome'
                     );
                     $args1 = ['val0', 'val1', $kwargs];

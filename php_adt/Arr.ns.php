@@ -69,6 +69,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             array_push($this->_elements, $element);
         }
         $this->_size = count($this->_elements);
+        $this->on_change();
     }
 
     // STATIC
@@ -117,6 +118,10 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // PROTECTED
+    /**
+     * @internal
+    */
+    protected function on_change() {}
 
     /**
      * @internal
@@ -140,7 +145,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         if ($name === 'length') {
             return $this->_size;
         }
-        throw new Exception("Cannot get '$name' of instance of Arr!", 1);
+        throw new \Exception("Cannot get '$name' of instance of Arr!", 1);
     }
 
     /**
@@ -152,11 +157,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         if (in_array($name, static::$instance_methods)) {
             $res = call_user_func($name, $this->_elements, ...$args);
             if (is_array($res)) {
-                return new Arr(...$res);
+                return new static(...$res);
             }
             return $res;
         }
-        throw new Exception("Cannot call $org_name on instance of Arr!", 1);
+        throw new \Exception("Cannot call $org_name on instance of Arr!", 1);
     }
 
     /**
@@ -296,10 +301,11 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     * @return Arr
     */
     public function add(...$elements) {
-        foreach ($elements as $idx => $element) {
-            $this->push($element);
-        }
-        return $this;
+        // foreach ($elements as $idx => $element) {
+        //     $this->push($element);
+        // }
+        // return $this;
+        $this->append(...$elements);
     }
 
     /**
@@ -326,6 +332,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         $this->_elements = [];
         $this->_size = 0;
         $this->_position = 0;
+        $this->on_change();
         return $this;
     }
 
@@ -833,6 +840,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     */
     public function push(...$args) {
         $this->_size = array_push($this->_elements, ...$args);
+        $this->on_change();
         return $this;
     }
 
@@ -908,7 +916,8 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $left++;
             $right--;
        }
-        return $this;
+       $this->on_change();
+       return $this;
     }
 
     /**
@@ -927,6 +936,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
             $removed_element = array_shift($this->_elements);
             $this->_size--;
             $this->rewind();
+            $this->on_change();
             return $removed_element;
         }
         return null;
@@ -940,6 +950,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     */
     public function shuffle() {
         if (shuffle($this->_elements)) {
+            $this->on_change();
             return $this;
         }
         throw new \Exception("Arr::shuffle: Some unknow error during shuffle.", 1);
@@ -952,6 +963,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     */
     public function sort($cmp_function='__mergesort_compare') {
         __mergesort($this->_elements, $cmp_function);
+        $this->on_change();
         return $this;
     }
 
@@ -968,6 +980,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
         $offset = $this->_adjust_offset($offset);
         $removed_elements = array_splice($this->_elements, $offset, $length, $new_elements);
         $this->_size += -count($removed_elements) + count($new_elements);
+        $this->on_change();
         return new static(...$removed_elements);
     }
 
@@ -998,6 +1011,7 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
     public function unshift(...$elements) {
         $length = array_unshift($this->_elements, ...$elements);
         $this->_size += $length;
+        $this->on_change();
         return $this;
     }
 

@@ -9,8 +9,8 @@
 <?php
 
 // use namespaced
-require_once __DIR__.'/php_adt/init.php';
-require_once __DIR__.'/php_adt/itertools/init.php';
+require_once 'php_adt/init.php';
+require_once 'php_adt/itertools/init.php';
 
 
 
@@ -37,6 +37,9 @@ require_once 'test/ConversionTest.ns.php';
 require_once 'test/GenewraporTest.ns.php';
 
 \php_adt\Test::print_stats();
+
+// $dict = \php_adt\dict([1, 2, 3]);
+// echo $dict;
 
 ?>
 </body>

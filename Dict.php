@@ -72,6 +72,10 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
         }
     }
 
+    public static function from_iterable($iterable) {
+        return new static(null, $iterable);
+    }
+
     /**
      * Stringifies the dict instance.
      * @return string
@@ -592,5 +596,13 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
         }
         return $res;
     }
+}
 
+/**
+* Same as <code>Dict::from_iterable($iterable)</code>
+* @param Traversable|array $iterable
+* @return Dict
+*/
+function dict($iterable) {
+    return Dict::from_iterable($iterable);
 }

@@ -473,3 +473,12 @@ class Set extends AbstractCollection implements ArrayAccess, Iterator {
         return $this;
     }
 }
+
+/**
+* Same as <code>Set::from_iterable($iterable)</code>
+* @param Traversable|array $iterable
+* @return Set
+*/
+function set($iterable) {
+    return Set::from_iterable($iterable);
+}

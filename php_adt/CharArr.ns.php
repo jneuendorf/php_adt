@@ -729,3 +729,12 @@ class CharArr extends Arr {
 // namespace dependent class aliasing
 $ns_prefix = __NAMESPACE__ == '' ? '' : __NAMESPACE__.'\\';
 class_alias($ns_prefix.'CharArr', $ns_prefix.'Str');
+
+/**
+* Same as <code>CharArr::from_iterable($iterable)</code>
+* @param Traversable|array $iterable
+* @return CharArr
+*/
+function chararr($iterable) {
+    return CharArr::from_iterable($iterable);
+}

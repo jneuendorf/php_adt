@@ -31,6 +31,9 @@ require_once 'test/GenewraporTest.php';
 
 Test::print_stats();
 
+// $dict = dict([1, 2, 3]);
+// echo $dict;
+
 ?>
 </body>
 </html>

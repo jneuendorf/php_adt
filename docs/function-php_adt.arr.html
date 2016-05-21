@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Function php_adt\itertools\islice | php_adt</title>
+	<title>Function php_adt\arr | php_adt</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
@@ -28,7 +28,7 @@
 
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="namespace-php_adt.itertools.html" title="Summary of php_adt\itertools"><span>Namespace</span></a>
+						<a href="namespace-php_adt.html" title="Summary of php_adt"><span>Namespace</span></a>
 					</li>
 					<li class="active">
 <span>Function</span>					</li>
@@ -61,7 +61,7 @@
 							php_adt<span></span>
 						</a>
 							<ul>
-					<li class="active">
+					<li>
 						<a href="namespace-php_adt.itertools.html">
 							itertools						</a>
 							</li>
@@ -73,30 +73,24 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-php_adt.itertools.Slice.html">Slice</a></li>
+				<li><a href="class-php_adt.Arr.html">Arr</a></li>
+				<li><a href="class-php_adt.CharArr.html">CharArr</a></li>
+				<li><a href="class-php_adt.Dict.html">Dict</a></li>
+				<li><a href="class-php_adt.Genewrapor.html">Genewrapor</a></li>
+				<li><a href="class-php_adt.Set.html">Set</a></li>
+				<li><a href="class-php_adt.Tree.html">Tree</a></li>
 			</ul>
 
 
 
-			<h3>Exceptions</h3>
-			<ul>
-				<li><a href="class-php_adt.itertools.StopIteration.html">StopIteration</a></li>
-			</ul>
 
 
 			<h3>Functions</h3>
 			<ul>
-				<li><a href="function-php_adt.itertools.chain.html">chain</a></li>
-				<li><a href="function-php_adt.itertools.cycle.html">cycle</a></li>
-				<li><a href="function-php_adt.itertools.enumerate.html">enumerate</a></li>
-				<li><a href="function-php_adt.itertools.inext.html">inext</a></li>
-				<li class="active"><a href="function-php_adt.itertools.islice.html">islice</a></li>
-				<li><a href="function-php_adt.itertools.iter.html">iter</a></li>
-				<li><a href="function-php_adt.itertools.permutations.html">permutations</a></li>
-				<li><a href="function-php_adt.itertools.product.html">product</a></li>
-				<li><a href="function-php_adt.itertools.repeat.html">repeat</a></li>
-				<li><a href="function-php_adt.itertools.step.html">step</a></li>
-				<li><a href="function-php_adt.itertools.zip.html">zip</a></li>
+				<li class="active"><a href="function-php_adt.arr.html">arr</a></li>
+				<li><a href="function-php_adt.chararr.html">chararr</a></li>
+				<li><a href="function-php_adt.dict.html">dict</a></li>
+				<li><a href="function-php_adt.set.html">set</a></li>
 			</ul>
 		</div>
 	</div>
@@ -107,27 +101,21 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="function">
-	<h1>Function islice</h1>
+	<h1>Function arr</h1>
 
 
 	<div class="description">
-	<p>islice(iterable, [start, ]stop[, step]).</p>
+	<p>Same as</p>
 
-<p>Make an iterator that returns selected elements from the iterable. If
-start is non-zero, then elements from the iterable are skipped until start
-is reached. Afterward, elements are returned consecutively unless step is
-set higher than one which results in items being skipped. If stop is not
-set, then iteration continues until the iterator is exhausted, if at all;
-otherwise, it stops at the specified position. Unlike regular slicing,
-islice() does not support negative values for start, stop, or step.</p>
+<pre>Arr::from_iterable(<span class="php-var">$iterable</span>)</pre>
 	</div>
 
 	<div class="alert alert-info">
-		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a>\<a href="namespace-php_adt.itertools.html">itertools</a><br>
+		<b>Namespace:</b> <a href="namespace-php_adt.html">php_adt</a><br>
 		
 		<b>Located at</b>
-		<a href="source-function-php_adt.itertools.islice.html#146-179" title="Go to source code">
-			itertools/itertools.ns.php
+		<a href="source-function-php_adt.arr.html#1074-1081" title="Go to source code">
+			Arr.ns.php
 		</a><br>
 	</div>
 
@@ -136,18 +124,26 @@ islice() does not support negative values for start, stop, or step.</p>
         <div class="panel-heading"><h2>Parameters summary</h2></div>
 		<table class="summary table table-bordered table-striped" id="parameters">
 		<tr id="$iterable">
-			<td class="name"><code></code></td>
+			<td class="name"><code>Traversable|array</code></td>
 			<td class="value"><code><var>$iterable</var></code></td>
-			<td></td>
-		</tr>
-		<tr id="$args">
-			<td class="name"><code></code></td>
-			<td class="value"><code><var>$args</var></code></td>
 			<td></td>
 		</tr>
 		</table>
 	</div>
 
+	<div class="panel panel-default">
+        <div class="panel-heading"><h2>Return value summary</h2></div>
+		<table class="summary table table-bordered table-striped" id="returns">
+		<tr>
+			<td class="name"><code>
+				<code><a href="class-php_adt.Arr.html">php_adt\Arr</a></code>
+			</code></td>
+			<td>
+				Arr
+			</td>
+		</tr>
+		</table>
+	</div>
 
 
 </div>

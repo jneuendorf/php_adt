@@ -1,7 +1,6 @@
 <?php
 
 require_once '_php_adt/AbstractCollection.php';
-// import('Dict');
 
 use \_php_adt\AbstractCollection as AbstractCollection;
 use \ArrayAccess as ArrayAccess;
@@ -1067,4 +1066,13 @@ class Arr extends AbstractCollection implements ArrayAccess, Iterator {
 
     // pop([index]) is implemented above (php array section)
     // remove(object) is implemented above (collection interface section)
+}
+
+/**
+* Same as <code>Arr::from_iterable($iterable)</code>
+* @param Traversable|array $iterable
+* @return Arr
+*/
+function arr($iterable) {
+    return Arr::from_iterable($iterable);
 }

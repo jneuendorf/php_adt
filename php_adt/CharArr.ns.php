@@ -110,16 +110,6 @@ class CharArr extends Arr {
     ////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC
 
-    // /**
-    // * Empties the CharArr.
-    // * @return CharArr
-    // */
-    // public function clear() {
-    //     parent::clear();
-    //     $this->on_change();
-    //     return $this;
-    // }
-
     /**
     * Creates a copy of the CharArr instnace.
     * @return CharArr

@@ -2,11 +2,12 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
-require_once '_php_adt/AbstractTree.php';
-import('Arr');
+use \StdClass as StdClass;
+use \Exception as Exception;
+// use \php_adt\Arr as Arr;
 
-use _php_adt\AbstractTree as AbstractTree;
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractTree.php']);
+use \_php_adt\AbstractTree as AbstractTree;
 
 /**
  * Tree is class implementing a tree structure with nodes knowing both their children and their parents.

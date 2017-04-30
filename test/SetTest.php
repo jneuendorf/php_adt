@@ -1,5 +1,8 @@
 <?php
 
+namespace php_adt;
+
+use \StdClass as StdClass; use \Exception as Exception;
 // require_once __DIR__.'/../Set.php';
 // require_once __DIR__.'/Test.php';
 

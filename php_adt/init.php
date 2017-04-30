@@ -1,19 +1,16 @@
 <?php
 
-// include this file for using all the classes that come with php_adt (Arr, Dict, Genewrapor, Set, Tree) (namespaced)
-
-$__namespaced = true;
-
+// include this file for using all the classes that come with php_adt (Arr, Dict, Genewrapor, Set, Tree)
 $orig_include_path = get_include_path();
 set_include_path(__DIR__.'/..');
 
 require_once '_php_adt/init.php';
-require_once 'php_adt/Arr.ns.php';
-require_once 'php_adt/CharArr.ns.php';
-require_once 'php_adt/Dict.ns.php';
-require_once 'php_adt/Genewrapor.ns.php';
-require_once 'php_adt/Set.ns.php';
-require_once 'php_adt/Str.ns.php';
-require_once 'php_adt/Tree.ns.php';
+require_once 'php_adt/Arr.php';
+require_once 'php_adt/CharArr.php';
+require_once 'php_adt/Dict.php';
+require_once 'php_adt/Genewrapor.php';
+require_once 'php_adt/Set.php';
+require_once 'php_adt/Str.php';
+require_once 'php_adt/Tree.php';
 
 set_include_path($orig_include_path);

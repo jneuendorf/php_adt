@@ -1,5 +1,11 @@
 <?php
 
+namespace php_adt\itertools;
+use \Exception as Exception;
+
+/**
+ * raised when trying to iterate over an empty iterator.
+ */
 class StopIteration extends Exception {
     /**
     * the return value of the iterator that caused the exception.

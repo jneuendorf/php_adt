@@ -1,5 +1,17 @@
 <?php
 
+namespace php_adt\itertools;
+
+use php_adt\itertools\StopIteration as StopIteration;
+use php_adt\itertools\Slice as Slice;
+
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Genewrapor.php']);
+use php_adt\Genewrapor as Genewrapor;
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Arr.php']);
+use php_adt\Arr as Arr;
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'Set.php']);
+use php_adt\Set as Set;
+
 /**
  * most of the code is heavily inspired by
  * https://docs.python.org/3/library/itertools.html.
@@ -23,26 +35,6 @@ function iter($iterable) {
 }
 
 /**
- * raised when trying to iterate over an empty iterator.
- */
-// class StopIteration extends Exception {
-//     /**
-//     * the return value of the iterator that caused the exception.
-//     * @var mixed
-//     */
-//     public $result;
-//
-//     public function __construct($result = null, Exception $previous = null) {
-//         $this->result = $result;
-//         parent::__construct("StopIteration: $result", 0, $previous);
-//     }
-//
-//     public function __toString() {
-//         return __CLASS__.": [{$this->code}]: {$this->result}\n";
-//     }
-// }
-
-/**
  * get an iterator's current value v, advance the iterator, and return v,
  * raises StopIteration if the given iterator is empty.
  */
@@ -54,7 +46,6 @@ function inext($iterator) {
     }
     $current = $iterator->current();
     $iterator->next();
-
     return $current;
 }
 
@@ -99,25 +90,6 @@ function step($start = 0, $step = 1) {
         }
     });
 }
-
-// class Slice {
-//     // [start,] stop [, step])
-//     public function __construct(...$args) {
-//         if (count($args) == 1) {
-//             $this->start = 0;
-//             $this->stop = $args[0];
-//             $this->step = 1;
-//         } else {
-//             $this->start = $args[0];
-//             $this->stop = $args[1];
-//             if (count($args) >= 3) {
-//                 $this->step = $args[2];
-//             } else {
-//                 $this->step = 1;
-//             }
-//         }
-//     }
-// }
 
 /**
  * yields zip(step(), $iterable) as key => value pairs.

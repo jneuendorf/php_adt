@@ -1,5 +1,8 @@
 <?php
 
+namespace php_adt;
+
+use \StdClass as StdClass; use \Exception as Exception;
 require_once 'funcs.php';
 
 ob_start();

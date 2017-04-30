@@ -1,5 +1,17 @@
 <?php
+namespace php_adt;
 
+use function \php_adt\itertools\iter as iter;
+use function \php_adt\itertools\step as step;
+use function \php_adt\itertools\inext as inext;
+use function \php_adt\itertools\zip as zip;
+use function \php_adt\itertools\enumerate as enumerate;
+use function \php_adt\itertools\cycle as cycle;
+use function \php_adt\itertools\chain as chain;
+use function \php_adt\itertools\permutations as permutations;
+use function \php_adt\itertools\product as product;
+use function \php_adt\itertools\repeat as repeat;
+use function \php_adt\itertools\islice as islice;use \StdClass as StdClass; use \Exception as Exception;
 // require_once __DIR__.'/Test.php';
 // require_once __DIR__.'/../Genewrapor.php';
 // require_once __DIR__.'/../Arr.php';

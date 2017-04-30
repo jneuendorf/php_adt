@@ -7,10 +7,13 @@
 </head>
 <body>
 <?php
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'php_adt', 'init.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'php_adt', 'itertools', 'init.php']);
 
-require_once 'init.php';
-require_once 'init.itertools.php';
-require_once 'test/Test.php';
+
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'Test.php']);
+
+use function \php_adt\expect as expect;
 
 
 echo '<h1>"undefined" constant</h1>';
@@ -20,18 +23,18 @@ expect(undefined)->not_to_be([]);
 expect(undefined)->to_be(undefined);
 
 
-require_once 'test/ItertoolsTest.php';
-require_once 'test/ArrTest.php';
-require_once 'test/CharArrTest.php';
-require_once 'test/DictTest.php';
-require_once 'test/SetTest.php';
-require_once 'test/TreeTest.php';
-require_once 'test/ConversionTest.php';
-require_once 'test/GenewraporTest.php';
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ItertoolsTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ArrTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'CharArrTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'DictTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'SetTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'TreeTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ConversionTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'GenewraporTest.php']);
 
-Test::print_stats();
+\php_adt\Test::print_stats();
 
-// $dict = dict([1, 2, 3]);
+// $dict = \php_adt\dict([1, 2, 3]);
 // echo $dict;
 
 ?>

@@ -1,5 +1,8 @@
 <?php
 
+namespace php_adt;
+
+use \StdClass as StdClass; use \Exception as Exception;
 echo '<h1>CharrArr (aka Str) class</h1>';
 
 section('creation',

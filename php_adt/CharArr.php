@@ -2,7 +2,9 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;import('Arr');
+use \StdClass as StdClass;
+use \Exception as Exception;
+use \php_adt\Arr as Arr;
 
 /**
  * CharArr is a subclass of Arr: An array of characters.

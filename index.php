@@ -9,8 +9,6 @@
 <?php
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'php_adt', 'init.php']);
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'php_adt', 'itertools', 'init.php']);
-
-
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'Test.php']);
 
 use function \php_adt\expect as expect;
@@ -33,10 +31,6 @@ require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ConversionTest.php'
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'GenewraporTest.php']);
 
 \php_adt\Test::print_stats();
-
-// $dict = \php_adt\dict([1, 2, 3]);
-// echo $dict;
-
 ?>
 </body>
 </html>

@@ -2,17 +2,13 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
-require_once '_php_adt/AbstractCollection.php';
-
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractCollection.php']);
 use \_php_adt\AbstractCollection as AbstractCollection;
-use \ArrayAccess as ArrayAccess;
-use \Iterator as Iterator;
 
 /**
  * Set is collection class with no duplicate elements.
  */
-class Set extends AbstractCollection implements ArrayAccess, Iterator {
+class Set extends AbstractCollection implements \ArrayAccess, \Iterator {
 
     /**
      * The set elements' hashes are stored as keys for uniqueness. All values are true.

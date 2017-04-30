@@ -2,12 +2,8 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
-require_once '_php_adt/AbstractCollection.php';
-
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractCollection.php']);
 use \_php_adt\AbstractCollection as AbstractCollection;
-use \ArrayAccess as ArrayAccess;
-use \Iterator as Iterator;
 
 /**
  * Arr is a wrapper around the native array type.
@@ -23,7 +19,7 @@ use \Iterator as Iterator;
  * @method number sum() See array_sum.
  * @method Arr values() See array_values.
  */
-class Arr extends AbstractCollection implements ArrayAccess, Iterator {
+class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
 
     /**
     * List of native array function that we can automatically create delegations (using the __call() method)

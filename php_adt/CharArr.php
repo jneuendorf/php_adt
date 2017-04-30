@@ -2,8 +2,6 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass;
-use \Exception as Exception;
 use \php_adt\Arr as Arr;
 
 /**

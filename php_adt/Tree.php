@@ -2,10 +2,6 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass;
-use \Exception as Exception;
-// use \php_adt\Arr as Arr;
-
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractTree.php']);
 use \_php_adt\AbstractTree as AbstractTree;
 
@@ -113,7 +109,7 @@ class Tree extends AbstractTree {
                 static::_level_order($tree_node, $accumulator);
                 break;
             default:
-                throw new Exception("Tree::traverse: Unsupported order given. Use a class constant! This error might be caused by having called the iterable method on a tree node.", 1);
+                throw new \Exception("Tree::traverse: Unsupported order given. Use a class constant! This error might be caused by having called the iterable method on a tree node.", 1);
         }
     }
 

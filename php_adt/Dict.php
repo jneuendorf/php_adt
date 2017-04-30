@@ -2,9 +2,7 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
-require_once '_php_adt/AbstractMap.php';
-
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractMap.php']);
 use \_php_adt\AbstractMap as AbstractMap;
 
 /**
@@ -141,7 +139,7 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
         try {
             $hash = __hash($object);
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
             if (is_object($object) && property_exists($object, '__uniqid__')) {
                 $hash = $object->__uniqid__;
             }
@@ -306,7 +304,7 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
                 return false;
             }
             // hashes are equal => compare each entry
-            $obj = new StdClass();
+            $obj = new \StdClass();
             foreach ($this as $key => $value) {
                 if (!$map->has_key($key) || !call_user_func($this->val_equals, $value, $map->get($key))) {
                     return false;
@@ -441,7 +439,7 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
     * @return bool
     */
     public function has_key($key) {
-        $default_val = new StdClass();
+        $default_val = new \StdClass();
         $val = $this->get($key, $default_val);
         return $val !== $default_val;
     }
@@ -526,7 +524,7 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
                 return $res;
             }
         }
-        throw new Exception('Dict::popitem: Cannot pop an item from an empty dictionary.');
+        throw new \Exception('Dict::popitem: Cannot pop an item from an empty dictionary.');
     }
 
     /**

@@ -1,0 +1,30 @@
+{
+    "name": "jneuendorf/php_adt",
+    "description": "PHP implementations of some data types with a close-to-python API",
+    "type": "library",
+    "keywords": [
+        "data types",
+        "data structures",
+        "python",
+    ],
+    "homepage": "https://github.com/jneuendorf/php_adt",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jim Neuendorf",
+            "email": "jim.neuendorf@gmx.de",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jneuendorf/php_adt/issues"
+    },
+    "require": {
+        "php": "^5.6"
+    },
+    "autoload": {
+        "files": [
+            "_php_adt/init.php"
+        ]
+    },
+}

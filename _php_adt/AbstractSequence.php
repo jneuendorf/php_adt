@@ -8,9 +8,11 @@ namespace _php_adt;
 require_once '_php_adt/Super.php';
 
 abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator {
-    abstract public function clear();
+    // abstract public function clear();
     // $index can potentially be used for slicing, too
-    abstract public function get($index);
+    public function get($index) {
+        return $this->offsetGet($index);
+    }
     // $index must be numeric
     abstract protected function _get_at($index);
     abstract public function slice($start=0, $length=null);

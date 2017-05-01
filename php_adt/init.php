@@ -11,5 +11,6 @@ require_once 'php_adt/Dict.php';
 require_once 'php_adt/Genewrapor.php';
 require_once 'php_adt/Set.php';
 require_once 'php_adt/Tree.php';
+require_once 'php_adt/Tuple.php';
 
 set_include_path($orig_include_path);

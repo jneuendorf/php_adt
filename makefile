@@ -1,4 +1,4 @@
-api: namespaced
+api:
 	rm -rf docs
 	mkdir docs
 	./apigen.phar generate --source="_php_adt,php_adt" --destination="docs" --template-theme bootstrap --title "php_adt" --tree --exclude="*init.php"

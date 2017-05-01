@@ -1,5 +1,7 @@
 <?php
 
+namespace php_adt;
+
 /**
  * This function is similar to language construct 'echo' but calls to __toString on non-string arguments before echoing.
  * @param mixed $args Arguments to echo stringified.
@@ -19,7 +21,20 @@ function p(...$args) {
 }
 
 function is_iterable($x) {
-    return is_array($x) || (is_object($x) && $x instanceof Iterator);
+    return is_array($x) || (is_object($x) && $x instanceof \Iterator);
+}
+
+function len($obj) {
+    try {
+        return count($obj);
+    }
+    catch (\Exception $e) {
+        throw new \TypeError('object of type '.get_class($obj).'has no len().', 1);
+    }
+}
+
+function str($obj) {
+    return __toString($obj);
 }
 
 // __ functions
@@ -179,6 +194,9 @@ function __clone($x) {
 }
 
 function __toString($x, $default_val=null) {
+    if (is_object($x) && method_exists($x, '__str__')) {
+        return $x->__str__();
+    }
     if ($x === undefined) {
         return 'undefined';
     }
@@ -229,7 +247,7 @@ function __mergesort_compare($a, $b) {
     // return __compare($a, $b, false);
 }
 
-function __mergesort(&$array, $cmp_function='__mergesort_compare') {
+function __mergesort(&$array, $cmp_function='\php_adt\__mergesort_compare') {
     $length = count($array);
     // Arrays of size < 2 require no action.
     if ($length < 2) {

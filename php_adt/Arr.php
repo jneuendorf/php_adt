@@ -346,7 +346,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
             }
             // hashes are equal => compare each entry
             foreach ($this as $idx => $element) {
-                if (!__equals($element, $arr[$idx])) {
+                if (!\php_adt\__equals($element, $arr[$idx])) {
                     return false;
                 }
             }
@@ -361,7 +361,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return bool
     */
-    public function has($object, $equality='__equals') {
+    public function has($object, $equality='\php_adt\__equals') {
         return $this->index($object, 0, $this->_size, $equality) !== null;
     }
 
@@ -383,7 +383,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return bool
     */
-    public function remove($object, $equality='__equals') {
+    public function remove($object, $equality='\php_adt\__equals') {
         $index = $this->index($object, 0, $this->_size, $equality);
         if ($index !== null) {
             $this->splice($index, 1);
@@ -620,7 +620,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality This optional parameter can be used to define how objects are considered equal.
     * @return Arr
     */
-    public function diff($arr, $equality='__equals') {
+    public function diff($arr, $equality='\php_adt\__equals') {
         $res = new Arr();
         foreach ($this as $idx => $elem) {
             if (!$arr->has($elem, $equality)) {
@@ -702,7 +702,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality
     * @return Arr
     */
-    public function intersect($arr, $equality='__equals') {
+    public function intersect($arr, $equality='\php_adt\__equals') {
         $res = new Arr();
         foreach ($this as $idx => $elem) {
             if ($arr->has($elem, $equality)) {
@@ -956,7 +956,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $cmp_function This optional parameter can be used to define how two elements compare.
     * @return Arr
     */
-    public function sort($cmp_function='__mergesort_compare') {
+    public function sort($cmp_function='\php_adt\__mergesort_compare') {
         __mergesort($this->_elements, $cmp_function);
         $this->on_change();
         return $this;
@@ -984,7 +984,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality This optional parameter can be used to define equality of elements.
     * @return Arr
     */
-    public function unique($equality='__equals') {
+    public function unique($equality='\php_adt\__equals') {
         $res = new Arr();
         foreach ($this as $idx => $element) {
             if ($idx === 0 || !$res->has($element, $equality)) {
@@ -1054,7 +1054,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @param callable $equality This optional parameter can be used to define what elements is considered a match.
     * @return int
     */
-    public function index($needle, $start=0, $stop=null, $equality='__equals') {
+    public function index($needle, $start=0, $stop=null, $equality='\php_adt\__equals') {
         if ($stop === null) {
             $stop = $this->_size;
         }

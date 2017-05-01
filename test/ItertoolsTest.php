@@ -11,7 +11,8 @@ use function \php_adt\itertools\chain as chain;
 use function \php_adt\itertools\permutations as permutations;
 use function \php_adt\itertools\product as product;
 use function \php_adt\itertools\repeat as repeat;
-use function \php_adt\itertools\islice as islice;use \StdClass as StdClass; use \Exception as Exception;
+use function \php_adt\itertools\islice as islice;
+
 // require_once __DIR__.'/Test.php';
 // require_once __DIR__.'/../Genewrapor.php';
 // require_once __DIR__.'/../Arr.php';

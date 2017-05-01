@@ -1,9 +1,5 @@
 <?php
-
 namespace php_adt;
-
-use \StdClass as StdClass;
-use \Exception as Exception;
 
 use _php_adt\Clonable as Clonable;
 
@@ -62,7 +58,8 @@ class Genewrapor extends Clonable implements \Iterator {
             $iterable = $iterable();
         }
         if (!is_iterable($iterable)) {
-            throw new Exception("Genewrapor::__construct: Expected \$iterable to be iterable. Got ".var_export($iterable, true), 1);
+            var_dump($iterable);
+            throw new \Exception("Genewrapor::__construct: Expected \$iterable to be iterable. Got ".var_export($iterable, true), 1);
         }
         $this->iterable = $iterable;
         $this->reiterable = $reiterable;

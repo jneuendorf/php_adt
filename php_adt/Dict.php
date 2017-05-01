@@ -60,7 +60,7 @@ class Dict extends AbstractMap implements \ArrayAccess, \Iterator {
     * @param callable $key_equality
     * @param callable $value_equality
     */
-    public function __construct($default_val=null, $iterable=null, $key_equality='__equals', $value_equality='__equals') {
+    public function __construct($default_val=null, $iterable=null, $key_equality='\php_adt\__equals', $value_equality='\php_adt\__equals') {
         $this->clear();
         $this->default_val = $default_val;
         $this->key_equals = $key_equality;

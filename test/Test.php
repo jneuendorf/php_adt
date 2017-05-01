@@ -2,7 +2,6 @@
 
 namespace php_adt;
 
-use \StdClass as StdClass; use \Exception as Exception;
 require_once 'funcs.php';
 
 ob_start();
@@ -63,7 +62,7 @@ class Test {
                     $this->setup->__invoke();
                 }
                 $res = $callback->bindTo($this)->__invoke();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $trace = htmlspecialchars(str_replace("\n", ' ', $e->getTraceAsString()));
                 echo '&nbsp;&nbsp;&nbsp;&nbsp;<span style=\'color:red; cursor:pointer\' onClick="$(this).next().fadeToggle(100);">&nbsp;&times; '.$e->getMessage().'</span><span style="display:none"><br>'.$trace.'</span><br>';
                 $res = false;
@@ -105,7 +104,7 @@ class Expectation {
         if (is_callable($this->value)) {
             try {
                 $this->value = $this->value->__invoke();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $exception = $e;
             }
         }
@@ -189,7 +188,7 @@ class RecursionTracker {
         static::$counters[$func_name]++;
         if (static::$counters[$func_name] > static::MAX_STACK_DEPTH) {
             echo "<h2 style='color:red'>max call stack exceeded by '$func_name'</h2>";
-            echo (new Exception())->getTraceAsString();
+            echo (new \Exception())->getTraceAsString();
             exit;
         }
         $arg_strs = [];
@@ -197,7 +196,7 @@ class RecursionTracker {
             $str = '#'.$idx.' ';
             try {
                 $str .= var_export($arg, true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $str .= '&lt;something circular&gt;';
             }
             $arg_strs[] = $str;
@@ -229,5 +228,3 @@ function subsection($name, ...$tests) {
 function expect($value=null, $label='') {
     return new Expectation($value, $label);
 }
-
-?>

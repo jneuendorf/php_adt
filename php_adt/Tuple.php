@@ -4,6 +4,7 @@ namespace php_adt;
 
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '_php_adt', 'AbstractSequence.php']);
 use \_php_adt\AbstractSequence;
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'exceptions', 'ValueError.php']);
 use \php_adt\ValueError;
 
 
@@ -12,7 +13,13 @@ class Tuple extends AbstractSequence {
     protected $_items;
 
     public function __construct($iterable=[]) {
-        $this->_items = Arr::from_iterable($iterable);
+        $args = func_get_args();
+        if (count($args) === 1) {
+            $this->_items = Arr::from_iterable($iterable);
+        }
+        else {
+            $this->_items = Arr::from_iterable($args);
+        }
     }
 
     public function hash() {
@@ -77,14 +84,14 @@ class Tuple extends AbstractSequence {
     */
     public function index($needle, $start=0, $stop=null, $equality='\php_adt\__equals') {
         if ($stop === null) {
-            $stop = $this->_size;
+            $stop = $this->size();
         }
         for ($i = $start; $i < $stop; $i++) {
-            if (call_user_func($equality, $this->_elements[$i], $needle) === true) {
+            if (call_user_func($equality, $this->_items[$i], $needle) === true) {
                 return $i;
             }
         }
-        throw new \ValueError(str($needle).' is not in tuple', 1);
+        throw new \php_adt\ValueError(str($needle).' is not in tuple', 1);
     }
 
     // ARRAY ACCESS
@@ -118,10 +125,15 @@ class Tuple extends AbstractSequence {
     }
 
     public function __str__() {
-        return '('.implode(', ', $this->_items->map(function($idx, $item) {
-            return str($item);
-        })).')';
+        return '('.
+            $this->_items
+                ->map(function($idx, $item) {
+                    return str($item);
+                })
+                ->join(', ')
+        .')';
     }
 }
 
+// for more trivial compilation of `tuple(1, 2)` to `new tuple(1, 2)`
 class_alias(__NAMESPACE__.'\Tuple', 'tuple');

@@ -26,7 +26,7 @@ function is_iterable($x) {
 
 function len($obj) {
     try {
-        return count($obj);
+        return $obj->__len__();
     }
     catch (\Exception $e) {
         throw new \TypeError('object of type '.get_class($obj).'has no len().', 1);

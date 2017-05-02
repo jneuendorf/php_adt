@@ -21,15 +21,15 @@ expect(undefined)->not_to_be([]);
 expect(undefined)->to_be(undefined);
 
 
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ItertoolsTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ArrTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'CharArrTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ItertoolsTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ArrTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'CharArrTest.php']);
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'TupleTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'DictTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'SetTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'TreeTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ConversionTest.php']);
-// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'GenewraporTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'DictTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'SetTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'TreeTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'ConversionTest.php']);
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'test', 'GenewraporTest.php']);
 
 \php_adt\Test::print_stats();
 ?>

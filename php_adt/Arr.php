@@ -593,7 +593,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @return Arr
     */
     public function concat(...$arrs) {
-        $res = new Arr(...$this->_elements);
+        $res = new \php_adt\Arr(...$this->_elements);
         foreach ($arrs as $idx => $arr) {
             $res->merge(...$arrs);
         }
@@ -607,7 +607,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @return Dict
     */
     public function count_values($group_func=null) {
-        $res = new Dict();
+        $res = new \php_adt\Dict();
         foreach ($this->group_by($group_func) as $key => $value) {
             $res->put($key, $value->size());
         }
@@ -621,7 +621,7 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @return Arr
     */
     public function diff($arr, $equality='\php_adt\__equals') {
-        $res = new Arr();
+        $res = new \php_adt\Arr();
         foreach ($this as $idx => $elem) {
             if (!$arr->has($elem, $equality)) {
                 $res->push($elem);
@@ -651,14 +651,14 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
                 return $elem;
             };
         }
-        $dict = new Dict();
+        $dict = new \php_adt\Dict();
         foreach ($this as $idx => $elem) {
             $grouped = $group_func($elem);
             if ($dict->has($grouped)) {
                 $dict->get($grouped)->push($elem);
             }
             else {
-                $dict->put($grouped, new Arr($elem));
+                $dict->put($grouped, new \php_adt\Arr($elem));
             }
         }
         return $dict;
@@ -674,9 +674,9 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @return Arr
     */
     public function flatten($deep=false) {
-        $flattened = new Arr();
+        $flattened = new \php_adt\Arr();
         foreach ($this as $idx => $value) {
-            if ($deep && $value instanceof Arr) {
+            if ($deep && $value instanceof \php_adt\Arr) {
                 $flattened->merge($value->flatten());
             }
             else {
@@ -718,6 +718,9 @@ class Arr extends AbstractCollection implements \ArrayAccess, \Iterator {
     * @return Str
     */
     public function join($glue='') {
+        if (is_string($glue)) {
+            $glue = new \php_adt\Str($glue);
+        }
         return $glue->join($this);
     }
 

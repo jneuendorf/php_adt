@@ -8,12 +8,8 @@ require_once 'Clonable.php';
 require_once 'Comparable.php';
 require_once 'Hashable.php';
 
-use _php_adt\Clonable as Clonable;
-use _php_adt\Comparable as Comparable;
-use _php_adt\Hashable as Hashable;
 
-
-abstract class Super extends Clonable implements Comparable, \Countable, Hashable {
+abstract class Super extends \_php_adt\Clonable implements \_php_adt\Comparable, \Countable, \_php_adt\Hashable {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // IMPLEMENTING COUNTABLE
@@ -26,4 +22,13 @@ abstract class Super extends Clonable implements Comparable, \Countable, Hashabl
     }
 
     abstract public function size();
+
+    public function __eq__($object) {
+        return $this->equals($object);
+    }
+
+    public function __len__() {
+        return $this->size();
+    }
+
 }

@@ -5,7 +5,10 @@
 */
 namespace _php_adt;
 
-require_once '_php_adt/Super.php';
+
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'Super.php']);
+// require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'funcs.php']);
+
 
 abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator {
     // abstract public function clear();
@@ -26,6 +29,7 @@ abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator
     ////////////////////////////////////////////////////////////////////////////////////
     // PARTLY IMPLEMENTING ARRAYACCESS (those methods are suggestions only!)
     // TODO: somehow share code with Arr class (sequence should NOT inherit from collection though)
+    // TODO: => use traits!
     /**
      * @internal
     */
@@ -53,7 +57,7 @@ abstract class AbstractSequence extends Super implements \ArrayAccess, \Iterator
                 $end = $offset[1];
             }
             else {
-                throw new \Exception('Invalid array offset '.__toString($offset).'. Array offsets must have the form \'[int1(,int2)]\'.');
+                throw new \Exception('Invalid array offset '.\php_adt\__toString($offset).'. Array offsets must have the form \'[int1(,int2)]\'.');
             }
         }
         else if (is_string($offset)) {
